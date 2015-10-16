@@ -302,8 +302,8 @@ $\Z / n\Z = \Z_n \coloneq \{[a]_n : a\in \Z\} = \{\overbar{0},\overbar{1},\dots,
 \end{defi}
 
 \begin{rem}
-$\Z_n$ is a ring with operation $\overbar{a} \overset{+}{\underset{-}{\cdot}} \overbar{b} \coloneq \overline{a\overset{+}{\underset{-}{\cdot}}b}$ (well defined due in item~3 of~\cref{four})
-$\Z_n^\times = \{ \overbar{a} \in \Z_n : \exists \overbar{b} \in \Z_n : \overbar{a}\overbar{b} = \overbar{1}$ ... group of units $\mod n$
+$\Z_n$ is a ring with operation $\overbar{a} \overset{+}{\underset{-}{\cdot}} \overbar{b} \coloneq \overline{a\overset{+}{\underset{-}{\cdot}}b}$ (well defined due to item~3 of~\cref{four})
+$\Z_n^\times = \{ \overbar{a} \in \Z_n : \exists \overbar{b} \in \Z_n : \overbar{a}\overbar{b} = \overbar{1} \}$ ... group of units $\mod n$
 \end{rem}
 
 \begin{lemma}
@@ -493,15 +493,18 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
     \sum_{d\divides n} \mu(d) S_f\left(\frac{n}{d}\right)
       &= \sum_{d\divides n} \mu(d) \sum_{e\divides \frac{n}{d}} f(e) \\
       &= \sum_{e\divides n} f(e) \sum_{\substack{d\divides n \\ s.t. e\divides \frac{n}{d}}} \mu(d) \\
-      &= \sum_{e\divides n} f(e) \underbrace{\sum_{d\divides  \frac{n}{e} \mu(d)} {=
-		\begin{cases}
+      \text{For the next step we use }
+		    &d\divides n \land e\divides \frac{n}{d}
+		    \Leftrightarrow e d \divides n
+		    \Leftrightarrow e\divides n \land d\divides \frac{n}{e}\\
+      &= \sum_{e\divides n} f(e) \sum_{d\divides  \frac{n}{e}} \mu(d)\\
+      &= f(n)\\
+      \text{since }
+        \sum_{d\divides  \frac{n}{e}} \mu(d) =
+		&\begin{cases}
 		  1 & \frac{n}{e} = 1 \\
 		  0 & \text{otherwise}
-		\end{cases}}}_%
-		{\text{Using }
-		    d\divides n \land e\divides \frac{n}{d}
-		    \Leftrightarrow e d \divides n
-		    \Leftrightarrow e\divides n \land d\divides \frac{n}{e} = f(n)}
+		\end{cases}
   \end{align*}
 \end{proof}
 
