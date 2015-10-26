@@ -1,0 +1,279 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section*{Organizatorial stuff}
+
+Dates (in TUGrazOnline):
+\begin{table}[!h]
+  \begin{tabular}{cccl}
+    Mon & 14:15--15:45 & C208 & Exercises (starting 19.10. first exercise class) \\
+    Tue & 14:15--15:45 & C307 & Lecture (starting 20.10. first (real) lecture) \\
+    Wed & 08:15--09:45 & C208 & Lecture
+  \end{tabular}
+\end{table}
+
+From now until 15.12. lectures by Martin Widmer.
+Then C. Frei.
+
+End: oral exams
+
+Exercises: Find details on website of the instructor Dijana Kreso.
+\url{math.tugraz.at/~kreso}
+
+\section{Basics}
+
+\begin{align}
+  \N &= \{1,2,\dots\} \\
+  \N_0 &= \N \cup \{0\}\\
+  \Z &= \{ \dots,-2,-1,0,1,2,\dots\}
+\end{align}
+
+\subsection{Divisibility}
+\begin{defi}
+Let $a,b \in \Z$. $a$ divides $b$ (written $a\divides b$) if $\exists q \in \Z : b = qa$.
+\newline
+Some properties: Let $a,b,c \in \Z$. Then the following statements hold:
+\begin{align}
+  a\divides b &\Rightarrow ac\divides bc \\
+  a\divides b \land b\divides c &\Rightarrow a\divides c \\
+  a\divides b \land b\divides a &\Leftrightarrow a = b \\
+  a\divides b \land a\divides c &\Rightarrow a\divides (b+c)
+\end{align}
+\end{defi}
+
+\begin{defi}[Remainder]
+Let $a \in \Z$, $b \in \N$. Then there are unique $q,r \in \Z$ such that
+\[a = qb + r \text{ and } 0 \leq r < b.\]
+\end{defi}
+
+\begin{rem}
+\begin{enumerate}
+  \item $b\divides a \Leftrightarrow r = 0$
+  \item $q = \lfloor \frac{a}{b} \rfloor$ (largest integer $\leq \frac{q}{b}$)
+  \item we will somtimes write: $a \mod b \coloneq c$
+\end{enumerate}
+\end{rem}
+
+\begin{defi}
+Let $a_1,a_2,\dots,a_n,d \in \mathbb{Z}$. $d$ is a greatest common divisor (gcd) of $a_1,\dots,a_n$ if
+$d\divides a_i$ $\forall 1\leq i \leq n$,
+and for every $e \in \Z$ with $e\divides a_i$ $\forall 1\leq i \leq n$, $e\divides d$.
+\end{defi}
+
+\begin{rem}
+
+\begin{enumerate}
+  \item a $\gcd$ of $a_1,\dots,a_n$ is unique up to sign
+  \item we write $d = \gcd(a_1,\dots,a_n)$ if $d$ is a $\gcd$ of $a_1,\dots,a_n$
+  \item for $a_1,\dots,a_n \in \Z$, a $\gcd$ exists and can be written as a linear combination of $a_1,\dots,a_n$,
+  i.e., $\exists x_1,\dots,x_n \in \Z$ such that $$\gcd(a_1,\dots,a_n) = x_1 a_1+ \dots + x_n a_n$$
+  \item $\gcd(a_1,\dots,a_n) = \gcd(\gcd(a_1,\dots,a_{n-1}),a_n)$
+  \item if $a\divides bc$ and $\gcd(a,b) = 1$ then $a\divides c$.
+  \item let $a^\prime \coloneq \frac{a}{\gcd(a,b)}$, $b^\prime = \frac{b}{\gcd(a,b)}$. Then $\gcd(a^\prime,b^\prime) = 1$
+\end{enumerate}
+\end{rem}
+\todo{Hier verwendest du $\coloneq $, sonst aber nur $=$, evtl. einheitlich machen für alle Definitionen?}
+
+\begin{algorithm}
+  \caption{Compute the $\gcd$ of two integers: Euclidean algorithm}
+  \begin{algorithmic}
+    \Require{$a,b \in \Z$. $|a| \geq |b|$}
+    \Ensure{$a \coloneq \gcd(a,b)$}
+    \State replace $a$ by $|a|$, $b$ by $|b|$
+    \While{$b \neq 0$}
+      \State write $a = qb +r$, $0 \leq r < b$
+      \State $a \coloneq b$
+      \State $b \coloneq r$
+    \EndWhile
+    \State \Return $a$
+  \end{algorithmic}
+\end{algorithm}
+
+The algorithm is correct, since $\gcd(a,b) = \gcd(b,a \mod b)$. \\
+The algorithm terminates because $b$ decreases in each step. \\
+The algorithm is fast: ($\mathcal{O}(\log b)$)
+
+\todo{sollte ausgebessert werden, 1. $O(logn)$ steps, 2. stimmt nur wenn $|r|\le b/2$}
+
+The Euclidean algorithm also allows us to find $x, y$ such that $\gcd(a,b) = ax+by$ by doing all computations backwards.
+
+\begin{ex}
+  $\gcd(56,22) = \,?$
+  \begin{align*}
+    a &= 56, b = 22\\
+    56 &= 2 \cdot 22 + 12\\
+    a &= 22, b = 12 \neq 0\\
+    22 &= 1 \cdot 12 + 10\\
+    a &= 12, b = 10 \neq 0\\
+    12 &= 1 \cdot 10 + 2\\
+    a &= 10, b = 2 \neq 0\\
+    10 &= 5 \cdot 2 + 0\\
+    a &= 2, b = 0 & \Rightarrow \gcd(56,22) = 2
+  \end{align*}
+  Doing the computations backwards:
+  \begin{align*}
+    2 &= 12 -10 = 12 - (22 - 12) = -22 + 2 \cdot 12 = -22 + 2(56-2 \cdot 22) = 2 \cdot 56 - 5 \cdot 22\\
+    x &= 2, y = -5
+  \end{align*}
+\end{ex}
+
+\begin{app*}[linear diophantine equations]
+Let $a,b,c \in \Z$, $a,b,c \neq 0$. Find all $(x,y) \in \Z^2$ which satisfy
+\begin{align}
+  \label{eq:lde}
+  ax+by = c.
+\end{align}
+\end{app*}
+
+\begin{description}
+  \item[Existence of solution] let $d = \gcd(a,b)$.
+    \[
+	    (d\divides a \Rightarrow d\divides xa) \land
+	    (d\divides b \Rightarrow d\divides yb)
+	\] \[
+	    \Rightarrow d\divides xa+yb = c \\
+	\] \[
+	    \Rightarrow \cref{eq:lde}
+	\]
+	can have solutions only if $d\divides c$.
+
+  \item[Solution in case $d=1$]
+    Let $x_0,y_0 \in \Z$ such that $ax_0+by_0 = 1$ using the Euclidean algorithm.
+    Then from $acx_0 + bcy_0 = c$ the solution $(cx_0, cy_0)$ of (\cref{eq:lde})
+    follows: for all $n \in \Z: (x,y) \coloneq (cx_0+nb,cy_0+na)$ is a solution.
+  
+	Indeed,
+	\begin{align*}
+	  ax+by &= acx_0 + anb + bcy_0 - bna = c &\checkmark
+	\end{align*}
+    These $(x,y)$ are all solutions: let $(x,y)$ be a solution. Then
+	\begin{align*}
+	   ax + by &= c \\
+	   acx_0 + bcy_0 &= c \\
+	   \Rightarrow a(x-cx_0) &= b(cy_0-y)
+	\end{align*}
+	\[ \gcd(a,b) = 1 \:\Rightarrow\: b \divides x - cx_0 \:\Rightarrow\: x = cx_0 + nb, n \in \Z \]
+	\[ \Rightarrow\: a \divides cy_0 - y \:\Rightarrow\: y = cy_0 + ma, m\in \Z \]
+    \[ c = ax+by = acx_0 + anb + bcy_0 + bma \]
+    \[ = c + (n+m)ab \Rightarrow (n+m)ab = 0 \Rightarrow m = -n \]
+  
+  \item[Solutions in the general case] Assume $d = \gcd(a,b)$ and $d\divides c$, let
+    \[
+		a^\prime = \frac{a}{d} \hspace{25pt}
+		b^\prime = \frac{b}{d} \hspace{25pt}
+		c^\prime \coloneq \frac{c}{d}
+	\]
+    Then $\gcd(a^\prime, b^\prime) = 1$ and the solution to (\cref{eq:lde}) is exactly the solution of $a^\prime x + b^\prime y = c^\prime$.
+\end{description}
+
+\subsection{Primes}
+
+\todo{1. Beistriche für bessere Lesbarkeit 2. faustregel, vor und nach ``i.e.'' gehört eigentlich beistrich}
+\begin{defi}
+$p \in \N$, $p > 1$ is a \emph{prime number} if the only positive divisors of $p$ are $1$ and $p$, i.e., $a \in \N$, $a\divides p \Rightarrow a \in \{1,p\}$.
+$\PP \coloneq \{ primes\} \subset \N, \PP = \{2,3,5,7,11,13,\dots\}$.
+$p$ prime and $p\divides ab \Rightarrow p\divides a$ or $p\divides b$
+\end{defi}
+
+\begin{theorem}[Fundamental theorem of arithmetic]
+Every $n \in \N$ can be written uniquely (up to reordering) as a product of primes.
+i.e. there are distinct primes $p_1,\dots,p_l$, and $\alpha_1,\dots,\alpha_l \in \N$ such that
+$n = p_1^{\alpha_1} \dots p_l^{\alpha_l}$
+\end{theorem}
+
+\begin{proof}[Sketch]\hfill{}
+  \begin{description}
+    \item[Existence]
+      let $p_0 > 1$ be the smallest divisor $> 1$ of $n$. Then $p_0$ is prime.
+      $n = p_0 n_0$, induction $\checkmark$
+
+    \item[Uniqueness]
+      let $p_1 \dots p_m = q_1 \dots q_l = n$, $p_i, q_j$ primes.
+      $p_1 \divides  q_1 \dots q_l \Rightarrow \exists i: p_1\divides q_i$, both prime $\Rightarrow p_1 = q_i$, wlog: $i = 1$.
+      $p_1\dots p_m = q_1 \dots q_l$, induction $\checkmark$
+  \end{description}
+\end{proof}
+
+\begin{theorem}[Euclid]
+There are $\infty$-many primes.
+\end{theorem}
+
+\begin{proof}
+  Given primes $p_1,\dots,p_n \in \PP$. We construct one more prime \[N \coloneq p_1 \cdot \dots \cdot p_n + 1 \text{.}\]
+  Assume $P$ is a prime factor of $N$.
+  If $P \in \{p_1, \dots ,p_n\}$ then $P\divides N$ and $P\divides p_1\dots p_n \Rightarrow P\divides 1$ $\lightning$
+\end{proof}
+
+\begin{rem}[prime factors and $\gcd$s]
+Let $a_1,\dots, a_n \in \Z$, write
+\[a_i = \prod_{p \in \PP} p^{\alpha_{p,i}}\text{, }\alpha_{p,i} \in \N_0 \text{,}\] almost all $a_i = 0$,
+then \[\gcd(a_1,\dots,a_n) = \prod_{p \in \PP} p^{\min_{1\leq i\leq n} \{\alpha_{p,i}\}}\]
+\end{rem}
+
+\subsection{Congruences}
+
+All rings are commutative with $1$.
+
+\begin{defi}
+Let $a,b \in \Z$, $n \in \N$. Then \emph{$a$ is congruent to $b \pmod{n}$}, $a \equiv b \pmod{n}$,
+if $n\divides  a-b$.
+We write $\overbar{a} = [a]_n \coloneq \{b \in \Z : b \equiv a (\mod n)\}$
+\end{defi}
+
+\begin{rem}
+\label{four}
+\begin{enumerate}
+  \item Congruence $\bmod{n}$ is an \emph{equivalence relation}
+  \item $\overbar{0},\overbar{1},\dots,\overline{n-1}$ is a partition of $\Z$.
+  \item if $a \equiv b \pmod{n}$, $c \equiv d \pmod{n}$, then 
+  $-a \equiv -b \pmod{n}$,
+  $a \overset{+}{\underset{-}{\cdot}} d \pmod{n}$.
+\end{enumerate}
+\end{rem}
+
+\begin{defi}
+$\Z / n\Z = \Z_n \coloneq \{[a]_n : a\in \Z\} = \{\overbar{0},\overbar{1},\dots,\overline{n-1}\}$ residue class ring modulo $n$
+\end{defi}
+
+\begin{rem}
+$\Z_n$ is a ring with operation $\overbar{a} \overset{+}{\underset{-}{\cdot}} \overbar{b} \coloneq \overline{a\overset{+}{\underset{-}{\cdot}}b}$ (well defined due to item~3 of~\cref{four})
+$\Z_n^\times = \{ \overbar{a} \in \Z_n : \exists \overbar{b} \in \Z_n : \overbar{a}\overbar{b} = \overbar{1} \}$ ... group of units $\mod n$
+\end{rem}
+
+\begin{lemma}
+Let $a \in \Z$. Then $\overbar{a} \in \Z_n^\times \Leftrightarrow \gcd(a,n) = 1$.
+\end{lemma}
+
+\begin{proof}\hfill
+\begin{itemize}
+  \item[``$\Rightarrow$'']
+    $\overbar{a}\overbar{b} = \overbar{1} \Leftrightarrow ab \equiv 1 \pmod{n} \Leftrightarrow n\divides ab-1$ \\
+    $\Rightarrow$ no prime factor of $n$ divides $a$ \\
+    $\Rightarrow \gcd(a,n) =1$.
+  \item[``$\Leftarrow$'']
+    $1 = \gcd(a,n) = ax + ny \Rightarrow \overbar{1} = \overbar{a}\overbar{x}$
+\end{itemize}
+\end{proof}
+
+\begin{rem}
+The inverse of $\overbar{a}$ can be computed by the Euclidean algorithm.
+\end{rem}
+
+\begin{ex}[Simultaneous congruences]
+Find $x \in \Z$ such that 
+\begin{align}
+x &\equiv 2 \pmod{3}\\
+x &\equiv 1 \pmod{5}\\
+x &\equiv 0 \pmod{7}
+\end{align}
+\end{ex}
+
+\begin{theorem}[Chinese remainder theorem (CRT)] Let
+\[ n_1,\dots,n_l \in \N \text{ subject to } \gcd (n_i,n_j) = 1 \;\forall i\neq j \]
+\[ x_1, \dots, x_l \in \Z \text{.} \]
+Then
+\[ \exists x \in \Z \text{ such that } x \equiv x_i \pmod{n_i} \; \forall 1\leq i \leq l \]
+where $x$ is unique modulo $n_1 \cdot \dots \cdot n_l$.
+\end{theorem}
+
+\end{document}

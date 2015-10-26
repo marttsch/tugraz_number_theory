@@ -1,0 +1,265 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section*{New Lecturer}
+Chapter 1:
+\begin{enumerate}
+  \item Approximation to algebraic numbers; Wolfgang M. Schmidt, 1972 L'Ehseignement Mathématique
+  \item Lectures Notes in Mathematics 785; W.M.Schmidt, Springer
+  \item LNM 1467, W.M.S., Springer
+  \item For section 2 (continued fractions) he will strictly follow the lecture notes of MT421 of Professor James McKee
+\end{enumerate}
+
+\section{Diophantine Approximation}
+
+\subsection{Dirichlet's Theorem}
+
+Let $\alpha \in \R$. As $\Q$ is dense in $\R$ any $\alpha \in \R$ can be approximated arbitrarily well, by rational numbers $p/q$ ($p \in \Z, q \in \N = \{1,2,3,\dots\}$).\\
+The question is how well can we approximate $\alpha$ in terms of the denominator $q$, e.g., is it true that for every $\alpha \in \R$ there esist infinitly many $p/q \in \Q$ $q\in \N$) such that $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$?\\
+\\
+The answer is no!\\
+Take $\alpha = r/s (s \in \N)$ a rational number. Then 
+\[ | \alpha - \frac{p}{q} | = |\frac{r}{s} - \frac{p}{q} | = | \frac{qr -ps}{sq} | \overset{\geq}{\text{provided } \alpha \neq \frac{p}{q}} \frac{1}{sq}  > \frac{1}{q^2} \text{ provided } q > s.\]
+This shows that we habe only finitly many solutions $p/q \in \Q$ for $| \alpha -\frac{p}{q} | < \frac{1}{q^2}$.
+
+\begin{theorem}[1.1.1 Dirichlet's Theorem]
+  Suppose $\alpha,Q \in \R$ and $Q > 1$. Then $\exists p,p \in \Z \text{s.t.} 0< q<Q$ and $| q\alpha - p | \leq \frac{1}{Q}$.
+\end{theorem}
+
+\begin{proof}
+  for $\xi \in \R$ put $\{ \xi \} = \xi - \lfloor \xi \rfloor$. so $ 0 \leq \{ \xi\} \leq 1$. First suppose $Q \in \Z$.
+  Consider the $Q + 1$ numbers $0,1,\{\alpha\},\{2\alpha\},\dots,\{(Q-1)\alpha\}$.\\
+  They all lie in $[0,1]$. We split it up in $Q$ subintervals:
+  \[ [0,1] =[0, \frac{1}{Q}] \cup \left[ \frac{1}{Q},\frac{2}{Q} \right] \cup \dots \cup \left[ \frac{Q-1}{Q},1 \right] \]
+  By the pigeon hole principle two of the previous numbers lie in the same subinterval. Thus $\exists r_1,r_2,s_1,s_2 \in \Z$ with $0 \leq r_1 < r_2 \leq Q-1$ such that $| (r_1\alpha - s_1) - (r_2 \alpha -s_2) | \leq \frac{1}{Q}$.
+  Then with $q = r_2 - r_1$ and $p = s_2 -s_1$ we get $|q\alpha - p| \leq \frac{1}{Q}$ and $0 < q < Q$.
+  This proves the Theorem when $Q \in \Z$. Now suppose $Q \nin \Z$. 
+  We apply the previous with $Q^\prime = \lfloor Q \rfloor + 1 > 1$.
+  Hence, $\exists p,q \in \Z$ with $| q\alpha - p | \leq \frac{1}{Q^\prime}$ and $0 < q < Q^\prime$, and so $|q\alpha - p | \leq \frac{1}{Q}$ and $0 < q < Q$.
+\end{proof}
+
+\begin{cor}[1.1.2]
+  Suppose $\alpha \in \R/\Q$. Then there exist infinitly many solutions $p/q \in \Q$ ($q \in \N$) of $| \alpha - \frac{p}{q}| < \frac{1}{q^2}$.
+\end{cor}
+
+\begin{proof}
+  Take $Q_1 > 1$. By Theorem 1.1.1 we get $(p_1, q_1) \in \Z^2$ with $0<q_1 < Q$, and $|q_1 \alpha - p_1 | \leq \frac{1}{Q_1}$.
+  Thus $|\alpha - \frac{p_1}{q_1} | \leq \frac{1}{q_1 Q_1} < \frac{1}{q_1^2}$
+  \\
+  Next take $Q_2 = |\alpha - \frac{p_1}{q_1}|^{-1} + 1$. Then Thm 1.1.1 again yields $\frac{p_2}{q_2} \in \Q$ with $|\alpha - \frac{p_2}{q_2} | < \frac{1}{q^2}$ and $|\alpha - \frac{p_2}{q_2} | \leq \frac{1}{q_r Q_2} \leq \frac{1}{Q_2} < |\alpha - \frac{p_1}{q_1}|$. So $\frac{p_2}{q_2}$ is a better approx then $\frac{p_1}{q_1}$.
+  Repeating this process indefinitely proves the claim.
+\end{proof}
+
+\begin{theorem}[1.1.3 Pell-equation]
+  Suppose $m \in \N$ is not a square (i.e., $m \neq n^2 \forall n \in \Z$).\\
+  Then 
+  \[x^2 - m y^2 = 1\]
+  has infinitely many solutions $(x,y)\in \Z^2$.
+\end{theorem}
+
+\begin{proof}
+  Apply Corollary 1.1.2 with $\alpha = \sqrt{m}$. So $\alpha \in \R/\Q$.
+  We get $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$ and $|\alpha + \frac{p}{q} | \overset{\leq}{triangle inequality} 1 + 2 \alpha$.
+  Thus
+  \[ |p^2 - mq^2| = q^2 | \alpha - \frac{p}{q} | \cdot |\alpha + \frac{p}{q}| < 1 + 2 \sqrt{m}. \]
+  Hence, there exists $k \in \Z$ with $|k| < 1 + 2 \sqrt{m}$. such that $ p^2 - m q^2 = k$ for infinitly many $(p,q) \in \Z^2$ and $p/q$ all distinct.\\
+  As $m$ is not a square we have $k \neq 0$.\\
+  \\
+  Let $S$ be the set of solutions $(p,q) \in \Z^2$ of $p^2 - m q^2 = k$.
+  The map $S \to (\Z/k\Z) \times (\Z/k\Z)$.
+  This map is not injective ($S = \infty$) hence, $\exists (p_1,q_1) \neq (p_2,q_2)$ both in $S$ such that $p_1 \cong p_2, q_1 \cong q_2 \pmod k$. (MOD)\\%todo marker
+  Now we compute
+  \begin{align}
+    k^2 &= (p_1^2 - m q_1^2)(p_2^2 - m q_2^2)\\
+    &= (p_1 + \sqrt{m}q_1)(p_2 - \sqrt{m} q_2)\\
+    &= (r - \sqrt{m} s)( r + \sqrt{m} s) = r^2 - m s^2\\
+    \text{where } r &= p_1 p_2 - m q_1 q_2\\
+    s &= p_1 q_2 - q_1 p_2 = \frac{1}{q_1 q_2} (\frac{p_1}{q_1} - \frac{p_2}{q_2}) \neq 0.
+  \end{align}
+  because of (MOD) $k \divides s$. Hence, $k^2 \divides s^2$. Thus $k^2 \divides r^2$. Hence $k \divides r$.
+  Then $ x = \frac{r}{k}$ and $y = \frac{s}{k}$ are both integers and
+  \[x^2 - m y^2 = 1. \]
+  We have one solution but we need infinitely many! To this end we replace $m$ by $md^2$ ($d \in \N$).
+  The above argument yields a solution $(x^\prime,y^\prime) \in \Z^2$ of ${x^\prime}^2 - md^2 {y^\prime}^2 = 1$.
+  Thus, $(x,y) = (x^\prime,dy^\prime)$ is a new lolution of $x^2 - m y^2 = 1$.\\
+  (Critical: $s \neq 0$)
+\end{proof}
+
+\subsection{Continued fractions}
+
+Let $\theta \in \R$. Put $a_0 = \lfloor \theta \rfloor$. If $a_0 \neq \theta$ then we find $\theta_1 > 1$ such that
+\[ \theta = a_0 + \frac{1}{\theta_1} \]
+and we put $a_1 = \lfloor \theta_1 \rfloor$. If $a_1 \neq \theta_1$ then we can find $\theta_2 > 1$ such that
+\[ \theta_1 = a_1 + \frac{1}{\theta_2} \]
+and we put $a_ = \lfloor \theta_2 \rfloor$. This process can be continued indefinitely, unless $a_n = \theta_n$ for some $n$.
+Note that $a_0$ can be zero or negative but  $a_1,a_2, a_3, \dots$ are all positive integers.\\
+We call this process the \emph{continued fraction process}. The $a_i$ are called \emph{partial quatients} of $\theta$.
+
+\begin{ex}
+  \[\theta = \frac{19}{11}\]
+  Then $a_0 = \lfloor \theta \rfloor = 1$\\
+  Now $\theta = \frac{19}{11} = a_0 + \frac{1}{\theta_1} = 1 + \frac{8}{11} = 1 + \frac{1}{\frac{11}{8}}$\\
+  So $\theta_1 = \frac{11}{8}$.\\
+  Thus $a_1 = \lfloor \theta_1 \rfloor = 1$.\\
+  Now 
+  \[ \theta_1 = \frac{11}{8} = a_1 + \frac{1}{\theta_2} = 1 + \frac{3}{8} = 1 + \frac{1}{\frac{8}{3}} \]
+  Thus $\theta_2 = \frac{2}{3}$ and $a_2 = \lfloor \theta_2 \rfloor = 2$\\
+  and so on...\\
+  \\
+  If the continued fraction process terminates then we have
+  \begin{align}
+  \theta &= a_0 + \frac{1}{\theta_1}\\
+  &= a_0 + \frac{1}{a_2 + \frac{1}{\theta_2}}\\
+  &= a_0 + \frac{1}{a_2 + \frac{1}{a_3 + \frac{1}{\theta_3}}}
+  & \dots
+  &= a_0 + \frac{1}{a_1 + \frac{1}{..}}%TODO add Kettenbruch
+  \end{align}
+  
+  In this case we write $\theta = [a_0,\dots,a_n]$.\\
+  We use the same notation when the $a_i$ are any real numbers, not necessarily integers.\\
+  In particular
+  \[ \theta = [a_0,\dots,a_i,\theta_{i+1}] \]
+  where $a \leq i < n$.
+\end{ex}
+
+If the continued fraction process does not terminate then we write $\theta = [a_0,a_1,a_2,\dots]$.\\
+Note that in this case, for every $n \geq 0$, we have 
+\[ \theta = [a_0,\dots, a_n,\theta_{n+1}] \]
+where $a_0,\dots,a_n$ are integers but $\theta_{n+1}$ is not!
+For $n \geq 0$ we set 
+\[ \frac{p_n}{q_n} = [a_0,\dots,a_n] \] 
+where $\gcd(p_n,q_n) = 1$.
+We shall say that $\frac{p_n}{q_n}$ is the $n$-th convergent of $\theta$.
+We will prove that $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$.
+Next we shall see that  $p_n,q_n > 0$ both satisfy the same simple recurrence relation $x_n = a_n x_{n-1} + x_{n-2}$ with different starting values.
+
+\begin{lemma}
+  Let $a_0,a_1,a_2,\dots$ be a sequence of integers with $a_i > 0$ ($i>0$).\\
+  Define $p_n,q_n$:
+  \begin{align}
+    p_0 &= a_0\\
+    q_0 &= 1\\
+    p_1 &= a_0 a_1 + 1\\
+    q_1 &= a_1\\
+    p_n &= a_n p_{n-1} + p_{n - 2} \text{ for } n \geq 2\\
+    q_n &= a_n q_{n-1} + q_{n-2} \text{ for } n \geq 2.
+  \end{align}
+  Then:
+  \begin{enumerate} %a,b
+    \item $p_n q_{n+1} - p_{n+1} q_n = (-1)^{n+1}$
+    \item $\gcd(p_n,q_n) = 1$
+    \item $p_n/q_n = [a_0,\dots,a_n]$
+    \item If the $a_i$ are produced by the continued fraction process for $\theta$, then, for every $n \geq 1$, $\frac{p_n}{q_n}$ is the $n$-th convergent of $\theta$ and
+    \[ \theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}} \]
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate} %a,b
+    \item We use induction on $n$. For $n = 0$ we note that 
+    \[ p_0 q_1 - p_1 q_0 = a_0 a_1 - a_0 a_1 - 1 = -1.\]
+    So resutl holds for $n = 0$.\\
+    Now suppose result holds for $n = m - 1$.\\
+    consider case $n = m$. Using the recurrence relation, we set
+    \begin{align}
+      p_m q_{m+1} - p_{m+1} q_m &= p_m (a_m q_m + q_{m-1}) - q_m ( a_m p_m + p_{m-1})\\
+      &= p_m q_{m-1} - p_{m-1}q_m = - (-1)^m = (-1)^{m+1}.
+    \end{align}
+    This proves claim for $n = m$.
+    \item Immedate from (a)
+    \item (c) + (d):\\
+    Remark about $\frac{p_n}{q_n}$ in (d) follows directly from (c).
+    We prove the rest of (d), along with (c), using induction on $n$. Remember that (c) a priori does not require that the $a_i$ are produced by the continued fraction process.\\
+    Consider base case $n = 1$. For (c) note that $\frac{p_1}{q_1} = a_0 + \frac{1}{a_1} = [a_0,a_1]$.
+    For (d) we note that
+    \[ \frac{p_1 \theta_2 + p_0}{q_1 \theta_2 + q_0} = \frac{(a_0 a_1 +1) \theta_2 + a_0}{a_1 \theta_2 + 1} = a_0 + \frac{\theta_2}{a_1 \theta_2 +1} = a_0 + \frac{1}{a_1 + \frac{1}{\theta_2}} = \theta \]
+    Next suppose (c) and (d) both hold for $n = m-1$, and consider $n = m$. Using (d)  with $n = m -1$ we get
+    \[ [a_0, \dots, a_m ] = \frac{p_{m-1} a_m + p_{m-2}}{q_{m-1} a_m + q_{m-2}} = \frac{p_m}{q_m} \text{ by recurrence ralation.} \]
+    This proves (c) for $n=m$.\\
+    To prove (d) with $n=m$ we observe that
+    \begin{align}
+      \theta &= [a_0,\dots,a_m,\theta{m+1} ] \\
+      &= [a_0,\dots,a_m + \frac{1}{\theta_{m+1}} ]\\
+      &\overset{=}{(d) for n=m-1} \frac{p_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + p_{m-2}}{q_{m-1} (a_m \frac{1}{\theta_{m-1}} ) + q_{m-2}}\\
+      &\overset{=}{rec. rel} \frac{p_m + p_{m-1} (\frac{1}{\theta_{m+1}})}{q_m + q_{m-1} ( \frac{1}{\theta_{m+1}})}\\
+      &= \frac{p_m \theta_{m+1} + p_{m-1}}{q_m \theta_{m+1} + q_{m-1}}
+    \end{align}
+    which is (d) for $n=m$.
+  \end{enumerate}
+\end{proof}
+
+Next we deduce some properties of continued fraction convergents.
+
+\begin{theorem}[1.2.2]
+  Let $\theta = [a_0,a_1,a_2,\dots ]$ with convergents $\frac{p_n}{q_n}$.
+  For (a) - (d) we assume that the continued fraction proves does not terminate
+  \begin{enumerate} %a,b
+    \item For all $n \in \N_0$, $\theta$ lies between $\frac{p_n}{q_n}$ and $\frac{p_{n+1}}{q_{n+1}}$.
+    \item For all $n \in \N_0: |\theta - \frac{p_n}{q_n} | \leq \frac{1}{q_n q_{n+1}}$
+    \item For $n \geq 1$ we have $q_{n+2} \geq 2\cdot q_n$
+    \item $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$
+    \item The continued fraction process terminates if and only if $\theta$ is rational.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note $\theta = [a_0,\dots,a_n,\theta_{n+1} ] = [a_0,\dots,a_n+\frac{1}{\theta_{n+1}}$
+    where $0 < \frac{1}{\theta_{n+1}} < \frac{1}{a_{n+1}}$. So that $\theta$ lies between $[a_0,\dots,a_n]$ and $[a_0,\dots,a_n + \frac{1}{a_{n+1}} ]$.
+    But $[a_0,\dots,a_n + \frac{1}{a_{n+1}} = [a_0,\dots,a_{n+1}]$. This shows (a).
+    \item By (a) we have $|\theta - \frac{p_n}{q_n} | \leq |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = | \frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}} | \underset{=}{Lemma 1.2.1(a)} \frac{1}{q_n q_{n+1}}$
+    \item Follws from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
+    \item Follows from (b) and (c)
+    \item Only if part is obvious.\\
+    Conversely suppose $\theta = \frac{a}{b} \in \Q$ but the process does \emph{not} terminate. Taking $n$ such that $q_n > b$ yields
+    \[ | \theta - \frac{p_n}{q_n} | \underset{\geq}{\frac{a}{b} \neq \frac{p_n}{q_n} as q_n > b and \gcd(p_n,q_n) = 1} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
+    contradicting (b).
+  \end{enumerate}
+\end{proof}
+
+\begin{ex}
+  Take $\theta = \frac{16}{9}$. We have $a_0 = 1$. Then $\theta = 1 + \frac{7}{9}$ so $\theta_1 = \frac{9}{7}$ and $a_1 = 1$. 
+  From $\theta_1 = \frac{9}{7} = 1 + \frac{2}{7}$ we get $\theta_2 = \frac{7}{2}$ and $a_2 = 3$.
+  Form $\theta_2 = \frac{7}{2} = 3 + \frac{1}{2}$ we get $\theta_3 = 2$ and $a_3 = 2$.
+  Thus $\theta = \frac{16}{9} = [1,1,3,2]$ and the convergents are $\frac{p_0}{q_0} = \frac{1}{1}, \frac{p_1}{q_1} = 1 + \frac{1}{1} = \frac{2}{1}, \frac{p_2}{q_2} = 1 + \frac{1}{1+\frac{1}{3}} = 1 + \frac{1}{\frac{4}{3}} = \frac{7}{4}$ 
+  and $\frac{p_3}{q_3} = \frac{16}{9}$. \\
+  Let's check some of the properties claimed.\\
+  $p_1 q_2 + p_2 q_1 = 2\cdot 4 - 7 \cdot 1 = 1 \checkmark, p_2 q_3 - p_3 q_2 = 7\cdot 9 - 16 \cdot 4 = -1 \checkmark,
+  \frac{p_2 \theta_3 + p_1}{q_2 \theta_3 +q_1} = \frac{ 7 \cdot 2 + 2}{4 \cdot 2 +1} = \frac{16}{9} = \theta \checkmark$
+\end{ex}
+
+We now show that convergents give best-possible rational approximations.
+\begin{theorem}[1.2.3]
+  Let $\theta$ be an irrational real number, and let $\frac{p_n}{q_n}$ be the convergents ($n \geq 0$) with partial quotients $a_n (n \geq 0)$.\\
+  Then
+  \begin{enumerate} %a,b
+    \item $ | \theta - \frac{p_n}{q_n}|$ strictly decreases as $n$ increases.
+    \item the convergents give successively closer approximations to $\theta$.
+    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < |\theta - \frac{p_n}{q_n}| < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
+    \item If $p,q \in \Z$ with $0 < q < q_{n+1}$ then
+    \[ |q \theta - p| \geq |q_n \theta - p_n| \]
+    (In this sense convergents are best-possible)
+    \item If $(p,q) \in \Z \times \N$ and $|\theta - \frac{p}{q}| < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item From Lemma 1.2.1(d) we have $\theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}}$.
+    Using Lemma 1.2.1(a) we get
+    \begin{align}
+    |q_n \theta - p_n| &= |\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}| \\
+    &= \frac{1}{q_n \theta_{n+1} + q_{n-1}}\\
+    &< \frac{1}{q_n + q_{n-1}}\\
+    &= \frac{1}{(a_n +1) q_{n-1} + q_{n-2}}\\
+    &< \frac{1}{\theta_n q_{n-1} + q_{n-2}}\\
+    &= | q_{n-1} \theta - p_{n-1}|
+    \end{align}
+    This shows (a) and (b) because the $q_n$ are increasing.
+    \item[c] We use $a_{n+1} q_n^2 < \theta_{n+1} q_n^2 + q_n q_{n-1} < (a_{n+1} + 2) q_n^2$
+    and combine it with the equation (proof part (a)),
+    \[ |\theta - \frac{p}{q}| = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
+  \end{enumerate}
+\end{proof}
+
+\end{document}
