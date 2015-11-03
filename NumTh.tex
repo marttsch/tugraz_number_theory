@@ -28,21 +28,21 @@
 
 \setcounter{section}{-1}
 
-\newcounter{cntsec} \numberwithin{cntsec}{subsection}
+\newcounter{cnt} \numberwithin{cnt}{subsection}
 
-\newtheorem{defi}{Definition}
+\newtheorem{defi}[cnt]{Definition}
 \newtheorem*{defi*}{Definition}
 \newtheorem{rem}{Remark}
 \newtheorem*{rem*}{Remark}
-\newtheorem{lemma}{Lemma}
+\newtheorem{lemma}[cnt]{Lemma}
 \newtheorem*{lemma*}{Lemma}
 \newtheorem{ex}{Example}
 \newtheorem*{ex*}{Example}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}[cnt]{Theorem}
 \newtheorem*{theorem*}{Theorem}
-\newtheorem{prop}{Proposition}
+\newtheorem{prop}[cnt]{Proposition}
 \newtheorem*{prop*}{Proposition}
-\newtheorem{cor}{Corollary}
+\newtheorem{cor}[cnt]{Corollary}
 \newtheorem*{cor*}{Corollary}
 \newtheorem{app}{Application}
 \newtheorem*{app*}{Application}
@@ -60,6 +60,9 @@
 \newcommand{\inv}[1]{{#1}^{-1}}
 \newcommand{\card}[1]{\left\vert{#1}\right\vert}
 \newcommand{\set}[1]{\left\{#1\right\}}
+
+\newcommand{\Vek}[3]{\left(\begin{array}{r}#1\\#2 
+\ifthenelse{\equal{#3}{}}{}{\\#3}\end{array}\right)}
 
 % use \abs{} for absolute values
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
@@ -81,14 +84,42 @@
 \maketitle
 \tableofcontents
 
-\subfile{lectures/2015-10-05.tex}
-\subfile{lectures/2015-10-06.tex}
+\subfile{lectures/NT_2015-10-05.tex}
+\subfile{lectures/NT_2015-10-06.tex}
 
-\subfile{lectures/2015-10-20.tex}
-\subfile{lectures/2015-10-21.tex}
+\subfile{lectures/NT_2015-10-20.tex}
+\subfile{lectures/NT_2015-10-21.tex}
 
-%\subfile{lectures/2015-10-27.tex}
-%\subfile{lectures/2015-10-28.tex}
+\subfile{lectures/NT_2015-10-27.tex}
+\subfile{lectures/NT_2015-10-28.tex}
 
+%\subfile{lectures/NT_2015-11-03.tex}
+%\subfile{lectures/NT_2015-11-04.tex}
+
+%\subfile{lectures/NT_2015-11-10.tex}
+%\subfile{lectures/NT_2015-11-11.tex}
+
+%\subfile{lectures/NT_2015-11-17.tex}
+%\subfile{lectures/NT_2015-11-18.tex}
+
+%\subfile{lectures/NT_2015-11-24.tex}
+%\subfile{lectures/NT_2015-11-25.tex}
+
+%\subfile{lectures/NT_2015-12-01.tex}
+%\subfile{lectures/NT_2015-12-02.tex}
+
+%\subfile{lectures/NT_2015-12-09.tex}
+
+%\subfile{lectures/NT_2015-12-15.tex}
+%\subfile{lectures/NT_2015-12-16.tex}
+
+%\subfile{lectures/NT_2016-01-12.tex}
+%\subfile{lectures/NT_2016-01-13.tex}
+
+%\subfile{lectures/NT_2016-01-19.tex}
+%\subfile{lectures/NT_2016-01-20.tex}
+
+%\subfile{lectures/NT_2016-01-26.tex}
+%\subfile{lectures/NT_2016-01-27.tex}
 
 \end{document}
