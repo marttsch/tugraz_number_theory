@@ -1,0 +1,137 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+Roth's Theorem has various new applications to, e.g., Diophantine equations and transcendence.
+Let's consider just one now trancendence result:\\
+Take $ \alpha = \sum_{k=1}^\infty 2^{-3^k}$; put $q_n = 2^{3^n}$ and
+$p_n = q_n \sum_{k=1}^n 2^{-3^k}$.
+Then $0 < \abs{\alpha - \frac{p_n}{q_n}} = \sum_{k=n+1}^\infty 2^{-3^k} < 2 \cdot 2^{-3^{n+1}} = 2 \cdot 2 \cdot q_n^{-1}$
+so by Roth's Theorem $\alpha$ is transcendental.\\
+\\
+How does one prove results like Roth's Theorem of the kind
+\[ \abs{\alpha - \frac{p}{q}} \geq \phi(q) \text{?} \]
+
+The idea is to find good rational approximations.
+\[ \abs{\alpha - \frac{p_n}{q_n}} \leq \delta_n \]
+with $\delta_n$ "pretty small". Then
+\[ \abs{\alpha - \frac{p}{q}} \geq \abs{\frac{p_n}{q_n} - \frac{p}{q}} - \abs{ \alpha - \frac{p_n}{q_n}} \]
+If 
+\begin{align}
+  \frac{p_n}{q_n} \neq \frac{p}{q} %ref *
+\end{align}
+then 
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{q q_n} - \delta_n. \]
+If we are lucky then $\delta_n < \frac{1}{q q_n}$ and we get a positive lower bound. How do we find these $\frac{p_n}{q_n}$?\\
+Usually this is a difficult task, but sometimes one can easily see these approximations $\frac{p_n}{q_n}$.
+Here is an example.\\
+Take again $\alpha = \sum_{k=1}^\infty 2^{-3^k}$. Then we can take again $q_n = 2^{3^n}$, $p_n = q_n \sum_{k=1}^n 2^{-3^k}$;
+so $\abs{\alpha -  \frac{p_n}{q_n}} < 2 \cdot q_n^{-3}$. Hence, if
+\[ \frac{p_n}{q_n} \neq \frac{p}{q} \]
+then
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{q q_n} - \frac{2}{q_n^3}\]
+If $q_n > 4 \cdot q$ then
+\[ \frac{1}{q q_n} - \frac{2}{q_n^3} \geq \frac{q}{2\cdot q q_n} \]
+As $\frac{p_n}{q_n}$ tends strictly monotonously to $\alpha$, we have $\frac{p_n}{q_n} \neq \frac{p}{q}$ or $\frac{p_{n+1}}{q_{n+1}} \neq \frac{p}{q}$
+Let $m$ be minimal with $q_m > 4 \cdot q$. Hence
+\[ q_m^{\frac{1}{3}} = q_{m-1} \leq 4 \cdot q < q_m \]
+If $\frac{p_m}{q_m} \neq \frac{p}{q}$ we take $n = m$ and $n = m+1$ else.
+We conclude
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{2 q q_n} \geq \frac{1}{2 q q_{m+1}} \geq \frac{1}{2 q} \frac{1}{q_m^3} \geq \frac{1}{2q} \frac{1}{(4q)^{\frac{9}{2}}} = 2^{-10}q^{-\frac{11}{2}} \]
+In this example everything works out nicely, e.g., (ref*) could easily be guaranteed by using $\frac{p_n}{q_n}$ tending strictly monotonously to $\alpha$.
+However, in Roth's Theorem (ref*) becomes the major-problem.
+
+\subsection{5 Simultaneous Diophantine approximation and the Subset Theorem}
+
+Suppose $\alpha_1,\dots,\alpha_n$ are real numbers. Theorem 1.1.1 can be generated to yield a solution $(x_1,\dots,x_n,y) \in \Z^n \times \N$ at the system
+\[ \abs{\frac{x_i}{y} - \alpha} \leq \frac{1}{y \cdot Q} (1\leq i\leq n), 0 < y < Q . \]
+(c.f. Exercise sheet 4).
+This in turn yields $\infty$-many solutions $(x_1,\dots,x_n,y) \in \Z^n \times \N$ of the system
+\[ \abs{\frac{x_i}{y} - \alpha_i} < \frac{1}{y^{1+\frac{1}{n}}} (1 \leq i \leq n). \]
+provided at least one of the $\alpha_i$'s is irrational. So Corollary 1.1.2 extends to simultaneous approximation.
+A much deeper fact is that Roth' Theorem also extends to simultanious approximation.
+
+%convention x _ underbar
+For $\ubar{x} \in \R^n$ we write $\norm{\ubar{x}} = ( \sum_{i = 1}^n x_i^2)^{\frac{1}{2}}$ for the Euclidean length.
+
+\begin{theorem}[Subspace Theorem, Schmidt]
+  Suppose $L_i(\ubar{x}) = \sum_{j=1}^n a_{ij} x_j (1 \leq i \leq n)$ are linearly independent
+  linear forms with algebraic coefficients $a_{ij}$.
+  Let $\delta > 0$. Then the solutions $\ubar{x} \in \Z^n \setminus \ubar{0}$ of
+  \[ \abs{L_1(\ubar{x}) \dots L_n(\ubar{x})} < \norm{\ubar{x}}^{-\delta} \]
+  lie in finitely many proper subspaces of $\Q^n$.
+\end{theorem}
+
+\begin{rem}
+  linearly independent linear forms means the coefficient vectors $(a_{i1},\dots,a_{in})$ are linearly independent over $\C$.
+\end{rem}
+
+\begin{cor}[1.5.2]
+  Let $\delta >0$, suppose $\alpha_1,\dots, \alpha_n$ are algebraic and $1,\alpha,\dots,\alpha_n$ are linearly independentn over
+  $\Q$. Then there are only finitely many $(x_1,\dots,x_n,y) \in \Z^n \times \N$ with
+  \begin{align}
+    (5.1) \abs{\frac{x_i}{y} - \alpha_i} < \frac{1}{y^{1+\frac{1}{n} + \delta}} (1 \leq i \leq n)
+  \end{align}
+\end{cor}
+
+\begin{proof}(assuming Theorem 1.5.1)
+  Put $\ubar{X} = (X_1,\dots,X_n,Y)$, $L_i(\ubar{X}) = \alpha_i Y - X_i (1 \leq i \leq n)$, $L_n(\ubar{X}) = Y$.
+  These $n+1$ linear forms in $n+1$ unknowns are linarly independet.
+  With $\ubar{x} = (x_1,\dots,x_n,y)$ the solutions of (5.1) yield
+  \[ \abs{L_1(\ubar{x}) \dots L_{n+1}(\ubar{x})} < \frac{1}{y^\delta} < \frac{1}{\norm{\ubar{x}}^{\frac{\delta}{2}}} \]
+  if $y$ is large enough. so by Theorem 1.5.1 (in $n+1$ dimensions), we set that the solutions lie in finitely many prober subspeced at $\Q^{n+1}$.
+  Pick one of these (of codimension I say).
+  It is giben by an equation $c_1x_1+\dots+c_nx_n+c_{n+1}y = 0$ where $c_i \in \Q$ not all zero.
+  On this subspace we have
+  \[ (c_1\alpha_1+\dots+c_n\alpha_n+c_{n+1})y = c_1(\alpha_1y - x_1) +\dots+ c_n(\alpha_ny - x_n).\]
+  Put $\gamma = c_1 \alpha_1+\dots+c_n\alpha_n + c_{n+1}$.
+  By $\Q$-linearly independence of $1,\alpha_1,\dots,\alpha_n$ we have $\gamma \neq 0$. Hence,
+  \[ \abs{\gamma} \abs{y} \leq \abs{c_1}\abs{\alpha_1y-x_1} +\dots+ \abs{c_n}\abs{\alpha_ny-x_n} \leq (\abs{c_1}+\dots+\abs{c_n})\frac{1}{y^{1+\frac{1}{n}+\delta}} \leq \abs{c_1}+\dots+\abs{c_n} \]
+  So $\abs{y}$ is bounded and we are done.
+\end{proof}
+
+In applications one sometimes needs a "$p$-adic" version of the subspace Theorem in which one approximates with respect to also the
+so called $p$-adic absolute values.
+
+
+\begin{defi*}[Absolute values]
+  An absolute value on a field $K$ is a map $\abs{\bullet}: K \to [0,\infty)]$ such that
+  \begin{itemize}
+    \item $\abs{x} = 0 \iff x = 0$
+    \item $\abs{x \cdot y} = \abs{x}\cdot\abs{y}$
+    \item $\abs{x+y} \leq \abs{x} + \abs{y}$
+  \end{itemize}
+\end{defi*}
+
+\begin{ex*}
+  \begin{itemize}
+    \item $K$ arbitrary. $\abs{x} = \begin{cases} 0 & x = 0\\ 1 & x \neq 0 \end{cases}$
+    the \emph{trivial absolute value}.
+    \item $K = \Q$, $\abs{\bullet} =$ \emph{standatd absolute value} on $\Q$.
+    To distinguish it from other absolute values let's write it as $\abs{\bullet} = \abs{\bullet}_\infty$.
+    \item $K = \Q$ and let $p \in \N$ be a prime number. If $x\in \Q, x \neq 0, \pm 1$, then $\exists$ a unique prime factoriation
+    $ x = \pm p_1^{a_1} \dots p_s^{a_s}$ where $p_1,\dots,p_s$ primes and $a_i \in \Z \setminus 0$.
+    For any prime $p \in \N$ write $ord_p(x)$ for the exponent of $p$ in the primfractorisation of $x$ (e.g. $ord_{p_i}x = a_i$).
+    For $x = \pm 1$ we put $ord_p x = 0 \forall p_i$.
+    The \emph{$p$-adic absolute vlaue} $1 \cdot 1_p$ on $\Q$ is defined by 
+    \[ \abs{x}_p = \begin{cases} 0 &: x = 0\\ p^{-ord_p(x)} &: x \neq 0 \end{cases} \]
+    The multiplicativity is clear.
+    Note that $ord_p(x_1+x_2) \geq \min\{ord_p(x_1),ord_p(x_2)\}$.
+    Hence, $\abs{x_1 + x_2}_p = p^{-ord_p(x_1+x_2)} \leq p^{-\min\{ord_p(x_1),ord_p(x_2)\}} \underbrace{=}{strong triangle inequality} \max{\abs{x_1}_p, \abs{x_2}_p\}} \leq \abs{x_1}_p + \abs{x_2}_p$
+    An absolute value that satisfies the srtong triange inequality is called non-Archimedean.
+  \end{itemize}
+\end{ex*}
+
+\begin{defi}
+  We set $M_\Q = \{ \text{primes in } \N\} \cup \{ \infty\}$. Then for each $v \in M_\Q$ we get an absolute value
+  $\abs{\cdot}_v$. Note that if $v \in M_\Q$ and $p$ a prime, $a \in \Z$, then
+  \[ \abs{\pm p^a}_v = \begin {cases} p &: v =p \\ p^a &: v = \infty\\ 1 &: v \neq p, v \neq \infty \end{cases} \]
+  Hence
+  \[ \prod_{v \in M_\Q} \abs{1 \pm p^a}_v = 1 \]
+  and so vy multiplicativity we conclude
+  \[ \prod_{v \in M_\Q} \abs{x}_v = 1 \]
+  for all $x \in \Q$, $x \neq 0$. (PF)
+  Thsi is the so-called producct formula (PF) on $\Q$.
+\end{defi}
+
+
+\end{document}

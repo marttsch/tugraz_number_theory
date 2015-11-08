@@ -15,6 +15,7 @@
 \usepackage[nameinlink]{cleveref}
 \usepackage{mathtools}
 \usepackage{subfiles}
+\usepackage{accents}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=footnotesize]{todonotes}
 
@@ -64,6 +65,8 @@
 \newcommand{\Vek}[3]{\left(\begin{array}{r}#1\\#2 
 \ifthenelse{\equal{#3}{}}{}{\\#3}\end{array}\right)}
 
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}
+
 % use \abs{} for absolute values
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
@@ -82,6 +85,7 @@
 
 \begin{document}
 \maketitle
+Please send feedback to \url{martina@tscheckl.eu}.
 \tableofcontents
 
 \subfile{lectures/NT_2015-10-05.tex}
@@ -93,8 +97,8 @@
 \subfile{lectures/NT_2015-10-27.tex}
 \subfile{lectures/NT_2015-10-28.tex}
 
-%\subfile{lectures/NT_2015-11-03.tex}
-%\subfile{lectures/NT_2015-11-04.tex}
+\subfile{lectures/NT_2015-11-03.tex}
+\subfile{lectures/NT_2015-11-04.tex}
 
 %\subfile{lectures/NT_2015-11-10.tex}
 %\subfile{lectures/NT_2015-11-11.tex}
