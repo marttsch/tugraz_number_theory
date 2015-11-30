@@ -13,7 +13,7 @@
     \[ \exists c > 0 \text{ such that } |\alpha - \frac{p}{q}| > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
     \item By (c) and (d) we see that $\theta = [a_0,a_1,a_2,\dots]$ is badly approximable if and only if
     the partial quotients $a_i$ are uniformly bounded, i.e., $\exists M > 0$ such that $a_i < M \forall i$.
-    \item (c) suggests that the "worst-approximable" number is $\theta = [1,1,1,\dots]$. 
+    \item (c) suggests that the \grqq worst-approximable\grqq ~number is $\theta = [1,1,1,\dots]$. 
     That's indeed the case c.f Exercise sheet 2 \# 5,6 (using that $\theta = 1 + \frac{1}{1+\frac{1}{1+\dots}} = 1 + \frac{1}{\theta}$.
     So $\theta^2 - \theta -1 = 0$.\\
     So $\theta = \frac{1 \pm \sqrt{5}}{2}$ but $a_0 = 1$ so $\theta = \frac{1 + \sqrt{5}}{2}$.
@@ -32,7 +32,7 @@ Note that by Corollary 1.1.2 we have $N_\alpha(\phi,Q) \to \infty$ as $Q \to \in
 and by Exercise sheet 2, even when $\phi(y) \geq \frac{1}{\sqrt{5}y^2}$.
 If $\phi$ decays slowly enough then one can easily show that
 \[ N_\alpha(\phi,Q) = 2 \cdot \underbrace{\int_1^Q y \phi(y) dy}{Vol S_\alpha (\phi,Q)}(\text{It } \underbrace{o(1)}{\text{tends to } 0 \text{ as } Q \to \infty}) \text{ as Q } \to \infty \]
-More specifically, using tools we develp in Chapter 3, one can easily show that
+More specifically, using tools we develop in Chapter 3, one can easily show that
 \[ \#\Z^2 \cap S_\alpha(\phi,Q) = 2 \cdot \int_1^Q y \phi(y) dy + \mathcal{O}(Q), \]
 using Möbius-inversion, one can show that 
 \[ N_\alpha(\phi,Q) = \frac{2}{S(2)} \cdot \int_1^Q y \phi(y) dy + \mathcal{O}(Q \log{Q}).\]
@@ -43,9 +43,9 @@ provided
 So, e.g., if $\phi(y) \geq \frac{(\log y)^2}{y}$.
 
 However, the case when $\phi(y)$ decays much quicker is more interesting.
-Serge Lang in 1967 proved that if $\alpha$ is reals quadratic then
+Serge Lang in 1967 proved that if $\alpha$ is real quadratic then
 \[ N_\alpha(\frac{1}{x^2},Q) = c_\alpha \cdot \log(Q) + \mathcal{O}(1)\text{. } (c_\alpha > 0). \]
-He mentioned that it would seem quite difficult to prove an asymptotic result por algebraic $\alpha$, let alone transcendend.\\
+He mentioned that it would seem quite difficult to prove an asymptotic result for algebraic $\alpha$, let alone transcended.\\
 Adams showed
 \[ N_e(\frac{1}{x^2},Q) = c_e \cdot \frac{\log Q}{\log \log Q} + \mathcal{O}(1) (c_e > 0) \]
 where $ e = 2.7122\dots$\\

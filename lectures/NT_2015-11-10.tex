@@ -19,7 +19,7 @@ where $\abs{\underline{x}}_v = \max \{\abs{x_0}_v,\dots,\abs{x_n}_v \}$.
   For $v \in S$ let $L_{v_1},\dots,L_{v_n}$ be $n$ linearly independent linear forms in $n$ variables with coefficients in $\Q$.
   Then the set of solutions $\underline{x} \in \Q^{n+1} \setminus 0$ of
   \[ \prod_{v \in S} \prod_{i=1}^n \frac{\abs{L_{v_i}(\underline{x})_v}}{\abs{\underline{x}}_v} < H_{\p^{n-1}}(\underline{x})^{-n-\delta} \]
-  lie in finitely many proper subsaced of $\Q^n$.
+  lie in finitely many proper subspace of $\Q^n$.
 \end{theorem}
 
 An interesting consequence is a finiteness result for $S$-unit equations.\\
@@ -28,7 +28,7 @@ Let $v$ be a non-Archimedean absolute value or a field $K$. Then
 \[ O_v =  \{ x \in K : \abs{x}_v \leq 1 \} \]
 is called the valuation ring of $v$. It is indeed a ring, e.g., $\abs{x}_v,\abs{y}_v \leq 1$ then
 \[ \abs{x+y}_v \leq \max \{ \abs{x}_v,\abs{y}_v \} \leq 1 \text{.} \]
-In particular, if $K = \Q$ and $v = p$ then $O_v$ is a subring of $\Q$.\\
+In particular, if $K = \Q$ and $v = p$ then $O_v$ is a sub-ring of $\Q$.\\
 \\
 Now let $S \subset M_\Q$  be finite and $\infty \in S$. We define the set of \emph{$S$-integers} $O_S$ to be
 \[ O_S = \cap_{v \nin S} O_v \text{.}\]
@@ -51,7 +51,7 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   \begin{itemize}
     \item $x_0,\dots x_n$ are $S$-units
     \item we identify proportional solutions (i.e., $\underline{x} = \lambda \underline{x}$ for $ \lambda \in \Q \setminus 0$).
-    \item no proper subsum vanishes, i.e., $\sum_{I} \alpha_i x_i \neq 0$ for all $\emptyset \subsetneqq I \subsetneqq \{0,1,\dots,n\}$.
+    \item no proper sub-sum vanishes, i.e., $\sum_{I} \alpha_i x_i \neq 0$ for all $\emptyset \subsetneqq I \subsetneqq \{0,1,\dots,n\}$.
   \end{itemize}
 \end{theorem}
 
@@ -66,7 +66,7 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   has solutions, e.g., $(x,y,z) = (0,0,0)$ or $(x,y,z) = (1,1,1)$.
   However, with $S = \{ \infty,3,5,7 \}$ each solution $(x,y,z)$ yields a solution $u_0 = 3x$, $u_1 = 5y$, $u_2 = - 7z$, $u_3 = - 1$ of the $S$-unit equation $u_0 + u_1 + u_2 + u_3 = 0$.
   These solutions are all non-proportional.
-  Moreover, no subsum vanishes unless $x y z = 0$ but then we easily see that $x=y=z=0$.
+  Moreover, no sub-sum vanishes unless $x y z = 0$ but then we easily see that $x=y=z=0$.
   Hence, Theorem 1.5.4 yields finiteness.
 \end{ex}
 
@@ -82,7 +82,7 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   Let $\tilde{\underline{x}} = (x_0,\dots,x_{n-1})$.
   For each $v \in S$ pick $i(v)$ with $0 \leq i(v) \leq n-1$.
   So we get $n^{\#S}$ such tuples $(i(v))_{v \in S}$.
-  Choose one of those tuples and condider all solutionas of $\alpha_0 x_0 + \dots + \alpha_n x_n = 0$ with
+  Choose one of those tuples and consider all solutions of $\alpha_0 x_0 + \dots + \alpha_n x_n = 0$ with
   \[ \abs{\tilde{\underline{x}}}_v = \abs{x_{i(v)}}_v \]
   Choose the set of linear forms
   \[ \{ L_{v_j} : 1 \leq j \leq n \} = \{ X_0,X_1,\dots,X_{n-1},\frac{\alpha_0}{\alpha_n}X_0+\dots + \frac{\alpha_{n-1}}{\alpha_n}X_{n+1} \} \setminus \{X_{i(v)}\} \]
@@ -100,16 +100,16 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   is an $S$-unit equation in $\leq n$ unknowns.
   For every solution of "marker(S)" there is a set $J \subset J_0$, $J \neq \emptyset$, such that
   \[ \sum_{i \in J} c_i x_i = 0 \]
-  and \underline{no} subsum vanishes.
+  and \underline{no} sub-sum vanishes.
   By the induction hypotheses, up to proportionality, we get only finitely many solutions.
   Moreover, the number of possible choices $J$ is finite.
   Therefore it suffices to consider solutions $\{x_i\}_{i \in J}$ that are proportional to a fixed $\{u_i\}_{i \in J}$,
   i.e., $x_i = \xi u_i (i \in J)$.
-  Returning to our initital equation $\sum_{i=0}^n \alpha_i x_i = 0$ we get
+  Returning to our initial equation $\sum_{i=0}^n \alpha_i x_i = 0$ we get
   \[ \xi ( \sum_{i \in J} \alpha_i u_i) + \sum_{i \nin J} \alpha_i x_i) = 0 \]
   If $\sum_{i \in J} \alpha_i x_i \neq 0$ then the above is an $S$-unit equation in $1 + (n+1) - \#J \leq n$ unknowns,
   namely $\xi, x_i \: (i \nin J)$. By the induction hypothesis we get only finitely many non-proportional solutions
-  $\{ x_i\}_{i=0}^n$ for which no subsum vanishes. Finally, if $\sum_{i \in J} \alpha_i x_i = 0$ then $\sum_{i \nin J} \alpha_i x_i = 0$ and we ignore these solutions by assumption of the Theorem.
+  $\{ x_i\}_{i=0}^n$ for which no sub-sum vanishes. Finally, if $\sum_{i \in J} \alpha_i x_i = 0$ then $\sum_{i \nin J} \alpha_i x_i = 0$ and we ignore these solutions by assumption of the Theorem.
 \end{proof}
 
 

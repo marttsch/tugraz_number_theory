@@ -34,7 +34,7 @@
       &= p_m q_{m-1} - p_{m-1}q_m = - (-1)^m = (-1)^{m+1}.
     \end{align}
     This proves claim for $n = m$.
-    \item Immedate from (a)
+    \item Immediate from (a)
     \item (c) + (d):\\
     Remark about $\frac{p_n}{q_n}$ in (d) follows directly from (c).
     We prove the rest of (d), along with (c), using induction on $n$. Remember that (c) a priori does not require that the $a_i$ are produced by the continued fraction process.\\
@@ -76,7 +76,7 @@ Next we deduce some properties of continued fraction convergents.
     where $0 < \frac{1}{\theta_{n+1}} < \frac{1}{a_{n+1}}$. So that $\theta$ lies between $[a_0,\dots,a_n]$ and $[a_0,\dots,a_n + \frac{1}{a_{n+1}} ]$.
     But $[a_0,\dots,a_n + \frac{1}{a_{n+1}} = [a_0,\dots,a_{n+1}]$. This shows (a).
     \item By (a) we have $|\theta - \frac{p_n}{q_n} | \leq |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = | \frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}} | \underset{=}{Lemma 1.2.1(a)} \frac{1}{q_n q_{n+1}}$
-    \item Follws from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
+    \item Follows from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
     \item Follows from (b) and (c)
     \item Only if part is obvious.\\
     Conversely suppose $\theta = \frac{a}{b} \in \Q$ but the process does \emph{not} terminate. Taking $n$ such that $q_n > b$ yields
@@ -136,7 +136,7 @@ We now show that convergents give best-possible rational approximations.
     As $0 < q <q_{n+1}$ we have $u \neq 0$. If $v = 0$ then $(p,q) = u \cdot (p_n,q_n)$ and the claim is trivial. ($u = 1 \Rightarrow$ equality, $u > 1 \Rightarrow$ strictly >)\\
     So let's assume $v \neq 0$. Then $u$ and $v$ cannot both be negative (as $q > 0$) nor both be positive (as $q < q_{n+1}$).
     So they have opposite signs.\\
-    By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta p_{n+1}$ have opposit signs.
+    By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta p_{n+1}$ have opposite signs.
     Hence, $|q \theta - p| = |u (q_n \theta p_n) + v (q_{n+1} \theta - p_{n+1}| > |q_n \theta - p_n|$.
     \item[e)] Take $n$ with $q_n \leq q < q_{n+1}$. Then 
     \begin{align*} 
