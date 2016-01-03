@@ -33,7 +33,7 @@ By Theorem 1.2.5 we know
 where $ \epsilon = \begin{cases} \frac{1}{\theta - \bar{\theta}} & 2 \divides n\\ \frac{1}{\sqrt{c}(\theta -\bar{\theta}} & 2 \nmid n \end{cases}$
 \[ \iff n \log\left(\frac{\theta}{\sqrt{c}}\right) + \log\left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) + \log \epsilon \leq \log Q \]
 Using Taylor series expansion we see that 
-\[ | \log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right) | \leq | \frac{\bar{\theta}}{\theta - \bar{\theta}} |  \]
+\[ \abs{\log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right)} \leq \abs{\frac{\bar{\theta}}{\theta - \bar{\theta}}}  \]
 This proves the claim.
 
 \subsection{Liouville's Theorem}
@@ -59,34 +59,34 @@ If $\alpha$ is algebraic then we say $\deg D_\alpha$ is the \emph{degree of $\al
 \begin{theorem}[1.3.1 Liouville's Theorem]
   Suppose $\alpha$ is a real, algebraic number of degree $d$.
   Then $\exists c(\alpha) > 0$ such that
-  \[ |\alpha - \frac{p}{q}| > \frac{c(\alpha)}{q^d} \]
+  \[ \abs{\alpha - \frac{p}{q}} > \frac{c(\alpha)}{q^d} \]
   for every $(p,q) \in \Z \times \N$ with $\alpha \neq \frac{p}{q}$.
 \end{theorem}
 
 \begin{proof}
-  Suppose $|\alpha - \frac{p}{q} | > 1$ then the claim holds for every $c(\alpha) > 1$.
-  Now suppose $|\alpha - \frac{p}{q}| \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
+  Suppose $\abs{\alpha - \frac{p}{q}} > 1$ then the claim holds for every $c(\alpha) > 1$.
+  Now suppose $\abs{\alpha - \frac{p}{q}} \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
   \[ D_\alpha(x) = \sum_{i=1}^d (x - \alpha)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha) \]
   Hence, 
-  \[ |D_\alpha\left(\frac{p}{q}\right) | = | \sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)| \overset{\leq}{(D)label} |\frac{p}{q} - \alpha | \frac{1}{c(\alpha)} \]
+  \[ \abs{D_\alpha\left(\frac{p}{q}\right)} = \abs{\sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)} \overset{\leq}{(D)label} \abs{\frac{p}{q} - \alpha} \frac{1}{c(\alpha)} \]
   where
-  \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} |D_\alpha^{(i)}(\alpha) |\right)^{-1} \]
+  \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} \abs{D_\alpha^{(i)}(\alpha)}\right)^{-1} \]
   Now if $D_\alpha$ has a rational root then it must have degree one, so have only \emph{one} root.
   Thus $D_\alpha \left(\frac{p}{q}\right) \neq 0$ unless $\alpha = \frac{p}{q}$.
   Hence, if $\alpha \neq \frac{p}{q}$ we get
-  \[ | D_\alpha \left(\frac{p}{q}\right) | = | \frac{\text{non-zero integer}}{q^d} \geq \frac{1}{q^d}. \]
+  \[ \abs{D_\alpha \left(\frac{p}{q}\right)} = | \frac{\text{non-zero integer}}{q^d} \geq \frac{1}{q^d}. \] % TODO: there is no end for |
   Combing this with (D)label yields 
-  \[ |\alpha - \frac{p}{q} | > \frac{c(\alpha)}{q^d}.\]
+  \[ \abs{\alpha - \frac{p}{q}} > \frac{c(\alpha)}{q^d}.\]
 \end{proof}
 
 We say a real number $\alpha$ is a \emph{Liouville number} if for every $n \in \N$
-\[ 0 < |\alpha - \frac{p}{q}| < \frac{1}{q^n} \]
+\[ 0 < \abs{\alpha - \frac{p}{q}} < \frac{1}{q^n} \]
 has a solution. $p,q \in \Z$ with $q > 1$.
 
 \begin{ex}
   $\alpha = \sum_{k = 1}^\infty 10^{-k^k}$ is a Liouville number.
   Let $n \in\N$ and put $p = \sum_{k=1}^n 10^{n^n - k^k}$ and $q = 10^{n^n}$.
-  Then $ 0 < |\alpha - \frac{p}{q}| = \sum_{k>n} 10^{-k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
+  Then $ 0 < \abs{\alpha - \frac{p}{q}} = \sum_{k>n} 10^{-k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
 \end{ex}
 
 \begin{cor}[1.3.2]
@@ -106,7 +106,7 @@ has a solution. $p,q \in \Z$ with $q > 1$.
 \begin{theorem}[Khintchine]
   Suppose $\psi: \N \to (0,\infty)$ is monotone decreasing (not necessarily strictly).
   The set 
-  \[A_\psi = \{\alpha \in \R: |\alpha - \frac{p}{q}| < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
+  \[A_\psi = \{\alpha \in \R: \abs{\alpha - \frac{p}{q}} < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
   has a Lebesgue measure zero of $\sum_{q=1}^\infty \psi(q)$ converges and has full Lebesgue measure (i.e. the complement has measure zero) 
   if $\sum_{q=1}^\infty \psi(q)$ diverges.
 \end{theorem}

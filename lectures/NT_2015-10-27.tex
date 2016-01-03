@@ -5,12 +5,12 @@
   \begin{itemize}
     \item (d) implies that if $p,q \in \Z$, $0 < q \leq p_n$ then
     \begin{align*}
-      |\theta - \frac{p}{q}| &\geq |\theta - \frac{p_n}{q_n}| \cdot \frac{p_n}{q}\\
-      &\geq | \theta - \frac{p_n}{q_n}|
+      \abs{\theta - \frac{p}{q}} &\geq \abs{\theta - \frac{p_n}{q_n}} \cdot \frac{p_n}{q}\\
+      &\geq \abs{\theta - \frac{p_n}{q_n}}
     \end{align*}
     with "$=$" only if $\frac{p}{q} = \frac{p_n}{q_n}$.
     \item We say $\alpha \in \R \setminus \Q$ is \emph{badly approximable} if
-    \[ \exists c > 0 \text{ such that } |\alpha - \frac{p}{q}| > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
+    \[ \exists c > 0 \text{ such that } \abs{\alpha - \frac{p}{q}} > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
     \item By (c) and (d) we see that $\theta = [a_0,a_1,a_2,\dots]$ is badly approximable if and only if
     the partial quotients $a_i$ are uniformly bounded, i.e., $\exists M > 0$ such that $a_i < M \forall i$.
     \item (c) suggests that the \grqq worst-approximable\grqq ~number is $\theta = [1,1,1,\dots]$. 
@@ -24,8 +24,8 @@
 \emph{Counting Diophantine approximations 1:}\\
 Let $\alpha \in \R \setminus \Q$ and let $\phi: [1,\infty) \to (0,\infty)$ be decreasing.
 Consider the number of "$\phi$-good" approximations:
-\[ N_\alpha(\phi,Q) = \#\{\frac{p}{q} \in \Q ; |\alpha - \frac{p}{q} | < \phi(q), 1 \leq q \leq Q\} \]
-We put $S_\alpha(\phi,Q) = \{(x,y)\in \R^2 : | \alpha - \frac{x}{y}| < \phi(y), 1 \leq y \leq Q\}$.
+\[ N_\alpha(\phi,Q) = \#\{\frac{p}{q} \in \Q ; \abs{\alpha - \frac{p}{q}} < \phi(q), 1 \leq q \leq Q\} \]
+We put $S_\alpha(\phi,Q) = \{(x,y)\in \R^2 : \abs{\alpha - \frac{x}{y}} < \phi(y), 1 \leq y \leq Q\}$.
 Then
 \[ N_\alpha(\phi,Q) = \#\{(p,q)\in \Z \times \N : \gcd(p,q)\} \cap S_\alpha(\phi,Q) \]
 Note that by Corollary 1.1.2 we have $N_\alpha(\phi,Q) \to \infty$ as $Q \to \infty$ provided $\phi(y) \geq \frac{1}{y^2}$,
@@ -54,9 +54,9 @@ Here is an example.
 
 \begin{ex}
   Suppose $\phi(x) = \frac{1}{2x^2}$. Consider the continuous fraction expansion $\alpha = [a_0,a_1,a_2,\dots]$.
-  By Theorem 1.2.3 we know $| \alpha - \frac{p}{q}| < \phi(q) \Rightarrow \frac{p}{q}$ is a convergent.
-  Moreover, if $\frac{p}{q} = \frac{p_n}{q_n}$ is the $n$-th convergent then $|\alpha - \frac{p}{q}| < \frac{1}{a_{n+1} q^2}$.
-  So if all $a_i > 1$ then $|\alpha - \frac{p}{q}| < \phi(q) \forall$ convergent $\frac{p}{q}$.\\
+  By Theorem 1.2.3 we know $\abs{\alpha - \frac{p}{q}} < \phi(q) \Rightarrow \frac{p}{q}$ is a convergent.
+  Moreover, if $\frac{p}{q} = \frac{p_n}{q_n}$ is the $n$-th convergent then $\abs{\alpha - \frac{p}{q}} < \frac{1}{a_{n+1} q^2}$.
+  So if all $a_i > 1$ then $\abs{\alpha - \frac{p}{q}} < \phi(q) \forall$ convergent $\frac{p}{q}$.\\
   Hence, $N_\alpha(\phi,Q) = \#\{n: q_n \leq Q \}$.\\
   So, we need to compute the number of convergents $\frac{p_n}{q_n}$ with $q_n \leq Q$. 
   We shall soon see that this is rather simple if $\alpha = [b,a,b,a,b,a,\dots]$ with $a \divides b$.\\
