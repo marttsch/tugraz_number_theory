@@ -1,7 +1,7 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\subsection{5 Counting lattice points}
+\subsection{Counting lattice points}
 
 How many integer pairs $(x,y)$ solve the Diophantine inequality
 \[ x^2 + y^2 \leq T \text{?} \]
@@ -12,17 +12,19 @@ or more generally
 where $F$ is a positive definite quadratic form in $n$ variables?
 Even more generally, let $S \subset \R^n$ and $\Lambda$ a lattice in $\R^n$, we would like to get a (non-trivial) estimate for $(\Lambda \cap S)$.\\
 
-Suppose $S$ is measurable and "nicely shaped", and let $F_v = [0,1) b_1 + \dots + [0,1) b_n + v$ ($v \in \Lambda$) be a fundamental cell (with respect to basis $b_1,\dots,b_n$).\\
+Suppose $S$ is measurable and "nicely shaped", and let 
+\[ F_v = [0,1) b_1 + \dots + [0,1) b_n + v \; (v \in \Lambda) \] 
+be a fundamental cell (with respect to basis $b_1,\dots,b_n$).\\
 
 The idea is as follows:
-$\abs{\Lambda \cap S} \cong $number of $F_v$'s that lie in $S \cong \frac{\vol(S)}{\vol(F_v)} = \frac{\vol(S)}{\det(\Lambda)}$ %TODO replace \cong by \doppelwelle
+$\abs{\Lambda \cap S} \approx $ number of $F_v$'s that lie in $S \approx \frac{\vol(S)}{\vol(F_v)} = \frac{\vol(S)}{\det(\Lambda)}$
 
-"Nice set": %TODO picture
-"Bad sst": %TODO picture
+\todo{"Nice set"} %TODO picture
+\todo{"Bad set"} %TODO picture
 
 To characterize nice sets we use the following definition.
 
-\begin{defi}
+\begin{defi*}
   Let $n \geq 2$, $M$ be in $\N$ and $L \geq 0$ real.
   We say the set $Z$ lies in \underline{$\lip(n,M,L)$} if
   \begin{itemize}
@@ -33,11 +35,11 @@ To characterize nice sets we use the following definition.
   \[ \abs{\phi_i(x) - \phi_i(y)} \leq L \abs{x-y} \; \forall x,y \in [0,1]^{n-1} \]
   and such that the union of their images covers $Z$, i.e.,
   \[ Z \subset \cup_{i=1}^M \phi_i([0,1]^{n-1}) \text{.} \]
-\end{defi}
+\end{defi*}
 
 \begin{ex}
   The sphere $S^\prime \subset \R^2$ lies in $\lip(2,1,2\pi)$.
-  \[ \phi(x) = (\cos(2\pi x), \sin(2 \pi x)) \; (0 \leq x \leq 1) \]
+  \[ \phi(x) = (\cos(2\pi x), \sin(2 \pi x)) \text{ for } 0 \leq x \leq 1 \]
 \end{ex}
 
 We can now state the main result of Section 5.
@@ -45,7 +47,7 @@ Recall that the boundary $\partial S$ of $S \subset \R^n$ is defined by the topo
 \[ \partial S = \bar{S} \setminus \inner(S)\]
 We follow an approach of Masser and Vasler.
 
-\begin{theorem}[2.5.1\label{2_5_1}]
+\begin{theorem}\label{2_5_1}
   Let $S \subset \R^n$ be bounded and suppose that $\partial S \in \lip(n,M,L)$.
   Let $\Lambda$ be a lattice in $\R^n$ and $\lambda_1$ its first successive minimum with respect to the unit ball.
   Then, $S$ is measurable and
@@ -55,7 +57,7 @@ We follow an approach of Masser and Vasler.
 
 For the proof we need the following lemma.
 
-\begin{lemma}[2.5.2\label{2_5_2}]
+\begin{lemma}\label{2_5_2}
   Let $S \subset \R^n$ be bounded and measurable and let $\Lambda$ be a lattice in $\R^n$.
   Let $b_1,\dots,b_n$ be a basis of $\Lambda$, $F_v = [0,1)b_1 + \dots + [0,1)b_n + v$ the corresponding fundamental cells and write
   \[ \mathcal{T} = \abs{\{v \in \Lambda: F_v \cap \partial S \neq \emptyset\} } \text{,} \]
@@ -68,7 +70,7 @@ For the proof we need the following lemma.
   The cells $F_v$ ($v \in \Lambda$) define a partition of $\R^n$.
   Every $F_v$ contains exactly one lattice point, namely $v$.
   Let $m = \abs{\{v \in \Lambda : F_v \subset S \}}$.
-  Then $m \leq \abs{S \cap \Lambda}$.
+  Then $m \leq \abs{S \cap \Lambda}$.\\
   Now suppose $v \in S$.
   Then either $F_v \subset S$ or $F_v$ contains a point from $S$ and from its complement $S^C$.
   The connecting line segment of these points lies in $F_v$ as $F_v$ is convex and it must contain a point of the boundary $\partial S$.
@@ -76,10 +78,10 @@ For the proof we need the following lemma.
   \[ \abs{\Lambda \cap S} \leq m + \mathcal{T} \text{.} \]
   Now $\vol F_v = \det \Lambda$, and the union of all cells $F_v$ that lie in $S$ has volume $m \cdot \det \Lambda$.
   The volume of the union of cells $F_v$ that have non-empty intersection with $S$ is at most $(m + \mathcal{T}) \det \Lambda$.
-  So we have proved the inequalities:
+  So we have proved the inequalities
   \begin{itemize}
     \item $m \leq \abs{\Lambda \cap S} \leq (m + \mathcal{T})$
-    \item $m \det \Lambda \leq \vol S \leq (m + \mathcal{T}) \det \Lambda$
+    \item $m \cdot \det \Lambda \leq \vol S \leq (m + \mathcal{T}) \det \Lambda$
   \end{itemize}
   Thus \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq \mathcal{T}\]
 \end{proof}
@@ -87,12 +89,12 @@ For the proof we need the following lemma.
 We can now prove Theorem \ref{2_5_1}.
 
 \begin{proof}[Proof of Theorem \ref{2_5_1}]
-  We use $c_1,c_2,\dots,c_7$ to denote constants that depend only on $n$.\\
+  We use $c_1,c_2,c_3,c_4,c_5,c_6,c_7$ to denote constants that depend only on $n$.\\
   First let's assume $\Lambda = \Z^n$, so $\lambda_1 = 1$.
   We take the standard basis $b_i = c_i \; (1\leq i\leq n)$ and apply Lemma \ref{2_5_2}; so $\mathcal{T} = \mathcal{T}(e_1,\dots,e_n)$.
   We split $[0,1]^{n-1}$ into $L_1^{n-1}$ subcubes of side length $\frac{1}{L_1}$ where $L_1 = [L] + 1$. %TODO replace [] by \floor  
   The images of these subcubes under the parametrizing maps $\phi$ have diameter at most $L \cdot \frac{c_1}{L_1} \leq c_1$.
-  Thus, no ore than $c_2 = (c_1 + 2)^n$ cells $F_v$ can meet such a single image (= the image of a single subcube).
+  Thus, no more than $c_2 = (c_1 + 2)^n$ cells $F_v$ can meet such a single image (= the image of a single subcube).
   Hence, 
   \begin{align}
     \mathcal{T} \leq M \cdot c_2 \cdot L_1^{n-1} \leq M \cdot c_2 \cdot (L + 1)^{n-1} \label{5_1}
@@ -112,7 +114,7 @@ We can now prove Theorem \ref{2_5_1}.
   So we can apply the case $\Lambda = \Z^n$ to the set $A(S)$.
   The boundary $\partial A(S)$ can  be parametrized by the $M$ maps $\psi(x) = A(\phi(x))$ which satisfy
   \[ \abs{\psi(x) - \psi(y)} \leq \norm{A} \cdot L \abs{x-y} \text{,}\]
-  where $\norm{A}$ denotes the Euclidean operator norm of $A$.
+  where $\norm{A}$ denotes the Euclidean operator norm of $A$.\\
   By Cramer's rule the entries of row $i$ of $A$ are of the form $\frac{\mu}{\det \Lambda}$, 
   where $\mu$ is a minor of the matrix with columns $b_1,\dots,b_n$ omitting $b_i$.
   Using Hadamard's inequality we conclude 
@@ -125,10 +127,23 @@ We can now prove Theorem \ref{2_5_1}.
   Replacing $L$ in (\ref{5_1}) by $\frac{c_7 L}{\lambda_1}$ proves the theorem.
 \end{proof}
 
+\begin{rem}
+  We have not shown that $S$ is measurable.
+  One could do that by showing that $\partial S$ has measure zero, and noting that every closed set is measurable.\\
+  Why is $\vol(\partial S) = 0$?
+  Take $\Lambda = k^{-1} \Z^n$ where $k \in \N$, and $\mathcal{T}$ be associated to the basis $k^{-1} e_1, \dots, k^{-1}e_n$.
+  The proof of Theorem \ref{2_5_1} yields
+  \[ \mathcal{T} \leq c_n M \left( \frac{L}{k^{-1}} + 1 \right)^{n-1} \leq c_n M (L+1)^{n-1} k^{n-1} \text{.} \]
+  Since 
+  \[\vol(\partial S) \leq \mathcal{T} \vol F_v \leq c_n M (L+1)^{n-1} k^{n-1} k^{-n} \to 0 \text{ as } k \to \infty \text{.} \]
+  Hence $\vol(\partial S) = 0$.
+\end{rem}
+
+
 In some applications a more precise error term is needed that involves also the higher successive minima.
 With a bit more effort the following result could be proved.
 
-\begin{theorem}[2.5.3\label{2_5_3}]
+\begin{theorem}\label{2_5_3}
   Same hyptothesis as in Theorem \ref{2_5_1} and $\lambda_1,\dots,\lambda_n$ successive minima with respect to the unit ball.
   Then 
   \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq c M \underbrace{\max_{0 \leq i < n} \frac{L}{\lambda_1 \cdot \lambda_i}}_{\coloneq 1 \text{ for } i = 0} \]

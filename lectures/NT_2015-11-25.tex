@@ -1,50 +1,59 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\begin{lemma}[2.3.5 \label{l_2_3_5}]
+\begin{lemma}\label{l_2_3_5}
   Let $C$ be a convex, symmetric star body in $\R^n$, let $\Lambda$ be a lattice in $\R^n$, and let $a_1,\dots,a_n$ be linearly independent vectors in $\Lambda$.
   Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ such that
-  \[ f_C(b_j) \leq \max \{ f_C(a_j), \frac{1}{2} (f_C(a_1)+\dots+f_C(a_j)) \} \]
+  \[ f_C(b_j) \leq \max \left\lbrace f_C(a_j), \frac{1}{2} (f_C(a_1)+\dots+f_C(a_j)) \right\rbrace \]
 \end{lemma}
 
 \begin{proof}
   Consider the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$.
   By Theorem \ref{th_2_3_1} there exists a basis $c_1,\dots,c_n$ of $\Lambda$ such that
   \begin{align} \label{3_6}
-    a_1 &= v_{11} c_1\\
-    a_2 &= v_{21} c_1 + v_{22} c_2\\
-    &\vdots\\
-    a_n &= v_{n1} c_1 + \dots + v_{nn} c_n
+    \begin{split}
+      a_1 &= v_{11} c_1\\
+      a_2 &= v_{21} c_1 + v_{22} c_2\\
+      &\vdots\\
+      a_n &= v_{n1} c_1 + \dots + v_{nn} c_n
+    \end{split}
   \end{align}
-  with $v_ij \in \Z$ and $v_{ii} \neq 0$.
+  with $v_{ij} \in \Z$ and $v_{ii} \neq 0$.\\
   Consider 
-  \[b_j = c_j + t_{jj-1}a_{j-1} + \dots + t_{j1} a_1 \label{3_7}\]
-  where $t_{ji} \in \R$.
-  If $b_1,\dots,b_n$ are in $\Lambda$ then by (\ref{3_6}) they form a basis of $\Lambda$.
-  How do we choose $t_ji$?
-  If $v_jj = \pm 1$ then we put $b_j = \pm a_j$, which dearly is in the required form (\ref{3_7}) and obviously 
+  \begin{align}
+    b_j = c_j + t_{jj-1}a_{j-1} + \dots + t_{j1} a_1 \label{3_7}
+  \end{align}
+  where $t_{i} \in \R$.\\
+  If $b_1,\dots,b_n$ are in $\Lambda$ then by (\ref{3_6}) they form a basis of $\Lambda$.\\
+  How do we choose $t_{ji}$?
+  If $v_{jj} = \pm 1$ then we put $b_j = \pm a_j$, which clearly is in the required form (\ref{3_7}) and obviously 
   \[ f_C(b_j) = f_C(a_j) \text{.} \]
   Now suppose $\abs{v_{jj}} \geq 2$.
   Now solving (\ref{3_6}) for $c_j$ yields
   \[ c_j = v_{jj}^{-1} a_j + k_{j j-1} a_{j-1} + \dots + k_{j1} a_1 \]
-  with $k_{ji} \in \Q$.
+  with $k_{ji} \in \Q$.\\
   We choose $t_{ji} \in \Z$ such that
-  \[ \abs{k_{ji} + t_{ji}} \leq \frac{1}{2} \]
-  Then 
-  \[ b_j \in \Lambda \text{ and } b_j = l_{jj} a_j + l_{j j-1} a_{j-1} + \dots + l_{j1} a_1 \]
+  \[ \abs{k_{ji} + t_{ji}} \leq \frac{1}{2} \text{.} \]
+  Then $b_j \in \Lambda$ and 
+  \[b_j = l_{jj} a_j + l_{j j-1} a_{j-1} + \dots + l_{j1} a_1 \]
   with 
   \begin{align*}
     \abs{l_{jj}} &= \abs{v_{jj}} \leq \frac{1}{2} \text{ and}\\
-    \abs{l_{ji}} &= \abs{t_{ji} + k_{ji}} \leq \frac{1}{2} \; (i < j)
+    \abs{l_{ji}} &= \abs{t_{ji} + k_{ji}} \leq \frac{1}{2} \text{ for } i < j
   \end{align*}
-  Using that $C$ is a \underline{convex}, \underline{symmetric} star body we have the triangle-inequality. Hence,
-  \[ f_C(b_j) \leq f_C(l_{jj}a_j) + \dots + f_C(l_{j1}a_1) = \abs{l_{jj}} f_C(a_1) + \dots + \abs{l_{j1}} f_C(a_1) \leq \frac{1}{2} (f_C(a_j) + \dots + f_C(a_1)) \text{.} \]
+  Using that $C$ is a \underline{convex}, \underline{symmetric} star body we have the triangle inequality. 
+  Hence,
+  \begin{align*}
+    f_C(b_j) &\leq f_C(l_{jj}a_j) + \dots + f_C(l_{j1}a_1) \\
+    &= \abs{l_{jj}} f_C(a_1) + \dots + \abs{l_{j1}} f_C(a_1) \\
+    &\leq \frac{1}{2} (f_C(a_j) + \dots + f_C(a_1)) \text{.} 
+  \end{align*}
 \end{proof}
 
 \begin{cor}\label{2_3_6}
   Let $C$ be a convex, symmetric star body, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
   Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ with
-  \[ f_C(b_j) \leq \max \{ \lambda_j, \frac{1}{2}(\lambda_1 + \dots + \lambda_n \} \]
+  \[ f_C(b_j) \leq \max \left\lbrace \lambda_j, \frac{1}{2}(\lambda_1 + \dots + \lambda_j) \right\rbrace \]
 \end{cor}
 
 \begin{proof}
@@ -52,17 +61,16 @@
 \end{proof}
 
 
-\subsection{4. Minkowski's Second Theorem}
+\subsection{Minkowski's Second Theorem}
 
 Minkowski's Second Theorem is a refinement of his First Theorem and a central result in Geometry of Numbers.
-Let's start by rephrasing Minkowski 1.%\roman{1}
+Let's start by rephrasing Minkowski's First Theorem.%\roman{1}
 
 First note if $C \subset \R^n$ is convex, symmetric and of positive volume then there exist $\varepsilon > 0$, $x \in C$ such that
 \[ B_\varepsilon(x) \subset C \text{.} \]
 But then there exists $\varepsilon^\prime > 0$ such that $B_{\varepsilon^\prime}(0) \subset C$.
 So the origin lies in the interior of $C$.
-Let $\Lambda$ be a lattice in $\R^n$.
-So we can consider the successive minima $\lambda_1,\dots,\lambda_n$ of $\Lambda$ with respect to $C$.
+So we can consider the successive minima $\lambda_1,\dots,\lambda_n$ of $\Lambda$ with respect to $C$, where $\Lambda$ is a lattice in $\R^n$.
 
 Note that by definition of $\lambda_1$:
 \[ \forall \varepsilon > 0: \; (\lambda_1 - \varepsilon) C \text{ contains \underline{no} non-zero lattice point.} \]
@@ -74,7 +82,7 @@ Minkowski's First Theorem yields:
 On the other hand (\ref{4_1}) and $\vol C > 2^n \det \Lambda$ implies $\lambda_1 < 1$ and hence $C$ contains a non-zero lattice point.
 The following theorem is much more precise than (\ref{4_1})!
 
-\begin{theorem}[2.4.1 Minkowski's Second Theorem\label{th_2_4_1_minkovski2}]
+\begin{theorem}[Minkowski's Second Theorem\label{th_2_4_1_minkovski2}]
   Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$. Then
   \[ \frac{2^n}{n!} \det \Lambda \leq \lambda_1 \dots \lambda_n \cdot \vol C \leq 2^n \det \Lambda \]
 \end{theorem}
@@ -95,25 +103,25 @@ The following theorem is much more precise than (\ref{4_1})!
   Put 
   \[ \delta(C) = \sup_M \frac{\lambda_1^n(M,C)}{\det M}\] 
   where the supremum runs over all lattices $M$ in $\R^n$.
-  By Minkowski 1 (cf (\ref{4_1})).
-  We have 
+  By Minkowski's First Theorem \ref{th_2_2_2_minkowski1} and (\ref{4_1}), we have 
   \[ \delta(C) \leq \frac{2^n}{\vol C} \text{.} \]
   We will show that if $C = B_1(0)$ then
   \begin{align}
-    \det \Lambda \leq \lambda_1 \dots \lambda_n \leq \delta(C) \det \Lambda \text{.} \label{4_2}
+    \det(\Lambda) \leq \lambda_1 \dots \lambda_n \leq \delta(C) \det(\Lambda) \text{.} \label{4_2}
   \end{align}
   In particular, as $\vol(C) \geq \frac{2^n}{n!}$, we get 
-  \[ \frac{2^n}{n!} \lambda_1 \dots \lambda_n \leq \vol C \lambda_1 \dots \lambda_n \leq 2^n \det \Lambda \text{.} \]
+  \[ \frac{2^n}{n!} \lambda_1 \dots \lambda_n \leq \vol(C) \lambda_1 \dots \lambda_n \leq 2^n \det(\Lambda) \text{.} \]
   For the lower bound in (\ref{4_2}) take linearly independent $a_1,\dots,a_n \in \Lambda$ with $\abs{a_i} = \lambda_i$ using Lemma \ref{l_2_3_3}. 
-  For the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$ we have $\det \Lambda^\prime = I \det \Lambda$,
+  For the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$ we have 
+  \[ \det(\Lambda^\prime) = I \det(\Lambda) \text{,} \]
   where $I$ is the index of $\Lambda^\prime$ in $\Lambda$.
-  By Hadamard's inequality:
-  \[ \abs{a_1} \dots \abs{a_n} \geq \det \Lambda^\prime \geq \det \Lambda \text{.} \]
+  By Hadamard's inequality we have
+  \[ \abs{a_1} \cdot \dots \cdot \abs{a_n} \geq \det(\Lambda^\prime) \geq \det(\Lambda) \text{.} \]
   Thus
-  \[ \det \Lambda \leq \lambda_1 \dots \lambda_n \text{.} \]
+  \[ \det(\Lambda) \leq \lambda_1 \dots \lambda_n \text{.} \]
   Now we prove the upper bound in (\ref{4_2}).
   Let $b_1,\dots,b_n$ be a basis of $\Lambda$ as in Corollary \ref{cor_2_3_4}.
-  As in the prove of Lemma \ref{l_2_3_2} we can find mutually orthogonal vectors $c_1,\dots,c_n$ such that
+  As in the prove of Lemma \ref{l_2_3_2_hadamard} we can find mutually orthogonal vectors $c_1,\dots,c_n$ such that
   \[ b_j = t_{j1} c_1 + \dots + t_{jj} c_j \; (t_{ji} \in \R) \]
   By scaling we can assume $\abs{c_j}^2 = 1$ $(1 \leq j \leq n)$.
   Now
@@ -126,17 +134,17 @@ The following theorem is much more precise than (\ref{4_1})!
   \begin{align}
     \sum_{i=1}^n \lambda_i^{-2} \left( \sum_{j \geq i} u_j t_{ji} \right)^2 \geq 1 \label{4_4}
   \end{align}
-  where $u = (u_1,\dots,u_n) \in \Z^n \setminus 0$.
-  Let $u \in \Z^n \setminus 0$, 
+  where $u = (u_1,\dots,u_n) \in \Z^n \setminus 0$.\\
+  Let $u \in \Z^n \setminus 0$ with
   \begin{align}
     u_J \neq 0 \text{ and } u_j = 0 \text{ for } j > J \text{.} \label{4_5}
   \end{align}
-  Then $u_1 b_1 + \dots + u_n b_n, b_1,\dots b_{J-1}$ are linearly independent and by Corollary \ref{cor_2_3_4} we have 
+  Then $u_1 b_1 + \dots + u_n b_n$, $b_1,\dots, b_{J-1}$ are linearly independent and by Corollary \ref{cor_2_3_4} we have 
   \begin{align}
     \abs{\sum_{j=1}^n u_j b_j}^2 \geq \lambda_J^2 \label{4_6}
   \end{align}
   Moreover, (\ref{4_5}) implies that summands with $j > J$ in (\ref{4_3}) and (\ref{4_4}) are zero.
-  Thus, the left hand-side in (\ref{4_4}) is equal to 
+  Thus, the left hand side in (\ref{4_4}) is equal to 
   \begin{align}
     \sum_{i \leq J} \lambda_i^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 \geq \sum_{i \leq J} \lambda_J^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 = \lambda_J^{-2} \abs{\sum_{j=1}^n u_j b_j}^2 \underbrace{\geq}_{\text{by (\ref{4_6}) and (\ref{4_3})}} 1
   \end{align}
@@ -146,14 +154,14 @@ The following theorem is much more precise than (\ref{4_1})!
   \end{align}
   Then
   \[ \abs{\sum_{j=1}^n u_j b_j^\prime} \geq 1\]
-  for every point $\sum u_j b_j^\prime \in \Lambda^\prime \setminus 0$.
+  for every point $\sum_{j=1}^n u_j b_j^\prime \in \Lambda^\prime \setminus 0$.
   Hence, 
   \begin{align}
     \lambda_1(\Lambda^\prime,C) \geq 1 \label{4_7}
   \end{align}
   But 
   \begin{align}
-    \det \Lambda^\prime = \lambda_1det \Lambda^\prime = {-1} \dots \lambda_ndet \Lambda^\prime = {-1} \det \Lambda \label{4_8}
+    \det(\Lambda^\prime) = \lambda_1^{-1} \cdots \lambda_n^{-1} \det(\Lambda) \label{4_8}
   \end{align}
   $\lambda_i = \lambda_i(\Lambda,C)$\\
   Moreover, by definition
@@ -162,7 +170,7 @@ The following theorem is much more precise than (\ref{4_1})!
   \end{align}
   Combining (\ref{4_7}), (\ref{4_8}) and (\ref{4_9}) we conclude
   \begin{align}
-    \lambda_1 \dots \lambda_n = \det \Lambda \frac{1}{\det \Lambda^\prime} \leq \det \Lambda \frac{\lambda_1^n(\Lambda^\prime,C)}{\det \Lambda^\prime} \leq \det \Lambda \cdot \delta(C)
+    \lambda_1 \cdots \lambda_n = \det(\Lambda) \frac{1}{\det(\Lambda^\prime)} \leq \det(\Lambda) \frac{\lambda_1^n(\Lambda^\prime,C)}{\det(\Lambda^\prime)} \leq \det(\Lambda) \cdot \delta(C)
   \end{align}
 \end{proof}
 

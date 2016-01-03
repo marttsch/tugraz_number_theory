@@ -97,34 +97,39 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
   \[ \abs{x_1} \leq c_1 \]
   \[ \abs{x_i} < c_i \: (2 \leq i \leq n) \]
   These inequalities define a symmetric, convex set of points $x \in \R^n$
-  with volume $= 2^n c_1 \dots c_n$. So if $c_1\dots c_n > \abs{\det A} \det \Lambda$ then we can apply Theorem \ref{th_2_2_2_minkowski1} and the claim follows at once.
+  with volume $2^n c_1 \cdots c_n$. So if $c_1 \cdots c_n > \abs{\det(A)} \cdot \det(\Lambda)$ then we can apply Theorem \ref{th_2_2_2_minkowski1} and the claim follows at once.\\
   Next let $0 < \varepsilon < 1$.
   Then the set
   \begin{align*}
-  S_\varepsilon: & \abs{x_1} &\leq c_1 + \varepsilon < c_1 + 1 \\
-  & \abs{x_i} &< c_i \: (2 \leq i \leq n)
+  S_\varepsilon:
+  \begin{cases} \abs{x_1} \leq c_1 + \varepsilon < c_1 + 1 & \\
+  \abs{x_i} < c_i & \text{for } (2 \leq i \leq n)
+  \end{cases}
   \end{align*}
   still has a non-zero lattice point in $\mathcal{L}$.
-  But these sets $S_\varepsilon$ all lie in $S_1$ which lies in compact set and hence has only finitely many lattice points.
-  Hence, there must be a non-zero lattice point o $\mathcal{L}$ in $S_0$. 
-  This proves the Corollary if $\det A \neq 0$.
-  Now if $\det A = 0$ then (2.2) defines a set of points $u \in \R^n$ of infinite volume and so Theorem \ref{th_2_2_2_minkowski1} applies again and yields the claim.
+  But these sets $S_\varepsilon$ all lie in $S_1$ which lies in a compact set and hence has only finitely many lattice points.
+  Hence, there must be a non-zero lattice point of $\mathcal{L}$ in $S_0$. 
+  This proves the Corollary if $\det(A) \neq 0$.\\
+  Now if $\det(A) = 0$ then (2.2) defines a set of points $u \in \R^n$ of infinite volume and so Theorem \ref{th_2_2_2_minkowski1} applies again and yields the claim.
 \end{proof}
 
-\begin{cor}[Lagrange\label{cor_2_2_4_lagrange}]
+\begin{cor}[Lagrange's four-square Theorem\label{cor_2_2_4_lagrange}]
   Every positive integer is the sum of four squares.
 \end{cor}
 
 \begin{proof}
   First we observe that 
-  \[ (x_1^2 + x_2^2 + x_3^2 + x_4^2) \cdot (y_1^2 + y_2^2 + y_3^2 + y_4^2) = (x_1 y_1 + x_2 y_2 x + x_3 y_3 + x_4 y_4)^2
-  + (-x_1 y_2 + x_2 y_1 -x_3 y_4 + x_4y_3)^2 + (-x_1 y_3 + x_2 y_4 + x_3 y_1 - x_-2 y_2)^2 + (-x_1 y_4 - x_2 y_3 + x_3y_2 + x_4 y_1)^2 \text{.} \]
+  \begin{align*}
+    (x_1^2 + x_2^2 &+ x_3^2 + x_4^2) \cdot (y_1^2 + y_2^2 + y_3^2 + y_4^2) = \\
+    &= (x_1 y_1 + x_2 y_2 x + x_3 y_3 + x_4 y_4)^2 + (-x_1 y_2 + x_2 y_1 -x_3 y_4 + x_4y_3)^2 \\
+    &+ (-x_1 y_3 + x_2 y_4 + x_3 y_1 - x_-2 y_2)^2 + (-x_1 y_4 - x_2 y_3 + x_3y_2 + x_4 y_1)^2 \text{.}
+  \end{align*}
   Now $1 = 1^2 + 0^2 + 0^2 + 0^2$. So it suffices to prove the claim for primes $p$.
-  Now $2 = 1^2 + 1^2 + 0^2 + 0^2$; so we can assume $p \neq 2$.
-  Now $a^2$ and $-(b^2 + 1)$ run through exacty $\frac{p+1}{2}$ distinct residue classes modulo $p$ as $a \bmod b$ run through an entire system of residue classes. ($0^2, 1^2, \dots, \left( \frac{p-1}{2} \right)^2$ are all distinct in $\mathcal{F}_p$)\\
+  And we can assume $p \neq 2$ since $2 = 1^2 + 1^2 +0^2 + 0^2$. \\
+  Now $a^2$ and $-(b^2 + 1)$ run through exactly $\frac{p+1}{2}$ distinct residue classes modulo $p$ as $a \bmod b$ run through an entire system of residue classes. ($0^2, 1^2, \dots, \left( \frac{p-1}{2} \right)^2$ are all distinct in $\mathcal{F}_p$.)\\
   Hence, they have a common residue class; thus 
   \[ \exists a,b \in \Z \text{ such that } a^2 + b^2 +1 \equiv 0 \bmod p \text{.} \]
-  With this choice of $a \bmod b$ consider
+  With this choice of $a$ and $b$ consider
   \[ \Lambda = A \cdot \Z^4 \text{ where } A= \left( 
   \begin{matrix}
     1 & 0 & 0 & 0\\
@@ -132,17 +137,18 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
     a & b & p &  0\\
     b & -a & 0 & p
   \end{matrix} \right) \text{.}\]
-  So $\Lambda$ is a lattice in $\R^4$ with $\det \Lambda = p^2$.
+  So $\Lambda$ is a lattice in $\R^4$ with $\det(\Lambda) = p^2$.\\
   Next consider the convex, symmetric set 
-  \[ S = \{ (x_1,\dots,x_4) \in \R4 : x_1^2 + \dots + x_4^2 < 2p \} \]
-  Then $\vol S = \frac{\pi^2}{2} (2p)^4 = (2 \pi)^2 p^4 > 16 \cdot p^2 = 2^4 \det \Lambda$.
-  By Theorem \ref{th_2_2_2_minkowski1} $\exists x \in \Lambda \cap S$, $x \neq 0$.
+  \[ S = \{ (x_1,x_2,x_3,x_4) \in \R^4 : x_1^2 + x_2^2 + x_3^2 + x_4^2 < 2p \} \]
+  Then $\vol(S) = \frac{\pi^2}{2} (2p)^4 = (2 \pi)^2 p^4 > 16 \cdot p^2 = 2^4 \det(\Lambda)$.
+  By Theorem \ref{th_2_2_2_minkowski1} there exists an $x \in \Lambda \cap S$ with $x \neq 0$.\\
   Now 
   \[ x = \left(
   \begin{matrix}
     x_1 \\
     x_2 \\
-    x_3
+    x_3 \\
+    x_4
   \end{matrix} \right)
   = A \cdot z = \left(
   \begin{matrix}
@@ -150,11 +156,14 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
     z_2 \\
     a z_1 + b z_2 + p z_3 \\
     b z_1 - a z_2 + p z_4
-  \end{matrix} \right) \; (z \in \Z^4 \setminus 0) \]
+  \end{matrix} \right) \text{ for some } z \in \Z^4 \setminus \{0\} \]
   Hence,
-  \[ x_1^2 + x_2^2 + x_3^2 + x_4^2 \equiv z_1^2 + z_2^2 + (a z_1 + b z_2)^2 + (b z_1 - a z_2)^2
-  = \underbrace{(1 + a^2 + b^2)}_{\equiv 0 \bmod p} (z_1^2 + z_2^2) \equiv 0 \bmod p\]
-  Since $x \in S$, and $x \neq 0$ we conclude that $x_1^2 + \dots + x_4^2 = p$.
+  \begin{align*}
+    x_1^2 + x_2^2 + x_3^2 + x_4^2 &\equiv z_1^2 + z_2^2 + (a z_1 + b z_2)^2 + (b z_1 - a z_2)^2 \\
+    &\equiv \underbrace{(1 + a^2 + b^2)}_{\equiv 0 \bmod p} (z_1^2 + z_2^2) \\
+    &\equiv 0 \bmod p
+  \end{align*}
+  Since $x \in S$, and $x \neq 0$ we conclude that $x_1^2 + x_2^2 + x_3^2 + x_4^2 = p$.
   This proves the corollary.
 \end{proof}
 

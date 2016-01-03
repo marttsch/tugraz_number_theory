@@ -4,87 +4,92 @@
 \subsection{3 Basis reduction}
 
 Let $M$ be a lattice in $\R^n$ and let $\Lambda$ be a \underline{sublattice} of $M$, i.e., $\Lambda \subset M$ and $\Lambda$ is a lattice in $\R^n$.
-Hence, there exists a matrix $C \in \mat_n(\Z)$, $\det C \neq 0$ such that $\Lambda = C \cdot M$.
+Hence, there exists a matrix $C \in \mat_n(\Z)$ with $\det C \neq 0$ such that $\Lambda = C \cdot M$.\\
 We define the \underline{index} of $\Lambda$ in $M$ by 
-\[ I = \abs{\det C} = \frac{\det \Lambda}{\det M}\text{.} \]
+\[ I = \abs{\det(C)} = \frac{\det(\Lambda)}{\det(M)}\text{.} \]
 Note that $I \cdot C^{-1} = \adj(C) \in \mat_n(\Z)$,
-and thus $I \cdot M = I C^{-1} \Lambda \subset \Lambda$, so
+and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
 \begin{align}
-  I M C \subset \Lambda \subset M \label{3_1}
+  I \cdot M \cdot C \subset \Lambda \subset M \label{3_1}
 \end{align}
 
-\begin{theorem}[\label{th_2_3_1}]
+\begin{theorem}\label{th_2_3_1}
   Let $\Lambda$ be a sublattice of the lattice $M \subset \R^n$, 
   and let $b_1,\dots,b_n$ be a basis of $M$.
   Then there exists a basis $a_1,\dots,a_n$ of $\Lambda$ with
   \begin{align} \label{3_2}
+    \begin{split}
     a_1 &= v_{11} b_1\\
     a_2 &= v_{21} b_1 + v_{22} b_2\\
     &\vdots\\
     a_n &= v_n1 b_1 + \dots + v_{nn} b_n
+    \end{split}
   \end{align}
-  with $v_{ij} \in \Z$, $v_{ii} \neq 0$ ($1 \leq j \leq i \leq n$).
+  with $v_{ij} \in \Z$ and $v_{ii} \neq 0$ for $(1 \leq j \leq i \leq n)$.\\
   Conversely, if $a_1,\dots, a_n$ is a basis of $\Lambda$ then there exists a basis $b_1,\dots, b_n$ of $M$ such that (\ref{3_2}) holds.
 \end{theorem}
 
 \begin{proof}
-  By (\ref{3_1}) we know that $\exists v_{ij} \in \Z$ with $v_{ii} \neq 0$ and $\abs{v_{ii}}$ minimal such that
+  By (\ref{3_1}) we know that there exist $v_{ij} \in \Z$ with $v_{ii} \neq 0$ and $\abs{v_{ii}}$ minimal such that
   \[ a_i = v_{i1} b_1 + \dots + v_{ii} b_i \in \Lambda \]
-  We will show that $a_1,\dots,a_n$ is a basis for $\Lambda$.
+  We will show that $a_1,\dots,a_n$ is a basis for $\Lambda$.\\
   Let $c \in \Lambda$ and suppose $c$ is \underline{not} a $\Z$-linear combination of the $a_i$'s.
-  As $c \in M \exists t_i \in \Z$ such that
+  As $c \in M$ there exist $t_i \in \Z$ such that
   \[ c = t_1 b_1 + \dots + t_k b_k \; (1 \leq k \leq n, \, t_k \neq 0)\]
   If there exist several such $c$'s then we choose one where $k$ is minimal.
   Next we note that $v_{kk} \neq 0$.
   Hence, there exists a $s \in \Z$ such that
   \begin{align}
-    \abs{t_k - s v_{kk}} < \abs{v_{kk}} \label{3_3}
+    \abs{t_k - s v_{kk}} < \abs{v_{kk}} \text{.} \label{3_3}
   \end{align}
   Thus
   \[ c - sa_k = (t_1 - sv_{k1}) b_1 + \dots + (t_k - sv_{kk}) b_k \]
-  lies in $\Lambda$ (as $c$ and $a_k$ do) and is \underline{not} a $\Z$-linear combination of the $a_i$'s as $C$ is not.
+  lies in $\Lambda$ (as $c$ and $a_k$ do) and is \underline{not} a $\Z$-linear combination of the $a_i$'s as $c$ is not.
   Thus, by minimality of $k$ we must have $t_k - sv_{kk} \neq 0$.
   But then (\ref{3_3}) contradicts the minimality of $\abs{v_{kk}}$.
   Hence, $c$ must be a $\Z$-linear combination of the $a_i$'s and thus $a_1,\dots, a_n$ is a basis.
   This proves the first part.\\
   For the second part suppose $a_1,\dots,a_n$ is a basis of $\Lambda$.
-  By the first part and (\ref{3_1}) there exists a basis $b_1,\dots, Ib_n$ of $I \cdot M \subset \Lambda$ with
-  \begin{align}
+  By the first part and (\ref{3_1}) there exists a basis $I \cdot b_1,\dots, Ib_n$ of $I \cdot M \subset \Lambda$ with
+  \begin{align*}
     I b_1 &= w_{11} a_1\\
     I b_2 &= w_{21} a_1 + w_{22} a_2\\
     &\vdots\\
     I b_n &= w_{n1} a_1 + \dots + w_{nn} a_n
-  \end{align}
-  with $w_{ij} \in \Z$, $w_{ij} \neq 0$.
+  \end{align*}
+  with $w_{ij} \in \Z$ and $w_{ij} \neq 0$.\\
   Successively solving the above system for $a_i$ we get a system as in (\ref{3_2}) but a priori with $v_{ij} \in \Q$.
   But $b_1,\dots,b_n$ is a basis of $M$ and the $a_i \in M$.
   As the representation
   \[ a= t_1 b_1 + \dots + t_n b_n \; (t_i \in \R) \]
-  is unique we conclude that $v_ij \in \Z$, and this proves the second part.
+  is unique we conclude that $v_{ij} \in \Z$, and this proves the second part.
 \end{proof}
 
-\begin{lemma}[2.3.2 Hadamard's inequality \label{l_2_3_2_hadamard}]
+\begin{lemma}[Hadamard's inequality\label{l_2_3_2_hadamard}]
   Let $a_1,\dots,a_n \in \R^n$. Then
-  \[ \abs{\det ( a_1,\dots, a_n)} \leq \abs{a_1} \cdots \abs{a_n} \]
+  \[ \abs{\det ( a_1,\dots, a_n)} \leq \abs{a_1} \cdots \abs{a_n} \text{.} \]
 \end{lemma}
 
 \begin{proof}
-  This is geometrically obvious as volume of a parallelepiped is no larger than product of the lengths of the spanning vectors.
-  However, here is a formal proof. If $a_1,\dots,a_n$ are linearly dependent then trivial.
+  This is geometrically obvious as the volume of a parallelepiped is no larger than product of the lengths of the spanning vectors.
+  However, here is a formal proof. \\
+  If $a_1,\dots,a_n$ are linearly dependent then the inequality is trivial.
   Now assume $a_1,\dots,a_n$ are linearly independent.
-  Put $c_i = a_i$.
-  \[ c_i = a_i - \sum_{j< i} a_i c_j \abs{c_j}{-2} \cdot c_j\]
+  Put
+  \[ c_i = a_i - \sum_{j< i} a_i c_j \abs{c_j}^{-2} \cdot c_j\]
   Then
   \begin{align}
     c_i \cdot c_j = 0 \; (i \neq j)  \label{3_4}
   \end{align}
   and 
-  \[ a_i = t_{i1} c_1 + \dots + t_{i i-1} c_{i-1} + c_i \label{3_5}\]
-  By (\ref{3_4}) and (\ref{3_5}) we get 
-  \[ \abs{a_i}^2 = a_i a_i = (\sum_{j=1}^{i-1} t_{ij}^2 \abs{c_j}^2) + \abs{c_i}^2 \geq \abs{c_j}^2 \]
-  and $\det (a_1,\dots,a_n) = \det(c_1,\dots,c_n)$ (by linearity in columns).
-  Moreover,
   \begin{align}
+    a_i = t_{i1} c_1 + \dots + t_{i i-1} c_{i-1} + c_i \label{3_5}
+  \end{align}
+  By (\ref{3_4}) and (\ref{3_5}) we get 
+  \[ \abs{a_i}^2 = a_i a_i = (\sum_{j=1}^{i-1} t_{ij}^2 \abs{c_j}^2) + \abs{c_i}^2 \geq \abs{c_i}^2 \]
+  and $\det (a_1,\dots,a_n) = \det(c_1,\dots,c_n)$ (by linearity of determinant in columns).\\
+  Moreover,
+  \begin{align*}
     (\det (c_1,\dots,c_n))^2 = \det \left(    
     \begin{bmatrix}
       c_1\\
@@ -95,54 +100,61 @@ and thus $I \cdot M = I C^{-1} \Lambda \subset \Lambda$, so
       c_1 & \cdots & c_n
     \end{bmatrix}
     \right)
-    = \prod_{i=1}^n \abs{c_i}^2 = \prod_{i=1}^n \abs{a_i}^2 \text{.}
-  \end{align}
+    = \prod_{i=1}^n \abs{c_i}^2 \leq \prod_{i=1}^n \abs{a_i}^2 \text{.}
+  \end{align*}
 \end{proof}
 
-A \underline{distance function} $f$ on $\R^n$ is a function $f: \R^n \to \R$ such that
-\begin{itemize}
-  \item $f(x) \geq 0 \; \forall x \in \R^n$
-  \item $f(tx) = \abs{t} f(x) \; \forall x \in \R^n, \; \forall t \in \R$
-  \item $f$ is continuous.
-\end{itemize}
+\begin{defi*}
+  A \underline{distance function} $f$ on $\R^n$ is a function $f: \R^n \to \R$ such that
+  \begin{itemize}
+    \item $f(x) \geq 0 \; \forall x \in \R^n$
+    \item $f(tx) = \abs{t} f(x) \; \forall x \in \R^n \; \forall t \in \R$
+    \item $f$ is continuous.
+  \end{itemize}
+\end{defi*}
 
-We say $C$ is a star body in $\R^n$ if
-\begin{itemize}
-  \item $C \subset \R^n$ and compact
-  \item origin lies in the interior of $C$
-  \item $x \in C \implies t \cdot x \in C \; (0 \leq t \leq 1)$
-\end{itemize}
+\begin{defi*}
+  We say $C$ is a star body in $\R^n$ if
+  \begin{itemize}
+    \item $C \subset \R^n$ compact
+    \item $0 \in \inner(C)$, i.e., origin lies in the interior of $C$
+    \item $x \in C \implies t \cdot x \in C \; (0 \leq t \leq 1)$
+  \end{itemize}
+\end{defi*}
+
+%TODO add an example - picture
 
 \begin{rem}
   \begin{itemize}
     \item For a star body $C$ we have $t \cdot C \subset C$ for $0 \leq t \leq 1$.
     \item Every compact, convex $C \subset \R^n$ with the origin in its interior is a star body in $\R^n$.
     \item To every symmetric star body $C$ in $\R^n$ we can associate a distance function $f_C$ defined by
-    \[ f_C(x) = \inf \{ \lambda: x \in \lambda \cdot C \} \]
-    \item Note that $f_C(x) = 0 \implies x =0$. Why?
-    If $x \neq 0$, then there exists a $\lambda > 0$ such that $\lambda x \nin C$.
+    \[ f_C(x) = \inf \{ \lambda: x \in \lambda \cdot C \} \text{.} \]
+    Note that $f_C(x) = 0 \implies x =0$. \\
+    Why? If $x \neq 0$, then there exists a $\lambda > 0$ such that $\lambda x \nin C$.
     Hence, $f_C(x) \geq \frac{1}{\lambda}$.
-    \item If $C$ is symmetric and convex then $f_C$ is actually a norm on $\R^n$ (cf sheet 5)
+    \item If $C$ is symmetric and convex then $f_C$ is actually a norm on $\R^n$ (cf exercise sheet 5).
     In particular, $f_C$ satisfies the triangle-inequality.
   \end{itemize}
 \end{rem}
 
-\begin{lemma}[2.3.3\label{l_2_3_3}]
+\begin{lemma}\label{l_2_3_3}
   Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
-  Then there exist linearly independent $a_1,\dots,a_n \in \Lambda$ with $f_C(a_i) =  \lambda_i$.
+  Then there exist linearly independent $a_1,\dots,a_n \in \Lambda$ with $f_C(a_i) =  \lambda_i$.\\
   Moreover, if $a \in \Lambda$ and $f_C(a) < \lambda_j$ then $a_1,\dots,a_{j-1},a$ are linearly dependent.
 \end{lemma}
 
 \begin{proof}
-  The set $\lambda_n +1) \cdot C$ is compact and by definition of $\lambda_n$ contains $n$ linearly independent lattice points.
+  The set $(\lambda_n +1) \cdot C$ is compact and by definition of $\lambda_n$ contains $n$ linearly independent lattice points.
   By the definition of the $\Lambda_i$'s it suffices to consider these points.
   But by Theorem \ref{th_2_1_1} there are only finitely many of these, and so the claim easily follows.
 \end{proof}
 
-\begin{cor}[2.3.4 \label{cor_2_3_4}]
-  Let $C$ be a convex, symmetric star body in $\R^n$, let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
+\begin{cor}\label{cor_2_3_4}
+  Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
   Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ such that for $j = 1,\dots,n$: 
-  $x \in \Lambda$ and $f_C(x) < \lambda_j \implies x = u_1 b_1 + \dots + u_{j-1} b_{j-1}$ for some $u_1,\dots,u_{j-1} \in \Z$.
+  \[x \in \Lambda \text{ and } f_C(x) < \lambda_j \implies x = u_1 b_1 + \dots + u_{j-1} b_{j-1} \] 
+  for some $u_1,\dots,u_{j-1} \in \Z$.
 \end{cor}
 
 \begin{proof}
@@ -150,21 +162,25 @@ We say $C$ is a star body in $\R^n$ if
   Let $\Lambda^\prime = (a_1,\dots,a_n) \Z^n$ be the sublattice of $\Lambda$ with basis $a_1,\dots,a_n$.
   By Theorem \ref{th_2_3_1} there exists a basis $b_1,\dots, b_n$ of $\Lambda$ with (\ref{3_2});
   so $a_j$ is dependent only on $b_1,\dots,b_j$.
-  By Lemma \ref{l_2_3_3} if $f_C(x) < \lambda_j$, then $x = s_1 a_1 + \dots + s_{j-1} a_{j-1}
-  = u_1 b_1 + \dots + u_{j-1} b_{j-1}$ with $a_i \in \Q$.
+  By Lemma \ref{l_2_3_3} if $f_C(x) < \lambda_j$, then 
+  \begin{align*}
+    x &= s_1 a_1 + \dots + s_{j-1} a_{j-1} \\
+    &= u_1 b_1 + \dots + u_{j-1} b_{j-1}
+  \end{align*}
+  with $u_i \in \Q$.\\
   As $x \in \Lambda$ and $b_1,\dots, b_{j-1}$ are linearly independent we conclude that $u_1,\dots,u_{j-1} \in \Z$.
 \end{proof}
 
 \begin{ex}[Exercise]
-  $C = B_0(1)$ and $\Lambda = \begin{pmatrix}
+  Let $C = B_0(1)$ and $\Lambda = \begin{pmatrix}
   2 & 0 & 0 & 0 & 1\\
   0 & 2 & 0 & 0 & 1\\
   0 & 0 & 2 & 0 & 1\\
   0 & 0 & 0 & 2 & 1\\
   0 & 0 & 0 & 0 & 1
-  \end{pmatrix} \Z^5$
+  \end{pmatrix} \Z^5$.\\
   There exists \underline{no} basis $b_1,\dots, b_5$ such that
-  $\abs{b_i} = \lambda_i \; (1\leq i\leq 5)$ ($\lambda_i = \lambda_i (\Lambda,C)$)
+  $\abs{b_i} = \lambda_i \; (1\leq i\leq 5)$ with $\lambda_i = \lambda_i (\Lambda,C)$.
 \end{ex}
 
 \end{document}
