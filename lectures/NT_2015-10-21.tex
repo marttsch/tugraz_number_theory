@@ -63,7 +63,7 @@ Next we deduce some properties of continued fraction convergents.
   For (a) - (d) we assume that the continued fraction proves does not terminate
   \begin{enumerate} %a,b
     \item For all $n \in \N_0$, $\theta$ lies between $\frac{p_n}{q_n}$ and $\frac{p_{n+1}}{q_{n+1}}$.
-    \item For all $n \in \N_0: |\theta - \frac{p_n}{q_n} | \leq \frac{1}{q_n q_{n+1}}$
+    \item For all $n \in \N_0: \abs{\theta - \frac{p_n}{q_n}} \leq \frac{1}{q_n q_{n+1}}$
     \item For $n \geq 1$ we have $q_{n+2} \geq 2\cdot q_n$
     \item $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$
     \item The continued fraction process terminates if and only if $\theta$ is rational.
@@ -75,12 +75,12 @@ Next we deduce some properties of continued fraction convergents.
     \item Note $\theta = [a_0,\dots,a_n,\theta_{n+1} ] = [a_0,\dots,a_n+\frac{1}{\theta_{n+1}}$
     where $0 < \frac{1}{\theta_{n+1}} < \frac{1}{a_{n+1}}$. So that $\theta$ lies between $[a_0,\dots,a_n]$ and $[a_0,\dots,a_n + \frac{1}{a_{n+1}} ]$.
     But $[a_0,\dots,a_n + \frac{1}{a_{n+1}} = [a_0,\dots,a_{n+1}]$. This shows (a).
-    \item By (a) we have $|\theta - \frac{p_n}{q_n} | \leq |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = | \frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}} | \underset{=}{Lemma 1.2.1(a)} \frac{1}{q_n q_{n+1}}$
+    \item By (a) we have $\abs{\theta - \frac{p_n}{q_n}} \leq \abs{\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}} = \abs{\frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}}} \overset{\text{Lemma } 1.2.1(a)}{=} \frac{1}{q_n q_{n+1}}$
     \item Follows from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
     \item Follows from (b) and (c)
     \item Only if part is obvious.\\
     Conversely suppose $\theta = \frac{a}{b} \in \Q$ but the process does \emph{not} terminate. Taking $n$ such that $q_n > b$ yields
-    \[ | \theta - \frac{p_n}{q_n} | \underset{\geq}{\frac{a}{b} \neq \frac{p_n}{q_n} as q_n > b and \gcd(p_n,q_n) = 1} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
+    \[ | \theta - \frac{p_n}{q_n} | \overset{\frac{a}{b} \neq \frac{p_n}{q_n} \text{ as } q_n > b \text{ and } \gcd(p_n,q_n) = 1}{\geq} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
     contradicting (b).
   \end{enumerate}
 \end{proof}
@@ -101,14 +101,14 @@ We now show that convergents give best-possible rational approximations.
   Let $\theta$ be an irrational real number, and let $\frac{p_n}{q_n}$ be the convergents ($n \geq 0$) with partial quotients $a_n (n \geq 0)$.\\
   Then
   \begin{enumerate} %a,b
-    \item $ | \theta - \frac{p_n}{q_n}|$ strictly decreases as $n$ increases.
+    \item $\abs{\theta - \frac{p_n}{q_n}}$ strictly decreases as $n$ increases.
     \item the convergents give successively closer approximations to $\theta$.
-    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < |\theta - \frac{p_n}{q_n}| < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
+    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < \abs{\theta - \frac{p_n}{q_n}} < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
     \item If $p,q \in \Z$ with $0 < q < q_{n+1}$ then
-    \[ |q \theta - p| \geq |q_n \theta - p_n| \]
+    \[ \abs{q \theta - p} \geq \abs{q_n \theta - p_n} \]
     Moreover, "$=$" only if $(p,q) = (p_n,q_n)$.\\
     (In this sense convergents are best-possible approximations.)
-    \item If $(p,q) \in \Z \times \N$ and $|\theta - \frac{p}{q}| < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
+    \item If $(p,q) \in \Z \times \N$ and $\abs{\theta - \frac{p}{q}} < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
   \end{enumerate}
 \end{theorem}
 
@@ -117,17 +117,17 @@ We now show that convergents give best-possible rational approximations.
     \item From Lemma 1.2.1(d) we have $\theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}}$.
     Using Lemma 1.2.1(a) we get
     \begin{align}
-    |q_n \theta - p_n| &= |\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}| \\
+    \abs{q_n \theta - p_n} &= \abs{\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}} \\
     &= \frac{1}{q_n \theta_{n+1} + q_{n-1}}\\
     &< \frac{1}{q_n + q_{n-1}}\\
     &= \frac{1}{(a_n +1) q_{n-1} + q_{n-2}}\\
     &< \frac{1}{\theta_n q_{n-1} + q_{n-2}}\\
-    &= | q_{n-1} \theta - p_{n-1}|
+    &= \abs{q_{n-1} \theta - p_{n-1}}
     \end{align}
     This shows (a) and (b) because the $q_n$ are increasing.
     \item[c] We use $a_{n+1} q_n^2 < \theta_{n+1} q_n^2 + q_n q_{n-1} < (a_{n+1} + 2) q_n^2$
     and combine it with the equation (proof part (a)),
-    \[ |\theta - \frac{p}{q}| = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
+    \[ \abs{\theta - \frac{p}{q}} = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
     
     %---part from 27.10.2015
     
@@ -137,12 +137,12 @@ We now show that convergents give best-possible rational approximations.
     So let's assume $v \neq 0$. Then $u$ and $v$ cannot both be negative (as $q > 0$) nor both be positive (as $q < q_{n+1}$).
     So they have opposite signs.\\
     By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta p_{n+1}$ have opposite signs.
-    Hence, $|q \theta - p| = |u (q_n \theta p_n) + v (q_{n+1} \theta - p_{n+1}| > |q_n \theta - p_n|$.
+    Hence, $\abs{q \theta - p} = \abs{u (q_n \theta p_n) + v (q_{n+1} \theta - p_{n+1}} > \abs{q_n \theta - p_n}$.
     \item[e)] Take $n$ with $q_n \leq q < q_{n+1}$. Then 
     \begin{align*} 
-    |\frac{p}{q} - \frac{p_n}{q_n}| &\leq |\theta - \frac{p}{q}| + |\theta - \frac{p_n}{q_n}| \\
-    &= \frac{|q \theta - p|}{q} + \frac{|q_n \theta - p_n|}{q_n}\\
-    &\overset{\leq}{(d)} (\frac{1}{q} + \frac{1}{q_n}) |q \theta - p | \\
+    \abs{\frac{p}{q} - \frac{p_n}{q_n}} &\leq \abs{\theta - \frac{p}{q}} + \abs{\theta - \frac{p_n}{q_n}} \\
+    &= \frac{\abs{q \theta - p}}{q} + \frac{\abs{q_n \theta - p_n}}{q_n}\\
+    &\overset{\leq}{(d)} (\frac{1}{q} + \frac{1}{q_n}) \abs{q \theta - p } \\
     &\leq \frac{2}{q_n} \frac{1}{2q} \\
     &= \frac{1}{q q_n}
     \end{align*}

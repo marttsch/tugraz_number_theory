@@ -50,7 +50,7 @@ Let $a \in \Z$, $b \in \N$. Then there are unique $q,r \in \Z$ such that
 \begin{enumerate}
   \item $b\divides a \Leftrightarrow r = 0$
   \item $q = \lfloor \frac{a}{b} \rfloor$ (largest integer $\leq \frac{q}{b}$)
-  \item we will somtimes write: $a \mod b \coloneq c$
+  \item we will sometimes write: $a \mod b \coloneq c$
 \end{enumerate}
 \end{rem}
 
@@ -77,9 +77,9 @@ and for every $e \in \Z$ with $e\divides a_i$ $\forall 1\leq i \leq n$, $e\divid
 \begin{algorithm}
   \caption{Compute the $\gcd$ of two integers: Euclidean algorithm}
   \begin{algorithmic}
-    \Require{$a,b \in \Z$. $|a| \geq |b|$}
+    \Require{$a,b \in \Z$. $\abs{a} \geq \abs{b}$}
     \Ensure{$a \coloneq \gcd(a,b)$}
-    \State replace $a$ by $|a|$, $b$ by $|b|$
+    \State replace $a$ by $\abs{a}$, $b$ by $\abs{b}$
     \While{$b \neq 0$}
       \State write $a = qb +r$, $0 \leq r < b$
       \State $a \coloneq b$
@@ -93,7 +93,7 @@ The algorithm is correct, since $\gcd(a,b) = \gcd(b,a \mod b)$. \\
 The algorithm terminates because $b$ decreases in each step. \\
 The algorithm is fast: ($\mathcal{O}(\log b)$)
 
-\todo{sollte ausgebessert werden, 1. $O(logn)$ steps, 2. stimmt nur wenn $|r|\le b/2$}
+\todo[caption={}]{Das sollte ausgebessert werden, 1. $O(logn)$ steps, 2. stimmt nur wenn $\abs{r}\leq b/2$}
 
 The Euclidean algorithm also allows us to find $x, y$ such that $\gcd(a,b) = ax+by$ by doing all computations backwards.
 
