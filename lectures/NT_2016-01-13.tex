@@ -1,0 +1,206 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\[ \zeta(s) = \prod_p \frac{1}{1 - \frac{1}{p^s}} \text{, } \zeta(s) \text{holomorph, } \zeta(s) \neq 0 \text{, } \sigma > 1 \]
+
+\subsection{$\zeta$-function and primes}
+
+\begin{defi} \label{4_9}
+  The  \emph{von Mangoldt}-function $\Lambda: \N \to \R$ is defined as
+  \[ \Lambda(n) = 
+  \begin{cases}
+    \log p & \text{if } n = p^\nu, \nu \geq 1 \\
+    0 & \text{otherwise}
+  \end{cases} \]
+\end{defi}
+
+\begin{lemma}\label{4_10}
+  $D_\Lambda(s) = - \frac{\zeta^\prime(s)}{\zeta(s)}$, in $\sigma > 1$.
+\end{lemma}
+
+\begin{proof}
+  \[\log (1 - p^{-s})^\prime =  \frac{(\log p) p^{-s}}{1 - p^{-s}} = (\log p) \sum_{\nu = 1}^\infty p^{- \nu s} \]
+  \[ - \frac{\zeta^\prime (s)}{\zeta(s)} = - \log (\zeta(s))^\prime = \sum_p \log(1 - p^{-s})^\prime
+  = \sum_p (\log p) \sum_{\nu = 1}^\infty p^{- \nu s} = \sum_{p^\nu \in \N\\ \nu \geq 1} \frac{\log p}{p^{\nu s}}
+  = \sum_{n \in \N} \frac{\Lambda(n)}{n^s} = D_\Lambda(s) \text{.} \]
+\end{proof}
+
+Strategy for proof of PNT:\\
+1) study $\zeta(s)$, 2) study $D_\Lambda(s)$, 3) prove that $D_\Lambda(s)$ satisfies (I),(II),(III) of Theorem \ref{4_8_T}
+$\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}})$, 5) $\implies$ PNT.
+
+\begin{lemma}\label{4_11}
+  $\zeta(s)$ has a meromorphic continuation of $\sigma >0$, with a single pole at $s = 1$, with $Res_{s=1} \zeta(s) = 1$.
+\end{lemma}
+
+\begin{proof}
+  Prove existence of a finction $h(s)$ holomorph on $\sigma > 0$, such that $\zeta(s) = \frac{1}{s - 1} + h(s)$ on $\sigma > 1$.
+  $\sigma > 1$: $\zeta(s) - \frac{1}{s-1} = \sum_{n=1}^\infty \frac{1}{n^s} - \int_1^\infty \frac{1}{x^s} dx 
+  = \sum_{n=1}^\infty \underbrace{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx}_{\coloneq h(s)}$
+  \[ \abs{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx} = \abs{ \int_n^{n+1} (\int_n^x (\frac{s \cdot du}{u^{s+1}})dx}
+  \leq \max_{n \leq u \leq n+1} \abs{\frac{s}{u^{s+1}}} = \frac{\abs{s}}{n^{\sigma + 1}} \]
+  If $s \in D \subset \C$, then $\abs{s} \leq C = C(D)$.\\
+  $\implies$ the sum defining $h(s)$ has a majorant converges absloutely and uniformly in conec wheret of $\{\sigma > 0 \}$.
+  $\implies$ $h(s)$ holomporph on $\sigma > 0$.
+\end{proof}
+
+\begin{lemma} \label{4_12}
+  $D_\Lambda(s) =  - \frac{\zeta^\prime(s)}{\zeta(s)}$ has a meromoorphic cost to $\sigma > 0$.
+  In this domain, $D_\Lambda(s)$ has
+  \begin{itemize}
+    \item a singel pole at $s = 1$, with $Res_{s=1} D_\Lambda(s) = 1$
+    \item for each zero $\alpha$ of $\zeta(s)$ of order $\mu$, a singe pole at $s = \alpha$ with $Res_{s=\alpha} D_\Lambda(s) = - \mu$
+    \item no other pole
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  $\zeta(s)$ mropmorphic on $\sigma > 0 \implies \zeta^\prime(s)$ meromorphic on $\sigma > 0 \implies D_\Lambda(s) = - \frac{\zeta^\prime(s)}{\zeta(s)}$ meromorphic on $\sigma > 0$.
+  $D_\Lambda(s)$ has its poles at
+  \begin{enumerate}
+    \item poles of $\zeta^\prime(s)$
+    \item zeros of $\zeta(s)$
+  \end{enumerate}
+  since $\zeta(s)$ holomorphic $\implies \zeta^\prime(s)$ holomorphic $\implies$ the only pole of $\zeta^\prime(s)$ can be at $s = 1$.\\
+  \underline{Laurent-series at $s=1$:}
+  \begin{align*}
+    \left.
+    \begin{array}{ll}
+    \zeta(s) &= \frac{1}{s-1} + \dots \text{ higher order terms} \\
+    \implies \zeta^\prime(s) &= \frac{-1}{(s-1)^2} + \dots \\
+    \frac{1}{\zeta(s)} &= (s-1) + \dots
+    \end{array}
+    \right\rbrace -\frac{\zeta^\prime(s)}{\zeta(s)} = \frac{1}{s-1} + \dots \checkmark
+  \end{align*}
+  Let $\alpha \in \{ \sigma >0\}$ be a sero of $\zeta(s)$ of order $\mu \geq 1$.
+  Lauraunt-series at $s = \alpha$:\\
+  \begin{align*}
+    \zeta(s) &= c \cdot (s- \alpha)^\mu + \dots \\
+    \implies \zeta^\prime(s) &= \mu c (s-\alpha)^{\mu - 1} + \dots \\
+    \frac{1}{\zeta(s)} &= \frac{1}{c} + \frac{1}{(s-\alpha)^\mu} + \dots
+  \end{align*}
+  $\implies - \frac{\zeta^\prime(s)}{\zeta(s)} = - \frac{\mu}{(s - \alpha)} + \dots \checkmark$
+\end{proof}
+
+\begin{defi}\label{4_13}
+  $\Phi(s) \coloneq \sum_p \frac{\log p}{p^s}$.
+\end{defi}
+
+\begin{lemma}\label{4_14}
+  There is a holomorphic function $g(s)$ on $\sigma > \frac{1}{2}$, such that $\Phi(s) = D_\Lambda(s) - g(s)$, on $\sigma > 1$.
+  In particular, $\Phi(s)$ has mero cont to $\sigma > \frac{1}{2}$ with the same poles as $D_\Lambda(s)$.
+\end{lemma}
+
+\begin{proof}
+  $\sigma > 1$.
+  \[ \Phi(s) + \underbrace{\sum_p \frac{\log p}{p^s (p^s -1)}}_{=: g(s)} = \sum_p \frac{(\log p)}{p^s -1} = \sum_p \frac{(\log p)}{p^s} \cdot \frac{1}{1- p^s} = \sum_p (\log p) \sum_{\nu \geq 1} \frac{1}{p^{\nu s}} = D_\Lambda(s) \text{.} \]
+  Let $\sigma \geq \sigma_0 > \frac{1}{2}$.
+  Then
+  \[ \frac{p^\sigma - 1}{p^\sigma} = 1 - \frac{1}{p^\sigma} \geq 1 - \frac{1}{\sqrt{2}} \geq \frac{1}{4} \]
+  \begin{align*}
+    \abs{\frac{(\log p)}{p^s (p^s -1)}} \leq \abs{4 \frac{\log p}{p^{2s}}} \leq \abs{ 4 \frac{\log p}{p^{2\sigma_0}}} \\
+  \end{align*}
+  $\implies$ found majorant for $g(s)$, independent of $s$ in any closed half-plane $\sigma \geq \sigma_0 > \frac{1}{2}$.\\
+  $\implies$ $g(s)$ holomorph on $\sigma > \frac{1}{2}$.
+\end{proof}
+
+\begin{theorem}\label{4_15}
+  $\zeta(s) \neq 0$ for $\sigma \geq 1$.
+  In particular, $D_\Lambda(s)$ has no poles in $\sigma \geq 1$, except $s = 1$.
+\end{theorem}
+
+\begin{proof}[Proof (Mertens)]
+  \begin{align*}
+    D_\Lambda(s) = \Phi(s) + g(s) \text{,}
+  \end{align*}
+  $g(s)$ holomorphic on $\sigma > \frac{1}{2}$.
+  We know that $\zeta(s)$ has no zeros on $\sigma > 1$.
+  Assume that $\zeta(s)$ has a zero of order $\mu$ at $s=1 + \alpha \cdot i$, and a zero of order $\nu$ at $1 + 2 \cdot \alpha \cdot i$, where $\mu,\nu \geq 0$.
+  Show that $\mu = 0$.\\
+  Then: 
+  \[ \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + \varepsilon)
+  = \underbrace{\lim_{\varepsilon \searrow 0} \varepsilon D_\Lambda(1 + \varepsilon)}_{Res_{s=1} D_\Lambda(s)} - \underbrace{\lim_{\varepsilon \searrow 0} \varepsilon g(1 + \varepsilon)}_{= 0, \text{since g holom at 1}} = 1 \]
+  Similarly,
+  \begin{align*}
+    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + \alpha i \pm \varepsilon) &= Res_{s=1+\alpha i} D_\Lambda(s) = - \mu \\
+    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + 2 \alpha i \pm \varepsilon &= Res_{s=1+2\alpha i} D_\Lambda(s) = - \nu
+  \end{align*}
+  \begin{align*}
+    0 &\leq \sum_p \frac{\log p}{p^{1+\varepsilon}} ( \underbrace{p^{i \frac{\alpha}{2}} + p^{-i \frac{\alpha}{2}}}_{\in\R})^4 \\
+    &= \sum_p \frac{\log p}{p^{1+\varepsilon}} \sum_{j = 0}^4 \left( 4 \choose j \right) p^{i \frac{\alpha}{2}(j -(4-j))} \\
+    &= \sum_p \frac{\log p}{p^{1+\varepsilon}} \sum_{j=0}^4 \left( 4 \choose j \right) p^{i \alpha (j-2)} \\
+    &= \Phi(1 + \varepsilon + 2 \alpha i) + 4 \Phi(1+ \varepsilon + i \alpha) + 6 \Phi(1 +\varepsilon) + 4 \Phi(1 +\varepsilon - i \alpha) + \Phi(1 + \varepsilon - 2 i \alpha) =: E(\varepsilon)
+  \end{align*}
+  \[ 0 \leq \lim_{\varepsilon \searrow 0} \varepsilon E(\varepsilon) = 6 - 8 \mu - 2 \nu \implies \mu = 0 \]
+\end{proof}
+
+In particular, we can find a open subset $U \subseteq \C$, wontaining $\{\sigma \geq 1\}$, such that $D_\Lambda(s)$ has no poles in $U$, except $s = 1$.
+$\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (III)?
+
+\begin{theorem}\label{4_16}
+  \begin{enumerate}
+    \item Let $m \in \N_0$.
+    Then there exists a $C_m > 0$, such that $\abs{\zeta^{(m)}(s)} \leq C_m \cdot \abs{t}$ for all $s$ with $\sigma > 1$, $\abs{t} \geq 1$.
+    \item There exists a constant $c_0 > 0$ such that $\abs{\zeta(s)} \geq c_0 \abs{t}^{-4}$ for all $s$ with $\sigma >1$, $\abs{t} \geq 1$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Later (technical).
+\end{proof}
+
+\begin{theorem}[version of PNT]\label{4_17}
+  \[ \sum_{n \leq x} \Lambda(n) = x + \mathcal{O} \left( \frac{x}{\sqrt[N]{\log x}} \right) \text{.} \]
+\end{theorem}
+
+\begin{proof}
+  Use Theorem T.\\
+  $D_\Lambda(s)$ satisfies (I),(II); moreover, on $\sigma >1$, $\abs{t} \geq 1$ 
+  \[ \abs{D_\Lambda(s)} = \frac{\abs{\zeta^\prime(s)}}{\abs{\zeta(s)}} \leq C_1 \frac{1}{c_0} \abs{t}^5\]
+  \[ \abs{D_\Lambda^\prime(s)} = \abs{ \frac{- \zeta^{\prime \prime}(s) \zeta(s) + \zeta^\prime(s)^2}{\zeta(s)^2}}
+  \leq \frac{\abs{\zeta^{\prime \prime(s)}}}{\abs{\zeta(s)}} + \frac{\abs{\zeta^\prime(s)}^2}{\abs{\zeta(s)}^2}
+  \leq C_2 \frac{1}{c_0} \abs{t}^5 + C_1^2 \frac{1}{c_0^2} \abs{t}^10 \]
+  $\implies$ $D_\Lambda(s)$ satisfies (III) with $k = 10$.
+  Theorem \ref{4_8_T} $\implies \sum_{n \leq x} \Lambda(n) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}}$,
+  $ g = Res_{s = 1} D_\Lambda(s) = 1$.
+\end{proof}
+
+\begin{theorem}[PNT] \label{4_18}
+  $\exists N \in \N$ such that $\pi(x) = \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}})$.
+\end{theorem}
+
+\begin{proof}
+  1) 
+  \begin{align*}
+    \sum_{p \leq x} (\log p) &= \sum_{n \leq x} \Lambda(n) - \sum_{p^\nu \leq x, \nu \geq 2} (\log p) \\
+    &= x + \mathcal{O} ( \frac{x}{(\log x)^{\frac{1}{N}}}) + \dots + \mathcal{O}( \sum_{\nu = 2}^{\lceil \log_2 x \rceil} \sum_{n^\nu \leq x} (\log n)) \\
+    &= x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O} ( (\log X)^2 \sqrt{X}) \\
+    &= x + \mathcal{O}( \frac{x}{(\log x)^{\frac{1}{N}}} 
+  \end{align*}
+  Use Abel sum formula:
+  \[ \sum_{y < n \leq x} a_n f(n) = A(x) f(x) - A(y) f(y) - \int_y^x A(t) f^\prime(t) dt \text{,} \]
+  where $a_n \in \C$, $A(x) \coloneq \sum_{n \leq x} a_n$, $f: [y,\infty) \to \C$ contiuantially differntiable.
+  \[ a_n =
+  \begin{cases}
+    \log p & \text{if} n = p \\
+    0 & \text{otherwise}
+  \end{cases}
+  \implies A(x) = \sum_{p \leq x} \log p = x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) \]
+  $f(t) = \frac{1}{\log t}$;
+  $x = x$, $y = 2$
+  \begin{align*}
+    \sum_{2 < p \leq x} 1 &= \frac{A(x)}{\log x} - \frac{A(2)}{\log 2} - \int_2^x \frac{A(t)}{t (\log t)^2} dt \\
+    &= \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}} - 1 + \int_2^x \frac{1}{(\log t)^2} dt
+  + \mathcal{O} ( \int_2^x \frac{1}{(\log t)^{2+\frac{1}{N}}}) \\
+    &= \frac{x}{\log x} + \mathcal{O}( \frac{x}{(\log x)^{1 + \frac{1}{N}}}) + \mathcal{O}( \int_2^x \frac{1}{(\log t)^2}d 
+  \end{align*}
+  \begin{align*}
+    \int_2^x \frac{1}{(\log t)^2} dt &= \int_{\log 2}^{\log x} \frac{e^u}{u^2} du \\
+  &\underset{=}{u = \log t, du = \frac{dt}{t}} [ \frac{e^u}{u^2}]_{\log 2}^{\log x} + 2 \int_{\log 2}^{\log x} \frac{e^u}{u^3} du \\
+  &\underset{=}{ \frac{e^u}{u^3} \leq c \frac{e^{\log x}}{(\log x)^3}, c > 0} \\
+  &\leq \frac{x}{(\log x)^2} + \frac{2}{(\log 2)^2} + (\log x)c \frac{x}{(\log x)^3} \\
+  &= \mathcal{O}(\frac{x}{(\log x)^2} 
+  \end{align*}
+\end{proof}
+
+\end{document}

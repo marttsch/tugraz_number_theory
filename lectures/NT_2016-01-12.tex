@@ -1,0 +1,212 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section{4 Analytic number theory}
+
+Study number-theoretic Questions using (complex) analysis.
+
+\begin{rem}[Notation]
+  \begin{itemize}
+    \item $f,g : [0,\infty) \to \C$. Then $f \sim g : \Leftrightarrow \lim_{x\to \infty} \frac{f(x)}{g(x)} = 1$ "asymptotically equal"
+    \item $f = \mathcal{O}(g) : \Leftrightarrow \exists c > 0$ such that $\abs{f(x)} \leq c \cdot g(x) \forall x \geq 1$.
+  \end{itemize}
+\end{rem}
+
+\begin{rem}[Motivation: Prime number theorem (PNT)]
+  Let $\pi(x) \coloneq \# \{ p \leq x : p \text{ prime} \}$.
+  Then $\pi(x) \sim \frac{x}{\log x}$, 
+  i.e., "Tere are roughly $\frac{x}{\log x}$ primes upt o $x$."
+\end{rem}
+
+\subsection{Dirichlet series}
+
+\begin{defi}\label{4_1}
+  A \emph{Dirichlet} series is  a \underline{formal series} of the form
+  \[ D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s} \]
+  $a_n \in \C$, $n \in \N$, $s \in \C$.
+\end{defi}
+
+\begin{ex}
+  $a_n = 1$, $n \in \N$: $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ ... \emph{Riemann} $\zeta$-function.\\
+\end{ex}
+
+For any arithmetic function $f: \N \to \C$, we define the dirichlet series
+\[ D_f(s) = \sum_{n=1}^\infty \frac{f(n)}{n^s} \]
+\underline{Goal:} study $D_f(s)$ via  complex analysis to obtain \# -theoretic results about $f$.
+
+Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)$. $s_0 = \sigma_0 + i t_0, \dots$
+
+\begin{lemma}\label{4_2}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ be a Dirchlet series, $s_0 \in \C$.
+  If $D_(s_0)$ converges absolutely, then $D(s)$ converges absolutely and uniformly in the half-plane $\sigma \geq \sigma_0$.
+\end{lemma}
+
+\begin{proof}
+  $n^s = e^{s \log n} = e^{(\sigma + i t) \log n} \implies \abs{n^s} = e^{\sigma \log n} \geq e^{\sigma_0 \log n}$
+  \[ \abs{\frac{a_n}{n^s}} \leq \abs{\frac{a_n}{n^{\sigma_0}}} \]
+  formal majorant, independent of $s$ $\implies$ uniform convergence.
+  \todo{add picture of (right) half-plane |--}
+\end{proof}
+
+\begin{defi}\label{4_3}
+  A right half-plane 
+  \[ H = \{ s \in \C : \sigma > \sigma_0 \} \]
+  $\sigma_0 \in \R$, is called \underline{half-plane of absolute convergence for $D(s)$},
+  if $D(s)$ converges absolutely for all $s \in H$.\\
+  We also allow $\sigma_0 = - \infty$.
+  Then $D(s)$ converges everywhere.
+\end{defi}
+
+\begin{rem}
+  \begin{enumerate}
+    \item If $D(s)$ converges absolutely somewhere, then it has a half-plane of absolute convergence. (by lemma \ref{4_2})
+    \item The union of all half-planes of absolute convergence of $D(s)$ is a half-plane of absolute convergence of $D(s)$. We call it \underline{the} half-plane of absolute convergence of $D(s)$.
+    \item Lemma \ref{4_2} $\implies D(s)$ is a holomorphic function in its half-plane of absolute convergence\\
+    ( $\frac{a_n}{n^s}$ is an entire function and the series converges uniformly in compact disks)
+  \end{enumerate}
+\end{rem}
+
+\begin{ex}
+  $\sigma > 1$. $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ converges absolutely (for $\sigma > 1$).
+  By \emph{integral test}:
+  \[ \int_1^\infty \frac{1}{n^s} dx = \frac{1}{s - 1} < \infty \]
+  but $\zeta(1) = \sum_{n=1}^\infty \frac{1}{n}$ diverges $\implies \zeta(s)$ has $\sigma > 1$ as its h-p oac.
+\end{ex}
+
+\begin{lemma}\label{4_4}
+  Let $\abs{a_n} \leq C \cdot n^\alpha$, for $C > 0$, $\alpha \in \R$, and all $n \in \N$.
+  Then $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ converges absolutely for $\sigma > 1 + \alpha$.
+\end{lemma}
+
+\begin{proof}
+  $\abs{\frac{a_n}{n^s}} \leq \frac{C}{n^{\sigma- \alpha}}$; converges to $\zeta(s - \alpha)$.
+\end{proof}
+
+\begin{theorem}\label{4_5}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$, $a_n \in \C$, such that $D(s) = 0$ for all $s$ is a h-p oac $H$.
+  Then $a_n = 0$ for all $n$.
+\end{theorem}
+
+\begin{proof}
+  Let $\sigma_0 \in \R$ such that $D(s)$ converges absolutely for $\sigma \geq \sigma_0$.
+  Proof by contradiction.\\
+  Let $n_0$ be the samllest index with $a_n \neq 0$.
+  Then 
+  \begin{align*}
+    0 = D(s) = \frac{a_{n_0}}{n_0^s} + \underbrace{\sum_{n = n_0 + 1}^\infty \frac{a_n}{n^s}}_{=: D_1(s)} \\
+    \implies a_{n_0} = - n_0^s D_1(s) \text{.} \\
+    \forall \sigma \geq \sigma_0: \abs{a_{n_0}} \leq n_0^s \sum_{n= n_0 + 1}^\infty \frac{\abs{a_n}}{n^\sigma}
+    = \sum_{n = n_0 +1}^\infty \abs{a_n} \left( \frac{n_0}{n} \right)^\sigma
+  \end{align*}
+  let $\sigma \coloneq \sigma_0 + \lambda$ for $\lambda > 0$.
+  \begin{align*}
+    \left( \frac{n_0}{n} \right)^\sigma &=  \left( \frac{n_0}{n} \right)^{\sigma_0} \left( \frac{n_0}{n} \right)^\lambda \\
+    &\leq \left( \frac{n_0}{n} \right)^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda
+  \end{align*}
+  \begin{align*}
+    \abs{a_{n_0}} \leq n_0^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda \underbrace{\sum_{n = n_0 +1}^\infty}_{=: C_0 < \infty} \frac{\abs{a_n}}{n^{\sigma_0}} = n_0^{\sigma_0} C_0 \left( \frac{n_0}{n_0 + 1} \right)^\lambda
+  \end{align*}
+  \[ \implies \abs{a_{n_0}} \overset{\lambda \to \infty}{\to} 0 \implies a_{n_0} = 0 \lightning \]
+\end{proof}
+
+\begin{rem}
+  The theorem shows that $(a_n)_{n \in \N}$ is determined by $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$
+  since $D(\sigma_0)$ converges absolutely.\\
+  e.g. to prove that two ??? functions are identically equal, it is enough to show that $D_f(s) = D_g(s)$ for  $s$ in some h-p oac
+\end{rem}
+
+Why do \# - theorist use $D$- series (and not ,say, power series)?\\
+$D$-series con...
+Consider a (abs conv) D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$.
+For $A \subseteq \N$, with $D_A(s) = \sum_{\pi \in A} \frac{a_n}{n^s}$.
+
+\begin{lemma}\label{4_6}
+  Let $A,B \subseteq \N$. $A,B \neq \emptyset$, such that
+  \begin{enumerate}
+    \item the multiplicative map $A \times B \to \N$, $(a,b) \mapsto ab$ is injective
+    \item $A_{n \cdot m} = a_n \cdot a_m$ for $n \in A$ and $m \in B$.
+  \end{enumerate}
+  Let $C = AB = \{ ab : a \in A, b \in B \}$. Then $D_C(s) = D_A(s) D_B(s)$ in the half-plane oac of $D(s)$.
+\end{lemma}
+
+\begin{proof}
+  Cauchy-product: 
+  \[ \left( \sum_{n \in A} \frac{a_n}{n^s} \right) \cdot \left( \sum_{m \in B} \frac{a_m}{m^s} \right) = \sum_{(n,m) \in A \times B} \frac{a_n a_m}{(nm)^s} \overset{1,2}{=} \sum_{n \in C} \frac{a_n}{n^s} \]
+\end{proof}
+
+\begin{rem}
+  by induction: if $\emptyset \neq A_1,\dots , A_N \subseteq \N$ such that
+  \begin{enumerate}
+    \item $A_1 \times \dots \times A_n \to \N$, $(n_1,\dots,n_N) \mapsto n_1 \cdots n_N$ injective.
+    \item $a_{n_1 \cdots n_N} = a_{n_1} \cdots a_{n_N}$
+  \end{enumerate}
+  Let $C = A_1 \cdots A_N$, Then $D_C(s) = D_{A_1}(s) \cdots D_{A_N}(s)$.
+\end{rem}
+
+\begin{theorem}\label{4_7}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ be a convergent D-series, such that $a_1 = 1$ and $a_{n \cdot m} = a_n \cdot a_m$ whenever $\gcd(n,m) = 1$ (i.e., $a_n$ is multiplicative).
+  Then 
+  \[ D(s) = \prod_{p \text{ prime}} \left( \sum_{\nu = 0}^\infty \frac{a_{p^\nu}}{p^{\nu s}} \right) \text{,} \]
+  where the infinite product over all primes converges absolute in the half-plane $H$ of absolute convergence of $D(s)$.
+  The infinite product is called the \emph{Euler} product of $D(s)$.
+\end{theorem}
+
+\begin{proof}
+  Let $s \in H$, $p_1 = 2, p_2 = 3, p_3 = 5, \dots, p_n = n \text{-th prime}$.
+  $A_n = \{ p_n^\nu : \nu = 0,1,2,\dots \}$, $B_N = \{ n \in \N : \gcd(n,p_1,\dots,p_N) = 1 \}$\\
+  By first theorem of arithmetic,
+  \begin{align*}
+    A_1 \times \dots \times A_N \times B_N &\to \N \\
+    (n_1,\dots,n_N,m) &\mapsto n_1 \cdots n_N m
+  \end{align*}
+  \[ a_{n_1 \cdots n_N m} = a_{n_1} \cdots a_{n_N} \cdot a_m \]
+  Lemma $\implies$
+  \[ D(s) = D_\N(s) = \left( \prod_{i=1}^N D_{A_i}(s) \right) D_{B_N}(s) = \prod_{i=1}^N \left( \sum_{\nu=0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)\cdot D_{B_N}(s) \]
+  \begin{align*}
+    \gcd(m, p_1 \cdots p_N) = 1 \implies m = 1 \text{ or } m \geq N \\
+    &\implies \abs{D_{B_N} - \underbrace{1}_{= \frac{a_1}{1^s}}} \leq \sum_{m \geq N} \frac{\abs{a_m}}{m^s} \overset{N \to \infty}{\to} 0
+  \end{align*}
+  since $D(s)$ converges absolutely.
+  \begin{align*}
+    D(s) = \lim_{N \to \infty} \prod_{i=1}^N \left( \sum_{\nu = 0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)
+  \end{align*}
+  need to show: this is a convergent infinite product
+  \begin{rem}[Recall]
+    \[ \prod_{i=1}^\infty (a + b_i) \text{ converges absoutely } \iff \sum_{i=1}^\infty b_i \text{ converges absolutely} \]
+  \end{rem}
+  here:
+  \[ \sum_{i=1}^\infty \abs{b_i} = \sum_{i=1}^\infty \abs{ \sum_{\nu = 1}^\infty \frac{a_{p_i^\nu}}{p_o^{\nu s}}} \]
+  arises from $D(s)$ by re-ordering a sub-series (all prime powers) $\implies$ still converges absolutely
+\end{proof}
+
+\begin{ex}
+  For $\sigma > 1$, we have
+  \begin{align*}
+    \zeta(s) = \prod_{p} \left( \sum_{\nu = 0}^\infty \frac{1}{p^{\nu s}} \right) = \prod_p \left( \frac{1}{1 - \frac{1}{p^s}} \right)\\
+    \implies \zeta(s) \neq 0 \text{ for } \sigma > 1 \text{.}
+  \end{align*}
+\end{ex}
+
+
+\subsection{A Tauberian Theorem}
+
+Tauberian theorem are one way to extract arithmetic information about $(a_n)_{n \in \N}$ from $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$.
+The translate analytic properties of $D(s)$ to asymptotics of $A(x) = \sum_{n \leq x} a_n$.
+
+\begin{theorem}[T\label{4_8_T}]
+  Let $(a_n)_{n\in \N}$ ba a sequence of non-negative real numbers, such that the D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ converges for  $\sigma > 1$. Assume:
+  \begin{enumerate}
+    \item[(I)] $D(s)$ has a \underline{meromorphic continuation} to an open set $U \subseteq \C$ containing the closed half-space $\sigma \geq 1$.
+    \item[(II)] The \underline{only pole} of $D(s)$ in $U$ is at $s = 1$, has order $1$, and residue
+    \[ Res_{s=1} D(s) =: \rho \]
+    \item[(III)] There are constants $C,k$ such that $\abs{D(s)} \leq C \cdot \abs{t}^k$ and $\abs{D^\prime(s)} \leq C \cdot \abs{t}^k$ for $\sigma > 1$ and $\abs{t} \geq 1$.
+    Then
+    \[ \sum_{n \leq x} a_n = \rho x + \mathcal{O} \left( \frac{x}{\sqrt[N]{\log x}} \right) \text{,} \]
+    for some $N = N(k)$.
+  \end{enumerate}
+\end{theorem}
+
+In the next lecture, we apply Theorem \ref{4_8_T} and proberties of $\zeta(s)$ to deduce PNT.
+Next week we probe Theorem \ref{4_8_T}.
+
+\end{document}
