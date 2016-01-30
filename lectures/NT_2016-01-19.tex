@@ -1,0 +1,250 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\begin{proof}[Proof of Theorem \ref{4_8_T}:]
+  For the proof we consider so called "higher summatory functions"
+  \[ A_l(x) \coloneq \frac{1}{l!} \sum_{n \leq x} a_n (x-n)^l \text{.} \]
+  \[ A_0(x) = \sum_{n \leq x} a_n \]
+  is what we want.
+  Let's look at
+  \begin{align*}
+    \int_1^x A_l(t) dt &= \int_1^x \frac{1}{l!} \sum_{n \leq t} a_n ( t-n)^l dt \\
+    &= \sum_{n \leq x} a_n \int_1^x \frac{1}{l!} (t-n)^l dt \\
+    &= \frac{1}{(l+1)!} \sum_{n \leq x} a_n [(t-n)^{l+1}]_1^x \\
+    &= A_{l+1}(x)
+  \end{align*}
+  Define $r_l(x)$ by 
+  \[ A_l(x) = \rho \frac{x^{l+1}}{(l+1)!} (1 + r_l(x)) \text{.} \]
+  \begin{lemma}\label{l1}
+    Let $l \geq 0$. If $r_{l+1}(x) = \mathcal{O}(\frac{1}{\sqrt[N]{\log x}}$ then $r_l(x) = \mathcal{O}( \frac{1}{\sqrt[2N]{\log x}})$.
+  \end{lemma}
+  \begin{lemma}\label{l2}
+    If $l > k+1$ then $r_l(x) = \mathcal{O}( \frac{1}{\log x}$.
+  \end{lemma}
+  By Lemma \ref{l1} and Lemma \ref{l2} follows that
+  \[ r_l(x) = \mathcal{O}(\frac{1}{\sqrt[N_l]{\log x}})\]
+  with 
+  \[ N_l = \begin{cases}
+    1, & l > r + 1 \\
+    2^{\lfloor k \rfloor + 2 - l}, & l \leq r+1
+  \end{cases} \]
+  In particular, 
+  \[ r_0(x) = \mathcal{O}(\frac{1}{\sqrt[N_0]{\log x}}) \]
+  \[ N_0 = 2^{\lfloor k \rfloor + 2} \]
+  so 
+  \[ A_0(x) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N_0]{\log x}}) \implies \text{ Theorem \ref{4_8_T}} \]
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{l1}]
+  $0 < h = h(x) < 1$, $A_l(x)$ increasing.
+  \begin{align*}
+    \int_x^{x+hx} A_l(t) dt \geq h x A_l(x)
+  \end{align*}
+  \begin{align*}
+    h \frac{\rho}{(l+1)!} x^{l+2}(1+r_l(x)) &\leq A_{l+1}(x+hx) - A_{l+1}(x) \\
+    &= \frac{\rho}{(l+2)!} ((x+hx)^{l+2} (1 + r_{l+1}(x+hx)) - x^{l+2} (1 + r_{l+1}(x)) \\
+    (1 + r_l(x)) &\leq \frac{(1+h)^{l+2} (1 + r_{l+1}(x+hx)) - (1 + r_{l+1}(x)}{h(l+2)}
+  \end{align*}
+  Let $\varepsilon(x) \coloneq \sup_{0 \leq y \leq 1} \abs{r_{l+1}(x+yx)}$.
+  Then this implies
+  \begin{align*}
+    r_l(x) &\leq \frac{(1+h)^{l+2} (1 + \varepsilon(x)) - (1 - \varepsilon(x))}{h (l+2)} - 1
+    &= \frac{((1+h)^{l+2} + 1) \varepsilon(x)}{h (l+2)} + \frac{(1+h)^{l+2} - 1 - h(l+2)}{h (l+2)}
+  \end{align*}
+  Choose now $h(x) \coloneq \sqrt{\varepsilon(x)} < 1$ for large enough $x$.
+  \begin{align*}
+    &\implies ((1+h)^{l+2} - 1) \leq c_0 < \infty \\
+    &\implies r_l(x) \leq c_1 \frac{\varepsilon(x)}{h(x)} + \frac{\sum_{j=2}^{l+2} \left( l+2 \choose j \right) h^j}{h (l+2)} \\
+    &\leq c_1 \frac{\varepsilon(x)}{h(x)} + c_2 h = \mathcal{O}(\sqrt{\varepsilon(x)})
+  \end{align*}
+  To conclude that $r_l(x) = \mathcal{O} (\sqrt{\varepsilon(x)})$, we also need a lower bound.
+  This is obtained analogously, considering
+  \begin{align*}
+    \int_{x+hx}^x A_l(t) dt \leq hx A_l(x) \implies \overbar{r}_l(x) = \mathcal{O}(\sqrt{\varepsilon(x)}) \underbrace{=}_{\varepsilon(x) = \mathcal{O}(\frac{1}{\sqrt[N]{\log x}})} = \mathcal{O}(\frac{1}{\sqrt[2N]{\log x}})
+  \end{align*}
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{l2}]
+  We want to show that $r_l(x) = \mathcal{O}(\frac{1}{\log x})$, for $l > k+1$.
+  Idea: Write $A_l(x)$ as an integral, evaluate this integral by residue theorem.
+  \begin{lemma}\label{l3}
+    Let $l \in \N$, $\sigma_0 > 1$, $x > 0$.
+    Then 
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \underbrace{\frac{x^s}{s (s+1) \cdots (s+l)}}_{= f(s)} ds =
+      \begin{cases}
+        0, & 0 < x < 1 \\
+        \frac{1}{l!} (1 - \frac{1}{x})^l, & x \geq 1
+      \end{cases}
+    \end{align*}
+    Moreover, the integral converges absolutely.
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{\abs{x^s}}{\abs{s} \abs{s+1} \cdots \abs{s+l}} ds 
+      &\leq x^{\sigma_0} \int_{t = - \infty}^\infty \frac{1}{\abs{\sigma_0 + i t}^2} dt \\
+      &\leq x^{\sigma_0} \left( \int_{-1}^1 \frac{1}{\abs{t}^2} dt + \int_{-1}^1 \frac{1}{\sigma_0^2} dt 
+      + \int_1^\infty \frac{1}{t^2} dt \right) < \infty
+    \end{align*}
+    Let $0 < x < 1$.
+    For $R > 0$, let $\gamma_R$ be the path \todo{add picture}.
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds 
+      &= \lim_{R \to \infty} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds \\
+      &= \lim_{R \to \infty} \int_{\circ R} f(s) ds - \lim_{R \to \infty} \int_{R half} f(s) ds
+    \end{align*}
+    $f(s)$ is holomorphic inside $\circ R$.\\
+    Cauchy's Theorem implies $\int_{\circ R} f(s) ds = 0$.\\
+    Since $0 < x < 1$, $\abs{x}^s \leq 1$, since $\sigma > \sigma_0 > 0$ on $R half$.
+    \begin{align*}
+      \int_{R half} \abs{f(s)} ds &\leq \int_{R half} \frac{1}{R^2} ds \leq \frac{\pi R}{R^2} \overset{R \to \infty}{\to} 0 \\
+      &\implies \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds = 0
+    \end{align*}
+    Now $x \geq 1$: 
+    Now choose this contour \todo{add picture}\\
+    $R > l \implies$ all poles of $f(s)$ are inside this contour.
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds 
+      &= \lim_{R \to \infty} \frac{1}{2 \pi i} \int_{\circ} f(s) ds - \lim_{R \to \infty} \frac{1}{2 \pi i} \int_{half R^c} f(s) ds
+    \end{align*}
+    We have $\abs{x}^s \leq x^{\sigma_0} < \infty$ on $half C$. This implies
+    \[ \int_{half C} \abs{f(s)} ds \overset{R \to \infty}{\to} 0 \]
+    Residue Theorem:
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\circ C} f(s) ds  &= \sum_{j=o}^l Res_{s= -j} f(s) \\
+      Res_{s=-j} f(s) &= \lim_{s \to -j} (s+j) f(s) \\
+      &= \frac{x^{-j}}{(-j)(-j+1) \cdots 1 \cdot 2 \cdots (l-j)} \\
+      &= \frac{(-1)^j x^{-j}}{j! (l-j)!}
+    \end{align*}
+    Now we need to sum up the residues.
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\circ C} f(s) ds &= \sum_{j=0}^l \frac{(-1)^j x^{-j}}{j! (l-j)!} 
+      = \frac{1}{l!} (1 - \frac{1}{x})^l
+    \end{align*}
+  \end{proof}
+  
+  \begin{lemma}\label{l4}
+    Let $l \geq 1$, $\sigma_0 > 1$. Then
+    \begin{align*}
+      A_l(x) = \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma + i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds
+    \end{align*}
+    The integral converges absolutely.
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      RHS = \frac{1}{2 \pi i} \int_{\sigma_0 -i \infty}^{\sigma_0 + i \infty} \sum_{n=1}^\infty \frac{a_n}{n^s} \frac{x^{s+l}}{s (s+1) \cdots (s+l)} ds
+    \end{align*}
+    Use Lebesgue's dominated convergence then to swap integral and sum.
+    The integral is bounded by
+    \[ ( \underbrace{\sum_{n=1}^\infty \frac{\abs{a_n}}{n^{\sigma_0}}}_{=: c < \infty}) x^{\sigma_0 + l} \cdot \frac{1}{(\sigma_0 + i t)^2} =: g(s) \]
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 - i \infty} g(s) ds 
+      &= c \cdot x^{\sigma_0 + l} \cdot \int_{-\infty}^\infty \frac{1}{(\sigma_0 + i t)^2} dt < \infty \checkmark
+    \end{align*}
+    Thus
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds
+      &= \sum_{n=1}^\infty a_n x^l \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{(\frac{x}{n})^s}{s (s+1) \cdots (s+l)} ds \\
+      &= \sum_{n \leq x} a_n x^l \frac{1}{l!} (1 -\frac{n}{x})^l \\
+      &= \frac{1}{l!} \sum_{n \leq x} a_n (x-n)^l \\
+      &= A_l(x)
+    \end{align*}
+  \end{proof}
+  Choose $\sigma_0 = 2$.
+  We want to shift integration to $\sigma = 1$, but we need to avoid the pole of $D(s)$ at $s = 1$.
+  Recall that $U \supseteq \{ \sigma \geq 1\}$ implies that we can find $0 < \sigma_1 < 1$ such that the box will come
+  $1 \pm i$, $\sigma_1 \pm i$ is in $U$.
+  Let $L$ be the following path: \todo{add picture}
+  \begin{lemma}\label{l5}
+    Let $l \geq k$. Then
+    \[ A_l(x) = \frac{\rho x^{l+1}}{(l+1)!} + \frac{1}{2 \pi i} \int_L \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds \]
+  \end{lemma}
+  \begin{proof}
+    Let $T > 1$. We define $L_T$ by \todo{add picture}, $C_T$ \todo{add picture} closed curve.
+    Let $f(s) = \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)}$.
+    Then 
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{2 - Ti}^{2+ Ti} f(s) ds - \frac{1}{2 \pi i} \int_{L_T} f(s) ds 
+      = \frac{1}{2 \pi i} \int_{\circ C_T} f(s) ds - \int_{1 - Ti}^{2- Ti} f(s) ds + \int_{1 + Ti}^{2 + Ti} f(s) ds
+    \end{align*}
+    Residue Theorem:
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\circ C_T} f(s) ds &= Res_{s=1} f(s) \\
+      &= \lim_{s \to 1} \frac{(s-1) D(s) x^{s+l}}{s (s+1) \cdots (s+l)} \\
+      &= \frac{\rho x^{l+1}}{(l+1)!}
+    \end{align*}
+    For $s = \sigma \pm Ti$, $1 < \sigma < 2$ we have $\abs{D(s)} \leq C T^k$ (by (III)).
+    Thus
+    \begin{align*}
+      \abs{f(s)} \leq \frac{C T^k x^{\sigma+l}}{T^{l+1}} \leq \frac{C x^{\sigma + l}}{T} \overset{T \to \infty}{\to} 0
+    \end{align*}
+    \begin{align*}
+      A_l(x) = \frac{1}{2 \pi i} \int_{2 - i \infty}^{2 + i \infty} f(s) ds 
+      &= \lim_{T \to \infty} \frac{1}{2 \pi i}\int_{2 - iT}^{2+ iT} f(s) ds  \\
+      &=  \lim_{T \to \infty} \frac{1}{2 \pi i} \int_{L_T} f(s) ds + \frac{\rho x^{l+1}}{(l+1)!} \\
+      &= \frac{1}{2 \pi i} \int_L f(s) ds + \frac{\rho x^{l+1}}{(l+1)!} \\
+    \end{align*}
+  \end{proof}
+  %---20.01.2016---
+  To prove Lemma \ref{l2}, we need
+  \[ \int_L \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds = \mathcal{O}( \frac{x^{l+1}}{\log x} \]
+  For integrals over vertical lines, use following lemma:
+  \begin{lemma}\label{l6}[Riemann-Lebesgue]
+    Let $- \infty \leq a < b \leq \infty$, $f: (a,b) \to \C$ bounded, constant differentiable, such that
+    \[ \int_a^b \abs{f(t)} dt \text{ and } \int_a^b \abs{f^\prime(t)} dt \]
+    exist.\\
+    Let $x > 0$. Then $\int_a^b \abs{f(t) x^{it}} dt$ exists and 
+    \[ \int_a^b f(t) x^{it} dt = \mathcal{O}(\frac{1}{\log x} \text{.} \]
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \abs{f(t) x^{it}} = \abs{f(t)} \implies \int_a^b \abs{f(t) x^{it}} dt \text{ exists.}
+    \end{align*}
+    \begin{align*}
+      \int_a^b f(t) x^{it} dt 
+      &= [ f(t) \frac{x^{it}}{i \log x} ]_a^b - \int_a^b f^\prime(t) \frac{x^{it}}{i \log x} dt \\
+      &= \frac{1}{i \log x} [f(t) x^{it}]_a^b - \int_a^b f^\prime(t) x^{it} dt)
+    \end{align*}
+    $f(t)$ is bounded implies that $f(t) x^{it}$ is bounded and thus
+    \[ \abs{[f(t) x^{it}]_a^b} = C_1 < \infty \]
+    \begin{align*}
+      \abs{ \int_a^b f^\prime(t) x^{it} dt} \leq \int_a^b \abs{f^\prime(t)} dt = C_2 < \infty
+    \end{align*}
+    $C_1, C_2$ are independent of $x$ and therefore
+    \[ \int_a^b f(t) x^{it} dt = \mathcal{O}(\frac{1}{\log x} \]
+  \end{proof}
+  Apply Lemma \ref{l6} to $f(t) = \frac{D(1+it)}{(1+it) (1+it+1) \cdots (1+it +l)}$.
+  Recall that for $l > k+1$ (III): $\abs{D(s)} \leq C \abs{t}^k$, $\sigma >1$, $\abs{t} \geq 1$ continuity also holds for $\sigma = 1$.
+  Thus
+  \begin{align*}
+    \abs{f(t)} \leq \frac{C \abs{t}^k}{\abs{t}^{k+1}} \leq \frac{C}{\abs{t}^2} \leq C \text{ if } \abs{t} \geq 1
+  \end{align*}
+  So $\int_{-1}^1 \abs{f(t)} dt$ and $\int_1^\infty \abs{f(t)} dt$ exist.
+  \begin{align*}
+    f^\prime(t) = \frac{iD^\prime(1+it)}{(1+it) (1+it+1) \cdots (1+it +l)} - \frac{i D(1+it) \sum_{j=0}^l \prod_{m \neq j} ((1+ m + it)}{(1+it) \cdots (1+it + l))^2}
+  \end{align*}
+  From (III) follows
+  \begin{align*}
+    \abs{f^\prime(t)} &\leq \frac{C \abs{t}^k}{\abs{t}^{l+1}} + \frac{C \abs{t}^k (l+1)}{\abs{t}^{l+2}} \leq \frac{\tilde{C}}{\abs{t}^2} \\
+    &\implies \int_{-\infty}^{-1} \abs{f^\prime(t)} dt \text{ and } \int_1^\infty \abs{f^\prime(t)} dt \text{ exist.}
+  \end{align*}
+  Thus
+  \begin{align*}
+    \abs{\int_{1-i \infty}^{1-i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} &\underset{=}{s = 1+it} x^{1+l} \abs{ \int_{1-i \infty}^{1-i} \frac{D(s) x^{it}}{s (s+1) \cdots (s+l)} ds } \\
+    &\underset{=}{ds = i dt} x^{1+l} \abs{\int_{-1}^1 f(t) dt} \overset{\text{Lemma \ref{l6}}}{=} \mathcal{O}(\frac{x^{1+l}}{\log x} \checkmark
+  \end{align*}
+  analogously:
+  \[ \int_{1+i}^{1+i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l} = \mathcal{O}(\frac{x^{1+l}}{\log x} \]
+  $f(s)$ is holomorph on $[\sigma_1 -i, \sigma_1 +i]$ and thus continuous\\
+  Compactness: $D(s)$ is bounded on $[\sigma_1 - i, \sigma_1 + i]$, e.g. $\abs{D(s)} \leq c < \infty$
+  \begin{align*}
+    \abs{\int_{\sigma_1 - i}^{\sigma_1 + i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} \leq 2 c x^{\sigma_1 + l} 
+    = \mathcal{O}(x^{\sigma_1 +l}) = \mathcal{O}(\frac{x^{1+l}}{\log x}
+  \end{align*}
+  $D(s)$ holomorph on $[\sigma_1 \pm i, 1 \pm i] \implies$ bounded ($\implies \abs{D(s)} \leq c < \infty$)
+  \begin{align*}
+    \abs{ \int_{\sigma_1 \pm i}^{1\pm i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} \leq c \int_{\sigma_1 \pm i}^{1 \pm i} x^{\sigma + 1} d\sigma = c x^l \int_{\sigma_1}^1 x^\sigma d\sigma  = C x^l [\frac{x^\sigma}{\log x}]_?^1
+  \end{align*} (Text missing) %TODO text missing
+\end{proof}
+
+\end{document}
