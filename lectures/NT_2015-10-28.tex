@@ -13,7 +13,7 @@
  So we need to show that $p_n = \omega_{n+2}$.\\
  Using that $\theta^{n+2} = b \theta^{n+1} + c \theta^n$ and $\bar{\theta}^{n+2} = b \bar{\theta}^{n+1} + c \bar{\theta}^n$
  and hence $u_{n+2} = \frac{\theta^{n+2} - \bar{\theta}^{n+2}}{\theta - \bar{\theta}} = b u_{n+1} + c u_n$.\\
- Moreover, $u_{2m+2} = c^m \omega{2m+2}$, $u_{2m+1} = c^m \omega_{2m+1}$.
+ Moreover, $u_{2m+2} = c^m \omega_{2m+2}$, $u_{2m+1} = c^m \omega_{2m+1}$.
  Inserting this into the above, distinguishing $n$ even or odd yields:
  \begin{align}
    \omega_{2m+2} = b \omega_{2m+1} + \omega_{2m}\\
@@ -25,12 +25,12 @@
 
 \emph{Counting Diophantine Approximation 2:}\\
 We can use Theorem 1.2.5 to show that if $\theta = [\bar{b,a}]$ with $b = a c, a>1$ then 
-\[ N_\theta(\frac{1}{2x^2},Q) = \frac{\log Q}{\log(\frac{Q}{\sqrt{c}})} + \mathcal{O}(1)\]
+\[ N_\theta(\frac{1}{2x^2},Q) = \frac{\log Q}{\log(\frac{\theta}{\sqrt{c}})} + \mathcal{O}(1)\]
 Indeed, we have already seen, that 
 \[ N_\theta(\frac{1}{2x^2},Q) = \#\{n: q_n \leq Q \} \]
 By Theorem 1.2.5 we know
 \[ q_n \leq Q \iff c^{-\lfloor\frac{n+1}{2} \rfloor} \frac{\theta^n - \bar{\theta}^n}{\theta - \bar{\theta}} = \left(\frac{\theta}{\sqrt{c}}\right)^n \left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) \epsilon \leq Q\]
-where $ \epsilon = \begin{cases} \frac{1}{\theta - \bar{\theta}} & 2 \divides n\\ \frac{1}{\sqrt{c}(\theta -\bar{\theta}} & 2 \nmid n \end{cases}$
+where $ \epsilon = \begin{cases} \frac{1}{\theta - \bar{\theta}} & 2 \divides n\\ \frac{1}{\sqrt{c}(\theta -\bar{\theta})} & 2 \nmid n \end{cases}$
 \[ \iff n \log\left(\frac{\theta}{\sqrt{c}}\right) + \log\left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) + \log \epsilon \leq \log Q \]
 Using Taylor series expansion we see that 
 \[ | \log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right) | \leq | \frac{\bar{\theta}}{\theta - \bar{\theta}} |  \]
@@ -56,7 +56,7 @@ If $\alpha$ is algebraic then we say $\deg D_\alpha$ is the \emph{degree of $\al
   \end{itemize}
 \end{ex}
 
-\begin{theorem}[1.3.1 Liouville's Theorem]
+\begin{theorem}[Liouville's Theorem]\label{1_3_1}
   Suppose $\alpha$ is a real, algebraic number of degree $d$.
   Then $\exists c(\alpha) > 0$ such that
   \[ |\alpha - \frac{p}{q}| > \frac{c(\alpha)}{q^d} \]
@@ -68,7 +68,7 @@ If $\alpha$ is algebraic then we say $\deg D_\alpha$ is the \emph{degree of $\al
   Now suppose $|\alpha - \frac{p}{q}| \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
   \[ D_\alpha(x) = \sum_{i=1}^d (x - \alpha)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha) \]
   Hence, 
-  \[ |D_\alpha\left(\frac{p}{q}\right) | = | \sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)| \overset{\leq}{(D)label} |\frac{p}{q} - \alpha | \frac{1}{c(\alpha)} \]
+  \[ |D_\alpha\left(\frac{p}{q}\right) | = | \sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)| \overset{(D)label}{\leq} |\frac{p}{q} - \alpha | \frac{1}{c(\alpha)} \]
   where
   \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} |D_\alpha^{(i)}(\alpha) |\right)^{-1} \]
   Now if $D_\alpha$ has a rational root then it must have degree one, so have only \emph{one} root.
@@ -86,10 +86,10 @@ has a solution. $p,q \in \Z$ with $q > 1$.
 \begin{ex}
   $\alpha = \sum_{k = 1}^\infty 10^{-k^k}$ is a Liouville number.
   Let $n \in\N$ and put $p = \sum_{k=1}^n 10^{n^n - k^k}$ and $q = 10^{n^n}$.
-  Then $ 0 < |\alpha - \frac{p}{q}| = \sum_{k>n} 10^{-k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
+  Then $ 0 < |\alpha - \frac{p}{q}| = \sum_{k>n} 10^{-k^k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
 \end{ex}
 
-\begin{cor}[1.3.2]
+\begin{cor}\label{1_3_2}
   Every Liouville number is transcendental (i.e., not algebraic).
 \end{cor}
 
@@ -103,11 +103,11 @@ has a solution. $p,q \in \Z$ with $q > 1$.
   In fact \grqq most\grqq ~ real numbers are "not very far" from badly approximable as the following theorem shows.
 %\end{rem}
 
-\begin{theorem}[Khintchine]
+\begin{theorem}[Khintchine]\label{1_3_3}
   Suppose $\psi: \N \to (0,\infty)$ is monotone decreasing (not necessarily strictly).
   The set 
   \[A_\psi = \{\alpha \in \R: |\alpha - \frac{p}{q}| < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
-  has a Lebesgue measure zero of $\sum_{q=1}^\infty \psi(q)$ converges and has full Lebesgue measure (i.e. the complement has measure zero) 
+  has a Lebesgue measure zero if $\sum_{q=1}^\infty \psi(q)$ converges and has full Lebesgue measure (i.e. the complement has measure zero) 
   if $\sum_{q=1}^\infty \psi(q)$ diverges.
 \end{theorem}
 

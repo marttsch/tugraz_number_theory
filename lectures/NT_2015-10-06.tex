@@ -47,7 +47,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   $f$ is \emph{completely multiplicative} if $\forall m,n: f(mn) = f(m) f(n)$.
   Let $f: \N \to \C$. Its \emph{summatory function} is $S_{f}(n) \coloneq \sum_{d\divides n} f(d)$.
 \end{defi}
-
+\todo{add lemma}
 \begin{proof}
   If $\gcd(m,n) = 1$ and $d\divides mn$, then $\exists$ unique $d_1,d_2$ such that $d = d_1 \cdot d_2$ with $d_1 \divides  m$, $d_2\divides n$.
   \[S_f (mn) = \sum_{d\divides mn} f(d) = \sum_{d_1\divides m} \sum_{d_2\divides n} f(d_1 d_2) = \sum_{d_1\divides m} f(d_1) \sum_{d_2\divides n} f(d_2) = S_f(m) S_f(n)\]
@@ -124,7 +124,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \[
     S_\mu(n) = \begin{cases}
       1 & \text{if } n=1 \\
-      0 & \text{if } n>0
+      0 & \text{if } n>1
     \end{cases}
   \]
 \end{lemma}
@@ -237,7 +237,7 @@ $2 \times$ Lemma: $x = 1+p$ satisfies $\abs{x} = p^{\alpha -1}$, now find $y$.
 
 \begin{enumerate}
   \item $\exists z \in \Z: \abs{\overbar{z}} = p-1 \text{ is } \Z_p^\times$
-  \item let $l \coloneq \card{E} \text{ is } \Z_{p^\alpha}^\times$
+  \item let $l \coloneq \card{\overbar{z}} \text{ is } \Z_{p^\alpha}^\times$
   \item Then $p^\alpha \divides  z^l -1 \Rightarrow z^l \equiv 1 \mod p$
   \item $\Rightarrow$ $p-1 \divides  l$.
   \item Let $y \coloneq z^{\frac{l}{p-1}}$, then $\abs{\overbar{y}} = p-1$.

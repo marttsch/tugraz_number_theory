@@ -36,7 +36,7 @@ Some properties: Let $a,b,c \in \Z$. Then the following statements hold:
 \begin{align}
   a\divides b &\Rightarrow ac\divides bc \\
   a\divides b \land b\divides c &\Rightarrow a\divides c \\
-  a\divides b \land b\divides a &\Leftrightarrow a = b \\
+  a\divides b \land b\divides a &\iff a = \pm b \\
   a\divides b \land a\divides c &\Rightarrow a\divides (b+c)
 \end{align}
 \end{defi}
@@ -49,7 +49,7 @@ Let $a \in \Z$, $b \in \N$. Then there are unique $q,r \in \Z$ such that
 \begin{rem}
 \begin{enumerate}
   \item $b\divides a \Leftrightarrow r = 0$
-  \item $q = \lfloor \frac{a}{b} \rfloor$ (largest integer $\leq \frac{q}{b}$)
+  \item $q = \lfloor \frac{a}{b} \rfloor$ (largest integer $\leq \frac{a}{b}$)
   \item we will somtimes write: $a \mod b \coloneq c$
 \end{enumerate}
 \end{rem}
@@ -206,13 +206,14 @@ There are $\infty$-many primes.
 
 \begin{rem}[prime factors and $\gcd$s]
 Let $a_1,\dots, a_n \in \Z$, write
-\[a_i = \prod_{p \in \PP} p^{\alpha_{p,i}}\text{, }\alpha_{p,i} \in \N_0 \text{,}\] almost all $a_i = 0$,
+\[a_i = \prod_{p \in \PP} p^{\alpha_{p,i}}\text{, }\alpha_{p,i} \in \N_0 \text{,}\] almost all $\alpha_{p,i} = 0$,
 then \[\gcd(a_1,\dots,a_n) = \prod_{p \in \PP} p^{\min_{1\leq i\leq n} \{\alpha_{p,i}\}}\]
 \end{rem}
 
 \subsection{Congruences}
 
 All rings are commutative with $1$.
+\todo{zu Begriffserklärung oder zum ersten Vorkommen von Ringen}
 
 \begin{defi}
 Let $a,b \in \Z$, $n \in \N$. Then \emph{$a$ is congruent to $b \pmod{n}$}, $a \equiv b \pmod{n}$,
@@ -223,14 +224,16 @@ We write $\overbar{a} = [a]_n \coloneq \{b \in \Z : b \equiv a (\mod n)\}$
 \begin{rem}
 \label{four}
 \begin{enumerate}
-  \item Congruence $\bmod{n}$ is an \emph{equivalence relation}
+  \item Congruence $\pmod{n}$ is an \emph{equivalence relation}
   \item $\overbar{0},\overbar{1},\dots,\overline{n-1}$ is a partition of $\Z$.
   \item if $a \equiv b \pmod{n}$, $c \equiv d \pmod{n}$, then 
   $-a \equiv -b \pmod{n}$,
-  $a \overset{+}{\underset{-}{\cdot}} d \pmod{n}$.
+  $a \overset{+}{\underset{-}{\cdot}} d \equiv \overset{\pm}{\cdot} \pmod{n}$.
+  \todo{fix + - *}
 \end{enumerate}
 \end{rem}
 
+\todo{a ring }
 \begin{defi}
 $\Z / n\Z = \Z_n \coloneq \{[a]_n : a\in \Z\} = \{\overbar{0},\overbar{1},\dots,\overline{n-1}\}$ residue class ring modulo $n$
 \end{defi}

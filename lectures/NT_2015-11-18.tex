@@ -31,10 +31,10 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
 \begin{proof}
   Let $b_1,\dots,b_n$ be a basis of $\Lambda$ and let $F = [0,1) b_1 + \dots + [0,1) b_n$ be a fundamental cell.
   Thus $\vol F = \det \Lambda$, and if $x \in \R^n$ then $\exists$ \underline{unique} $v \in \Lambda$ and $\theta \in F$ such that
-  \[ x = V + \theta \text{.}\]
+  \[ x = v + \theta \text{.}\]
   Now for each $v \in \Lambda$ consider
   \[ \mathcal{R}(v) = \{ \theta \in F : v + \theta \in S \} \]
-  %TODO add picture
+  \todo{add picture}
   Hence, 
   \[ \sum_{v \in \Lambda} \vol(\mathcal{R}(v)) = \vol S \]
   Now if $\vol S > \det \Lambda$ then (2.1) implies $\sum_{v \in \Lambda} \vol (\mathcal{R}(v)) > \det \Lambda = \vol F  $.
@@ -43,7 +43,7 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
   Hence, the points $x_1 = v_1 + \theta_0, x_2 = v_2 + \theta_0$ are both in $S$ and $x_1 - x_2 = v_1 - v_2 \in \Lambda \setminus 0$.
 \end{proof}
 
-\begin{theorem}[Mnkowski's First Theorem \label{th_2_2_2_minkowski1}]
+\begin{theorem}[Minkowski's First Theorem \label{th_2_2_2_minkowski1}]
   Let $\Lambda$ be a lattice in $\R^n$, and let $S \subset \R^n$ be convex and symmetric.
   Suppose that either
   \begin{itemize}
@@ -74,7 +74,7 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
   So $(\Lambda \setminus S) \cap B_R(0)$ is finite by Theorem \ref{th_2_1_2} and hence $\exists \varepsilon > 0$
   such that 
   \[ B_\varepsilon(v) \cap S = \emptyset  \; \forall v \in (\Lambda \setminus S) \cap B_R(0) \text{.} \]
-  %TODO add picture
+  \todo{add picture}
   Hence, $\exists \lambda > 1$ such that
   \[ \lambda S \cap \Lambda = S \cap \Lambda \text{.} \]
   By the first part we know that $\lambda S$ contains a non-zero lattice point, and this completes the proof.
@@ -85,14 +85,14 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
   Suppose $c_1,\dots, c_n > 0$ and $c_1 \dots c_n \geq \abs{\det A} \det \Lambda$.
   Then $\exists u \in \Lambda \setminus 0$ such that 
   (2.2) $\begin{cases}  
-    \abs{ \sum_{j=1}^n a_{ij} u_j} \leq c_1\\
+    \abs{ \sum_{j=1}^n a_{1j} u_j} \leq c_1\\
     \abs{ \sum_{j=1}^n a_{ij} u_j} < c_i \: (2 \leq i \leq n) \text{.}
   \end{cases}$
 \end{cor}
 
 \begin{proof}
   First suppose $\det A \neq 0$.
-  Then $\mathcal{L} = A - \Lambda$ is  a lattice in $\R^n$ with $\det \mathcal{L} = \abs{\det A} \det \Lambda$.
+  Then $\mathcal{L} = A \cdot \Lambda$ is  a lattice in $\R^n$ with $\det \mathcal{L} = \abs{\det A} \det \Lambda$.
   Then (2.2) means we are looking for a non-zero lattice point $x \in \mathcal{L}$ such that
   \[ \abs{x_1} \leq c_1 \]
   \[ \abs{x_i} < c_i \: (2 \leq i \leq n) \]
@@ -121,8 +121,8 @@ We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of in
   First we observe that 
   \begin{align*}
     (x_1^2 + x_2^2 &+ x_3^2 + x_4^2) \cdot (y_1^2 + y_2^2 + y_3^2 + y_4^2) = \\
-    &= (x_1 y_1 + x_2 y_2 x + x_3 y_3 + x_4 y_4)^2 + (-x_1 y_2 + x_2 y_1 -x_3 y_4 + x_4y_3)^2 \\
-    &+ (-x_1 y_3 + x_2 y_4 + x_3 y_1 - x_-2 y_2)^2 + (-x_1 y_4 - x_2 y_3 + x_3y_2 + x_4 y_1)^2 \text{.}
+    &= (x_1 y_1 + x_2 y_2 + x_3 y_3 + x_4 y_4)^2 + (-x_1 y_2 + x_2 y_1 -x_3 y_4 + x_4y_3)^2 \\
+    &+ (-x_1 y_3 + x_2 y_4 + x_3 y_1 - x_4 y_2)^2 + (-x_1 y_4 - x_2 y_3 + x_3y_2 + x_4 y_1)^2 \text{.}
   \end{align*}
   Now $1 = 1^2 + 0^2 + 0^2 + 0^2$. So it suffices to prove the claim for primes $p$.
   And we can assume $p \neq 2$ since $2 = 1^2 + 1^2 +0^2 + 0^2$. \\

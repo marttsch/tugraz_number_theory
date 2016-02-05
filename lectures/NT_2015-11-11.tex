@@ -1,7 +1,7 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\subsection{6. Further generalizations and open problems}
+\subsection{Further generalizations and open problems}
 
 Let $\alpha, \beta \in \R \setminus \Q$ and consider the linearly independent  linear forms $L_1{\underbar{x}} = x_0 \alpha -x_1$, $L_2(\underbar{x}) = x_0 \beta - x_2$, $L_3(\underbar{x}) = x_0$
 If $\alpha, \beta$ are algebraic then Theorem 1.5.1 implies that the solutions $\underbar{x} \in \Z^3 \setminus \underbar{0}$ of
@@ -41,11 +41,11 @@ If we assume that $A \subset \R$  then we still can use the (usual) absolute val
 But usually we have no "natural denominators" for $x \in A$.
 But there is a natural way to interpret the original setting that easily generalizes from $A = \Q$ to $A=\overbar{\Q} \cap \R$.
 To this end we introduce the so-called \underline{multiplicative absolute Weil height}:
-\[ H: \Q \to \left[1,\infty\right) \]
+\[ H: \overbar{\Q} \to \left[1,\infty\right) \]
 defined by
-\[ H(\alpha) = M(D_\alpha(x)) \]
+\[ H(\alpha) = M(D_\alpha(x))^{\frac{1}{\deg \alpha}} \]
 where $D_\alpha(x) = a_0 (x - \alpha_1)\dots (x - \alpha_d) \in \Z[x]$ is the minimal polynomial of $\alpha$ and
-\[ M(D_\alpha(x)) = \abs{a_0} \cdots \prod_{i=1}^n \max \{ 1, \abs{\alpha_i} \} \]
+\[ M(D_\alpha(x)) = \abs{a_0} \cdot \prod_{i=1}^d \max \{ 1, \abs{\alpha_i} \} \]
 $M$ is called the \underline{Mahler-measure}.
 
 \begin{ex}
@@ -60,13 +60,13 @@ $M$ is called the \underline{Mahler-measure}.
 
 One can easily show (c.f. sheet 4) that 
 \begin{align}
-  \# \{ \alpha \in \overbar{\Q} : \deg d \leq d, H(\alpha) \leq X \} < \infty \; \forall d \in \N \; X \geq 1\text{.} 
+  \# \{ \alpha \in \overbar{\Q} : \deg \alpha \leq d, H(\alpha) \leq X \} < \infty \; \forall d \in \N \; X \geq 1\text{.} 
   \label{6_1}
 \end{align}
 
 Back to Diophantine approximation with $A = \Q$.
 As 
-\[ a + m - \frac{p}{q} = a - \left( \frac{p - mq}{q} \right) \]
+\[ \alpha + m - \frac{p}{q} = \alpha - \left( \frac{p - mq}{q} \right) \]
 we can assume $\alpha \in (0,1)$
 So all good enough approximations $\frac{p}{q}$ lie also in $(0,1)$. Now if $\frac{p}{q} \in (0,1)$ then 
 \[ H \left( \frac{p}{q} \right) = q \text{.} \]
@@ -90,13 +90,13 @@ More generally this is true if
 \[ \# \{ \alpha \in A : H(\alpha) \leq X \} < \infty \; \forall X \geq 1\text{.}\]
 In this case we say $A$ has \underline{property $N$}.
 
-\begin{theorem}[1.6.3 Wirsing 1961 \label{th_1_6_3}]
+\begin{theorem}[Wirsing 1961 \label{th_1_6_3}]
   Let $d \in \N$, $d > 1$ and $\alpha \in \R \setminus \Q_{(d)}$.
   Then $\exists \infty$-many $x \in \Q_{(d)}$ with
   \[ \abs{\alpha - x} < H(x)^{-(\frac{d+3}{2})} \]
 \end{theorem}
 
-\begin{conj}[1.6.4 Wirsing's Conjecture, around 1961 \label{conj_1_6_4}]
+\begin{conj}[Wirsing's Conjecture, around 1961 \label{conj_1_6_4}]
   Suppose $\alpha \in \R \setminus \Q_{(d)}$, ($d\in \N$) and $\lambda < d+1$ then 
   $\exists \infty$-many $x \in \Q_{(d)}$ with
   \[ \abs{\alpha - x} < H(x)^{-\lambda} \text{.} \]
@@ -115,13 +115,13 @@ Unfortunately, nobody knows whether $\Q^{(d)}$ has property ($N$), except when $
 \end{theorem}
 
 \begin{op}[1.6.7]
-  Find an analogue of Corollary 1.1.2 for $A = \Q{(2)} \cap \R$.
+  Find an analogue of Corollary 1.1.2 for $A = \Q^{(2)} \cap \R$.
   How quickly can $\phi : \left[1,\infty\right) \to \left(0,\infty\right)$ decay if for every $\alpha \in \R \setminus A$
   \[ \abs{ \alpha - x } < \phi(H(x)) \]
   has $\infty$-many solutions $x \in A$? 
   It is not difficult to show an inequality in the other direction provided $\alpha$ is algebraic, 
   e.g., if $\alpha \in \overbar{\Q}\setminus \Q^{(2)}$ then
-  \[ \abs{\alpha -x } > (2 \cdot H(\alpha) H(x))^{-\deg \alpha \cdot 2^{(2 H(x))}} \]
+  \[ \abs{\alpha -x } > (2 \cdot H(\alpha) H(x))^{-\deg \alpha \cdot 2^{(2 H(x))^8}} \]
   How much can this be improved?
 \end{op}
 

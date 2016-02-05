@@ -1,7 +1,7 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\begin{lemma}
+\begin{lemma}\label{1_2_1}
   Let $a_0,a_1,a_2,\dots$ be a sequence of integers with $a_i > 0$ ($i>0$).\\
   Define $p_n,q_n$:
   \begin{align}
@@ -46,9 +46,9 @@
     This proves (c) for $n=m$.\\
     To prove (d) with $n=m$ we observe that
     \begin{align}
-      \theta &= [a_0,\dots,a_m,\theta{m+1} ] \\
+      \theta &= [a_0,\dots,a_m,\theta_{m+1} ] \\
       &= [a_0,\dots,a_m + \frac{1}{\theta_{m+1}} ]\\
-      &\overset{=}{(d) for n=m-1} \frac{p_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + p_{m-2}}{q_{m-1} (a_m \frac{1}{\theta_{m-1}} ) + q_{m-2}}\\
+      &\overset{=}{(d) for n=m-1} \frac{p_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + p_{m-2}}{q_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + q_{m-2}}\\
       &\overset{=}{rec. rel} \frac{p_m + p_{m-1} (\frac{1}{\theta_{m+1}})}{q_m + q_{m-1} ( \frac{1}{\theta_{m+1}})}\\
       &= \frac{p_m \theta_{m+1} + p_{m-1}}{q_m \theta_{m+1} + q_{m-1}}
     \end{align}
@@ -58,7 +58,7 @@
 
 Next we deduce some properties of continued fraction convergents.
 
-\begin{theorem}
+\begin{theorem}\label{1_2_2}
   Let $\theta = [a_0,a_1,a_2,\dots ]$ with convergents $\frac{p_n}{q_n}$.
   For (a) - (d) we assume that the continued fraction proves does not terminate
   \begin{enumerate} %a,b
@@ -97,7 +97,8 @@ Next we deduce some properties of continued fraction convergents.
 \end{ex*}
 
 We now show that convergents give best-possible rational approximations.
-\begin{theorem}
+
+\begin{theorem}\label{1_2_3}
   Let $\theta$ be an irrational real number, and let $\frac{p_n}{q_n}$ be the convergents ($n \geq 0$) with partial quotients $a_n (n \geq 0)$.\\
   Then
   \begin{enumerate} %a,b
@@ -136,8 +137,8 @@ We now show that convergents give best-possible rational approximations.
     As $0 < q <q_{n+1}$ we have $u \neq 0$. If $v = 0$ then $(p,q) = u \cdot (p_n,q_n)$ and the claim is trivial. ($u = 1 \Rightarrow$ equality, $u > 1 \Rightarrow$ strictly >)\\
     So let's assume $v \neq 0$. Then $u$ and $v$ cannot both be negative (as $q > 0$) nor both be positive (as $q < q_{n+1}$).
     So they have opposite signs.\\
-    By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta p_{n+1}$ have opposite signs.
-    Hence, $|q \theta - p| = |u (q_n \theta p_n) + v (q_{n+1} \theta - p_{n+1}| > |q_n \theta - p_n|$.
+    By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta - p_{n+1}$ have opposite signs.
+    Hence, $|q \theta - p| = |u (q_n \theta - p_n) + v (q_{n+1} \theta - p_{n+1})| > |q_n \theta - p_n|$.
     \item[e)] Take $n$ with $q_n \leq q < q_{n+1}$. Then 
     \begin{align*} 
     |\frac{p}{q} - \frac{p_n}{q_n}| &\leq |\theta - \frac{p}{q}| + |\theta - \frac{p_n}{q_n}| \\

@@ -21,9 +21,9 @@
   with $v_{ij} \in \Z$ and $v_{ii} \neq 0$.\\
   Consider 
   \begin{align}
-    b_j = c_j + t_{jj-1}a_{j-1} + \dots + t_{j1} a_1 \label{3_7}
+    b_j = c_j + t_{j(j-1)}a_{j-1} + \dots + t_{j1} a_1 \label{3_7}
   \end{align}
-  where $t_{i} \in \R$.\\
+  where $t_{ji} \in \R$.\\
   If $b_1,\dots,b_n$ are in $\Lambda$ then by (\ref{3_6}) they form a basis of $\Lambda$.\\
   How do we choose $t_{ji}$?
   If $v_{jj} = \pm 1$ then we put $b_j = \pm a_j$, which clearly is in the required form (\ref{3_7}) and obviously 
@@ -38,14 +38,14 @@
   \[b_j = l_{jj} a_j + l_{j j-1} a_{j-1} + \dots + l_{j1} a_1 \]
   with 
   \begin{align*}
-    \abs{l_{jj}} &= \abs{v_{jj}} \leq \frac{1}{2} \text{ and}\\
+    \abs{l_{jj}} &= \abs{v_{jj}^{-1}} \leq \frac{1}{2} \text{ and}\\
     \abs{l_{ji}} &= \abs{t_{ji} + k_{ji}} \leq \frac{1}{2} \text{ for } i < j
   \end{align*}
   Using that $C$ is a \underline{convex}, \underline{symmetric} star body we have the triangle inequality. 
   Hence,
   \begin{align*}
     f_C(b_j) &\leq f_C(l_{jj}a_j) + \dots + f_C(l_{j1}a_1) \\
-    &= \abs{l_{jj}} f_C(a_1) + \dots + \abs{l_{j1}} f_C(a_1) \\
+    &= \abs{l_{jj}} f_C(a_j) + \dots + \abs{l_{j1}} f_C(a_1) \\
     &\leq \frac{1}{2} (f_C(a_j) + \dots + f_C(a_1)) \text{.} 
   \end{align*}
 \end{proof}
@@ -111,24 +111,24 @@ The following theorem is much more precise than (\ref{4_1})!
   \end{align}
   In particular, as $\vol(C) \geq \frac{2^n}{n!}$, we get 
   \[ \frac{2^n}{n!} \lambda_1 \dots \lambda_n \leq \vol(C) \lambda_1 \dots \lambda_n \leq 2^n \det(\Lambda) \text{.} \]
-  For the lower bound in (\ref{4_2}) take linearly independent $a_1,\dots,a_n \in \Lambda$ with $\abs{a_i} = \lambda_i$ using Lemma \ref{l_2_3_3}. 
+  For the lower bound in (\ref{4_2}) take linearly independent $a_1,\dots,a_n \in \Lambda$ with $\norm{a_i} = \lambda_i$ using Lemma \ref{l_2_3_3}. 
   For the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$ we have 
   \[ \det(\Lambda^\prime) = I \det(\Lambda) \text{,} \]
   where $I$ is the index of $\Lambda^\prime$ in $\Lambda$.
   By Hadamard's inequality we have
-  \[ \abs{a_1} \cdot \dots \cdot \abs{a_n} \geq \det(\Lambda^\prime) \geq \det(\Lambda) \text{.} \]
+  \[ \norm{a_1} \cdot \dots \cdot \norm{a_n} \geq \det(\Lambda^\prime) \geq \det(\Lambda) \text{.} \]
   Thus
   \[ \det(\Lambda) \leq \lambda_1 \dots \lambda_n \text{.} \]
   Now we prove the upper bound in (\ref{4_2}).
   Let $b_1,\dots,b_n$ be a basis of $\Lambda$ as in Corollary \ref{cor_2_3_4}.
   As in the prove of Lemma \ref{l_2_3_2_hadamard} we can find mutually orthogonal vectors $c_1,\dots,c_n$ such that
   \[ b_j = t_{j1} c_1 + \dots + t_{jj} c_j \; (t_{ji} \in \R) \]
-  By scaling we can assume $\abs{c_j}^2 = 1$ $(1 \leq j \leq n)$.
+  By scaling we can assume $\norm{c_j}^2 = 1$ $(1 \leq j \leq n)$.
   Now
   \[ \sum_{j=1}^n u_j b_j = \sum_{i=1}^n \left( \sum_{j \geq i} u_j t_{ji} \right) c_i \]
   thus
   \begin{align}
-    \abs{\sum_{j=1}^n u_j b_j}^2 = \sum_{i=1}^n \left( \sum_{j \geq i} u_j t_{ji} \right)^2 \label{4_3}
+    \norm{\sum_{j=1}^n u_j b_j}^2 = \sum_{i=1}^n \left( \sum_{j \geq i} u_j t_{ji} \right)^2 \label{4_3}
   \end{align}
   Next we show that
   \begin{align}
@@ -141,19 +141,19 @@ The following theorem is much more precise than (\ref{4_1})!
   \end{align}
   Then $u_1 b_1 + \dots + u_n b_n$, $b_1,\dots, b_{J-1}$ are linearly independent and by Corollary \ref{cor_2_3_4} we have 
   \begin{align}
-    \abs{\sum_{j=1}^n u_j b_j}^2 \geq \lambda_J^2 \label{4_6}
+    \norm{\sum_{j=1}^n u_j b_j}^2 \geq \lambda_J^2 \label{4_6}
   \end{align}
   Moreover, (\ref{4_5}) implies that summands with $j > J$ in (\ref{4_3}) and (\ref{4_4}) are zero.
   Thus, the left hand side in (\ref{4_4}) is equal to 
   \begin{align}
-    \sum_{i \leq J} \lambda_i^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 \geq \sum_{i \leq J} \lambda_J^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 = \lambda_J^{-2} \abs{\sum_{j=1}^n u_j b_j}^2 \underbrace{\geq}_{\text{by (\ref{4_6}) and (\ref{4_3})}} 1
+    \sum_{i \leq J} \lambda_i^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 \geq \sum_{i \leq J} \lambda_J^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 = \lambda_J^{-2} \norm{\sum_{j=1}^n u_j b_j}^2 \underbrace{\geq}_{\text{by (\ref{4_6}) and (\ref{4_3})}} 1
   \end{align}
   So if $\Lambda^\prime$ is the lattice with basis 
   \begin{align}
     b_j^\prime = t_{j1} \lambda_1^{-1} c_1 + \dots + t_{jj} \lambda_j^{-1} c_j \; (1 \leq j \leq n)
   \end{align}
   Then
-  \[ \abs{\sum_{j=1}^n u_j b_j^\prime} \geq 1\]
+  \[ \norm{\sum_{j=1}^n u_j b_j^\prime} \geq 1\]
   for every point $\sum_{j=1}^n u_j b_j^\prime \in \Lambda^\prime \setminus 0$.
   Hence, 
   \begin{align}

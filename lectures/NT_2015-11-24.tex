@@ -1,7 +1,7 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\subsection{3 Basis reduction}
+\subsection{Basis reduction}
 
 Let $M$ be a lattice in $\R^n$ and let $\Lambda$ be a \underline{sublattice} of $M$, i.e., $\Lambda \subset M$ and $\Lambda$ is a lattice in $\R^n$.
 Hence, there exists a matrix $C \in \mat_n(\Z)$ with $\det C \neq 0$ such that $\Lambda = C \cdot M$.\\
@@ -57,36 +57,36 @@ and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
     &\vdots\\
     I b_n &= w_{n1} a_1 + \dots + w_{nn} a_n
   \end{align*}
-  with $w_{ij} \in \Z$ and $w_{ij} \neq 0$.\\
+  with $w_{ij} \in \Z$ and $w_{ii} \neq 0$.\\
   Successively solving the above system for $a_i$ we get a system as in (\ref{3_2}) but a priori with $v_{ij} \in \Q$.
   But $b_1,\dots,b_n$ is a basis of $M$ and the $a_i \in M$.
   As the representation
-  \[ a= t_1 b_1 + \dots + t_n b_n \; (t_i \in \R) \]
+  \[ a = t_1 b_1 + \dots + t_n b_n \; (t_i \in \R) \]
   is unique we conclude that $v_{ij} \in \Z$, and this proves the second part.
 \end{proof}
 
 \begin{lemma}[Hadamard's inequality\label{l_2_3_2_hadamard}]
   Let $a_1,\dots,a_n \in \R^n$. Then
-  \[ \abs{\det ( a_1,\dots, a_n)} \leq \abs{a_1} \cdots \abs{a_n} \text{.} \]
+  \[ \abs{\det ( a_1,\dots, a_n)} \leq \norm{a_1} \cdots \norm{a_n} \text{.} \]
 \end{lemma}
 
 \begin{proof}
-  This is geometrically obvious as the volume of a parallelepiped is no larger than product of the lengths of the spanning vectors.
+  This is geometrically obvious as the volume of a parallelepiped is not larger than product of the lengths of the spanning vectors.
   However, here is a formal proof. \\
   If $a_1,\dots,a_n$ are linearly dependent then the inequality is trivial.
   Now assume $a_1,\dots,a_n$ are linearly independent.
   Put
-  \[ c_i = a_i - \sum_{j< i} a_i c_j \abs{c_j}^{-2} \cdot c_j\]
+  \[ c_i = a_i - \sum_{j< i} \left\langle a_i, c_j \right\rangle \norm{c_j}^{-2} \cdot c_j\]
   Then
   \begin{align}
-    c_i \cdot c_j = 0 \; (i \neq j)  \label{3_4}
+    \left\langle c_i, c_j \right\rangle = 0 \; (i \neq j)  \label{3_4}
   \end{align}
   and 
   \begin{align}
-    a_i = t_{i1} c_1 + \dots + t_{i i-1} c_{i-1} + c_i \label{3_5}
+    a_i = t_{i1} c_1 + \dots + t_{i (i-1)} c_{i-1} + c_i \label{3_5}
   \end{align}
   By (\ref{3_4}) and (\ref{3_5}) we get 
-  \[ \abs{a_i}^2 = a_i a_i = (\sum_{j=1}^{i-1} t_{ij}^2 \abs{c_j}^2) + \abs{c_i}^2 \geq \abs{c_i}^2 \]
+  \[ \norm{a_i}^2 = \left\langle a_i, a_i \right\rangle = (\sum_{j=1}^{i-1} t_{ij}^2 \norm{c_j}^2) + \norm{c_i}^2 \geq \norm{c_i}^2 \]
   and $\det (a_1,\dots,a_n) = \det(c_1,\dots,c_n)$ (by linearity of determinant in columns).\\
   Moreover,
   \begin{align*}
@@ -100,7 +100,7 @@ and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
       c_1 & \cdots & c_n
     \end{bmatrix}
     \right)
-    = \prod_{i=1}^n \abs{c_i}^2 \leq \prod_{i=1}^n \abs{a_i}^2 \text{.}
+    = \prod_{i=1}^n \norm{c_i}^2 \leq \prod_{i=1}^n \norm{a_i}^2 \text{.}
   \end{align*}
 \end{proof}
 
@@ -147,7 +147,7 @@ and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
 \begin{proof}
   The set $(\lambda_n +1) \cdot C$ is compact and by definition of $\lambda_n$ contains $n$ linearly independent lattice points.
   By the definition of the $\Lambda_i$'s it suffices to consider these points.
-  But by Theorem \ref{th_2_1_1} there are only finitely many of these, and so the claim easily follows.
+  But by Theorem \ref{th_2_1_2} there are only finitely many of these, and so the claim easily follows.
 \end{proof}
 
 \begin{cor}\label{cor_2_3_4}
@@ -172,7 +172,7 @@ and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
 \end{proof}
 
 \begin{ex}[Exercise]
-  Let $C = B_0(1)$ and $\Lambda = \begin{pmatrix}
+  Let $C = B_1(0)$ and $\Lambda = \begin{pmatrix}
   2 & 0 & 0 & 0 & 1\\
   0 & 2 & 0 & 0 & 1\\
   0 & 0 & 2 & 0 & 1\\
@@ -180,7 +180,7 @@ and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
   0 & 0 & 0 & 0 & 1
   \end{pmatrix} \Z^5$.\\
   There exists \underline{no} basis $b_1,\dots, b_5$ such that
-  $\abs{b_i} = \lambda_i \; (1\leq i\leq 5)$ with $\lambda_i = \lambda_i (\Lambda,C)$.
+  $\norm{b_i} = \lambda_i \; (1\leq i\leq 5)$ with $\lambda_i = \lambda_i (\Lambda,C)$.
 \end{ex}
 
 \end{document}

@@ -8,7 +8,7 @@ How many integer pairs $(x,y)$ solve the Diophantine inequality
 What about
 \[ 3 x^2 + 5 y^2 + 7 z^2 \leq T \text{,} \]
 or more generally
-\[F(\underline{x}) < T \text{,} \]
+\[F(\underline{x}) \leq T \text{,} \]
 where $F$ is a positive definite quadratic form in $n$ variables?
 Even more generally, let $S \subset \R^n$ and $\Lambda$ a lattice in $\R^n$, we would like to get a (non-trivial) estimate for $(\Lambda \cap S)$.\\
 
@@ -32,7 +32,7 @@ To characterize nice sets we use the following definition.
     \item there exist $M$ maps $\phi_i: [0,1]^{n-1} \to \R^n$ %TODO mising text
   \end{itemize}
   satisfying a Lipschitz condition with constant $L$, i.e.,
-  \[ \abs{\phi_i(x) - \phi_i(y)} \leq L \abs{x-y} \; \forall x,y \in [0,1]^{n-1} \]
+  \[ \norm{\phi_i(x) - \phi_i(y)} \leq L \norm{x-y} \; \forall x,y \in [0,1]^{n-1} \]
   and such that the union of their images covers $Z$, i.e.,
   \[ Z \subset \cup_{i=1}^M \phi_i([0,1]^{n-1}) \text{.} \]
 \end{defi*}
@@ -45,7 +45,7 @@ To characterize nice sets we use the following definition.
 We can now state the main result of Section 5.
 Recall that the boundary $\partial S$ of $S \subset \R^n$ is defined by the topological closure $\bar{S}$ minus the interior $\inner(S)$ of $S$.
 \[ \partial S = \bar{S} \setminus \inner(S)\]
-We follow an approach of Masser and Vasler.
+We follow an approach of Masser and Vaaler.
 
 \begin{theorem}\label{2_5_1}
   Let $S \subset \R^n$ be bounded and suppose that $\partial S \in \lip(n,M,L)$.
@@ -113,12 +113,12 @@ We can now prove Theorem \ref{2_5_1}.
   \[ \abs{S \cap \Lambda} = \abs{A(S \cap \Lambda)} = \abs{A(S) \cap A(\Lambda)} = \abs{A(S) \cap \Z^n} \text{.} \]
   So we can apply the case $\Lambda = \Z^n$ to the set $A(S)$.
   The boundary $\partial A(S)$ can  be parametrized by the $M$ maps $\psi(x) = A(\phi(x))$ which satisfy
-  \[ \abs{\psi(x) - \psi(y)} \leq \norm{A} \cdot L \abs{x-y} \text{,}\]
+  \[ \norm{\psi(x) - \psi(y)} \leq \norm{A} \cdot L \norm{x-y} \text{,}\]
   where $\norm{A}$ denotes the Euclidean operator norm of $A$.\\
   By Cramer's rule the entries of row $i$ of $A$ are of the form $\frac{\mu}{\det \Lambda}$, 
   where $\mu$ is a minor of the matrix with columns $b_1,\dots,b_n$ omitting $b_i$.
   Using Hadamard's inequality we conclude 
-  \[ \abs{\mu} \leq \frac{\abs{b_1} \cdots \abs{b_n}}{\abs{b_i}} \leq c_4 \cdot \frac{\lambda_1 \cdots \lambda_n}{\lambda_i} \text{.}\]
+  \[ \abs{\mu} \leq \frac{\norm{b_1} \cdots \norm{b_n}}{\norm{b_i}} \leq c_4 \cdot \frac{\lambda_1 \cdots \lambda_n}{\lambda_i} \text{.}\]
   By Minkowski's Second Theorem we have
   \[ \lambda_1,\dots,\lambda_n \leq c_5 \cdot \det \Lambda \text{.} \]
   Hence, each entry of $A$ has absolute value at most $\frac{c_6}{\lambda_1}$.
@@ -147,6 +147,7 @@ With a bit more effort the following result could be proved.
   Same hyptothesis as in Theorem \ref{2_5_1} and $\lambda_1,\dots,\lambda_n$ successive minima with respect to the unit ball.
   Then 
   \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq c M \underbrace{\max_{0 \leq i < n} \frac{L}{\lambda_1 \cdot \lambda_i}}_{\coloneq 1 \text{ for } i = 0} \]
+  \todo{Professor: compare with Adrian}
   and $c = n^{3n^2}$.
 \end{theorem}
 

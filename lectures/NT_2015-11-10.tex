@@ -9,16 +9,16 @@ where $\abs{\underline{x}}_v = \max \{\abs{x_0}_v,\dots,\abs{x_n}_v \}$.
 
 \begin{ex}
   If $\underline{x} = (x_0,\dots,x_n)$ where $x_0,\dots,x_n \in \Z$ and $\gcd(x_0,\dots,x_n) = 1$.
-  Then $\abs{x}_p = 1$ for all primes p. Hence,
+  Then $\abs{\underbar{x}}_p = 1$ for all primes p. Hence,
   \[ H_{\p^n} (\underline{x}) = \max \{\abs{x_0}_\infty,\dots,\abs{x_n}_\infty \} \text{.}\]
   Note that $H_{\p^n} ( \lambda \cdot \underline{x}) = H_{\p^n}(\underline{x}) \forall \lambda \in \Q \setminus 0$.
 \end{ex}
 
-\begin{theorem}[1.5.3 p-adic Subspace Theorem, Schlickewei and Schnidt]
+\begin{theorem}[1.5.3 p-adic Subspace Theorem, Schlickewei and Schmidt]
   Let $\delta > 0$ and let $S \subset M_\Q$ be finite and with $\infty \in S$.
   For $v \in S$ let $L_{v_1},\dots,L_{v_n}$ be $n$ linearly independent linear forms in $n$ variables with coefficients in $\Q$.
-  Then the set of solutions $\underline{x} \in \Q^{n+1} \setminus 0$ of
-  \[ \prod_{v \in S} \prod_{i=1}^n \frac{\abs{L_{v_i}(\underline{x})_v}}{\abs{\underline{x}}_v} < H_{\p^{n-1}}(\underline{x})^{-n-\delta} \]
+  Then the set of solutions $\underline{x} \in \Q^{n} \setminus 0$ of
+  \[ \prod_{v \in S} \prod_{i=1}^n \frac{\abs{L_{v_i}(\underline{x})}_v}{\abs{\underline{x}}_v} < H_{\p^{n-1}}(\underline{x})^{-n-\delta} \]
   lie in finitely many proper subspace of $\Q^n$.
 \end{theorem}
 
@@ -41,7 +41,7 @@ As $\infty \in S$, this is an intersection of rings, hence a ring.
 \end{ex}
 
 We say $x \in \Q$ is an $S$-unit if $x \neq 0$ and $x, x^{-1}$ are both in $O_S$.
-So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty,p_1,\dots,p_s \}$ then $x$ is an $S$-unit $\iff x = \pm \prod_{p \in S \setminus \infty} p^a_p$ (and $ap \in \Z$).
+So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty,p_1,\dots,p_s \}$ then $x$ is an $S$-unit $\iff x = \pm \prod_{p \in S \setminus \infty} p^{a_p}$ (and $a_p \in \Z$).
 
 \begin{theorem}[1.5.4 $S$-unit equation]
   Let $S \subset M_\Q$ be finite, and $\infty \in S$. Let $\alpha_0,\dots,\alpha_n$ be non-zero and in $\Q$.
@@ -64,14 +64,14 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   The exponential Diophantine equation 
   \[ 3^x + 5^y - 7^z = 1 \]
   has solutions, e.g., $(x,y,z) = (0,0,0)$ or $(x,y,z) = (1,1,1)$.
-  However, with $S = \{ \infty,3,5,7 \}$ each solution $(x,y,z)$ yields a solution $u_0 = 3x$, $u_1 = 5y$, $u_2 = - 7z$, $u_3 = - 1$ of the $S$-unit equation $u_0 + u_1 + u_2 + u_3 = 0$.
+  However, with $S = \{ \infty,3,5,7 \}$ each solution $(x,y,z)$ yields a solution $u_0 = 3^x$, $u_1 = 5^y$, $u_2 = - 7^z$, $u_3 = - 1$ of the $S$-unit equation $u_0 + u_1 + u_2 + u_3 = 0$.
   These solutions are all non-proportional.
   Moreover, no sub-sum vanishes unless $x y z = 0$ but then we easily see that $x=y=z=0$.
   Hence, Theorem 1.5.4 yields finiteness.
 \end{ex}
 
-\begin{proof}[assuming Theorem 1.5.3]
-  Induction on $n$. If $n=1$ then $\alpha_0 x_0 + \alpha_1 x_1 = 0$, so all solutions are proportional to $(1, -\frac{\alpha_0}{\alpha_1}$.
+\begin{proof}[Proof (assuming Theorem 1.5.3)]
+  Induction on $n$. If $n=1$ then $\alpha_0 x_0 + \alpha_1 x_1 = 0$, so all solutions are proportional to $(1, -\frac{\alpha_0}{\alpha_1})$.
   Now suppose the claim holds for all $S$-unit equations in $\leq n$ variables.
   As $x_i$ are $S$-units we have
   \[ \abs{x_i}_v = 1 \forall v \nin S \text{.} \]
@@ -88,10 +88,10 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   \[ \{ L_{v_j} : 1 \leq j \leq n \} = \{ X_0,X_1,\dots,X_{n-1},\frac{\alpha_0}{\alpha_n}X_0+\dots + \frac{\alpha_{n-1}}{\alpha_n}X_{n+1} \} \setminus \{X_{i(v)}\} \]
   Then
   \[ \prod_{ v \in S} \prod_{j=1}^n \frac{\abs{L_{v_j}(\tilde{\underline{x}})}_v}{\abs{\tilde{\underline{x}}}_v} 
-  = \frac{1}{H_{\p{n+1}}(\tilde{\underline{x}})^{n+1}} \]
+  = \frac{1}{H_{\p^{n+1}}(\tilde{\underline{x}})^{n+1}} \]
   By Theorem 1.5.3 the solutions $\tilde{\underline{x}}$ lie in finitely many proper subspaces.
   Take one of these  then all elements in this subspace satisfy an equation
-  \[ c_0 x_0 + \dots c_{n-1} x_{n-1} = 0  (c_i \in \Q \text{, not all } = 0 \text{!})\]
+  \[ c_0 x_0 + \dots + c_{n-1} x_{n-1} = 0  (c_i \in \Q \text{, not all } = 0 \text{!})\]
   Let $J_0$ be the set of $i$ with $c_i \neq 0$.
   Then 
   \begin{align}
@@ -106,7 +106,7 @@ So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty
   Therefore it suffices to consider solutions $\{x_i\}_{i \in J}$ that are proportional to a fixed $\{u_i\}_{i \in J}$,
   i.e., $x_i = \xi u_i (i \in J)$.
   Returning to our initial equation $\sum_{i=0}^n \alpha_i x_i = 0$ we get
-  \[ \xi ( \sum_{i \in J} \alpha_i u_i) + \sum_{i \nin J} \alpha_i x_i) = 0 \]
+  \[ \xi ( \sum_{i \in J} \alpha_i u_i) + (\sum_{i \nin J} \alpha_i x_i) = 0 \]
   If $\sum_{i \in J} \alpha_i x_i \neq 0$ then the above is an $S$-unit equation in $1 + (n+1) - \#J \leq n$ unknowns,
   namely $\xi, x_i \: (i \nin J)$. By the induction hypothesis we get only finitely many non-proportional solutions
   $\{ x_i\}_{i=0}^n$ for which no sub-sum vanishes. Finally, if $\sum_{i \in J} \alpha_i x_i = 0$ then $\sum_{i \nin J} \alpha_i x_i = 0$ and we ignore these solutions by assumption of the Theorem.
