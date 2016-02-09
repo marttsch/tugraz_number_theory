@@ -15,7 +15,7 @@ Study number-theoretic Questions using (complex) analysis.
 \begin{rem}[Motivation: Prime number theorem (PNT)]
   Let $\pi(x) \coloneq \# \{ p \leq x : p \text{ prime} \}$.
   Then $\pi(x) \sim \frac{x}{\log x}$, 
-  i.e., "Tere are roughly $\frac{x}{\log x}$ primes upt o $x$."
+  i.e., "Tere are roughly $\frac{x}{\log x}$ primes up to $x$."
 \end{rem}
 
 \subsection{Dirichlet series}
@@ -69,7 +69,7 @@ Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)
 \begin{ex}
   $\sigma > 1$. $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ converges absolutely (for $\sigma > 1$).
   By \emph{integral test}:
-  \[ \int_1^\infty \frac{1}{n^s} dx = \frac{1}{s - 1} < \infty \]
+  \[ \int_1^\infty \frac{1}{x^s} dx = \frac{1}{s - 1} < \infty \]
   but $\zeta(1) = \sum_{n=1}^\infty \frac{1}{n}$ diverges $\implies \zeta(s)$ has $\sigma > 1$ as its h-p oac.
 \end{ex}
 
@@ -83,7 +83,7 @@ Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)
 \end{proof}
 
 \begin{theorem}\label{4_5}
-  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$, $a_n \in \C$, such that $D(s) = 0$ for all $s$ is a h-p oac $H$.
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$, $a_n \in \C$, such that $D(s) = 0$ for all $s$ in a h-p oac $H$.
   Then $a_n = 0$ for all $n$.
 \end{theorem}
 
@@ -95,7 +95,7 @@ Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)
   \begin{align*}
     0 = D(s) = \frac{a_{n_0}}{n_0^s} + \underbrace{\sum_{n = n_0 + 1}^\infty \frac{a_n}{n^s}}_{=: D_1(s)} \\
     \implies a_{n_0} = - n_0^s D_1(s) \text{.} \\
-    \forall \sigma \geq \sigma_0: \abs{a_{n_0}} \leq n_0^s \sum_{n= n_0 + 1}^\infty \frac{\abs{a_n}}{n^\sigma}
+    \forall \sigma \geq \sigma_0: \abs{a_{n_0}} \leq n_0^\sigma \sum_{n= n_0 + 1}^\infty \frac{\abs{a_n}}{n^\sigma}
     = \sum_{n = n_0 +1}^\infty \abs{a_n} \left( \frac{n_0}{n} \right)^\sigma
   \end{align*}
   let $\sigma \coloneq \sigma_0 + \lambda$ for $\lambda > 0$.
@@ -104,7 +104,7 @@ Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)
     &\leq \left( \frac{n_0}{n} \right)^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda
   \end{align*}
   \begin{align*}
-    \abs{a_{n_0}} \leq n_0^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda \underbrace{\sum_{n = n_0 +1}^\infty}_{=: C_0 < \infty} \frac{\abs{a_n}}{n^{\sigma_0}} = n_0^{\sigma_0} C_0 \left( \frac{n_0}{n_0 + 1} \right)^\lambda
+    \abs{a_{n_0}} \leq n_0^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda \underbrace{\sum_{n = n_0 +1}^\infty \frac{\abs{a_n}}{n^{\sigma_0}}}_{=: C_0 < \infty} = n_0^{\sigma_0} C_0 \left( \frac{n_0}{n_0 + 1} \right)^\lambda
   \end{align*}
   \[ \implies \abs{a_{n_0}} \overset{\lambda \to \infty}{\to} 0 \implies a_{n_0} = 0 \lightning \]
 \end{proof}
@@ -112,19 +112,19 @@ Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)
 \begin{rem}
   The theorem shows that $(a_n)_{n \in \N}$ is determined by $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$
   since $D(\sigma_0)$ converges absolutely.\\
-  e.g. to prove that two ??? functions are identically equal, it is enough to show that $D_f(s) = D_g(s)$ for  $s$ in some h-p oac
+  e.g. to prove that two arithmetic functions $f,g$ are identically equal, it is enough to show that $D_f(s) = D_g(s)$ for  $s$ in some h-p oac
 \end{rem}
 
 Why do \# - theorist use $D$- series (and not ,say, power series)?\\
-$D$-series con...
+Because $D$-series are compatible with multiplicative structure.
 Consider a (abs conv) D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$.
-For $A \subseteq \N$, with $D_A(s) = \sum_{\pi \in A} \frac{a_n}{n^s}$.
+For $A \subseteq \N$, with $D_A(s) = \sum_{n \in A} \frac{a_n}{n^s}$.
 
 \begin{lemma}\label{4_6}
   Let $A,B \subseteq \N$. $A,B \neq \emptyset$, such that
   \begin{enumerate}
-    \item the multiplicative map $A \times B \to \N$, $(a,b) \mapsto ab$ is injective
-    \item $A_{n \cdot m} = a_n \cdot a_m$ for $n \in A$ and $m \in B$.
+    \item the multiplication map $A \times B \to \N$, $(a,b) \mapsto ab$ is injective
+    \item $a_{n \cdot m} = a_n \cdot a_m$ for $n \in A$ and $m \in B$.
   \end{enumerate}
   Let $C = AB = \{ ab : a \in A, b \in B \}$. Then $D_C(s) = D_A(s) D_B(s)$ in the half-plane oac of $D(s)$.
 \end{lemma}
@@ -154,11 +154,12 @@ For $A \subseteq \N$, with $D_A(s) = \sum_{\pi \in A} \frac{a_n}{n^s}$.
 \begin{proof}
   Let $s \in H$, $p_1 = 2, p_2 = 3, p_3 = 5, \dots, p_n = n \text{-th prime}$.
   $A_n = \{ p_n^\nu : \nu = 0,1,2,\dots \}$, $B_N = \{ n \in \N : \gcd(n,p_1,\dots,p_N) = 1 \}$\\
-  By first theorem of arithmetic,
+  By the fundamental theorem of arithmetic,
   \begin{align*}
     A_1 \times \dots \times A_N \times B_N &\to \N \\
     (n_1,\dots,n_N,m) &\mapsto n_1 \cdots n_N m
   \end{align*}
+  is bijective. And
   \[ a_{n_1 \cdots n_N m} = a_{n_1} \cdots a_{n_N} \cdot a_m \]
   Lemma $\implies$
   \[ D(s) = D_\N(s) = \left( \prod_{i=1}^N D_{A_i}(s) \right) D_{B_N}(s) = \prod_{i=1}^N \left( \sum_{\nu=0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)\cdot D_{B_N}(s) \]
@@ -170,12 +171,12 @@ For $A \subseteq \N$, with $D_A(s) = \sum_{\pi \in A} \frac{a_n}{n^s}$.
   \begin{align*}
     D(s) = \lim_{N \to \infty} \prod_{i=1}^N \left( \sum_{\nu = 0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)
   \end{align*}
-  need to show: this is a convergent infinite product
+  we need to show: this is a convergent infinite product
   \begin{rem}[Recall]
-    \[ \prod_{i=1}^\infty (a + b_i) \text{ converges absoutely } \iff \sum_{i=1}^\infty b_i \text{ converges absolutely} \]
+    \[ \prod_{i=1}^\infty (1 + b_i) \text{ converges absoutely } \iff \sum_{i=1}^\infty b_i \text{ converges absolutely} \]
   \end{rem}
   here:
-  \[ \sum_{i=1}^\infty \abs{b_i} = \sum_{i=1}^\infty \abs{ \sum_{\nu = 1}^\infty \frac{a_{p_i^\nu}}{p_o^{\nu s}}} \]
+  \[ \sum_{i=1}^\infty \abs{b_i} = \sum_{i=1}^\infty \abs{ \sum_{\nu = 1}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}}} \]
   arises from $D(s)$ by re-ordering a sub-series (all prime powers) $\implies$ still converges absolutely
 \end{proof}
 
@@ -197,6 +198,7 @@ The translate analytic properties of $D(s)$ to asymptotics of $A(x) = \sum_{n \l
   Let $(a_n)_{n\in \N}$ ba a sequence of non-negative real numbers, such that the D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ converges for  $\sigma > 1$. Assume:
   \begin{enumerate}
     \item[(I)] $D(s)$ has a \underline{meromorphic continuation} to an open set $U \subseteq \C$ containing the closed half-space $\sigma \geq 1$.
+    \todo{add pic}
     \item[(II)] The \underline{only pole} of $D(s)$ in $U$ is at $s = 1$, has order $1$, and residue
     \[ Res_{s=1} D(s) =: \rho \]
     \item[(III)] There are constants $C,k$ such that $\abs{D(s)} \leq C \cdot \abs{t}^k$ and $\abs{D^\prime(s)} \leq C \cdot \abs{t}^k$ for $\sigma > 1$ and $\abs{t} \geq 1$.

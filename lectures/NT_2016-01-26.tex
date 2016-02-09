@@ -1,6 +1,8 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
+\subsection{$e$ and $\pi$ are transcendental}
+
 \begin{theorem}
   $e$ is transcendental. (Hermite 1873)
 \end{theorem}
@@ -8,7 +10,7 @@
 Exploit properties of $e^x$ ($(e^x)^\prime = e^x$)
 \begin{align*}
   e^x \cdot \int_0^x e^{-t} f(t) dt &= \{ \text{using integration by points} \} \\
-  &= e^x f(0) - f(x) + e^x \cdot \int_0^x e^{-t} f^\prime(f) dt \text{.}
+  &= e^x (f(0) - f(x)) + e^x \cdot \int_0^x e^{-t} f^\prime(f) dt \text{.}
 \end{align*}
 Plug into this formula $f^\prime, f^{\prime \prime},\dots$ and take the sum of all equations, Cancellations occur!
 Choose $f$ polynomial if $n > \deg(f)$, $f^{(n)}(x) = 0$.
@@ -29,7 +31,7 @@ Then the sum of all equations gives
     \sum_{k=0}^n a_k e^k \int_0^k e^{-t} f(t) dt &= \underbrace{\left( \sum_{k=0}^n a_k e^k \right)}_{0} F(0) - \sum_{k=0}^n a_k F(k) \\
     - \sum_{k=0}^n a_k e^k \int_0^k e^{-t} f(t) dt &= \sum_{k=0}^n a_k F(k) \text{.}
   \end{align*}
-  Idea: We choose $f$ so that the RHS is a nonzero integer, and thus $m$ absolute value $\geq 1$,
+  Idea: We choose $f$ so that the RHS is a nonzero integer, and thus in absolute value $\geq 1$,
   but also that the LHS can be made arbitrarily small.
   \\
   Hermite's choice of $f$:
@@ -46,34 +48,34 @@ Then the sum of all equations gives
     &\overset{\text{triangle inequ.}}{\leq} \sum_{k=0}^n \abs{a_k} e^k \abs{\int_0^k e^{-t}f(t)dt} \\
     &\leq \sum_{k=0}^n \abs{a_k} e^k \int_0^k e^{-t} \abs{f(t)}dt \\
     \text{comment} \\
-    & e^{-t} \leq 1 \text{ for } 0 \leq t \leq 1 \\
+    & e^{-t} \leq 1 \text{ for } 0 \leq t \leq n \\
     \text{comment end} \\
     &= \sum_{k=0}^n \abs{a_k} e^k \int_0^k \abs{f(t)} dt\\
     \text{comment} \\
-    &\text{ Note that the maximum value of functions } t,t-1,\dots t_n \text{ on } [0,n] \text{ is } n \\
+    &\text{ Note that the maximum value of functions } t,t-1,\dots ,t-n \text{ on } [0,n] \text{ is } n \\
     & \abs{f(x)} \text{ on } [0,n] \text{ is bounded above by } \frac{1}{(p-1)!} n^{p-1} n^{np} \\
     \text{comment end} \\
     &\leq \sum_{k=0}^n \abs{a_k} e^k \frac{1}{(p-1)!} n^{np+p-1} \int_0^k 1 dt \\
     &= \sum_{k=0}^n \abs{a_k} e^k \frac{n^{np+p-1}}{(p-1)!} \cdot \underbrace{k}_{\leq n} \\
     &\leq \sum_{k=0}^n \abs{a_k} e^k \frac{n^{np+p}}{(p-1)!} \\
-    &\leq \sum_{k=0}^n \abs{a_k} e^n \frac{(n^{n+1})^{p-1}}{(p-1)!} n^{n-1} \\
+    &\leq \sum_{k=0}^n \abs{a_k} e^n \frac{(n^{n+1})^{p-1}}{(p-1)!} n^{n+1} \\
     &\text{comment} \\
-    & \lim_m \frac{c^m}{m} = 0; \text{ In our case } \lim_{p\to \infty} \frac{(n^{n+1})^{p-1}}{(p-1)!} = 0 \\
+    & \lim_{m \to \infty} \frac{c^m}{m!} = 0; \text{ In our case } \lim_{p\to \infty} \frac{(n^{n+1})^{p-1}}{(p-1)!} = 0 \\
     & \text{So, the last expression for $p$ sufficently large will be } < 1 \text{.}
     &\text{comment end} \\
   \end{align*}
-  Therefore, for sufficiently large $p$, the LHS is $m$ absolute value $<1$.\\
+  Therefore, for sufficiently large $p$, the LHS is in absolute value $<1$.\\
   \\
   We now turn attention to the RHS.
   \begin{align*}
     RHS &= \sum_{k=0}^n a_k F(k) \text{.}
   \end{align*}
-  Recall $F(k) = \sum_{j=0}^{\deg f} f^{(i)}(k)$.
+  Recall $F(k) = \sum_{j=0}^{\deg f} f^{(j)}(k)$.
   Show that RHS is a nonzero integer.
-  Idea: we will show that $f^{(0)}(k) \in \Z$ for all $j$, and that only $F(0)$ is not divisible by $p$.
+  Idea: we will show that $f^{(j)}(k) \in \Z$ for all $j$, and that only $F(0)$ is not divisible by $p$.
   
   \begin{align*}
-    f(t) &= \frac{1}{(p-1)!} t^{p-1} \cdot g(t) \\
+    f(t) &= \frac{1}{(p-1)!} t^{p-1} \cdot g(t)^p \\
     g(t) &= (t-1) \cdots (t - m)
   \end{align*}
   We analyse $F(0)$, that is the case $k = 0$.
@@ -87,9 +89,9 @@ Then the sum of all equations gives
   \begin{align*}
     f(x) &= \frac{f^{(p-1)}(0)}{(p-1)!} \cdot t^{p-1} + \dots + \frac{f^{(j)}(0)}{j!} \cdot t^j
   \end{align*}
-  The coefficients of $f$ next to $t^{p-1}$ is $\frac{f^{(p-q)}(0)}{(p-1)!}$,
+  The coefficients of $f$ next to $t^{p-1}$ is $\frac{f^{(p-1)}(0)}{(p-1)!}$,
   but by definition of $f$, this coefficient is 
-  \[ (\frac{(-1)(-2)\cdots(-n))^p}{(p-1)!} \implies f^{(p-1)}(0) = ((-1)^n \cdot n!)^p \]
+  \[ \frac{((-1)(-2)\cdots(-n))^p}{(p-1)!} \implies f^{(p-1)}(0) = ((-1)^n \cdot n!)^p \]
   For $p > n$, this is not divisible by $p$.\\
   We now show that $f^{(j)}(0)$ is an integer divisible by $p$ when $j \geq p$.
   Look at the Taylor expansion of $f$ and definition of $f$.\\
@@ -107,25 +109,24 @@ Then the sum of all equations gives
     f^{(j)}(0) \in \Z \text{ divisible by } p \text{.}
   \end{align*}
   It follows that $F(0) \in \Z$, and not arbitrary.
-  Now , $p$ was chosen so that $p > \abs{q_0}$
+  Now , $p$ was chosen so that $p > \abs{a_0}$
   \begin{align*}
-    &\implies \abs{q_0 F(0)} \geq 1 \text{ integer }
+    &\implies \abs{a_0 F(0)} \geq 1 \text{ integer }
     &\implies a_0 F(0) \text{ not divisible by } p \text{, integer.}
   \end{align*}
   \[ RHS = \sum_{k=0}^n a_k F(k) \]
   $F(k) = ?$ when $k = 1,2,\dots,n$.
   Follow the same method (look at the Taylor expansion of $f$ at $k$).
   \[ f(t) = \frac{1}{(p-1)!} t^{p-1} \cdot g(t)^p \]
-  \[ g(t) = (t-1) \\cdots (t-n) \]
+  \[ g(t) = (t-1) \cdots (t-n) \]
   In the case, $k \in \{1,2,\dots,n \}$ is a root of $f$ of multiplicity by $p$.
   Because of this $f^{(p-1)}(k)$ is going to be $0$, and all $f^{(j)}(K)$, for $0 \leq j \leq \deg(f)$,
   will be divisible by $p$.
   Therefore,
-  \[ \sum_{k=0}^n a_k F(k) = a_0 F(0) + \] %TODO text missing
-  \todo{text missing}
+  \[ \sum_{k=0}^n a_k F(k) = a_0 F(0) + \text{ something divisible by $p$} \]
   Thus,
-  \[ \sum_{k=0}^n a_k F(k) \neq 0 \] %TODO text missing
-  \todo{text missing}
+  \[ \sum_{k=0}^n a_k F(k) \neq 0 \]
+  So in absolute value $\geq 1$.
 \end{proof}
 
 \begin{theorem}
@@ -138,11 +139,11 @@ Then the sum of all equations gives
   It follows that $i \cdot \pi$ is algebraic.
   Recall that
   \[ e^{i \pi} +1 = 0 \text{.} \]
-  Let $\theta_1 \in \Q[x]$ such that $\theta_1(i \pi) = 0$,
-  let $n = \deg(\theta_1)$.
-  So, $\theta_1$ has $n$ roots.
+  Let $\sigma1 \in \Q[x]$ such that $\sigma1(i \pi) = 0$,
+  let $n = \deg(\sigma1)$.
+  So, $\sigma1$ has $n$ roots.
   \[ \alpha_1 = i \pi, \alpha_2,\dots,\alpha_n \]
-  be other root of $\theta_1$.
+  be other root of $\sigma_1$.
   \[ e^{\alpha_1} + 1 = 0 \text{.} \]
   Thus,
   \begin{align}\label{onestar}
@@ -158,18 +159,28 @@ Then the sum of all equations gives
   It follows that 
   \[ k \cdot e^0 + e^{\beta_1} + \dots + e^{\beta_r} = 0 \]
   and each $\beta_j \neq 0$.
-  Let $\theta$ be a polynomial whose roots are $\beta_i$'s,
-  \[ \theta(x) = c x^r + c_1 x^{r-1} + \dots + \underbrace{c_r}_{\neq 0} \]
+  Let $\sigma$ be a polynomial whose roots are $\beta_i$'s \todo{and integer coefficients??},
+  \[ \sigma(x) = c x^r + c_1 x^{r-1} + \dots + \underbrace{c_r}_{\neq 0} \]
   We will again exploit the fact that 
   \[ - \int_0^x e^{-y} f(y) dy = e^{-x} F(x) - F(0) \]
   with
   \[ F = \sum_{j=0}^x f^{(j)}(x) \]
   \\
   \\
-  \[ f(x) = \frac{c^s x^{p-1}}{(p-1)!} \theta(x)^p \]
+  \[ f(x) = \frac{c^s x^{p-1}}{(p-1)!} \sigma(x)^p \]
   $s = rp -1$.
   
-  $\theta = \sigma$!!!
+  Idea: Again use identity, use $\sigma$, and use similar strategy as with $e$.
 \end{proof}
+
+\subsection*{Oral exam:}
+
+\begin{itemize}
+  \item all parts of the lecture will be covered
+  \item roughly 20-30 min 
+  \item know at least the ideas behind the long proofs
+  \item to get a date write an e-mail
+  \item before the end of March take the exam by Frei, then Tichy
+\end{itemize}
 
 \end{document}

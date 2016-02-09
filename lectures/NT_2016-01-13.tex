@@ -1,9 +1,9 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\[ \zeta(s) = \prod_p \frac{1}{1 - \frac{1}{p^s}} \text{, } \zeta(s) \text{holomorph, } \zeta(s) \neq 0 \text{, } \sigma > 1 \]
-
 \subsection{$\zeta$-function and primes}
+
+\[ \zeta(s) = \prod_p \frac{1}{1 - \frac{1}{p^s}} \text{, } \zeta(s) \text{holomorph, } \zeta(s) \neq 0 \text{, } \sigma > 1 \]
 
 \begin{defi} \label{4_9}
   The  \emph{von Mangoldt}-function $\Lambda: \N \to \R$ is defined as
@@ -30,26 +30,26 @@ Strategy for proof of PNT:\\
 $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}})$, 5) $\implies$ PNT.
 
 \begin{lemma}\label{4_11}
-  $\zeta(s)$ has a meromorphic continuation of $\sigma >0$, with a single pole at $s = 1$, with $Res_{s=1} \zeta(s) = 1$.
+  $\zeta(s)$ has a meromorphic continuation of $\sigma >0$, with a simple pole at $s = 1$, with $Res_{s=1} \zeta(s) = 1$.
 \end{lemma}
 
 \begin{proof}
-  Prove existence of a finction $h(s)$ holomorph on $\sigma > 0$, such that $\zeta(s) = \frac{1}{s - 1} + h(s)$ on $\sigma > 1$.
+  Prove existence of a function $h(s)$ holomorph on $\sigma > 0$, such that $\zeta(s) = \frac{1}{s - 1} + h(s)$ on $\sigma > 1$.
   $\sigma > 1$: $\zeta(s) - \frac{1}{s-1} = \sum_{n=1}^\infty \frac{1}{n^s} - \int_1^\infty \frac{1}{x^s} dx 
   = \sum_{n=1}^\infty \underbrace{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx}_{\coloneq h(s)}$
   \[ \abs{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx} = \abs{ \int_n^{n+1} (\int_n^x (\frac{s \cdot du}{u^{s+1}})dx}
   \leq \max_{n \leq u \leq n+1} \abs{\frac{s}{u^{s+1}}} = \frac{\abs{s}}{n^{\sigma + 1}} \]
   If $s \in D \subset \C$, then $\abs{s} \leq C = C(D)$.\\
-  $\implies$ the sum defining $h(s)$ has a majorant converges absloutely and uniformly in conec wheret of $\{\sigma > 0 \}$.
+  $\implies$ the sum defining $h(s)$ has a majorant converges absloutely and uniformly in compact subsets of $\{\sigma > 0 \}$.
   $\implies$ $h(s)$ holomporph on $\sigma > 0$.
 \end{proof}
 
 \begin{lemma} \label{4_12}
-  $D_\Lambda(s) =  - \frac{\zeta^\prime(s)}{\zeta(s)}$ has a meromoorphic cost to $\sigma > 0$.
+  $D_\Lambda(s) =  - \frac{\zeta^\prime(s)}{\zeta(s)}$ has a meromoorphic continuation to $\sigma > 0$.
   In this domain, $D_\Lambda(s)$ has
   \begin{itemize}
-    \item a singel pole at $s = 1$, with $Res_{s=1} D_\Lambda(s) = 1$
-    \item for each zero $\alpha$ of $\zeta(s)$ of order $\mu$, a singe pole at $s = \alpha$ with $Res_{s=\alpha} D_\Lambda(s) = - \mu$
+    \item a simple pole at $s = 1$, with $Res_{s=1} D_\Lambda(s) = 1$
+    \item for each zero $\alpha$ of $\zeta(s)$ of order $\mu$, a simple pole at $s = \alpha$ with $Res_{s=\alpha} D_\Lambda(s) = - \mu$
     \item no other pole
   \end{itemize}
 \end{lemma}
@@ -72,12 +72,12 @@ $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}
     \end{array}
     \right\rbrace -\frac{\zeta^\prime(s)}{\zeta(s)} = \frac{1}{s-1} + \dots \checkmark
   \end{align*}
-  Let $\alpha \in \{ \sigma >0\}$ be a sero of $\zeta(s)$ of order $\mu \geq 1$.
+  Let $\alpha \in \{ \sigma >0\}$ be a zero of $\zeta(s)$ of order $\mu \geq 1$.
   Lauraunt-series at $s = \alpha$:\\
   \begin{align*}
     \zeta(s) &= c \cdot (s- \alpha)^\mu + \dots \\
     \implies \zeta^\prime(s) &= \mu c (s-\alpha)^{\mu - 1} + \dots \\
-    \frac{1}{\zeta(s)} &= \frac{1}{c} + \frac{1}{(s-\alpha)^\mu} + \dots
+    \frac{1}{\zeta(s)} &= \frac{1}{c} \cdot \frac{1}{(s-\alpha)^\mu} + \dots
   \end{align*}
   $\implies - \frac{\zeta^\prime(s)}{\zeta(s)} = - \frac{\mu}{(s - \alpha)} + \dots \checkmark$
 \end{proof}
@@ -88,12 +88,12 @@ $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}
 
 \begin{lemma}\label{4_14}
   There is a holomorphic function $g(s)$ on $\sigma > \frac{1}{2}$, such that $\Phi(s) = D_\Lambda(s) - g(s)$, on $\sigma > 1$.
-  In particular, $\Phi(s)$ has mero cont to $\sigma > \frac{1}{2}$ with the same poles as $D_\Lambda(s)$.
+  In particular, $\Phi(s)$ has meromorphic continuation to $\sigma > \frac{1}{2}$ with the same poles as $D_\Lambda(s)$.
 \end{lemma}
 
 \begin{proof}
   $\sigma > 1$.
-  \[ \Phi(s) + \underbrace{\sum_p \frac{\log p}{p^s (p^s -1)}}_{=: g(s)} = \sum_p \frac{(\log p)}{p^s -1} = \sum_p \frac{(\log p)}{p^s} \cdot \frac{1}{1- p^s} = \sum_p (\log p) \sum_{\nu \geq 1} \frac{1}{p^{\nu s}} = D_\Lambda(s) \text{.} \]
+  \[ \Phi(s) + \underbrace{\sum_p \frac{\log p}{p^s (p^s -1)}}_{=: g(s)} = \sum_p \frac{(\log p)}{p^s -1} = \sum_p \frac{(\log p)}{p^s} \cdot \frac{1}{1- p^{-s}} = \sum_p (\log p) \sum_{\nu \geq 1} \frac{1}{p^{\nu s}} = D_\Lambda(s) \text{.} \]
   Let $\sigma \geq \sigma_0 > \frac{1}{2}$.
   Then
   \[ \frac{p^\sigma - 1}{p^\sigma} = 1 - \frac{1}{p^\sigma} \geq 1 - \frac{1}{\sqrt{2}} \geq \frac{1}{4} \]
@@ -104,7 +104,7 @@ $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}
   $\implies$ $g(s)$ holomorph on $\sigma > \frac{1}{2}$.
 \end{proof}
 
-\begin{theorem}\label{4_15}
+\begin{theorem}[Zero-freeness of $\zeta$]\label{4_15}
   $\zeta(s) \neq 0$ for $\sigma \geq 1$.
   In particular, $D_\Lambda(s)$ has no poles in $\sigma \geq 1$, except $s = 1$.
 \end{theorem}
@@ -123,7 +123,7 @@ $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}
   Similarly,
   \begin{align*}
     \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + \alpha i \pm \varepsilon) &= Res_{s=1+\alpha i} D_\Lambda(s) = - \mu \\
-    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + 2 \alpha i \pm \varepsilon &= Res_{s=1+2\alpha i} D_\Lambda(s) = - \nu
+    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + 2 \alpha i \pm \varepsilon) &= Res_{s=1+2\alpha i} D_\Lambda(s) = - \nu
   \end{align*}
   \begin{align*}
     0 &\leq \sum_p \frac{\log p}{p^{1+\varepsilon}} ( \underbrace{p^{i \frac{\alpha}{2}} + p^{-i \frac{\alpha}{2}}}_{\in\R})^4 \\
@@ -134,7 +134,7 @@ $\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}
   \[ 0 \leq \lim_{\varepsilon \searrow 0} \varepsilon E(\varepsilon) = 6 - 8 \mu - 2 \nu \implies \mu = 0 \]
 \end{proof}
 
-In particular, we can find a open subset $U \subseteq \C$, wontaining $\{\sigma \geq 1\}$, such that $D_\Lambda(s)$ has no poles in $U$, except $s = 1$.
+In particular, we can find a open subset $U \subseteq \C$, containing $\{\sigma \geq 1\}$, such that $D_\Lambda(s)$ has no poles in $U$, except $s = 1$.
 $\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (III)?
 
 \begin{theorem}\label{4_16}
@@ -159,10 +159,10 @@ $\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (I
   \[ \abs{D_\Lambda(s)} = \frac{\abs{\zeta^\prime(s)}}{\abs{\zeta(s)}} \leq C_1 \frac{1}{c_0} \abs{t}^5\]
   \[ \abs{D_\Lambda^\prime(s)} = \abs{ \frac{- \zeta^{\prime \prime}(s) \zeta(s) + \zeta^\prime(s)^2}{\zeta(s)^2}}
   \leq \frac{\abs{\zeta^{\prime \prime(s)}}}{\abs{\zeta(s)}} + \frac{\abs{\zeta^\prime(s)}^2}{\abs{\zeta(s)}^2}
-  \leq C_2 \frac{1}{c_0} \abs{t}^5 + C_1^2 \frac{1}{c_0^2} \abs{t}^10 \]
+  \leq C_2 \frac{1}{c_0} \abs{t}^5 + C_1^2 \frac{1}{c_0^2} \abs{t}^{10} \]
   $\implies$ $D_\Lambda(s)$ satisfies (III) with $k = 10$.
-  Theorem \ref{4_8_T} $\implies \sum_{n \leq x} \Lambda(n) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}}$,
-  $ g = Res_{s = 1} D_\Lambda(s) = 1$.
+  Theorem \ref{4_8_T} $\implies \sum_{n \leq x} \Lambda(n) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}})$,
+  $ \rho = Res_{s = 1} D_\Lambda(s) = 1$. This quite easily implies the PNT.
 \end{proof}
 
 \begin{theorem}[PNT] \label{4_18}
@@ -170,14 +170,14 @@ $\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (I
 \end{theorem}
 
 \begin{proof}
-  1) 
+  First, 
   \begin{align*}
     \sum_{p \leq x} (\log p) &= \sum_{n \leq x} \Lambda(n) - \sum_{p^\nu \leq x, \nu \geq 2} (\log p) \\
-    &= x + \mathcal{O} ( \frac{x}{(\log x)^{\frac{1}{N}}}) + \dots + \mathcal{O}( \sum_{\nu = 2}^{\lceil \log_2 x \rceil} \sum_{n^\nu \leq x} (\log n)) \\
-    &= x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O} ( (\log X)^2 \sqrt{X}) \\
-    &= x + \mathcal{O}( \frac{x}{(\log x)^{\frac{1}{N}}} 
+    &= x + \mathcal{O} ( \frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O}( \sum_{\nu = 2}^{\lceil \log_2 x \rceil} \sum_{n^\nu \leq x} (\log n)) \\
+    &= x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O} ( (\log x)^2 \sqrt{x}) \\
+    &= x + \mathcal{O}( \frac{x}{(\log x)^{\frac{1}{N}}} )
   \end{align*}
-  Use Abel sum formula:
+  Then use Abel sum formula:
   \[ \sum_{y < n \leq x} a_n f(n) = A(x) f(x) - A(y) f(y) - \int_y^x A(t) f^\prime(t) dt \text{,} \]
   where $a_n \in \C$, $A(x) \coloneq \sum_{n \leq x} a_n$, $f: [y,\infty) \to \C$ contiuantially differntiable.
   \[ a_n =
@@ -190,16 +190,16 @@ $\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (I
   $x = x$, $y = 2$
   \begin{align*}
     \sum_{2 < p \leq x} 1 &= \frac{A(x)}{\log x} - \frac{A(2)}{\log 2} - \int_2^x \frac{A(t)}{t (\log t)^2} dt \\
-    &= \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}} - 1 + \int_2^x \frac{1}{(\log t)^2} dt
-  + \mathcal{O} ( \int_2^x \frac{1}{(\log t)^{2+\frac{1}{N}}}) \\
-    &= \frac{x}{\log x} + \mathcal{O}( \frac{x}{(\log x)^{1 + \frac{1}{N}}}) + \mathcal{O}( \int_2^x \frac{1}{(\log t)^2}d 
+    &= \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}}) - 1 - \int_2^x \frac{1}{(\log t)^2} dt
+  + \mathcal{O} ( \int_2^x \frac{1}{(\log t)^{2+\frac{1}{N}}}dt) \\
+    &= \frac{x}{\log x} + \mathcal{O}( \frac{x}{(\log x)^{1 + \frac{1}{N}}}) + \mathcal{O}( \int_2^x \frac{1}{(\log t)^2}dt )
   \end{align*}
   \begin{align*}
     \int_2^x \frac{1}{(\log t)^2} dt &= \int_{\log 2}^{\log x} \frac{e^u}{u^2} du \\
-  &\underset{=}{u = \log t, du = \frac{dt}{t}} [ \frac{e^u}{u^2}]_{\log 2}^{\log x} + 2 \int_{\log 2}^{\log x} \frac{e^u}{u^3} du \\
-  &\underset{=}{ \frac{e^u}{u^3} \leq c \frac{e^{\log x}}{(\log x)^3}, c > 0} \\
+  &\underset{u = \log t, du = \frac{dt}{t}}{=} [ \frac{e^u}{u^2}]_{\log 2}^{\log x} + 2 \int_{\log 2}^{\log x} \frac{e^u}{u^3} du \\
+  &\underset{ \frac{e^u}{u^3} \leq c \frac{e^{\log x}}{(\log x)^3}, c > 0}{=} \\
   &\leq \frac{x}{(\log x)^2} + \frac{2}{(\log 2)^2} + (\log x)c \frac{x}{(\log x)^3} \\
-  &= \mathcal{O}(\frac{x}{(\log x)^2} 
+  &= \mathcal{O}(\frac{x}{(\log x)^2}) 
   \end{align*}
 \end{proof}
 

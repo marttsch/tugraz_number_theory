@@ -1,7 +1,7 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\emph{Estimates for $\zeta(s)$:}
+\subsection{Estimates for $\zeta(s)$:}
 \begin{theorem}
   If $s = \sigma + it$.
   \begin{enumerate}
@@ -21,17 +21,19 @@
     choose $C_m$ large enough.\\
     $1 < \sigma < 2$: we already know
     \begin{align*}
-      \zeta(s) = \frac{1}{s-1} + \sum_{n=1}^\infty \int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s} dx \\
+      \zeta(s) = \frac{1}{s-1} + \sum_{n=1}^\infty \int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx \\
+      \text{The sum converges uniformly in $s$.} \\
       \implies \zeta^{(m)}(s) = \frac{(-1)^m m!}{(s-1)^{m+1}} + \sum_{n=1}^\infty (-1)^m \int_n^{n+1} (\frac{(\log n)^m}{n^s} - \frac{(\log x)^m}{x^s}) dx
     \end{align*}
     Now consider
+    \todo{check inequality; especially $x$ and $n$, which is right??}
     \begin{align*}
       \abs{ \frac{(\log n)^m}{n^s} - \frac{(\log x)^m}{x^s} } = \abs{ \int_{u=n}^x ( \frac{(\log u)^m}{u^s})^\prime du} 
       \leq 1 \cdot (\abs{s} + m) \frac{(\log n)^m}{x^{\sigma +1}} \leq (\abs{s}+m) \frac{(\log n)^m}{x^2} \\
     \end{align*}
     Since
     \begin{align*}
-      {(\frac{(\log x)^m}{x^s})^\prime = \frac{m (\log x)^{m-1}}{x^{s+1}} - s \frac{(\log x)^m}{s^{s+1}} 
+      {(\frac{(\log x)^m}{x^s})^\prime = \frac{m (\log x)^{m-1}}{x^{s+1}} - s \frac{(\log x)^m}{x^{s+1}} 
       = \frac{1}{x^{s+1}} (m (\log x)^{m-1} - s(\log x)^m)}
     \end{align*}
     \begin{align*}
@@ -40,7 +42,7 @@
     since $\abs{s} \leq \underbrace{\sigma}_{\in (1,2)} + \underbrace{\abs{t}}_{\geq 1}$
     \item Let $\sigma > 1$.
     \begin{align*}
-      \log \zeta(s) = \sum_p - \log (1-p^{-s}) \underset{=}{- \log (1-z) = \sum_{n=1}^\infty \frac{z^n}{n} \text{ for } \abs{z} < 1}
+      \log \zeta(s) = \sum_p - \log (1-p^{-s}) \overset{- \log (1-z) = \sum_{n=1}^\infty \frac{z^n}{n} \text{ for } \abs{z} < 1}{=}
       \sum_p \sum_\nu \frac{1}{\nu p^{\nu s}}
       = \sum_n \frac{b_n}{n^s}
     \end{align*}
@@ -58,7 +60,7 @@
     Let $B(s) = \sum_{n=1}^\infty \frac{b_n}{n^s}$ be a D-series with $b_n \geq 0$, that is (abs) convergent for $\sigma > 1$.
     Then $Re(B(\sigma + 2 it)) + 4 \cdot Re(B(\sigma+it)) + 3 \cdot Re(B(\sigma)) \geq 0$ for $\sigma > 1$.
     In particular, for $Z(s) \coloneq e^{B(s)}$, we have
-    \[ \abs{Z(\sigma +it)}^4 \cdot \abs{Z(\sigma +2 it)} \cdots \abs{Z(\sigma)}^3 \geq 1 \]
+    \[ \abs{Z(\sigma +it)}^4 \cdot \abs{Z(\sigma +2 it)} \cdot \abs{Z(\sigma)}^3 \geq 1 \]
   \end{lemma}
   \begin{proof}
     Let $a \in \C$, $a \overbar{a} = \abs{a} =1$.
@@ -70,7 +72,7 @@
     \end{align*}
     $a + \overbar{a} = 2 Re(a)$
     \begin{align*}
-      0 \geq 16 Re(a)^4 = 2 Re(a^4) + 8 Re(a^2) +6 \\
+      0 \leq 16 Re(a)^4 = 2 Re(a^4) + 8 Re(a^2) +6 \\
       \implies Re(a^4) + 4 Re(a^2) +3  = 8 Re(a)^4 \geq 0
     \end{align*}
     Choose $a \coloneq n^{- \frac{it}{2}}$. Then we get
@@ -97,14 +99,15 @@
     \end{align*}
     But $\lim_{\sigma \searrow 1} RHS = \infty$ and thus $\lightning$.
   \end{rem}
-  Assume first that $\sigma > 2$.
+  Assume first that $\sigma \geq 2$.
   Then 
   \begin{align*}
-    \abs{\zeta(s)} \geq 1 - \abs{\zeta(s) - 1} = 1 - \abs{\sum_{n=2}^\infty \frac{1}{n^2}}
+    \abs{\zeta(s)} \geq 1 - \abs{\zeta(s) - 1} = 1 - \abs{\sum_{n=2}^\infty \frac{1}{n^s}}
+    \geq 1 - \sum_{n=2}^\infty \frac{1}{n^2}
     = 1 - (\zeta(2) - 1) = 2 -\zeta(2) > 0
   \end{align*}
   \begin{lemma}
-    $\zeta(2) = \frac{\pi^2}{6} = 1,64 < 2$
+    $\zeta(2) = \frac{\pi^2}{6} \approx 1,64 < 2$
   \end{lemma}
   \begin{proof}[Proof by Euler]
     Weierstaß product for $\sin(\pi x)$.
@@ -113,15 +116,20 @@
     \end{align*}
     \begin{align*}
       \sin(\pi x) = \pi x - \frac{(\pi x)^3}{3!} + \dots \\
-      \pi  x \prod_{}
-    \end{align*} %TODO text missing
+      \implies \pi  x \prod_{n=1}^\infty (1- \frac{x^2}{n^2}) = \pi x - (\pi x)^3 \sum_{n=1}^\infty \frac{1}{n^2} + \dots
+    \end{align*}
+    comparison with the coefficient of $[x^3]$ yields
+    \begin{align*}
+      \frac{(\pi x)^3}{6} = \pi x^3 \zeta(2) \\
+      \implies \zeta(2) = \frac{\pi^2}{6}
+    \end{align*}
   \end{proof}
   $1 < \sigma < 2$: Rewrite \ref{star} with $s = \sigma +it$.
   \begin{align*}
-    \abs{\zeta(s)} \geq (\sigma - 1)^{\frac{3}{4}} \abs{\zeta(\sigma + 2it)}^{-\frac{1}{4}} \cdot \abs{\zeta(s) (\sigma-1)}^{-\frac{3}{4}}
+    \abs{\zeta(s)} \geq (\sigma - 1)^{\frac{3}{4}} \abs{\zeta(\sigma + 2it)}^{-\frac{1}{4}} \cdot \abs{\zeta(\sigma) (\sigma-1)}^{-\frac{3}{4}}
   \end{align*}
-  The function $\sigma \mapsto (\sigma - 1) \zeta(\sigma)$ is continuous on $1 \leq \sigma \leq 2$, we see in $1 \leq \sigma \leq 2$ that $c_2 \geq \abs{\zeta(\sigma) (\sigma -1) } \geq c_1 > 0$ for some $c_1$ (compactness)
-  1) $\implies \abs{\zeta(\sigma + 2it)} \leq 2 C_0 \abs{t}$, $\abs{t} \geq 1$.
+  The function $\sigma \mapsto (\sigma - 1) \zeta(\sigma)$ is continuous on $1 \leq \sigma \leq 2$, we see in $1 \leq \sigma \leq 2$ that $c_2 \geq \abs{\zeta(\sigma) (\sigma -1) } \geq c_1 > 0$ for some $c_1$ (compactness)\\
+  By 1) $\implies \abs{\zeta(\sigma + 2it)} \leq 2 C_0 \abs{t}$, $\abs{t} \geq 1$.
   Therefore:
   \begin{align} \label{starstar}
     \abs{\zeta(s)} \geq A(\sigma - 1)^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} 
@@ -129,10 +137,10 @@
   where $A > 0$, for $1 < \sigma < 2$ and $\abs{t} \geq 1$.
   Let $\varepsilon \in (0,1)$ small enough (see later)
   Define
-  \[ \sigma(t) \coloneq 1 + \varepsilon \abs{t}^{-s} \in (0,2) \text{ for } \abs{t} \geq 1 \]
+  \[ \sigma(t) \coloneq 1 + \varepsilon \abs{t}^{-5} \in (1,2) \text{ for } \abs{t} \geq 1 \]
   Case a) $\sigma \geq \sigma(t)$.
   Then \ref{starstar} implies that 
-  \[ \abs{\zeta(s)} \geq A (\varepsilon \abs{t}^{-s})^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} = A \varepsilon^{\frac{1}{4}} \abs{t}^4 \checkmark \]
+  \[ \abs{\zeta(s)} \geq A (\varepsilon \abs{t}^{-5})^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} = A \varepsilon^{\frac{3}{4}} \abs{t}^{-4} \checkmark \]
   Case b) $1 < \sigma < \sigma(t)$.
   Then 
   \begin{align*}
