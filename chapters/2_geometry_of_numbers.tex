@@ -1,0 +1,836 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section{Geometry of Numbers}
+
+References:
+\begin{itemize}
+  \item J.W.S. Cassels "An Introduction to the Geometry of Numbers"
+  \item W.M. Schmidt Lecture Notes M. 785 and 1467
+\end{itemize}
+
+\subsection{Basic notions}
+Let $R$ be an integral domain (with $1$), and $n \in \N$.
+We write $\mat_n(R) = \{ n \times n \text{ matrices with entries in } R\}$
+and $\gl_n(R) = \{ A \in \mat_n(R): A \text{ is invertibel and } A^{-1} \in \mat_n(R) \}$.
+Then $(\gl_n(R), \cdot)$ is a group. We say $u \in R$ is a unit (in $R$) if $\exists u^\prime \in R$ such that $u^\prime \cdot u = 1$.\\
+If $A \in \gl_n(R)$ then $(\det A)^{-1} = \det A^{-1} \in R$. So $\det A$ is a unit in $R$.
+On the other hand if $A \in \mat_n(R)$ and $\det A$ is a unit in $R$ then $A^{-1} = (\det a)^{-1} \adj(A) \in \mat_n(R)$ as the adjungate matrix $\adj(A)$ of $A$ clearly is in $\mat_n(R)$. 
+Thus we have
+\[ \gl_n(R) = \{ A \in \mat_n(R) : \det A \text{ is a unit in } R \} \text{.} \]
+In particular, $\gl_n(\Z) = \{ A \in \mat_n(\Z): \det A = \pm 1 \}$.\\
+\\
+Let $n \in \N$. A \underline{lattice} $\Lambda$ in $\R^n$ is a set of the form
+\[ \Lambda = A \Z^n = \{ Ax : x \in \Z^n \} \]
+where $A \in \gl_n(\R)$.
+The column vectors of $A$ are called a \underline{basis} of $\Lambda$.
+
+\begin{lemma}[2.1.1 \label{l_2_1_1}]
+  Let $A,B \in \gl_n(\R)$. Then 
+  \[ A \Z^n = B \Z^n \iff \exists T \in \gl_n(\Z) \text{ such that } B = AT \]
+\end{lemma}
+
+\begin{proof}
+  "$\Leftarrow$" If $B = AT$ with $T \in \gl_n(\Z)$ then $T \Z^n = \Z^n$.
+  Hence, $B \Z^n = A \Z^n$.\\
+  "$\Rightarrow$" If $A\Z^n = B \Z^n$ then each column vector of $B$ lies in $A \Z^n$,
+  thus $\exists T \in \mat_n(\Z)$ such that $B = AT$.
+  Similarly $\exists T^\prime \in \mat_n(\Z)$ such that $A = B T^\prime$.
+  Hence, $ A = A T T^\prime$.
+  Thus $T^\prime = T^{-1}$. So $T \in \gl_n(\Z)$.
+\end{proof}
+
+By Lemma \ref{l_2_1_1} we see that if $\Lambda = A \Z^n$ then $\abs{\det A}$ is uniquely determined by $\Lambda$.
+We call it the \underline{determinant} of $\Lambda$
+\[ \det \Lambda = \abs{\det A} \]
+Let $b_1,\dots,b_n$ be a basis of $\Lambda$ and $v \in \Lambda$. We set
+\[ F_v = [0,1)\cdot b_1 + \dots + [0,1) \cdot b_n + v \]
+and call it a fundamental cell of $\Lambda$.
+\todo{add pic}
+
+Note that
+\begin{itemize}
+  \item $\det \Lambda = \vol F$
+  \item $\R^n = \overset{\cdot}{\cup}_{v \in \Lambda} F_v$ is a partition of $\R^n$ (cf sheet 5).
+\end{itemize}
+
+Recall that $C \subset \R^n$ is called \underline{convex} if:
+\[ x,y \in C \implies tx + (1-t)y \in C \forall t \in [0,1] \]
+We say $C$ is symmetric if:
+\[ x \in C \implies -x \in C\]
+Recall that every convex set is measurable.
+
+Let $C$ be a convex, compact and symmetric set in $\R^n$ with the origin in the interior of $C$.
+Let $\Lambda$ be a lattice in $\R^n$.
+Then we define the successive minima $\lambda_1,\dots,\lambda_n$ of $\Lambda$ with respect to $C$ by
+\[ \lambda_i = \inf \{ \lambda : \lambda C \cap \Lambda \text{ contains } i \text{ linearly independent vectors} \} \text{.} \]
+
+Note that $0 < \lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n < \infty$.
+
+\begin{ex}
+  \begin{itemize}
+    \item $\Lambda = \Z^n$, $C = [-1,1]^n$.
+    Then $\lambda_1 = \dots = \lambda_n = 1$.
+    \item $\Lambda = \left(
+    \begin{matrix}
+      1 & 0 \\
+      0 & 2
+    \end{matrix}
+    \right) \Z^2$, $C = [-1,1]^2$.
+    Then $\lambda_1 = 1$, $\lambda_2 = 2$.
+    \item $\Lambda = \left(
+    \begin{matrix}
+      1 & 0 \\
+      0 & 2
+    \end{matrix}
+    \right) \Z^2$, $C = [-1,1] \times [-2,2]$.
+    Then $\lambda_1 = \lambda_2 = 1$.
+  \end{itemize}
+  \todo{add pic}
+\end{ex}
+
+\begin{theorem}\label{th_2_1_2}
+  Let $\Lambda$ be in $\R^n$. Then $\Lambda$ is a lattice in $\R^n$ if and only if:
+  \begin{enumerate}
+    \item[i)\label{th_2_1_2_1}] $(\Lambda,+)$ is a group
+    \item[ii)\label{th_2_1_2_2}] $\Lambda$ contains $n$ linearly independent vectors
+    \item[iii)\label{th_2_1_2_3}] $\Lambda$ is discrete, $\# S \cap \Lambda < \infty \forall \text{ compact } S \subset \R^n$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  First suppose $\Lambda$ is a lattice.
+  Then i) and ii) are clear.
+  And iii) is clear, at least if $\Lambda = \Z^n$.
+  But if $\Lambda = A \Z^n$ then $\# \Lambda \cap S = \# \Z^n \cap A^{-1} S$ as $x \mapsto A^{-1} x$ is continuous we have $S$ compact $\implies A^{1-} S$ compact.
+  So this proves the first direction.\\
+  Now let's suppose $\Lambda \subset \R^n$ such that i), ii), iii) hold.
+  We use induction on $n$. \\
+  Let $n=1$. Then $\Lambda$ contains a non-zero vector $b$ that is closest to the origin (using ii) and iii)).
+  By i) we easily see that $\Lambda = b \Z$. So $\Lambda $ is a lattice in $\R^1$.\\
+  Now suppose the claim holds in $\R^m$ if $m < n$.
+  Let $u_1,\dots,u_n$ be $n$ linearly independent vectors in $\Lambda$.
+  Consider the subspace $U = \left\langle u_1,\dots,u_{n-1} \right\rangle_\R$; thus $\dim U = n-1$.
+  Let $\tilde{e_1},\dots,\tilde{e_{n-1}}$ be an orthonormal basis of $U$.
+  Let
+  \[ O \in \oth_n(\R) = \{ A \in \gl_n(\R): A^T A = I_n \} \text{ (the orthogonal group)} \]
+  with
+  \[ O(\tilde{e_i}) = e_i \; (1 \leq i \leq n-1) \]
+  where $e_1,\dots,e_n$ is the canonical basis of $\R^n$.
+  Hence, $O(U) = \R^{n-1} \times \{ 0 \}$, and
+  \[ O( \Lambda \cap U) \subset \R^{n-1} \times \{ 0 \} \]
+  is a discrete additive group that contains the $n-1$ linearly independent vectors $O(u_1),\dots,O(u_{n-1})$.
+  Let $\Pi: \R^n \to \R^{n-1}$, $\Pi(x) = (x_1,\dots,x_{n-1})$.
+  Then $\Pi \circ O(\Lambda \cap U)$ is also a discrete additive group that contains $n-1$ linearly independent vectors
+  and it is also in $\R^{n-1}$.
+  Hence, by induction hypothesis $\Pi \circ O(\Lambda \cap U)$ is a lattice in $\R^{n-1}$.
+  So $\exists A_{n-1} \subset \gl_{n-1}(\R)$ such that $\Pi \circ O (\Lambda \cap U) = A_{n-1} \Z^{n-1}$.
+  So 
+  \[ O (\Lambda \cap U) = \left(
+  \underbrace{\begin{matrix}
+    A_{n-1} & 0 \\
+    0 & 0
+  \end{matrix}}{\tilde{A}}
+  \right) \Z^n \]
+  Now let $\mu = \inf \{ \abs{ w_n} : w = (w_1,\dots,w_n) \in O(\Lambda \setminus U) \}$.
+  Suppose $v_1,v_2,v_3,\dots \in O(\Lambda \setminus U)$ with
+  \[ \abs{ v_{in}} \to \mu \; (\text{as } i \to \infty \]
+  where $v_{in}$ is the last coordinate.
+  
+  Adding elements from $O(U)$ does not change the last coordinate.
+  Hence, we can assume that the vectors 
+  \[ (v_{i1},\dots,v_{in-1}) \in [0,1)a_1 + \dots + [0,1) a_{n-1} \]
+  where $a_i =$ column vector of $A_{n-1}$.
+  In particular, the first $n-1$ coordinates of $v_i$ are  bounded in absolute value.
+  But the absolute value of the last coordinate also tends to $\mu$, so is also bounded.
+  As $\Lambda$ is discrete by iii) also $O(\Lambda)$ is discrete.
+  Thus the sequence $v_i$ contains only finitely many vectors, in particular
+  \[ \exists v \in O(\Lambda \setminus U) \text{ such that } v_n \overset{after v \to -v}{=} \mu \text{ and } \mu > 0 \text{.}\]
+  Let $u \in O(\Lambda)$.
+  Then also $u^\prime = u - \left[ \frac{u_n}{\mu} \right] \cdot v$ is in $O(\Lambda)$ ($O(\Lambda)$ is a group as $\Lambda$ is).
+  So $0 \leq u_n^\prime < \mu$, so by minimality of $\mu$, $u_n^\prime = 0$.
+  Hence, $u^\prime \in O(\Lambda) \cap \R^{n-1} \times \{ 0 \} = O(\Lambda) \cap O(U) = O(\Lambda \cap U)$.
+  Now 
+  \[ u = u^\prime + \left[ \frac{u_n}{\mu} \right] \cdot v \in O(\Lambda \cap U) + \Z \cdot v\]
+  and thus
+  \[ u \in \tilde{A} \Z^n + v \cdot \Z = \underbrace{\left[ (\tilde{a_1}) \dots (\tilde{a_{n-1}}) (v)  \right]} \Z^n = A \Z^n \]
+  where $\tilde{a_i} = i$-th column vector of $\tilde{A}$.
+  Thus $O(\Lambda) \subset A \Z^n$.
+  Clearly (as $O(\Lambda)$ is a group) also $A \Z^n \subset O(\Lambda)$.
+  Now the rows of $A$ are linearly independent.
+  Thus $A \in \gl_n(\R)$.
+  So $O(\Lambda)$ is a lattice and thus $\Lambda$ is a lattice.
+\end{proof}
+
+\begin{cor}[2.1.3 \label{cor_2_1_3}]
+  Let $n \in \N$, $m_1,\dots,m_n \in \N$ and $a_{ij} \in \Z$ $(1\leq i,j \leq n)$.
+  Then 
+  \[ \Lambda = \{ x \in \Z^n : \sum_{j=1}^n a_{ij} x_j \equiv 0 \bmod m_i (1 \leq i \leq n) \} \]
+  is a lattice in $\R^n$.
+\end{cor}
+
+\begin{proof}
+  As $\Lambda \subset \Z^n$, it is discrete. Clearly $0 \in \Lambda$, and if $x_1,x_2 \in \Lambda$ then $x_1 + x_2 \in \Lambda$.
+  So $\Lambda$ is a discrete additive subgroup of $\Z^n$.
+  Moreover, the $n$ linearly independent vectors ($m,0,\dots,0),\dots,(0,\dots,0,m)$ where $m = m_1 \cdot \dots \cdot m_n$
+  are all in $\Lambda$.
+  Hence, by Theorem \ref{th_2_1_2} we conclude that $\Lambda$ is a lattice in $\R^n$.
+\end{proof}
+
+
+\subsection{The Theorems of Blichfeldt and Minkowski}
+
+Minkowski's First and Second Theorem are possibly some of the most useful theorems in number theory.
+We will deduce Minkowski's First Theorem via Blichfeldt's Theorem which is of interest for its own sake.
+
+\begin{theorem}[Blichfeldt \label{th_2_2_1_blichfeldt}]
+  Let $\Lambda$ be a lattice in $\R^n$, and let $S \subset \R^n$ be measurable such that $\vol S > \det \Lambda$ ($\vol S = \infty$ is allowed).
+  Then 
+  \[ \exists x_1,x_2 \in S, x_1 \neq x_2 \text{ and } x_1 - x_2 \in \Lambda \text{.}\]
+\end{theorem}
+
+\begin{proof}
+  Let $b_1,\dots,b_n$ be a basis of $\Lambda$ and let $F = [0,1) b_1 + \dots + [0,1) b_n$ be a fundamental cell.
+  Thus $\vol F = \det \Lambda$, and if $x \in \R^n$ then $\exists$ \underline{unique} $v \in \Lambda$ and $\theta \in F$ such that
+  \[ x = v + \theta \text{.}\]
+  Now for each $v \in \Lambda$ consider
+  \[ \mathcal{R}(v) = \{ \theta \in F : v + \theta \in S \} \]
+  \todo{add picture}
+  Hence, 
+  \[ \sum_{v \in \Lambda} \vol(\mathcal{R}(v)) = \vol S \]
+  Now if $\vol S > \det \Lambda$ then (2.1) implies $\sum_{v \in \Lambda} \vol (\mathcal{R}(v)) > \det \Lambda = \vol F  $.
+  But $\cup_{v \in \Lambda} \mathcal{R}(v) \subset F$; so the union \underline{cannot} be disjoint.
+  Thus $\exists v_1,v_2 \in \Lambda, v_1 \neq v_2$ such that $\theta_0 \in \mathcal{R}(v_1) \cap \mathcal{R}(v_2)$.
+  Hence, the points $x_1 = v_1 + \theta_0, x_2 = v_2 + \theta_0$ are both in $S$ and $x_1 - x_2 = v_1 - v_2 \in \Lambda \setminus 0$.
+\end{proof}
+
+\begin{theorem}[Minkowski's First Theorem \label{th_2_2_2_minkowski1}]
+  Let $\Lambda$ be a lattice in $\R^n$, and let $S \subset \R^n$ be convex and symmetric.
+  Suppose that either
+  \begin{itemize}
+    \item $\vol S > 2^n \det \Lambda$ ($\vol S = \infty$ allowed) \\
+    or
+    \item $\vol S \geq 2^n \det \Lambda$ and $S$ is compact
+  \end{itemize}
+  Then $S$ contains a \underline{non-zero} lattice point.
+\end{theorem}
+
+\begin{rem}
+  $2^n$ is sharp, take $\Lambda = \Z^n$ and $S = (-1,1)^n$,
+  then $\vol S = 2^n$, $\det \Lambda = 1$, $S$ is symmetric and convex, but $S \cap \Lambda = \{ 0\}$.
+\end{rem}
+
+\begin{proof}
+  First suppose $\vol S > 2^n \cdot \det \Lambda$.
+  Now $\vol \left( \frac{1}{2}S \right) = 2^{-n} \vol S > \det \Lambda$.
+  By Theorem \ref{th_2_2_1_blichfeldt} (with the set $\frac{1}{2} S$) we see that $\exists x_1,x_2 \in S$,
+  $x_1 \neq x_2$ such that $\frac{1}{2} x_1 - \frac{1}{2} x_2 \in \Lambda \setminus 0$.
+  But $S$ is symmetric, thus $-x_2 \in S$.
+  As $S$ is convex we conclude that $\frac{1}{2} x_1 + \frac{1}{2} (-x_2) \in S$.
+  This proves the first part.\\
+  Now suppose $S$ is compact and $\vol S = 2^n \det \Lambda$.
+  If $v \in \Lambda \setminus S$ then $\exists \varepsilon_v > 0$ such that $B_{\varepsilon_v}(v) \cap S = \emptyset$ ($S^c$ is open!)
+  where $B_r(y) = \{ x \in \R^n : \abs{x - y} < r \}$.
+  As $S$ is compact $\exists R > 0$ such that $\lambda S \subset B_R (0)$ for all $\lambda$ with $0 < \lambda <2$.
+  So $(\Lambda \setminus S) \cap B_R(0)$ is finite by Theorem \ref{th_2_1_2} and hence $\exists \varepsilon > 0$
+  such that 
+  \[ B_\varepsilon(v) \cap S = \emptyset  \; \forall v \in (\Lambda \setminus S) \cap B_R(0) \text{.} \]
+  \todo{add picture}
+  Hence, $\exists \lambda > 1$ such that
+  \[ \lambda S \cap \Lambda = S \cap \Lambda \text{.} \]
+  By the first part we know that $\lambda S$ contains a non-zero lattice point, and this completes the proof.
+\end{proof}
+
+\begin{cor}\label{cor_2_2_3}
+  Let $\Lambda$ be a lattice in $\R^n$ and let $a_{ij} \in \R \; (1 \leq i,j \leq n)$.
+  Suppose $c_1,\dots, c_n > 0$ and $c_1 \dots c_n \geq \abs{\det A} \det \Lambda$.
+  Then $\exists u \in \Lambda \setminus 0$ such that 
+  (2.2) $\begin{cases}  
+    \abs{ \sum_{j=1}^n a_{1j} u_j} \leq c_1\\
+    \abs{ \sum_{j=1}^n a_{ij} u_j} < c_i \: (2 \leq i \leq n) \text{.}
+  \end{cases}$
+\end{cor}
+
+\begin{proof}
+  First suppose $\det A \neq 0$.
+  Then $\mathcal{L} = A \cdot \Lambda$ is  a lattice in $\R^n$ with $\det \mathcal{L} = \abs{\det A} \det \Lambda$.
+  Then (2.2) means we are looking for a non-zero lattice point $x \in \mathcal{L}$ such that
+  \[ \abs{x_1} \leq c_1 \]
+  \[ \abs{x_i} < c_i \: (2 \leq i \leq n) \]
+  These inequalities define a symmetric, convex set of points $x \in \R^n$
+  with volume $2^n c_1 \cdots c_n$. So if $c_1 \cdots c_n > \abs{\det(A)} \cdot \det(\Lambda)$ then we can apply Theorem \ref{th_2_2_2_minkowski1} and the claim follows at once.\\
+  Next let $0 < \varepsilon < 1$.
+  Then the set
+  \begin{align*}
+  S_\varepsilon:
+  \begin{cases} \abs{x_1} \leq c_1 + \varepsilon < c_1 + 1 & \\
+  \abs{x_i} < c_i & \text{for } (2 \leq i \leq n)
+  \end{cases}
+  \end{align*}
+  still has a non-zero lattice point in $\mathcal{L}$.
+  But these sets $S_\varepsilon$ all lie in $S_1$ which lies in a compact set and hence has only finitely many lattice points.
+  Hence, there must be a non-zero lattice point of $\mathcal{L}$ in $S_0$. 
+  This proves the Corollary if $\det(A) \neq 0$.\\
+  Now if $\det(A) = 0$ then (2.2) defines a set of points $u \in \R^n$ of infinite volume and so Theorem \ref{th_2_2_2_minkowski1} applies again and yields the claim.
+\end{proof}
+
+\begin{cor}[Lagrange's four-square Theorem\label{cor_2_2_4_lagrange}]
+  Every positive integer is the sum of four squares.
+\end{cor}
+
+\begin{proof}
+  First we observe that 
+  \begin{align*}
+    (x_1^2 + x_2^2 &+ x_3^2 + x_4^2) \cdot (y_1^2 + y_2^2 + y_3^2 + y_4^2) = \\
+    &= (x_1 y_1 + x_2 y_2 + x_3 y_3 + x_4 y_4)^2 + (-x_1 y_2 + x_2 y_1 -x_3 y_4 + x_4y_3)^2 \\
+    &+ (-x_1 y_3 + x_2 y_4 + x_3 y_1 - x_4 y_2)^2 + (-x_1 y_4 - x_2 y_3 + x_3y_2 + x_4 y_1)^2 \text{.}
+  \end{align*}
+  Now $1 = 1^2 + 0^2 + 0^2 + 0^2$. So it suffices to prove the claim for primes $p$.
+  And we can assume $p \neq 2$ since $2 = 1^2 + 1^2 +0^2 + 0^2$. \\
+  Now $a^2$ and $-(b^2 + 1)$ run through exactly $\frac{p+1}{2}$ distinct residue classes modulo $p$ as $a \bmod b$ run through an entire system of residue classes. ($0^2, 1^2, \dots, \left( \frac{p-1}{2} \right)^2$ are all distinct in $\mathcal{F}_p$.)\\
+  Hence, they have a common residue class; thus 
+  \[ \exists a,b \in \Z \text{ such that } a^2 + b^2 +1 \equiv 0 \bmod p \text{.} \]
+  With this choice of $a$ and $b$ consider
+  \[ \Lambda = A \cdot \Z^4 \text{ where } A= \left( 
+  \begin{matrix}
+    1 & 0 & 0 & 0\\
+    0 & 1 & 0 & 0\\
+    a & b & p &  0\\
+    b & -a & 0 & p
+  \end{matrix} \right) \text{.}\]
+  So $\Lambda$ is a lattice in $\R^4$ with $\det(\Lambda) = p^2$.\\
+  Next consider the convex, symmetric set 
+  \[ S = \{ (x_1,x_2,x_3,x_4) \in \R^4 : x_1^2 + x_2^2 + x_3^2 + x_4^2 < 2p \} \]
+  Then $\vol(S) = \frac{\pi^2}{2} (2p)^4 = (2 \pi)^2 p^4 > 16 \cdot p^2 = 2^4 \det(\Lambda)$.
+  By Theorem \ref{th_2_2_2_minkowski1} there exists an $x \in \Lambda \cap S$ with $x \neq 0$.\\
+  Now 
+  \[ x = \left(
+  \begin{matrix}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+    x_4
+  \end{matrix} \right)
+  = A \cdot z = \left(
+  \begin{matrix}
+    z_1 \\
+    z_2 \\
+    a z_1 + b z_2 + p z_3 \\
+    b z_1 - a z_2 + p z_4
+  \end{matrix} \right) \text{ for some } z \in \Z^4 \setminus \{0\} \]
+  Hence,
+  \begin{align*}
+    x_1^2 + x_2^2 + x_3^2 + x_4^2 &\equiv z_1^2 + z_2^2 + (a z_1 + b z_2)^2 + (b z_1 - a z_2)^2 \\
+    &\equiv \underbrace{(1 + a^2 + b^2)}_{\equiv 0 \bmod p} (z_1^2 + z_2^2) \\
+    &\equiv 0 \bmod p
+  \end{align*}
+  Since $x \in S$, and $x \neq 0$ we conclude that $x_1^2 + x_2^2 + x_3^2 + x_4^2 = p$.
+  This proves the corollary.
+\end{proof}
+
+\subsection{Basis reduction}
+
+Let $M$ be a lattice in $\R^n$ and let $\Lambda$ be a \underline{sublattice} of $M$, i.e., $\Lambda \subset M$ and $\Lambda$ is a lattice in $\R^n$.
+Hence, there exists a matrix $C \in \mat_n(\Z)$ with $\det C \neq 0$ such that $\Lambda = C \cdot M$.\\
+We define the \underline{index} of $\Lambda$ in $M$ by 
+\[ I = \abs{\det(C)} = \frac{\det(\Lambda)}{\det(M)}\text{.} \]
+Note that $I \cdot C^{-1} = \adj(C) \in \mat_n(\Z)$,
+and thus $I \cdot M = I \cdot C^{-1} \cdot \Lambda \subset \Lambda$, so
+\begin{align}
+  I \cdot M \cdot C \subset \Lambda \subset M \label{3_1}
+\end{align}
+
+\begin{theorem}\label{th_2_3_1}
+  Let $\Lambda$ be a sublattice of the lattice $M \subset \R^n$, 
+  and let $b_1,\dots,b_n$ be a basis of $M$.
+  Then there exists a basis $a_1,\dots,a_n$ of $\Lambda$ with
+  \begin{align} \label{3_2}
+    \begin{split}
+    a_1 &= v_{11} b_1\\
+    a_2 &= v_{21} b_1 + v_{22} b_2\\
+    &\vdots\\
+    a_n &= v_n1 b_1 + \dots + v_{nn} b_n
+    \end{split}
+  \end{align}
+  with $v_{ij} \in \Z$ and $v_{ii} \neq 0$ for $(1 \leq j \leq i \leq n)$.\\
+  Conversely, if $a_1,\dots, a_n$ is a basis of $\Lambda$ then there exists a basis $b_1,\dots, b_n$ of $M$ such that (\ref{3_2}) holds.
+\end{theorem}
+
+\begin{proof}
+  By (\ref{3_1}) we know that there exist $v_{ij} \in \Z$ with $v_{ii} \neq 0$ and $\abs{v_{ii}}$ minimal such that
+  \[ a_i = v_{i1} b_1 + \dots + v_{ii} b_i \in \Lambda \]
+  We will show that $a_1,\dots,a_n$ is a basis for $\Lambda$.\\
+  Let $c \in \Lambda$ and suppose $c$ is \underline{not} a $\Z$-linear combination of the $a_i$'s.
+  As $c \in M$ there exist $t_i \in \Z$ such that
+  \[ c = t_1 b_1 + \dots + t_k b_k \; (1 \leq k \leq n, \, t_k \neq 0)\]
+  If there exist several such $c$'s then we choose one where $k$ is minimal.
+  Next we note that $v_{kk} \neq 0$.
+  Hence, there exists a $s \in \Z$ such that
+  \begin{align}
+    \abs{t_k - s v_{kk}} < \abs{v_{kk}} \text{.} \label{3_3}
+  \end{align}
+  Thus
+  \[ c - sa_k = (t_1 - sv_{k1}) b_1 + \dots + (t_k - sv_{kk}) b_k \]
+  lies in $\Lambda$ (as $c$ and $a_k$ do) and is \underline{not} a $\Z$-linear combination of the $a_i$'s as $c$ is not.
+  Thus, by minimality of $k$ we must have $t_k - sv_{kk} \neq 0$.
+  But then (\ref{3_3}) contradicts the minimality of $\abs{v_{kk}}$.
+  Hence, $c$ must be a $\Z$-linear combination of the $a_i$'s and thus $a_1,\dots, a_n$ is a basis.
+  This proves the first part.\\
+  For the second part suppose $a_1,\dots,a_n$ is a basis of $\Lambda$.
+  By the first part and (\ref{3_1}) there exists a basis $I \cdot b_1,\dots, Ib_n$ of $I \cdot M \subset \Lambda$ with
+  \begin{align*}
+    I b_1 &= w_{11} a_1\\
+    I b_2 &= w_{21} a_1 + w_{22} a_2\\
+    &\vdots\\
+    I b_n &= w_{n1} a_1 + \dots + w_{nn} a_n
+  \end{align*}
+  with $w_{ij} \in \Z$ and $w_{ii} \neq 0$.\\
+  Successively solving the above system for $a_i$ we get a system as in (\ref{3_2}) but a priori with $v_{ij} \in \Q$.
+  But $b_1,\dots,b_n$ is a basis of $M$ and the $a_i \in M$.
+  As the representation
+  \[ a = t_1 b_1 + \dots + t_n b_n \; (t_i \in \R) \]
+  is unique we conclude that $v_{ij} \in \Z$, and this proves the second part.
+\end{proof}
+
+\begin{lemma}[Hadamard's inequality\label{l_2_3_2_hadamard}]
+  Let $a_1,\dots,a_n \in \R^n$. Then
+  \[ \abs{\det ( a_1,\dots, a_n)} \leq \norm{a_1} \cdots \norm{a_n} \text{.} \]
+\end{lemma}
+
+\begin{proof}
+  This is geometrically obvious as the volume of a parallelepiped is not larger than product of the lengths of the spanning vectors.
+  However, here is a formal proof. \\
+  If $a_1,\dots,a_n$ are linearly dependent then the inequality is trivial.
+  Now assume $a_1,\dots,a_n$ are linearly independent.
+  Put
+  \[ c_i = a_i - \sum_{j< i} \left\langle a_i, c_j \right\rangle \norm{c_j}^{-2} \cdot c_j\]
+  Then
+  \begin{align}
+    \left\langle c_i, c_j \right\rangle = 0 \; (i \neq j)  \label{3_4}
+  \end{align}
+  and 
+  \begin{align}
+    a_i = t_{i1} c_1 + \dots + t_{i (i-1)} c_{i-1} + c_i \label{3_5}
+  \end{align}
+  By (\ref{3_4}) and (\ref{3_5}) we get 
+  \[ \norm{a_i}^2 = \left\langle a_i, a_i \right\rangle = (\sum_{j=1}^{i-1} t_{ij}^2 \norm{c_j}^2) + \norm{c_i}^2 \geq \norm{c_i}^2 \]
+  and $\det (a_1,\dots,a_n) = \det(c_1,\dots,c_n)$ (by linearity of determinant in columns).\\
+  Moreover,
+  \begin{align*}
+    (\det (c_1,\dots,c_n))^2 = \det \left(    
+    \begin{bmatrix}
+      c_1\\
+      \vdots\\
+      c_n
+    \end{bmatrix}
+    \begin{bmatrix}
+      c_1 & \cdots & c_n
+    \end{bmatrix}
+    \right)
+    = \prod_{i=1}^n \norm{c_i}^2 \leq \prod_{i=1}^n \norm{a_i}^2 \text{.}
+  \end{align*}
+\end{proof}
+
+\begin{defi*}
+  A \underline{distance function} $f$ on $\R^n$ is a function $f: \R^n \to \R$ such that
+  \begin{itemize}
+    \item $f(x) \geq 0 \; \forall x \in \R^n$
+    \item $f(tx) = \abs{t} f(x) \; \forall x \in \R^n \; \forall t \in \R$
+    \item $f$ is continuous.
+  \end{itemize}
+\end{defi*}
+
+\begin{defi*}
+  We say $C$ is a star body in $\R^n$ if
+  \begin{itemize}
+    \item $C \subset \R^n$ compact
+    \item $0 \in \inner(C)$, i.e., origin lies in the interior of $C$
+    \item $x \in C \implies t \cdot x \in C \; (0 \leq t \leq 1)$
+  \end{itemize}
+\end{defi*}
+
+%TODO add an example - picture
+
+\begin{rem}
+  \begin{itemize}
+    \item For a star body $C$ we have $t \cdot C \subset C$ for $0 \leq t \leq 1$.
+    \item Every compact, convex $C \subset \R^n$ with the origin in its interior is a star body in $\R^n$.
+    \item To every symmetric star body $C$ in $\R^n$ we can associate a distance function $f_C$ defined by
+    \[ f_C(x) = \inf \{ \lambda: x \in \lambda \cdot C \} \text{.} \]
+    Note that $f_C(x) = 0 \implies x =0$. \\
+    Why? If $x \neq 0$, then there exists a $\lambda > 0$ such that $\lambda x \nin C$.
+    Hence, $f_C(x) \geq \frac{1}{\lambda}$.
+    \item If $C$ is symmetric and convex then $f_C$ is actually a norm on $\R^n$ (cf exercise sheet 5).
+    In particular, $f_C$ satisfies the triangle-inequality.
+  \end{itemize}
+\end{rem}
+
+\begin{lemma}\label{l_2_3_3}
+  Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
+  Then there exist linearly independent $a_1,\dots,a_n \in \Lambda$ with $f_C(a_i) =  \lambda_i$.\\
+  Moreover, if $a \in \Lambda$ and $f_C(a) < \lambda_j$ then $a_1,\dots,a_{j-1},a$ are linearly dependent.
+\end{lemma}
+
+\begin{proof}
+  The set $(\lambda_n +1) \cdot C$ is compact and by definition of $\lambda_n$ contains $n$ linearly independent lattice points.
+  By the definition of the $\Lambda_i$'s it suffices to consider these points.
+  But by Theorem \ref{th_2_1_2} there are only finitely many of these, and so the claim easily follows.
+\end{proof}
+
+\begin{cor}\label{cor_2_3_4}
+  Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
+  Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ such that for $j = 1,\dots,n$: 
+  \[x \in \Lambda \text{ and } f_C(x) < \lambda_j \implies x = u_1 b_1 + \dots + u_{j-1} b_{j-1} \] 
+  for some $u_1,\dots,u_{j-1} \in \Z$.
+\end{cor}
+
+\begin{proof}
+  Let $a_1,\dots,a_n \in \Lambda$ be as in Lemma \ref{l_2_3_3}.
+  Let $\Lambda^\prime = (a_1,\dots,a_n) \Z^n$ be the sublattice of $\Lambda$ with basis $a_1,\dots,a_n$.
+  By Theorem \ref{th_2_3_1} there exists a basis $b_1,\dots, b_n$ of $\Lambda$ with (\ref{3_2});
+  so $a_j$ is dependent only on $b_1,\dots,b_j$.
+  By Lemma \ref{l_2_3_3} if $f_C(x) < \lambda_j$, then 
+  \begin{align*}
+    x &= s_1 a_1 + \dots + s_{j-1} a_{j-1} \\
+    &= u_1 b_1 + \dots + u_{j-1} b_{j-1}
+  \end{align*}
+  with $u_i \in \Q$.\\
+  As $x \in \Lambda$ and $b_1,\dots, b_{j-1}$ are linearly independent we conclude that $u_1,\dots,u_{j-1} \in \Z$.
+\end{proof}
+
+\begin{ex}[Exercise]
+  Let $C = B_1(0)$ and $\Lambda = \begin{pmatrix}
+  2 & 0 & 0 & 0 & 1\\
+  0 & 2 & 0 & 0 & 1\\
+  0 & 0 & 2 & 0 & 1\\
+  0 & 0 & 0 & 2 & 1\\
+  0 & 0 & 0 & 0 & 1
+  \end{pmatrix} \Z^5$.\\
+  There exists \underline{no} basis $b_1,\dots, b_5$ such that
+  $\norm{b_i} = \lambda_i \; (1\leq i\leq 5)$ with $\lambda_i = \lambda_i (\Lambda,C)$.
+\end{ex}
+
+\begin{lemma}\label{l_2_3_5}
+  Let $C$ be a convex, symmetric star body in $\R^n$, let $\Lambda$ be a lattice in $\R^n$, and let $a_1,\dots,a_n$ be linearly independent vectors in $\Lambda$.
+  Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ such that
+  \[ f_C(b_j) \leq \max \left\lbrace f_C(a_j), \frac{1}{2} (f_C(a_1)+\dots+f_C(a_j)) \right\rbrace \]
+\end{lemma}
+
+\begin{proof}
+  Consider the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$.
+  By Theorem \ref{th_2_3_1} there exists a basis $c_1,\dots,c_n$ of $\Lambda$ such that
+  \begin{align} \label{3_6}
+    \begin{split}
+      a_1 &= v_{11} c_1\\
+      a_2 &= v_{21} c_1 + v_{22} c_2\\
+      &\vdots\\
+      a_n &= v_{n1} c_1 + \dots + v_{nn} c_n
+    \end{split}
+  \end{align}
+  with $v_{ij} \in \Z$ and $v_{ii} \neq 0$.\\
+  Consider 
+  \begin{align}
+    b_j = c_j + t_{j(j-1)}a_{j-1} + \dots + t_{j1} a_1 \label{3_7}
+  \end{align}
+  where $t_{ji} \in \R$.\\
+  If $b_1,\dots,b_n$ are in $\Lambda$ then by (\ref{3_6}) they form a basis of $\Lambda$.\\
+  How do we choose $t_{ji}$?
+  If $v_{jj} = \pm 1$ then we put $b_j = \pm a_j$, which clearly is in the required form (\ref{3_7}) and obviously 
+  \[ f_C(b_j) = f_C(a_j) \text{.} \]
+  Now suppose $\abs{v_{jj}} \geq 2$.
+  Now solving (\ref{3_6}) for $c_j$ yields
+  \[ c_j = v_{jj}^{-1} a_j + k_{j j-1} a_{j-1} + \dots + k_{j1} a_1 \]
+  with $k_{ji} \in \Q$.\\
+  We choose $t_{ji} \in \Z$ such that
+  \[ \abs{k_{ji} + t_{ji}} \leq \frac{1}{2} \text{.} \]
+  Then $b_j \in \Lambda$ and 
+  \[b_j = l_{jj} a_j + l_{j j-1} a_{j-1} + \dots + l_{j1} a_1 \]
+  with 
+  \begin{align*}
+    \abs{l_{jj}} &= \abs{v_{jj}^{-1}} \leq \frac{1}{2} \text{ and}\\
+    \abs{l_{ji}} &= \abs{t_{ji} + k_{ji}} \leq \frac{1}{2} \text{ for } i < j
+  \end{align*}
+  Using that $C$ is a \underline{convex}, \underline{symmetric} star body we have the triangle inequality. 
+  Hence,
+  \begin{align*}
+    f_C(b_j) &\leq f_C(l_{jj}a_j) + \dots + f_C(l_{j1}a_1) \\
+    &= \abs{l_{jj}} f_C(a_j) + \dots + \abs{l_{j1}} f_C(a_1) \\
+    &\leq \frac{1}{2} (f_C(a_j) + \dots + f_C(a_1)) \text{.} 
+  \end{align*}
+\end{proof}
+
+\begin{cor}\label{2_3_6}
+  Let $C$ be a convex, symmetric star body, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$.
+  Then there exists a basis $b_1,\dots,b_n$ of $\Lambda$ with
+  \[ f_C(b_j) \leq \max \left\lbrace \lambda_j, \frac{1}{2}(\lambda_1 + \dots + \lambda_j) \right\rbrace \]
+\end{cor}
+
+\begin{proof}
+  Immediate form Lemmas \ref{l_2_3_3} and \ref{l_2_3_5}.
+\end{proof}
+
+
+\subsection{Minkowski's Second Theorem}
+
+Minkowski's Second Theorem is a refinement of his First Theorem and a central result in Geometry of Numbers.
+Let's start by rephrasing Minkowski's First Theorem.%\roman{1}
+
+First note if $C \subset \R^n$ is convex, symmetric and of positive volume then there exist $\varepsilon > 0$, $x \in C$ such that
+\[ B_\varepsilon(x) \subset C \text{.} \]
+But then there exists $\varepsilon^\prime > 0$ such that $B_{\varepsilon^\prime}(0) \subset C$.
+So the origin lies in the interior of $C$.
+So we can consider the successive minima $\lambda_1,\dots,\lambda_n$ of $\Lambda$ with respect to $C$, where $\Lambda$ is a lattice in $\R^n$.
+
+Note that by definition of $\lambda_1$:
+\[ \forall \varepsilon > 0: \; (\lambda_1 - \varepsilon) C \text{ contains \underline{no} non-zero lattice point.} \]
+
+Minkowski's First Theorem yields:
+\begin{align}
+  \lambda_1^n \cdot \vol(C) = \vol(\lambda_1 C) \leq 2^n \cdot \det \Lambda \label{4_1}
+\end{align}
+On the other hand (\ref{4_1}) and $\vol C > 2^n \det \Lambda$ implies $\lambda_1 < 1$ and hence $C$ contains a non-zero lattice point.
+The following theorem is much more precise than (\ref{4_1})!
+
+\begin{theorem}[Minkowski's Second Theorem\label{th_2_4_1_minkovski2}]
+  Let $C$ be a convex, symmetric star body in $\R^n$, and let $\Lambda$ be a lattice in $\R^n$ with successive minima $\lambda_1,\dots,\lambda_n$ with respect to $C$. Then
+  \[ \frac{2^n}{n!} \det \Lambda \leq \lambda_1 \dots \lambda_n \cdot \vol C \leq 2^n \det \Lambda \]
+\end{theorem}
+
+\begin{rem}
+  \begin{itemize}
+    \item Both bounds are sharp. For the upper bound take $\Lambda = \Z^n$ and $C = [-1,1]^n$; 
+    so $\lambda_1 = \dots = \lambda_n = 1 = \det \Lambda$, and $\vol C = 2^n$.
+    For the lower bound take $\Lambda = \Z^n$ and $C$ defined by $\abs{x_1} + \dots + \abs{x_n} \leq 1$.
+    Then $\vol C = \frac{2^n}{n!}$ and $\lambda_1 =  \dots = \lambda_n = 1 = \det \Lambda$.
+    \item The upper bound is much harder to prove.
+    We will prove Theorem \ref{th_2_4_1_minkovski2} only for the ball $C = B_1(0)$.
+  \end{itemize}
+\end{rem}
+
+\begin{proof}
+  (Special case $C = B_1(0)$)\\
+  Put 
+  \[ \delta(C) = \sup_M \frac{\lambda_1^n(M,C)}{\det M}\] 
+  where the supremum runs over all lattices $M$ in $\R^n$.
+  By Minkowski's First Theorem \ref{th_2_2_2_minkowski1} and (\ref{4_1}), we have 
+  \[ \delta(C) \leq \frac{2^n}{\vol C} \text{.} \]
+  We will show that if $C = B_1(0)$ then
+  \begin{align}
+    \det(\Lambda) \leq \lambda_1 \dots \lambda_n \leq \delta(C) \det(\Lambda) \text{.} \label{4_2}
+  \end{align}
+  In particular, as $\vol(C) \geq \frac{2^n}{n!}$, we get 
+  \[ \frac{2^n}{n!} \lambda_1 \dots \lambda_n \leq \vol(C) \lambda_1 \dots \lambda_n \leq 2^n \det(\Lambda) \text{.} \]
+  For the lower bound in (\ref{4_2}) take linearly independent $a_1,\dots,a_n \in \Lambda$ with $\norm{a_i} = \lambda_i$ using Lemma \ref{l_2_3_3}. 
+  For the sublattice $\Lambda^\prime = (a_1 \dots a_n) \Z^n \subset \Lambda$ we have 
+  \[ \det(\Lambda^\prime) = I \det(\Lambda) \text{,} \]
+  where $I$ is the index of $\Lambda^\prime$ in $\Lambda$.
+  By Hadamard's inequality we have
+  \[ \norm{a_1} \cdot \dots \cdot \norm{a_n} \geq \det(\Lambda^\prime) \geq \det(\Lambda) \text{.} \]
+  Thus
+  \[ \det(\Lambda) \leq \lambda_1 \dots \lambda_n \text{.} \]
+  Now we prove the upper bound in (\ref{4_2}).
+  Let $b_1,\dots,b_n$ be a basis of $\Lambda$ as in Corollary \ref{cor_2_3_4}.
+  As in the prove of Lemma \ref{l_2_3_2_hadamard} we can find mutually orthogonal vectors $c_1,\dots,c_n$ such that
+  \[ b_j = t_{j1} c_1 + \dots + t_{jj} c_j \; (t_{ji} \in \R) \]
+  By scaling we can assume $\norm{c_j}^2 = 1$ $(1 \leq j \leq n)$.
+  Now
+  \[ \sum_{j=1}^n u_j b_j = \sum_{i=1}^n \left( \sum_{j \geq i} u_j t_{ji} \right) c_i \]
+  thus
+  \begin{align}
+    \norm{\sum_{j=1}^n u_j b_j}^2 = \sum_{i=1}^n \left( \sum_{j \geq i} u_j t_{ji} \right)^2 \label{4_3}
+  \end{align}
+  Next we show that
+  \begin{align}
+    \sum_{i=1}^n \lambda_i^{-2} \left( \sum_{j \geq i} u_j t_{ji} \right)^2 \geq 1 \label{4_4}
+  \end{align}
+  where $u = (u_1,\dots,u_n) \in \Z^n \setminus 0$.\\
+  Let $u \in \Z^n \setminus 0$ with
+  \begin{align}
+    u_J \neq 0 \text{ and } u_j = 0 \text{ for } j > J \text{.} \label{4_5}
+  \end{align}
+  Then $u_1 b_1 + \dots + u_n b_n$, $b_1,\dots, b_{J-1}$ are linearly independent and by Corollary \ref{cor_2_3_4} we have 
+  \begin{align}
+    \norm{\sum_{j=1}^n u_j b_j}^2 \geq \lambda_J^2 \label{4_6}
+  \end{align}
+  Moreover, (\ref{4_5}) implies that summands with $j > J$ in (\ref{4_3}) and (\ref{4_4}) are zero.
+  Thus, the left hand side in (\ref{4_4}) is equal to 
+  \begin{align}
+    \sum_{i \leq J} \lambda_i^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 \geq \sum_{i \leq J} \lambda_J^{-2} \left( \sum_{i \geq j} u_j t_{ji} \right)^2 = \lambda_J^{-2} \norm{\sum_{j=1}^n u_j b_j}^2 \underbrace{\geq}_{\text{by (\ref{4_6}) and (\ref{4_3})}} 1
+  \end{align}
+  So if $\Lambda^\prime$ is the lattice with basis 
+  \begin{align}
+    b_j^\prime = t_{j1} \lambda_1^{-1} c_1 + \dots + t_{jj} \lambda_j^{-1} c_j \; (1 \leq j \leq n)
+  \end{align}
+  Then
+  \[ \norm{\sum_{j=1}^n u_j b_j^\prime} \geq 1\]
+  for every point $\sum_{j=1}^n u_j b_j^\prime \in \Lambda^\prime \setminus 0$.
+  Hence, 
+  \begin{align}
+    \lambda_1(\Lambda^\prime,C) \geq 1 \label{4_7}
+  \end{align}
+  But 
+  \begin{align}
+    \det(\Lambda^\prime) = \lambda_1^{-1} \cdots \lambda_n^{-1} \det(\Lambda) \label{4_8}
+  \end{align}
+  $\lambda_i = \lambda_i(\Lambda,C)$\\
+  Moreover, by definition
+  \begin{align}
+    \frac{\lambda_1^n(\Lambda^\prime,C)}{\det \Lambda^\prime} \leq \sup_M \frac{\lambda_1^n(M,C)}{\det M} = \delta(C) \label{4_9}
+  \end{align}
+  Combining (\ref{4_7}), (\ref{4_8}) and (\ref{4_9}) we conclude
+  \begin{align}
+    \lambda_1 \cdots \lambda_n = \det(\Lambda) \frac{1}{\det(\Lambda^\prime)} \leq \det(\Lambda) \frac{\lambda_1^n(\Lambda^\prime,C)}{\det(\Lambda^\prime)} \leq \det(\Lambda) \cdot \delta(C)
+  \end{align}
+\end{proof}
+
+\subsection{Counting lattice points}
+
+How many integer pairs $(x,y)$ solve the Diophantine inequality
+\[ x^2 + y^2 \leq T \text{?} \]
+What about
+\[ 3 x^2 + 5 y^2 + 7 z^2 \leq T \text{,} \]
+or more generally
+\[F(\underline{x}) \leq T \text{,} \]
+where $F$ is a positive definite quadratic form in $n$ variables?
+Even more generally, let $S \subset \R^n$ and $\Lambda$ a lattice in $\R^n$, we would like to get a (non-trivial) estimate for $(\Lambda \cap S)$.\\
+
+Suppose $S$ is measurable and "nicely shaped", and let 
+\[ F_v = [0,1) b_1 + \dots + [0,1) b_n + v \; (v \in \Lambda) \] 
+be a fundamental cell (with respect to basis $b_1,\dots,b_n$).\\
+
+The idea is as follows:
+$\abs{\Lambda \cap S} \approx $ number of $F_v$'s that lie in $S \approx \frac{\vol(S)}{\vol(F_v)} = \frac{\vol(S)}{\det(\Lambda)}$
+
+\todo{"Nice set"} %TODO picture
+\todo{"Bad set"} %TODO picture
+
+To characterize nice sets we use the following definition.
+
+\begin{defi*}
+  Let $n \geq 2$, $M$ be in $\N$ and $L \geq 0$ real.
+  We say the set $Z$ lies in \underline{$\lip(n,M,L)$} if
+  \begin{itemize}
+    \item $Z \subset \R^n$
+    \item there exist $M$ maps $\phi_i: [0,1]^{n-1} \to \R^n$ %TODO mising text
+  \end{itemize}
+  satisfying a Lipschitz condition with constant $L$, i.e.,
+  \[ \norm{\phi_i(x) - \phi_i(y)} \leq L \norm{x-y} \; \forall x,y \in [0,1]^{n-1} \]
+  and such that the union of their images covers $Z$, i.e.,
+  \[ Z \subset \cup_{i=1}^M \phi_i([0,1]^{n-1}) \text{.} \]
+\end{defi*}
+
+\begin{ex}
+  The sphere $S^\prime \subset \R^2$ lies in $\lip(2,1,2\pi)$.
+  \[ \phi(x) = (\cos(2\pi x), \sin(2 \pi x)) \text{ for } 0 \leq x \leq 1 \]
+\end{ex}
+
+We can now state the main result of Section 5.
+Recall that the boundary $\partial S$ of $S \subset \R^n$ is defined by the topological closure $\bar{S}$ minus the interior $\inner(S)$ of $S$.
+\[ \partial S = \bar{S} \setminus \inner(S)\]
+We follow an approach of Masser and Vaaler.
+
+\begin{theorem}\label{2_5_1}
+  Let $S \subset \R^n$ be bounded and suppose that $\partial S \in \lip(n,M,L)$.
+  Let $\Lambda$ be a lattice in $\R^n$ and $\lambda_1$ its first successive minimum with respect to the unit ball.
+  Then, $S$ is measurable and
+  \[ \abs{\abs{\Lambda \cap S} - \frac{\vol(S)}{\det \Lambda}} \leq c \cdot M \cdot \left( \frac{L}{\lambda_1} + 1 \right)^{n-1} \]
+  where $c$ is a constant depending only on $n$.
+\end{theorem}
+
+For the proof we need the following lemma.
+
+\begin{lemma}\label{2_5_2}
+  Let $S \subset \R^n$ be bounded and measurable and let $\Lambda$ be a lattice in $\R^n$.
+  Let $b_1,\dots,b_n$ be a basis of $\Lambda$, $F_v = [0,1)b_1 + \dots + [0,1)b_n + v$ the corresponding fundamental cells and write
+  \[ \mathcal{T} = \abs{\{v \in \Lambda: F_v \cap \partial S \neq \emptyset\} } \text{,} \]
+  the number of cells that intersect the boundary $\partial S$ of $S$.
+  Then 
+  \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq \mathcal{T} \]
+\end{lemma}
+
+\begin{proof}
+  The cells $F_v$ ($v \in \Lambda$) define a partition of $\R^n$.
+  Every $F_v$ contains exactly one lattice point, namely $v$.
+  Let $m = \abs{\{v \in \Lambda : F_v \subset S \}}$.
+  Then $m \leq \abs{S \cap \Lambda}$.\\
+  Now suppose $v \in S$.
+  Then either $F_v \subset S$ or $F_v$ contains a point from $S$ and from its complement $S^C$.
+  The connecting line segment of these points lies in $F_v$ as $F_v$ is convex and it must contain a point of the boundary $\partial S$.
+  Hence, 
+  \[ \abs{\Lambda \cap S} \leq m + \mathcal{T} \text{.} \]
+  Now $\vol F_v = \det \Lambda$, and the union of all cells $F_v$ that lie in $S$ has volume $m \cdot \det \Lambda$.
+  The volume of the union of cells $F_v$ that have non-empty intersection with $S$ is at most $(m + \mathcal{T}) \det \Lambda$.
+  So we have proved the inequalities
+  \begin{itemize}
+    \item $m \leq \abs{\Lambda \cap S} \leq (m + \mathcal{T})$
+    \item $m \cdot \det \Lambda \leq \vol S \leq (m + \mathcal{T}) \det \Lambda$
+  \end{itemize}
+  Thus \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq \mathcal{T}\]
+\end{proof}
+
+We can now prove Theorem \ref{2_5_1}.
+
+\begin{proof}[Proof of Theorem \ref{2_5_1}]
+  We use $c_1,c_2,c_3,c_4,c_5,c_6,c_7$ to denote constants that depend only on $n$.\\
+  First let's assume $\Lambda = \Z^n$, so $\lambda_1 = 1$.
+  We take the standard basis $b_i = c_i \; (1\leq i\leq n)$ and apply Lemma \ref{2_5_2}; so $\mathcal{T} = \mathcal{T}(e_1,\dots,e_n)$.
+  We split $[0,1]^{n-1}$ into $L_1^{n-1}$ subcubes of side length $\frac{1}{L_1}$ where $L_1 = [L] + 1$. %TODO replace [] by \floor  
+  The images of these subcubes under the parametrizing maps $\phi$ have diameter at most $L \cdot \frac{c_1}{L_1} \leq c_1$.
+  Thus, no more than $c_2 = (c_1 + 2)^n$ cells $F_v$ can meet such a single image (= the image of a single subcube).
+  Hence, 
+  \begin{align}
+    \mathcal{T} \leq M \cdot c_2 \cdot L_1^{n-1} \leq M \cdot c_2 \cdot (L + 1)^{n-1} \label{5_1}
+  \end{align}
+  As $\lambda_1(\Z^n) = 1$ this proves the claim for $\Lambda = \Z^n$ thanks to Lemma \ref{2_5_1}.
+  
+  Now let $\Lambda$ be an arbitrary lattice.
+  By Corollary \ref{2_3_6} there exists a basis $b_1,\dots,b_n$ of $\Lambda$ such that
+  \[ \abs{b_i} \leq c_3 \lambda_i \; (1 \leq i \leq n) \]
+  where $\lambda_1,\dots,\lambda_n$ are the successive minima with respect to the unit ball.
+  Let 
+  \[ A^{-1} = \left( b_1 \dots b_n \right) \in \gl_n(\R) \text{,} \]
+  so that 
+  \[ A(\Lambda) = \Z^n \text{.} \]
+  Now 
+  \[ \abs{S \cap \Lambda} = \abs{A(S \cap \Lambda)} = \abs{A(S) \cap A(\Lambda)} = \abs{A(S) \cap \Z^n} \text{.} \]
+  So we can apply the case $\Lambda = \Z^n$ to the set $A(S)$.
+  The boundary $\partial A(S)$ can  be parametrized by the $M$ maps $\psi(x) = A(\phi(x))$ which satisfy
+  \[ \norm{\psi(x) - \psi(y)} \leq \norm{A} \cdot L \norm{x-y} \text{,}\]
+  where $\norm{A}$ denotes the Euclidean operator norm of $A$.\\
+  By Cramer's rule the entries of row $i$ of $A$ are of the form $\frac{\mu}{\det \Lambda}$, 
+  where $\mu$ is a minor of the matrix with columns $b_1,\dots,b_n$ omitting $b_i$.
+  Using Hadamard's inequality we conclude 
+  \[ \abs{\mu} \leq \frac{\norm{b_1} \cdots \norm{b_n}}{\norm{b_i}} \leq c_4 \cdot \frac{\lambda_1 \cdots \lambda_n}{\lambda_i} \text{.}\]
+  By Minkowski's Second Theorem we have
+  \[ \lambda_1,\dots,\lambda_n \leq c_5 \cdot \det \Lambda \text{.} \]
+  Hence, each entry of $A$ has absolute value at most $\frac{c_6}{\lambda_1}$.
+  It follows 
+  \[ \norm{A} \leq \frac{c_7}{\lambda_1} \text{.} \]
+  Replacing $L$ in (\ref{5_1}) by $\frac{c_7 L}{\lambda_1}$ proves the theorem.
+\end{proof}
+
+\begin{rem}
+  We have not shown that $S$ is measurable.
+  One could do that by showing that $\partial S$ has measure zero, and noting that every closed set is measurable.\\
+  Why is $\vol(\partial S) = 0$?
+  Take $\Lambda = k^{-1} \Z^n$ where $k \in \N$, and $\mathcal{T}$ be associated to the basis $k^{-1} e_1, \dots, k^{-1}e_n$.
+  The proof of Theorem \ref{2_5_1} yields
+  \[ \mathcal{T} \leq c_n M \left( \frac{L}{k^{-1}} + 1 \right)^{n-1} \leq c_n M (L+1)^{n-1} k^{n-1} \text{.} \]
+  Since 
+  \[\vol(\partial S) \leq \mathcal{T} \vol F_v \leq c_n M (L+1)^{n-1} k^{n-1} k^{-n} \to 0 \text{ as } k \to \infty \text{.} \]
+  Hence $\vol(\partial S) = 0$.
+\end{rem}
+
+
+In some applications a more precise error term is needed that involves also the higher successive minima.
+With a bit more effort the following result could be proved.
+
+\begin{theorem}\label{2_5_3}
+  Same hyptothesis as in Theorem \ref{2_5_1} and $\lambda_1,\dots,\lambda_n$ successive minima with respect to the unit ball.
+  Then 
+  \[ \abs{\abs{\Lambda \cap S} - \frac{\vol S}{\det \Lambda}} \leq c M \underbrace{\max_{0 \leq i < n} \frac{L}{\lambda_1 \cdot \lambda_i}}_{\coloneq 1 \text{ for } i = 0} \]
+  \todo{Professor: compare with Adrian}
+  and $c = n^{3n^2}$.
+\end{theorem}
+
+\end{document}

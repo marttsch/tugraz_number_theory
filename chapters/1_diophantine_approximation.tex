@@ -1,0 +1,965 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section*{New Lecturer}
+Chapter 1:
+\begin{enumerate}
+  \item Approximation to algebraic numbers; Wolfgang M. Schmidt, 1972 L'Ehseignement Mathématique
+  \item Lectures Notes in Mathematics 785; W.M.Schmidt, Springer
+  \item LNM 1467, W.M.S., Springer
+  \item For section 2 (continued fractions) he will strictly follow the lecture notes of MT421 of Professor James McKee
+\end{enumerate}
+
+\section{Diophantine Approximation}
+
+\subsection{Dirichlet's Theorem}
+
+Let $\alpha \in \R$. As $\Q$ is dense in $\R$ any $\alpha \in \R$ can be approximated arbitrarily well, by rational numbers $p/q$ ($p \in \Z, q \in \N = \{1,2,3,\dots\}$).\\
+The question is how well can we approximate $\alpha$ in terms of the denominator $q$, e.g., is it true that for every $\alpha \in \R$ there exists infinitely many $p/q \in \Q$ $q\in \N$) such that $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$?\\
+\\
+The answer is no!\\
+Take $\alpha = r/s (s \in \N)$ a rational number. Then 
+\[ | \alpha - \frac{p}{q} | = |\frac{r}{s} - \frac{p}{q} | = | \frac{qr -ps}{sq} | \overset{\geq}{\text{provided } \alpha \neq \frac{p}{q}} \frac{1}{sq}  > \frac{1}{q^2} \text{ provided } q > s.\]
+This shows that we have only finitely many solutions $p/q \in \Q$ for $| \alpha -\frac{p}{q} | < \frac{1}{q^2}$.
+
+\begin{theorem}[Dirichlet's Theorem]\label{1_1_1}
+  Suppose $\alpha,Q \in \R$ and $Q > 1$. Then $\exists p,q \in \Z \text{s.t.} 0< q<Q$ and $| q\alpha - p | \leq \frac{1}{Q}$.
+\end{theorem}
+
+\begin{proof}
+  for $\xi \in \R$ put $\{ \xi \} = \xi - \lfloor \xi \rfloor$. so $ 0 \leq \{ \xi\} < 1$. First suppose $Q \in \Z$.
+  Consider the $Q + 1$ numbers $0,1,\{\alpha\},\{2\alpha\},\dots,\{(Q-1)\alpha\}$.\\
+  They all lie in $[0,1]$. We split it up in $Q$ subintervals:
+  \[ [0,1] =[0, \frac{1}{Q}] \cup \left[ \frac{1}{Q},\frac{2}{Q} \right] \cup \dots \cup \left[ \frac{Q-1}{Q},1 \right] \]
+  By the pigeon hole principle two of the previous numbers lie in the same subinterval. Thus $\exists r_1,r_2,s_1,s_2 \in \Z$ with $0 \leq r_1 < r_2 \leq Q-1$ such that $| (r_1\alpha - s_1) - (r_2 \alpha -s_2) | \leq \frac{1}{Q}$.
+  Then with $q = r_2 - r_1$ and $p = s_2 -s_1$ we get $|q\alpha - p| \leq \frac{1}{Q}$ and $0 < q < Q$.
+  This proves the Theorem when $Q \in \Z$. Now suppose $Q \nin \Z$. 
+  We apply the previous with $Q^\prime = \lfloor Q \rfloor + 1 > 1$.
+  Hence, $\exists p,q \in \Z$ with $| q\alpha - p | \leq \frac{1}{Q^\prime}$ and $0 < q < Q^\prime$, and so $|q\alpha - p | \leq \frac{1}{Q}$ and $0 < q < Q$.
+\end{proof}
+
+\begin{cor}\label{1_1_2}
+  Suppose $\alpha \in \R/\Q$. Then there exist infinitely many solutions $p/q \in \Q$ ($q \in \N$) of $| \alpha - \frac{p}{q}| < \frac{1}{q^2}$.
+\end{cor}
+
+\begin{proof}
+  Take $Q_1 > 1$. By Theorem 1.1.1 we get $(p_1, q_1) \in \Z^2$ with $0<q_1 < Q$, and $|q_1 \alpha - p_1 | \leq \frac{1}{Q_1}$.
+  Thus $|\alpha - \frac{p_1}{q_1} | \leq \frac{1}{q_1 Q_1} < \frac{1}{q_1^2}$
+  \\
+  Next take $Q_2 = |\alpha - \frac{p_1}{q_1}|^{-1} + 1$. Then Theorem 1.1.1 again yields $\frac{p_2}{q_2} \in \Q$ with $|\alpha - \frac{p_2}{q_2} | < \frac{1}{q^2}$ and $|\alpha - \frac{p_2}{q_2} | \leq \frac{1}{q_2 Q_2} \leq \frac{1}{Q_2} < |\alpha - \frac{p_1}{q_1}|$. So $\frac{p_2}{q_2}$ is a better approx then $\frac{p_1}{q_1}$.
+  Repeating this process indefinitely proves the claim.
+\end{proof}
+
+\begin{theorem}[Pell-equation]\label{1_1_3}
+  Suppose $m \in \N$ is not a square (i.e., $m \neq n^2 \forall n \in \Z$).\\
+  Then 
+  \[x^2 - m y^2 = 1\]
+  has infinitely many solutions $(x,y)\in \Z^2$.
+\end{theorem}
+
+\begin{proof}
+  Apply Corollary 1.1.2 with $\alpha = \sqrt{m}$. So $\alpha \in \R/\Q$.
+  We get $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$ and $|\alpha + \frac{p}{q} | \overset{\leq}{triangle inequality} 1 + 2 \alpha$.
+  Thus
+  \[ |p^2 - mq^2| = q^2 | \alpha - \frac{p}{q} | \cdot |\alpha + \frac{p}{q}| < 1 + 2 \sqrt{m}. \]
+  Hence, there exists $k \in \Z$ with $|k| < 1 + 2 \sqrt{m}$. such that $ p^2 - m q^2 = k$ for infinitely many $(p,q) \in \Z^2$ and $p/q$ all distinct.\\
+  As $m$ is not a square we have $k \neq 0$.\\
+  \\
+  Let $S$ be the set of solutions $(p,q) \in \Z^2$ of $p^2 - m q^2 = k$.
+  The map $S \to (\Z/k\Z) \times (\Z/k\Z)$.
+  This map is not injective ($S = \infty$) hence, $\exists (p_1,q_1) \neq (p_2,q_2)$ both in $S$ such that $p_1 \equiv p_2, q_1 \equiv q_2 \pmod k$. (MOD)\\%todo marker
+  Now we compute
+  \begin{align}
+    k^2 &= (p_1^2 - m q_1^2)(p_2^2 - m q_2^2)\\
+    &= (p_1 + \sqrt{m}q_1)(p_2 - \sqrt{m} q_2)(p_1 - \sqrt{m}q_1)(p_2 + \sqrt{m} q_2)\\
+    &= (r - \sqrt{m} s)( r + \sqrt{m} s) = r^2 - m s^2\\
+    \text{where } r &= p_1 p_2 - m q_1 q_2\\
+    s &= p_1 q_2 - q_1 p_2 = \frac{1}{q_1 q_2} (\frac{p_1}{q_1} - \frac{p_2}{q_2}) \neq 0.
+  \end{align}
+  because of (MOD) $k \divides s$. Hence, $k^2 \divides s^2$. Thus $k^2 \divides r^2$. Hence $k \divides r$.
+  Then $ x = \frac{r}{k}$ and $y = \frac{s}{k}$ are both integers and
+  \[x^2 - m y^2 = 1. \]
+  We have one solution but we need infinitely many! To this end we replace $m$ by $md^2$ ($d \in \N$).
+  The above argument yields a solution $(x^\prime,y^\prime) \in \Z^2$ of ${x^\prime}^2 - md^2 {y^\prime}^2 = 1$.
+  Thus, $(x,y) = (x^\prime,dy^\prime)$ is a new solution of $x^2 - m y^2 = 1$.\\
+  (Critical: $s \neq 0$)
+\end{proof}
+
+\subsection{Continued fractions}
+
+Let $\theta \in \R$. Put $a_0 = \lfloor \theta \rfloor$. If $a_0 \neq \theta$ then we find $\theta_1 > 1$ such that
+\[ \theta = a_0 + \frac{1}{\theta_1} \]
+and we put $a_1 = \lfloor \theta_1 \rfloor$. If $a_1 \neq \theta_1$ then we can find $\theta_2 > 1$ such that
+\[ \theta_1 = a_1 + \frac{1}{\theta_2} \]
+and we put $a_2 = \lfloor \theta_2 \rfloor$. This process can be continued indefinitely, unless $a_n = \theta_n$ for some $n$.
+Note that $a_0$ can be zero or negative but  $a_1,a_2, a_3, \dots$ are all positive integers.\\
+We call this process the \emph{continued fraction process}. The $a_i$ are called \emph{partial quotients} of $\theta$.
+
+\begin{ex*}
+  \[\theta = \frac{19}{11}\]
+  Then $a_0 = \lfloor \theta \rfloor = 1$\\
+  Now $\theta = \frac{19}{11} = a_0 + \frac{1}{\theta_1} = 1 + \frac{8}{11} = 1 + \frac{1}{\frac{11}{8}}$\\
+  So $\theta_1 = \frac{11}{8}$.\\
+  Thus $a_1 = \lfloor \theta_1 \rfloor = 1$.\\
+  Now 
+  \[ \theta_1 = \frac{11}{8} = a_1 + \frac{1}{\theta_2} = 1 + \frac{3}{8} = 1 + \frac{1}{\frac{8}{3}} \]
+  Thus $\theta_2 = \frac{2}{3}$ and $a_2 = \lfloor \theta_2 \rfloor = 2$\\
+  and so on...\\
+  \\
+  If the continued fraction process terminates then we have
+  \begin{align}
+  \theta &= a_0 + \frac{1}{\theta_1}\\
+  &= a_0 + \frac{1}{a_2 + \frac{1}{\theta_2}}\\
+  &= a_0 + \frac{1}{a_2 + \frac{1}{a_3 + \frac{1}{\theta_3}}}
+  & \dots
+  &= a_0 + \frac{1}{a_1 + \frac{1}{..}}%TODO add Kettenbruch
+  \end{align}
+  
+  In this case we write $\theta = [a_0,\dots,a_n]$.\\
+  We use the same notation when the $a_i$ are any real numbers, not necessarily integers.\\
+  In particular
+  \[ \theta = [a_0,\dots,a_i,\theta_{i+1}] \]
+  where $0 \leq i < n$.
+\end{ex*}
+
+If the continued fraction process does not terminate then we write $\theta = [a_0,a_1,a_2,\dots]$.\\
+Note that in this case, for every $n \geq 0$, we have 
+\[ \theta = [a_0,\dots, a_n,\theta_{n+1}] \]
+where $a_0,\dots,a_n$ are integers but $\theta_{n+1}$ is not!
+For $n \geq 0$ we set 
+\[ \frac{p_n}{q_n} = [a_0,\dots,a_n] \] 
+where $\gcd(p_n,q_n) = 1$.
+We shall say that $\frac{p_n}{q_n}$ is the $n$-th convergent of $\theta$.
+We will prove that $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$.
+Next we shall see that  $p_n,q_n > 0$ both satisfy the same simple recurrence relation $x_n = a_n x_{n-1} + x_{n-2}$ with different starting values.
+
+\begin{lemma}\label{1_2_1}
+  Let $a_0,a_1,a_2,\dots$ be a sequence of integers with $a_i > 0$ ($i>0$).\\
+  Define $p_n,q_n$:
+  \begin{align}
+    p_0 &= a_0\\
+    q_0 &= 1\\
+    p_1 &= a_0 a_1 + 1\\
+    q_1 &= a_1\\
+    p_n &= a_n p_{n-1} + p_{n - 2} \text{ for } n \geq 2\\
+    q_n &= a_n q_{n-1} + q_{n-2} \text{ for } n \geq 2.
+  \end{align}
+  Then:
+  \begin{enumerate} %a,b
+    \item $p_n q_{n+1} - p_{n+1} q_n = (-1)^{n+1}$
+    \item $\gcd(p_n,q_n) = 1$
+    \item $p_n/q_n = [a_0,\dots,a_n]$
+    \item If the $a_i$ are produced by the continued fraction process for $\theta$, then, for every $n \geq 1$, $\frac{p_n}{q_n}$ is the $n$-th convergent of $\theta$ and
+    \[ \theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}} \]
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate} %a,b
+    \item We use induction on $n$. For $n = 0$ we note that 
+    \[ p_0 q_1 - p_1 q_0 = a_0 a_1 - a_0 a_1 - 1 = -1.\]
+    So the result holds for $n = 0$.\\
+    Now suppose result holds for $n = m - 1$.\\
+    consider case $n = m$. Using the recurrence relation, we set
+    \begin{align}
+      p_m q_{m+1} - p_{m+1} q_m &= p_m (a_m q_m + q_{m-1}) - q_m ( a_m p_m + p_{m-1})\\
+      &= p_m q_{m-1} - p_{m-1}q_m = - (-1)^m = (-1)^{m+1}.
+    \end{align}
+    This proves claim for $n = m$.
+    \item Immediate from (a)
+    \item (c) + (d):\\
+    Remark about $\frac{p_n}{q_n}$ in (d) follows directly from (c).
+    We prove the rest of (d), along with (c), using induction on $n$. Remember that (c) a priori does not require that the $a_i$ are produced by the continued fraction process.\\
+    Consider base case $n = 1$. For (c) note that $\frac{p_1}{q_1} = a_0 + \frac{1}{a_1} = [a_0,a_1]$.
+    For (d) we note that
+    \[ \frac{p_1 \theta_2 + p_0}{q_1 \theta_2 + q_0} = \frac{(a_0 a_1 +1) \theta_2 + a_0}{a_1 \theta_2 + 1} = a_0 + \frac{\theta_2}{a_1 \theta_2 +1} = a_0 + \frac{1}{a_1 + \frac{1}{\theta_2}} = \theta \]
+    Next suppose (c) and (d) both hold for $n = m-1$, and consider $n = m$. Using (d)  with $n = m -1$ we get
+    \[ [a_0, \dots, a_m ] = \frac{p_{m-1} a_m + p_{m-2}}{q_{m-1} a_m + q_{m-2}} = \frac{p_m}{q_m} \text{ by recurrence ralation.} \]
+    This proves (c) for $n=m$.\\
+    To prove (d) with $n=m$ we observe that
+    \begin{align}
+      \theta &= [a_0,\dots,a_m,\theta_{m+1} ] \\
+      &= [a_0,\dots,a_m + \frac{1}{\theta_{m+1}} ]\\
+      &\overset{=}{(d) for n=m-1} \frac{p_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + p_{m-2}}{q_{m-1} (a_m + \frac{1}{\theta_{m+1}} ) + q_{m-2}}\\
+      &\overset{=}{rec. rel} \frac{p_m + p_{m-1} (\frac{1}{\theta_{m+1}})}{q_m + q_{m-1} ( \frac{1}{\theta_{m+1}})}\\
+      &= \frac{p_m \theta_{m+1} + p_{m-1}}{q_m \theta_{m+1} + q_{m-1}}
+    \end{align}
+    which is (d) for $n=m$.
+  \end{enumerate}
+\end{proof}
+
+Next we deduce some properties of continued fraction convergents.
+
+\begin{theorem}\label{1_2_2}
+  Let $\theta = [a_0,a_1,a_2,\dots ]$ with convergents $\frac{p_n}{q_n}$.
+  For (a) - (d) we assume that the continued fraction proves does not terminate
+  \begin{enumerate} %a,b
+    \item For all $n \in \N_0$, $\theta$ lies between $\frac{p_n}{q_n}$ and $\frac{p_{n+1}}{q_{n+1}}$.
+    \item For all $n \in \N_0: |\theta - \frac{p_n}{q_n} | \leq \frac{1}{q_n q_{n+1}}$
+    \item For $n \geq 1$ we have $q_{n+2} \geq 2\cdot q_n$
+    \item $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$
+    \item The continued fraction process terminates if and only if $\theta$ is rational.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note $\theta = [a_0,\dots,a_n,\theta_{n+1} ] = [a_0,\dots,a_n+\frac{1}{\theta_{n+1}}$
+    where $0 < \frac{1}{\theta_{n+1}} < \frac{1}{a_{n+1}}$. So that $\theta$ lies between $[a_0,\dots,a_n]$ and $[a_0,\dots,a_n + \frac{1}{a_{n+1}} ]$.
+    But $[a_0,\dots,a_n + \frac{1}{a_{n+1}} = [a_0,\dots,a_{n+1}]$. This shows (a).
+    \item By (a) we have $|\theta - \frac{p_n}{q_n} | \leq |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = | \frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}} | \underset{=}{Lemma 1.2.1(a)} \frac{1}{q_n q_{n+1}}$
+    \item Follows from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
+    \item Follows from (b) and (c)
+    \item Only if part is obvious.\\
+    Conversely suppose $\theta = \frac{a}{b} \in \Q$ but the process does \emph{not} terminate. Taking $n$ such that $q_n > b$ yields
+    \[ | \theta - \frac{p_n}{q_n} | \underset{\geq}{\frac{a}{b} \neq \frac{p_n}{q_n} as q_n > b and \gcd(p_n,q_n) = 1} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
+    contradicting (b).
+  \end{enumerate}
+\end{proof}
+
+\begin{ex*}
+  Take $\theta = \frac{16}{9}$. We have $a_0 = 1$. Then $\theta = 1 + \frac{7}{9}$ so $\theta_1 = \frac{9}{7}$ and $a_1 = 1$. 
+  From $\theta_1 = \frac{9}{7} = 1 + \frac{2}{7}$ we get $\theta_2 = \frac{7}{2}$ and $a_2 = 3$.
+  Form $\theta_2 = \frac{7}{2} = 3 + \frac{1}{2}$ we get $\theta_3 = 2$ and $a_3 = 2$.
+  Thus $\theta = \frac{16}{9} = [1,1,3,2]$ and the convergents are $\frac{p_0}{q_0} = \frac{1}{1}, \frac{p_1}{q_1} = 1 + \frac{1}{1} = \frac{2}{1}, \frac{p_2}{q_2} = 1 + \frac{1}{1+\frac{1}{3}} = 1 + \frac{1}{\frac{4}{3}} = \frac{7}{4}$ 
+  and $\frac{p_3}{q_3} = \frac{16}{9}$. \\
+  Let's check some of the properties claimed.\\
+  $p_1 q_2 + p_2 q_1 = 2\cdot 4 - 7 \cdot 1 = 1 \checkmark, p_2 q_3 - p_3 q_2 = 7\cdot 9 - 16 \cdot 4 = -1 \checkmark,
+  \frac{p_2 \theta_3 + p_1}{q_2 \theta_3 +q_1} = \frac{ 7 \cdot 2 + 2}{4 \cdot 2 +1} = \frac{16}{9} = \theta \checkmark$
+\end{ex*}
+
+We now show that convergents give best-possible rational approximations.
+
+\begin{theorem}\label{1_2_3}
+  Let $\theta$ be an irrational real number, and let $\frac{p_n}{q_n}$ be the convergents ($n \geq 0$) with partial quotients $a_n (n \geq 0)$.\\
+  Then
+  \begin{enumerate} %a,b
+    \item $ | \theta - \frac{p_n}{q_n}|$ strictly decreases as $n$ increases.
+    \item the convergents give successively closer approximations to $\theta$.
+    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < |\theta - \frac{p_n}{q_n}| < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
+    \item If $p,q \in \Z$ with $0 < q < q_{n+1}$ then
+    \[ |q \theta - p| \geq |q_n \theta - p_n| \]
+    Moreover, "$=$" only if $(p,q) = (p_n,q_n)$.\\
+    (In this sense convergents are best-possible approximations.)
+    \item If $(p,q) \in \Z \times \N$ and $|\theta - \frac{p}{q}| < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item From Lemma 1.2.1(d) we have $\theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}}$.
+    Using Lemma 1.2.1(a) we get
+    \begin{align}
+    |q_n \theta - p_n| &= |\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}| \\
+    &= \frac{1}{q_n \theta_{n+1} + q_{n-1}}\\
+    &< \frac{1}{q_n + q_{n-1}}\\
+    &= \frac{1}{(a_n +1) q_{n-1} + q_{n-2}}\\
+    &< \frac{1}{\theta_n q_{n-1} + q_{n-2}}\\
+    &= | q_{n-1} \theta - p_{n-1}|
+    \end{align}
+    This shows (a) and (b) because the $q_n$ are increasing.
+    \item[c] We use $a_{n+1} q_n^2 < \theta_{n+1} q_n^2 + q_n q_{n-1} < (a_{n+1} + 2) q_n^2$
+    and combine it with the equation (proof part (a)),
+    \[ |\theta - \frac{p}{q}| = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
+    
+    %---part from 27.10.2015
+    
+    \item[d)] By Lemma 1.2.1(a) we can find $\Vek{u}{v}{} \ in \Z^2$ such that
+    \[ \left(\begin{matrix} p_n & p_{n+1}\\ q_n & q_{n+1} \end{matrix} \right) \Vek{u}{v}{} = \Vek{p}{q}{}. \]
+    As $0 < q <q_{n+1}$ we have $u \neq 0$. If $v = 0$ then $(p,q) = u \cdot (p_n,q_n)$ and the claim is trivial. ($u = 1 \Rightarrow$ equality, $u > 1 \Rightarrow$ strictly >)\\
+    So let's assume $v \neq 0$. Then $u$ and $v$ cannot both be negative (as $q > 0$) nor both be positive (as $q < q_{n+1}$).
+    So they have opposite signs.\\
+    By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta - p_{n+1}$ have opposite signs.
+    Hence, $|q \theta - p| = |u (q_n \theta - p_n) + v (q_{n+1} \theta - p_{n+1})| > |q_n \theta - p_n|$.
+    \item[e)] Take $n$ with $q_n \leq q < q_{n+1}$. Then 
+    \begin{align*} 
+    |\frac{p}{q} - \frac{p_n}{q_n}| &\leq |\theta - \frac{p}{q}| + |\theta - \frac{p_n}{q_n}| \\
+    &= \frac{|q \theta - p|}{q} + \frac{|q_n \theta - p_n|}{q_n}\\
+    &\overset{\leq}{(d)} (\frac{1}{q} + \frac{1}{q_n}) |q \theta - p | \\
+    &\leq \frac{2}{q_n} \frac{1}{2q} \\
+    &= \frac{1}{q q_n}
+    \end{align*}
+    Hence, $\frac{p}{q} = \frac{p_n}{q_n}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{rem}
+  \begin{itemize}
+    \item (d) implies that if $p,q \in \Z$, $0 < q \leq q_n$ then
+    \begin{align*}
+      |\theta - \frac{p}{q}| &\geq |\theta - \frac{p_n}{q_n}| \cdot \frac{q_n}{q}\\
+      &\geq | \theta - \frac{p_n}{q_n}|
+    \end{align*}
+    with "$=$" only if $\frac{p}{q} = \frac{p_n}{q_n}$.
+    \item We say $\alpha \in \R \setminus \Q$ is \emph{badly approximable} if
+    \[ \exists c > 0 \text{ such that } |\alpha - \frac{p}{q}| > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
+    \item By (c) and (d) we see that $\theta = [a_0,a_1,a_2,\dots]$ is badly approximable if and only if
+    the partial quotients $a_i$ are uniformly bounded, i.e., $\exists M > 0$ such that $a_i < M \forall i$.
+    \item (c) suggests that the \grqq worst-approximable\grqq ~number is $\theta = [1,1,1,\dots]$. 
+    That's indeed the case c.f Exercise sheet 2 \# 5,6 (using that $\theta = 1 + \frac{1}{1+\frac{1}{1+\dots}} = 1 + \frac{1}{\theta}$.
+    So $\theta^2 - \theta -1 = 0$.\\
+    So $\theta = \frac{1 \pm \sqrt{5}}{2}$ but $a_0 = 1$ so $\theta = \frac{1 + \sqrt{5}}{2}$.
+  \end{itemize}
+\end{rem}
+
+%-----------
+\emph{Counting Diophantine approximations 1:}\\
+\todo{Professor: check}
+Let $\alpha \in \R \setminus \Q$ and let $\phi: [1,\infty) \to (0,\infty)$ be decreasing.
+Consider the number of "$\phi$-good" approximations:
+\[ N_\alpha(\phi,Q) = \#\{\frac{p}{q} \in \Q ; |\alpha - \frac{p}{q} | < \phi(q), 1 \leq q \leq Q\} \]
+We put $S_\alpha(\phi,Q) = \{(x,y)\in \R^2 : | \alpha - \frac{x}{y}| < \phi(y), 1 \leq y \leq Q\}$.
+Then
+\[ N_\alpha(\phi,Q) = \#\{(p,q)\in \Z \times \N : \gcd(p,q) = 1\} \cap S_\alpha(\phi,Q) \]
+Note that by Corollary 1.1.2 we have $N_\alpha(\phi,Q) \to \infty$ as $Q \to \infty$ provided $\phi(y) \geq \frac{1}{y^2}$,
+and by Exercise sheet 2, even when $\phi(y) \geq \frac{1}{\sqrt{5}y^2}$.
+If $\phi$ decays slowly enough then one can easily show that
+\[ N_\alpha(\phi,Q) = 2 \cdot \underbrace{\int_1^Q y \phi(y) dy}_{Vol S_\alpha (\phi,Q)}(1+ \underbrace{o(1))}_{\text{tends to } 0 \text{ as } Q \to \infty} \text{ as Q } \to \infty \]
+\todo{$2$ or $\frac{2}{\zeta(2)}$}
+More specifically, using tools we develop in Chapter 3, one can easily show that
+\[ \#\Z^2 \cap S_\alpha(\phi,Q) = 2 \cdot \int_1^Q y \phi(y) dy + \mathcal{O}(Q), \]
+using Möbius-inversion, one can show that 
+\[ N_\alpha(\phi,Q) = \frac{2}{\zeta(2)} \cdot \int_1^Q y \phi(y) dy + \mathcal{O}(Q \log{Q}).\]
+So we get an asymptotic formula
+\[ N_\alpha (\phi,Q) \sim \frac{2}{\zeta(2)} Vol S_\alpha (\phi,Q) \]
+provided
+\[ \frac{Q \log Q}{\int_1^Q y \phi(y)dy} \to 0 \text{ as } Q \to \infty. \]
+So, e.g., if $\phi(y) \geq \frac{(\log y)^2}{y}$.
+
+However, the case when $\phi(y)$ decays much quicker is more interesting.
+Serge Lang in 1967 proved that if $\alpha$ is real quadratic then
+\[ N_\alpha(\frac{1}{x^2},Q) = c_\alpha \cdot \log(Q) + \mathcal{O}(1)\text{. } (c_\alpha > 0). \]
+He mentioned that it would seem quite difficult to prove an asymptotic result for algebraic $\alpha$, let alone transcended.\\
+Adams showed
+\[ N_e(\frac{1}{x^2},Q) = c_e \cdot \frac{\log Q}{\log \log Q} + \mathcal{O}(1) (c_e > 0) \]
+where $ e = 2.7122\dots$\\
+Lang and Adams both used continuous fractions expansion. How can one prove asymptotics for $N_\alpha(\phi,Q)$?
+Here is an example.
+
+\begin{ex}
+  Suppose $\phi(x) = \frac{1}{2x^2}$. Consider the continuous fraction expansion $\alpha = [a_0,a_1,a_2,\dots]$.
+  By Theorem 1.2.3 we know $| \alpha - \frac{p}{q}| < \phi(q) \Rightarrow \frac{p}{q}$ is a convergent.
+  Moreover, if $\frac{p}{q} = \frac{p_n}{q_n}$ is the $n$-th convergent then $|\alpha - \frac{p}{q}| < \frac{1}{a_{n+1} q^2}$.
+  So if all $a_i > 1$ then $|\alpha - \frac{p}{q}| < \phi(q) \forall$ convergent $\frac{p}{q}$.\\
+  Hence, $N_\alpha(\phi,Q) = \#\{n: q_n \leq Q \}$.\\
+  So, we need to compute the number of convergents $\frac{p_n}{q_n}$ with $q_n \leq Q$. 
+  We shall soon see that this is rather simple if $\alpha = [b,a,b,a,b,a,\dots]$ with $a \divides b$.\\
+  We will get back to this after Theorem 1.2.5.
+\end{ex}
+%----------
+
+A continued fraction $[a_0,a_1,a_2,\dots]$ is called \emph{periodic} if
+\[ \exists k \in \N  \text{ and } L \in \N_0 \text{ such that } a_{k+l} = a_l \forall l \geq L.\]
+In this case we write $[a_0,a_1,a_2,\dots] = [a_0,\dots,\overbar{a_L,a_{L+1},\dots,a_{L+k-1}}]$.
+
+\begin{theorem}\label{1_2_4}
+  $\theta = [a_0,a_1,a_2,\dots]$ is periodic $\iff \theta$ is real quadratic ($\theta$ is real quadratic means $\exists D \in \Z[x]\setminus 0$ of degree $2$ with $D(\theta) = 0$, but $\theta \nin \Q$ and $\theta \in \R$)
+\end{theorem}
+
+See Ex Sheet 2 \#3 for a special instance.\\
+A proof can be found, e.g., in Hardy \& Wright "The Theory of numbers", Oxford University press\\
+\\
+Let's go back to the problem of computing  $p_n, q_n$ of the $n$-th convergent.
+The general recursion formula is unhandy.
+But in certain cases there is a simple explicit formula. 
+Consider $\theta = [b,a,b,a,\dots] = [\overbar{b,a}]$ and suppose $b = a \cdot c$ for some $c \in \N$.
+Now $\theta = b + \frac{1}{a + \frac{1}{b + \frac{1}{\dots}}} = b + \frac{1}{a + \frac{1}{\theta}}$.
+Thus $\underbrace{a \theta^2 - ab\theta - b}_{\theta^2 - b\theta -c = 0} = 0$, so $\theta = \frac{b + \sqrt{b^2+4c}}{2}$
+and we put $\bar{\theta} = \frac{b - \sqrt{b^2+4c}}{2}$.
+
+\begin{theorem}\label{1_2_5}
+  The $p_n$ and $q_n$ of the $n$-th convergent $\frac{p_n}{q_n}$ of $\theta = [\overbar{b,a}] (b = ac)$ are give by
+  \[ p_n = c^{-\lfloor\frac{n+1}{2} \rfloor} \cdot u_{n+2}, q_n =c^{-\lfloor\frac{n+1}{2} \rfloor} \cdot u_{n+1}\]
+  where
+  \[ u_n = \frac{\theta^n - \bar{\theta}^n}{\theta - \bar{\theta}}.\]
+  (Recall: $\theta = \frac{b+\sqrt{b^2+4c}}{2}, \bar{\theta} = \frac{b-\sqrt{b^2+4c}}{2}$, so $\theta - b\theta -c =0, \bar{\theta}^2 - b \bar{\theta} -c = 0$)
+\end{theorem}
+
+\begin{proof}
+  For $n = 0, 1$ we note that 
+  \begin{align}
+  q_0 &= q = u_1\\
+  q_1 &= a = \frac{b}{c} = \frac{u_2}{c}\\
+  p_0 &= b = \theta + \bar{\theta} = u_2\\
+  p_1 &= a b + 1 = \frac{b^2+c}{c} = \frac{(\theta + \bar{\theta})^2 - \theta \bar{\theta}}{c} = \frac{u_3}{c}
+ \end{align}
+ Put $\omega_{n+2} = c^{-\lfloor\frac{n+1}{2} \rfloor} u_{n+2}$.\\
+ So we need to show that $p_n = \omega_{n+2}$.\\
+ Using that $\theta^{n+2} = b \theta^{n+1} + c \theta^n$ and $\bar{\theta}^{n+2} = b \bar{\theta}^{n+1} + c \bar{\theta}^n$
+ and hence $u_{n+2} = \frac{\theta^{n+2} - \bar{\theta}^{n+2}}{\theta - \bar{\theta}} = b u_{n+1} + c u_n$.\\
+ Moreover, $u_{2m+2} = c^m \omega_{2m+2}$, $u_{2m+1} = c^m \omega_{2m+1}$.
+ Inserting this into the above, distinguishing $n$ even or odd yields:
+ \begin{align}
+   \omega_{2m+2} = b \omega_{2m+1} + \omega_{2m}\\
+   \omega_{2m+1} = a \omega_{2m} + \omega_{2m - 1}
+ \end{align}
+ Hence, $p_n$ and $\omega_{n+2}$ satisfy the same recurrence relation. and here the same two starting values, so $p_n = \omega_{n+2}$.\\
+ Similar for $q_n$.
+\end{proof}
+
+\emph{Counting Diophantine Approximation 2:}\\
+We can use Theorem 1.2.5 to show that if $\theta = [\bar{b,a}]$ with $b = a c, a>1$ then 
+\[ N_\theta(\frac{1}{2x^2},Q) = \frac{\log Q}{\log(\frac{\theta}{\sqrt{c}})} + \mathcal{O}(1)\]
+Indeed, we have already seen, that 
+\[ N_\theta(\frac{1}{2x^2},Q) = \#\{n: q_n \leq Q \} \]
+By Theorem 1.2.5 we know
+\[ q_n \leq Q \iff c^{-\lfloor\frac{n+1}{2} \rfloor} \frac{\theta^n - \bar{\theta}^n}{\theta - \bar{\theta}} = \left(\frac{\theta}{\sqrt{c}}\right)^n \left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) \epsilon \leq Q\]
+where $ \epsilon = \begin{cases} \frac{1}{\theta - \bar{\theta}} & 2 \divides n\\ \frac{1}{\sqrt{c}(\theta -\bar{\theta})} & 2 \nmid n \end{cases}$
+\[ \iff n \log\left(\frac{\theta}{\sqrt{c}}\right) + \log\left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) + \log \epsilon \leq \log Q \]
+Using Taylor series expansion we see that 
+\[ | \log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right) | \leq | \frac{\bar{\theta}}{\theta - \bar{\theta}} |  \]
+This proves the claim.
+
+\subsection{Liouville's Theorem}
+Let $\alpha \in \C$. If $\exists D(x) \in \Z[x]$, $D \neq 0$ and $D(\alpha) = 0$ then we say $\alpha$ is \emph{algebraic}.
+In this case $\exists D(x) = a_0 x^d + \dots + a_d \in \Z[x]$ with
+\begin{itemize}
+  \item $D(\alpha) = 0$
+  \item $a_0 > 0$
+  \item $\gcd(a_0,\dots,a_d) = 1$
+  \item $\deg D(x)$ minimal
+\end{itemize}
+Imposing all these condition renders $D$ unique; We write $D_\alpha(x)$ and call this the \emph{minimal polynomial} of $\alpha$.
+If $\alpha$ is algebraic then we say $\deg D_\alpha$ is the \emph{degree of $\alpha$}.
+
+\begin{ex}
+  \begin{itemize}
+    \item $\alpha = 0, D_\alpha(x) = x$
+    \item $\alpha = \sqrt{2} + 1, D_\alpha(x) = (x -1)^2 - 2 = x^2 -2x -1$
+    \item $\alpha = \frac {1}{\sqrt{2}}, D_\alpha(x) = 2x^2 -1$
+  \end{itemize}
+\end{ex}
+
+\begin{theorem}[Liouville's Theorem]\label{1_3_1}
+  Suppose $\alpha$ is a real, algebraic number of degree $d$.
+  Then $\exists c(\alpha) > 0$ such that
+  \[ |\alpha - \frac{p}{q}| > \frac{c(\alpha)}{q^d} \]
+  for every $(p,q) \in \Z \times \N$ with $\alpha \neq \frac{p}{q}$.
+\end{theorem}
+
+\begin{proof}
+  Suppose $|\alpha - \frac{p}{q} | > 1$ then the claim holds for every $c(\alpha) > 1$.
+  Now suppose $|\alpha - \frac{p}{q}| \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
+  \[ D_\alpha(x) = \sum_{i=1}^d (x - \alpha)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha) \]
+  Hence, 
+  \[ |D_\alpha\left(\frac{p}{q}\right) | = | \sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)| \overset{(D)label}{\leq} |\frac{p}{q} - \alpha | \frac{1}{c(\alpha)} \]
+  where
+  \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} |D_\alpha^{(i)}(\alpha) |\right)^{-1} \]
+  Now if $D_\alpha$ has a rational root then it must have degree one, so have only \emph{one} root.
+  Thus $D_\alpha \left(\frac{p}{q}\right) \neq 0$ unless $\alpha = \frac{p}{q}$.
+  Hence, if $\alpha \neq \frac{p}{q}$ we get
+  \[ | D_\alpha \left(\frac{p}{q}\right) | = | \frac{\text{non-zero integer}}{q^d} \geq \frac{1}{q^d}. \]
+  Combing this with (D)label yields 
+  \[ |\alpha - \frac{p}{q} | > \frac{c(\alpha)}{q^d}.\]
+\end{proof}
+
+We say a real number $\alpha$ is a \emph{Liouville number} if for every $n \in \N$
+\[ 0 < |\alpha - \frac{p}{q}| < \frac{1}{q^n} \]
+has a solution. $p,q \in \Z$ with $q > 1$.
+
+\begin{ex}
+  $\alpha = \sum_{k = 1}^\infty 10^{-k^k}$ is a Liouville number.
+  Let $n \in\N$ and put $p = \sum_{k=1}^n 10^{n^n - k^k}$ and $q = 10^{n^n}$.
+  Then $ 0 < |\alpha - \frac{p}{q}| = \sum_{k>n} 10^{-k^k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
+\end{ex}
+
+\begin{cor}\label{1_3_2}
+  Every Liouville number is transcendental (i.e., not algebraic).
+\end{cor}
+
+\begin{proof}
+  Immediate from Theorem 1.3.1 (Liouville's Theorem).
+\end{proof}
+
+%\begin{rem}
+  Algebraic numbers are enumerable and thus have Lebesgue measure zero.
+  It's not difficult to show that the set of Liouville numbers, while \emph{not} enumerable, also has measure zero.
+  In fact \grqq most\grqq ~ real numbers are "not very far" from badly approximable as the following theorem shows.
+%\end{rem}
+
+\begin{theorem}[Khintchine]\label{1_3_3}
+  Suppose $\psi: \N \to (0,\infty)$ is monotone decreasing (not necessarily strictly).
+  The set 
+  \[A_\psi = \{\alpha \in \R: |\alpha - \frac{p}{q}| < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
+  has a Lebesgue measure zero if $\sum_{q=1}^\infty \psi(q)$ converges and has full Lebesgue measure (i.e. the complement has measure zero) 
+  if $\sum_{q=1}^\infty \psi(q)$ diverges.
+\end{theorem}
+
+We will not prove this Theorem. (For a proof see e.g. Glyn Harman "Metric number theory".)
+
+\begin{ex}
+  \begin{itemize}
+    \item Take $\psi(q) = \frac{1}{q}$. We already know that $A_\psi = \R \setminus \Q$.
+    And indeed $\sum \psi(q)$ diverges...
+    \item $\psi(q) = \frac{1}{q \log(q-1)}$. Then $\sum \psi(q)$ diverges and thus $A_\psi$ has full measure.
+    \item $\psi(q) = \frac{1}{q (\log(q+1))^{1+\epsilon}} (\epsilon > 0)$ then $\sum \psi(q)$ converges,
+    so $A_\psi$ has measure zero.
+  \end{itemize}
+\end{ex}
+
+\subsection{Theorems of Thue- Siegel and Roth}
+In Section 1 we have seen that $\infty$-many solutions $\frac{p}{q}$ to $\abs{\sqrt2-\frac{p}{q}}<\frac{1}{q^2}$  leads to $\infty$-many solutions $\left(x,y\right)\in\Z^2$ of $x^2-2y^2=1$. What about $x^3-2y^3=1$? Starting as for $x^2-2y^2$ we get
+$$y^3 \abs{\frac{x}{y}-2^{1⁄3}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega}}_{\ge\operatorname{Im}{\omega}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega^2}}_{{\ge{\operatorname{Im}{\omega}}}}$$
+where $\omega=e^{\frac{2\pi i}{3}}$.
+
+So to get boundedness of $x^3-2y^3$ for $\infty$-many $\left(x,y\right)$ we need $\exists c>0$ such that
+$$\abs{\frac{x}{y}-2^{1/3}}<\frac{c}{y^3}$$
+has $\infty$-many solutions $\left(x,y\right)\in\Z\times\N$. 
+
+Theorem 1.3.3 tells us that we would be extremely lucky if that were the case. And erven if so, we still would lack the group structure for $\Z+\sqrt 2 \Z$ (closed under multiplication but $\Z+2^{1/3} \Z$ is not). On the other hand, suppose we could show that
+$$\abs{\frac{x}{y}-2^{1/3}}<1/y^\lambda$$
+has only finitely many solutions $\left(x,y\right)\in\Z\times\N$ for some fixed $\lambda<3$. As $x^3-2y^3=1$, and $y\ne0$ yields: 
+$$\abs{\frac{x}{y}-2^{1/3}}<\frac{1}{2^{1/3} {\left(\operatorname{Im}\omega\right)}^2 y^3}$$
+We would conclude that $x^3-2y^3=1$ has only finitely many solutions $\left(x,y\right)\in\Z^2$. Note that $"deg" 2^{1/3}=3 (D(x)=x^3-2)$ and so Liouville’s Theorem yields only $\lambda=3$ not $\lambda<3$. So the big challenge is to improve Liouville’s Theorem. After Liouville it has taken 65 years until the first breakthrough was obtained by Axel Thue in 1909. 
+
+\begin{theorem}[Thue]\label{1_4_1}
+Let $\alpha$ be a real algebraic number of degree $d\ge 2$, and let $\lambda>\frac{d}{2}+1$. Then $\exists c=c(\alpha,\lambda)>0$ such that
+$$\abs{\alpha-\frac{p}{q}}>\frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N.$$
+\end{theorem}
+
+\begin{itemize}
+\item Note that for $d=2$ Liouville is stronger
+\item Given $\alpha$ and $\lambda$ there is no method to determine a feasible value for $c$. This is in stark contrast to Liouville’s Theorem. 
+\end{itemize}
+
+Just as for $x^3-2y^3=1$ one can now very easily show that if $f(X,Y)=a_0 (X-\alpha_1 Y)\cdots(X-\alpha_d Y)\in\Q[X,Y]$ with $a_0\ne0, d\ge 3$, and $\alpha_1,\dots,\alpha_d$ pairwise distinct, and $b\in\Q\setminus\set{0}$, then
+$$f(x,y)=b$$
+has only finitely many solutions $\left(x,y\right)\in\Z^2$. \\
+Wrong if $d=2$:
+$$X^2-2Y^2=1$$
+or $b=0$:
+$$X^3-Y^3=0$$
+or $\alpha_1,\dots,\alpha_d$ not pairwise distinct: 
+$$(X-Y)^5=1$$
+We will show that Theorem 1.4.1 implies even the following stronger result. 
+
+\begin{theorem}[Generalized Thue equations]\label{1_4_2}
+Let $f(X,Y)=a_0 \left(X-\alpha_1 Y\right)\cdots\allowbreak\left(X-\alpha_d Y\right)\in\Q\left[X,Y\right]$ with $a_0\ne 0, d\ge 3$ and $\alpha_1,\cdots,\alpha_d$ pairwise distinct. Let $g(X,Y)\in\Q\left[X,Y\right]$ of total degree $<\frac{d}{2}-1$. 
+\\
+Then there are only finitely many $(X,Y)\in\Z^2$ with
+$$f(x,y)=g(x,y)$$
+and
+$g(x,y)\ne 0$.
+\end{theorem}
+
+\begin{ex}
+$$x^5-2y^5=x-y$$
+has only finitely many solutions $\left(x,y\right)\in\Z^2$. Indeed if $x-y=0$ then $x^5-2y^5=0$ thus $x=y=0$. 
+Note Theorem can go wrong if $\alpha_1=\alpha_2$: 
+$$(X^2-2Y^2 )^2=1.$$
+\end{ex}
+
+\begin{proof}[Proof (assuming Theorem 1.4.1)]
+If $y=0$ then we have at most d possibilities for x. So we can assume $y\ne 0$. We claim that
+$$\abs{x}\le c_1 \abs{y}$$
+for some $c_1=c_1 (f,g)$. Clearly true when $\abs{x}\le\abs{y}$, so let's assume $\abs{x}>\abs{y}$. Then we write
+$$f(x,y)=\sum_{i=0}^d {a_i x^{d-i} y^i}=\sum_{j+k\le d-1} {b_{jk} x^j y^k}=g(x,y)$$
+\todo{sum $j+k \leq d-1$ or $d+1$ or $\frac{d}{2}-1$}
+Dividing by $x^{d-1}$ yields
+$$a_0 x=-\sum_{i=1}^d {a_i  \frac{y^i}{x^{i-1}}}+\sum_{j+k \leq d-1} {b_{jk} x^{j-d+1} y^k}$$
+We have
+$$\abs{\frac{y^i}{x^{i-1}}}\le\abs{y}$$
+and
+$$\abs{\frac{y^k}{x^{d-1-j}}}\le\abs{y}^{j+k-(d-1)}\le 1$$
+Therefore $\abs{x}\le c_1 \abs{y}$, e.g. with $c_1=\frac{1}{\abs{a_0}} \left(\sum \abs{a_i} +\sum \abs{b_{jk}} \right)+1$.
+From
+$$f(x,y)=g(x,y),(\star)$$
+we get
+$$\abs{\alpha_0}\prod_{i=1}^d {\abs{\frac{x}{y}-\alpha_i}} \le c_2 \abs{y}^{e-d}$$
+where $c_2=c_2\left(c_1,g\right)$ and $e<\frac{d}{2}-1$. So assume $(\star)$ has $\infty$-many solutions $\left(x,y\right)\in\Z^2$. Then $\exists i$, say $i=1$, such that $\abs{\frac{x}{y}-\alpha_1}\le\mu:=\frac{1}{2}\displaystyle{\min_{j\ne 1}{\left\{\abs{\alpha_j-\alpha_1}\right\}}}>0$ for $\infty$-many $(x,y)$ of these solutions of $(\star)$. 
+Now
+$$\abs{\frac{x}{y}-\alpha_j}\ge\abs{\abs{\alpha_j-\alpha_1}-\abs{\frac{x}{y}-\alpha_1}}\ge 2\mu-\mu=\mu>0$$
+Hence, we conclude
+$$\abs{\frac{x}{y}-\alpha_1}\le \frac{c_2}{\abs{a_0}}\mu^{1-d} \abs{y}^{e-d},(\star\star)$$
+for these solutions $\left(x,y\right)$. Here we can assume $y>0$ (just replace $x$ by $-x$). Now let $d_1$ be the degree of $\alpha_1$. As $f(x,1)\in\Q[x]$, $f(x,1)\ne 0$ and $f(\alpha_1,1)=0$. Thus $d_1\le d$. Moreover, $d-e>\frac{d}{2}+1$ and this $\exists\lambda$ such that
+$$d-e>\lambda>\frac{d_1}{2}+1.$$
+If $d_1\ge 2$ then Theorem 1.4.1 implies that $(\star)$ has only finitely many solutions $\left(x,y\right)\in\Z^2$. Finally suppose $d_1=1$. Then $\alpha_1=\frac{p}{q}$, and $(\star\star)$ yields: 
+$$\abs{x-\frac{p}{q} y} \le c_3 y^{e-d+1}\le c_3 y^{-\frac{d}{2}}.$$
+Thus $x=\frac{p}{q} y=\alpha_1 y$ for $y$ large enough. But then $0=f(x,y)=g(x,y)$ a contradiction. 
+\end{proof}
+
+After Thue came Siegel (1921) who improved the exponent $\frac{d}{2}+1$ to $2\sqrt{d}$. This was slightly improved by Dyson and Gelfand (1947) to $\sqrt{2d}$. Finally in 1955 came Roth: 
+
+\begin{theorem}[(Roth)]\label{1_4_3}
+Let $\alpha$ be a real, algebraic irrational number, and $\lambda>2$. Then $\exists c=c(\alpha,\lambda)>0$ such that
+$$\abs{\alpha-\frac{p}{q}}\ge \frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N.$$
+\end{theorem}
+
+By Corollary 1.1.2 $\lambda>2$ is best-possible. 
+But if we allow more general functions $\phi(q)$, not only powers of $q$, then an improvement might be possible. However, since 1955 nobody was able to replace $q^{-\lambda}$ by a function $\phi(q)$ that decays more slowly, e.g. $\phi(q)=q^{-2} {\left(\log{q}\right)}^{-1}$. 
+\\
+However, back to the case where $\phi(q)$ is a power of $q$. 
+\\
+From Theorem 1.3.3. we know that for a generic real $\alpha$
+$$\abs{\frac{p}{q}-\alpha}<q^{-\lambda}$$
+has only finitely many solutions $p,q\in\Z\times\N$ provided $\lambda>2$. Any by Corollary 1.1.2 every irrational real number has $\infty$-many solutions when $\lambda=2$. And so from Roth's Theorem we see an algebraic irrational behaves \grqq essentially\grqq~like a generic number.
+
+Roth's Theorem has various new applications to, e.g., Diophantine equations and transcendence.
+Let's consider just one now transcendence result:\\
+Take $ \alpha = \sum_{k=1}^\infty 2^{-3^k}$; put $q_n = 2^{3^n}$ and
+$p_n = q_n \sum_{k=1}^n 2^{-3^k}$.
+Then $0 < \abs{\alpha - \frac{p_n}{q_n}} = \sum_{k=n+1}^\infty 2^{-3^k} < 2 \cdot 2^{-3^{n+1}} = 2 \cdot q_n^{-3}$
+so by Roth's Theorem $\alpha$ is transcendental.\\
+\\
+How does one prove results like Roth's Theorem of the kind
+\[ \abs{\alpha - \frac{p}{q}} \geq \phi(q) \text{?} \]
+
+The idea is to find good rational approximations.
+\[ \abs{\alpha - \frac{p_n}{q_n}} < \delta_n \]
+with $\delta_n$ "pretty small". Then
+\[ \abs{\alpha - \frac{p}{q}} \geq \abs{\frac{p_n}{q_n} - \frac{p}{q}} - \abs{ \alpha - \frac{p_n}{q_n}} \]
+If 
+\begin{align}
+  \frac{p_n}{q_n} \neq \frac{p}{q} %ref *
+\end{align}
+then 
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{q q_n} - \delta_n. \]
+If we are lucky then $\delta_n < \frac{1}{q q_n}$ and we get a positive lower bound. How do we find these $\frac{p_n}{q_n}$?\\
+Usually this is a difficult task, but sometimes one can easily see these approximations $\frac{p_n}{q_n}$.
+Here is an example.\\
+Take again $\alpha = \sum_{k=1}^\infty 2^{-3^k}$. Then we can take again $q_n = 2^{3^n}$, $p_n = q_n \sum_{k=1}^n 2^{-3^k}$;
+so $\abs{\alpha -  \frac{p_n}{q_n}} < 2 \cdot q_n^{-3}$. Hence, if
+\[ \frac{p_n}{q_n} \neq \frac{p}{q} \]
+then
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{q q_n} - \frac{2}{q_n^3}\]
+If $q_n^2 > 4 \cdot q$ then
+\[ \frac{1}{q q_n} - \frac{2}{q_n^3} \geq \frac{1}{2\cdot q q_n} \]
+As $\frac{p_n}{q_n}$ tends strictly monotonously to $\alpha$, we have $\frac{p_n}{q_n} \neq \frac{p}{q}$ or $\frac{p_{n+1}}{q_{n+1}} \neq \frac{p}{q}$
+Let $m$ be minimal with $q_m > 4 \cdot q$. Hence
+\[ q_m^{\frac{2}{3}} = q_{m-1}^2 \leq 4 \cdot q < q_m^2 \]
+\todo{is this formula correct? Maybe without squares?}
+If $\frac{p_m}{q_m} \neq \frac{p}{q}$ we take $n = m$ and $n = m+1$ else.
+We conclude
+\[ \abs{\alpha - \frac{p}{q}} \geq \frac{1}{2 q q_n} \geq \frac{1}{2 q q_{m+1}} \geq \frac{1}{2 q} \frac{1}{q_m^3} \geq \frac{1}{2q} \frac{1}{(4q)^{\frac{9}{2}}} = 2^{-10}q^{-\frac{11}{2}} \]
+In this example everything works out nicely, e.g., (ref*) could easily be guaranteed by using $\frac{p_n}{q_n}$ tending strictly monotonously to $\alpha$.
+However, in Roth's Theorem (ref*) becomes the major-problem.
+
+\subsection{Simultaneous Diophantine approximation and the Subspace Theorem}
+
+Suppose $\alpha_1,\dots,\alpha_n$ are real numbers. Theorem 1.1.1 can be generalized to yield a solution $(x_1,\dots,x_n,y) \in \Z^n \times \N$ of the system
+\[ \abs{\frac{x_i}{y} - \alpha_i} \leq \frac{1}{y \cdot Q} (1\leq i\leq n), 0 < y < Q . \]
+(c.f. Exercise sheet 4).
+This in turn yields $\infty$-many solutions $(x_1,\dots,x_n,y) \in \Z^n \times \N$ of the system
+\[ \abs{\frac{x_i}{y} - \alpha_i} < \frac{1}{y^{1+\frac{1}{n}}} (1 \leq i \leq n). \]
+provided at least one of the $\alpha_i$'s is irrational. So Corollary 1.1.2 extends to simultaneous approximation.
+A much deeper fact is that Roth' Theorem also extends to simultaneous approximation.
+
+%convention x _ underbar
+For $\ubar{x} \in \R^n$ we write $\norm{\ubar{x}} = ( \sum_{i = 1}^n x_i^2)^{\frac{1}{2}}$ for the Euclidean length.
+
+\begin{theorem}[Subspace Theorem, Schmidt]
+  Suppose $L_i(\ubar{x}) = \sum_{j=1}^n a_{ij} x_j (1 \leq i \leq n)$ are linearly independent
+  linear forms with algebraic coefficients $a_{ij}$.
+  Let $\delta > 0$. Then the solutions $\ubar{x} \in \Z^n \setminus \ubar{0}$ of
+  \[ \abs{L_1(\ubar{x}) \dots L_n(\ubar{x})} < \norm{\ubar{x}}^{-\delta} \]
+  lie in finitely many proper subspaces of $\Q^n$.
+\end{theorem}
+
+\begin{rem}
+  linearly independent linear forms means the coefficient vectors $(a_{i1},\dots,a_{in})$ are linearly independent over $\C$.
+\end{rem}
+
+\begin{cor}
+  Let $\delta >0$, suppose $\alpha_1,\dots, \alpha_n$ are algebraic and $1,\alpha_1,\dots,\alpha_n$ are linearly independent over
+  $\Q$. Then there are only finitely many $(x_1,\dots,x_n,y) \in \Z^n \times \N$ with
+  \begin{align}
+    (5.1) \abs{\frac{x_i}{y} - \alpha_i} < \frac{1}{y^{1+\frac{1}{n} + \delta}} (1 \leq i \leq n)
+  \end{align}
+\end{cor}
+
+\begin{proof}(assuming Theorem 1.5.1)
+  Put $\ubar{X} = (X_1,\dots,X_n,Y)$, $L_i(\ubar{X}) = \alpha_i Y - X_i (1 \leq i \leq n)$, $L_{n+1}(\ubar{X}) = Y$.
+  These $n+1$ linear forms in $n+1$ unknowns are linearly independent.
+  With $\ubar{x} = (x_1,\dots,x_n,y)$ the solutions of (5.1) yield
+  \[ \abs{L_1(\ubar{x}) \dots L_{n+1}(\ubar{x})} < \frac{1}{y^\delta} < \frac{1}{\norm{\ubar{x}}^{\frac{\delta}{2}}} \]
+  if $y$ is large enough. so by Theorem 1.5.1 (in $n+1$ dimensions), we set that the solutions lie in finitely many prober sub spaces at $\Q^{n+1}$.
+  Pick one of these (of co-dimension $1$ say).
+  It is given by an equation $c_1x_1+\dots+c_nx_n+c_{n+1}y = 0$ where $c_i \in \Q$ not all zero.
+  On this subspace we have
+  \[ (c_1\alpha_1+\dots+c_n\alpha_n+c_{n+1})y = c_1(\alpha_1y - x_1) +\dots+ c_n(\alpha_ny - x_n).\]
+  Put $\gamma = c_1 \alpha_1+\dots+c_n\alpha_n + c_{n+1}$.
+  By $\Q$-linearly independence of $1,\alpha_1,\dots,\alpha_n$ we have $\gamma \neq 0$. Hence,
+  \[ \abs{\gamma} \abs{y} \leq \abs{c_1}\abs{\alpha_1y-x_1} +\dots+ \abs{c_n}\abs{\alpha_ny-x_n} \leq (\abs{c_1}+\dots+\abs{c_n})\frac{1}{y^{\frac{1}{n}+\delta}} \leq \abs{c_1}+\dots+\abs{c_n} \]
+  So $\abs{y}$ is bounded and we are done.
+\end{proof}
+
+In applications one sometimes needs a "$p$-adic" version of the subspace Theorem in which one approximates with respect to also the
+so called $p$-adic absolute values.
+
+
+\begin{defi*}[Absolute values]
+  An absolute value on a field $K$ is a map $\abs{\bullet}: K \to [0,\infty)]$ such that
+  \begin{itemize}
+    \item $\abs{x} = 0 \iff x = 0$
+    \item $\abs{x \cdot y} = \abs{x}\cdot\abs{y}$
+    \item $\abs{x+y} \leq \abs{x} + \abs{y}$
+  \end{itemize}
+\end{defi*}
+
+\begin{ex*}
+  \begin{itemize}
+    \item $K$ arbitrary. $\abs{x} = \begin{cases} 0 & x = 0\\ 1 & x \neq 0 \end{cases}$
+    the \emph{trivial absolute value}.
+    \item $K = \Q$, $\abs{\bullet} =$ \emph{standard absolute value} on $\Q$.
+    To distinguish it from other absolute values let's write it as $\abs{\bullet} = \abs{\bullet}_\infty$.
+    \item $K = \Q$ and let $p \in \N$ be a prime number. If $x\in \Q, x \neq 0, \pm 1$, then $\exists$ a unique prime factorisation
+    $ x = \pm p_1^{a_1} \dots p_s^{a_s}$ where $p_1,\dots,p_s$ primes and $a_i \in \Z \setminus 0$.
+    For any prime $p \in \N$ write $ord_p(x)$ for the exponent of $p$ in the prim-factorisation of $x$ (e.g. $ord_{p_i}x = a_i$).
+    For $x = \pm 1$ we put $ord_p x = 0 \forall p_i$.
+    The \emph{$p$-adic absolute value} $1 \cdot 1_p$ on $\Q$ is defined by 
+    \[ \abs{x}_p = \begin{cases} 0 &: x = 0\\ p^{-ord_p(x)} &: x \neq 0 \end{cases} \]
+    The multiplicativity is clear.
+    Note that $ord_p(x_1+x_2) \geq \min\{ord_p(x_1),ord_p(x_2)\}$.
+    Hence, $\abs{x_1 + x_2}_p = p^{-ord_p(x_1+x_2)} \leq p^{-\min\{ord_p(x_1),ord_p(x_2)\}} \underbrace{=}{strong triangle inequality} \max{\abs{x_1}_p, \abs{x_2}_p\}} \leq \abs{x_1}_p + \abs{x_2}_p$
+    An absolute value that satisfies the strong triangle inequality is called non-Archimedean.
+  \end{itemize}
+\end{ex*}
+
+\begin{defi*}
+  We set $M_\Q = \{ \text{primes in } \N\} \cup \{ \infty\}$. Then for each $v \in M_\Q$ we get an absolute value
+  $\abs{\cdot}_v$. Note that if $v \in M_\Q$ and $p$ a prime, $a \in \Z$, then
+  \[ \abs{\pm p^a}_v = \begin {cases} p^{-a} &: v =p \\ p^a &: v = \infty\\ 1 &: v \neq p, v \neq \infty \end{cases} \]
+  Hence
+  \[ \prod_{v \in M_\Q} \abs{\pm p^a}_v = 1 \]
+  and so by multiplicativity we conclude
+  \[ \prod_{v \in M_\Q} \abs{x}_v = 1 \]
+  for all $x \in \Q$, $x \neq 0$. (PF)
+  This is the so-called product formula (PF) on $\Q$.
+\end{defi*}
+
+Next, we want to introduce a notion of "arithmetic complexity" on elements in $\Q^{n+1}$, the so-called projective height:
+\[ H_{\p^n}: \Q^{n+1} \to \left[1,\infty\right) \]
+defined by
+\[ H_{\p^n}(\underline{x}) = \prod_{v \in M_\Q} \abs{\underline{x}}_v \]
+where $\abs{\underline{x}}_v = \max \{\abs{x_0}_v,\dots,\abs{x_n}_v \}$.
+
+\begin{ex}
+  If $\underline{x} = (x_0,\dots,x_n)$ where $x_0,\dots,x_n \in \Z$ and $\gcd(x_0,\dots,x_n) = 1$.
+  Then $\abs{\underbar{x}}_p = 1$ for all primes p. Hence,
+  \[ H_{\p^n} (\underline{x}) = \max \{\abs{x_0}_\infty,\dots,\abs{x_n}_\infty \} \text{.}\]
+  Note that $H_{\p^n} ( \lambda \cdot \underline{x}) = H_{\p^n}(\underline{x}) \forall \lambda \in \Q \setminus 0$.
+\end{ex}
+
+\begin{theorem}[1.5.3 p-adic Subspace Theorem, Schlickewei and Schmidt]
+  Let $\delta > 0$ and let $S \subset M_\Q$ be finite and with $\infty \in S$.
+  For $v \in S$ let $L_{v_1},\dots,L_{v_n}$ be $n$ linearly independent linear forms in $n$ variables with coefficients in $\Q$.
+  Then the set of solutions $\underline{x} \in \Q^{n} \setminus 0$ of
+  \[ \prod_{v \in S} \prod_{i=1}^n \frac{\abs{L_{v_i}(\underline{x})}_v}{\abs{\underline{x}}_v} < H_{\p^{n-1}}(\underline{x})^{-n-\delta} \]
+  lie in finitely many proper subspace of $\Q^n$.
+\end{theorem}
+
+An interesting consequence is a finiteness result for $S$-unit equations.\\
+$S$-integers and $S$-units:\\
+Let $v$ be a non-Archimedean absolute value or a field $K$. Then
+\[ O_v =  \{ x \in K : \abs{x}_v \leq 1 \} \]
+is called the valuation ring of $v$. It is indeed a ring, e.g., $\abs{x}_v,\abs{y}_v \leq 1$ then
+\[ \abs{x+y}_v \leq \max \{ \abs{x}_v,\abs{y}_v \} \leq 1 \text{.} \]
+In particular, if $K = \Q$ and $v = p$ then $O_v$ is a sub-ring of $\Q$.\\
+\\
+Now let $S \subset M_\Q$  be finite and $\infty \in S$. We define the set of \emph{$S$-integers} $O_S$ to be
+\[ O_S = \cap_{v \nin S} O_v \text{.}\]
+As $\infty \in S$, this is an intersection of rings, hence a ring.
+
+\begin{ex}
+  If $S = \{\infty\}$, then $O_S = \Z$.
+  If $S = \{\infty,p_1,\dots,p_s \}$ then
+  \[ O_S = \{ \frac{m}{p_1^{a_1} \dots p_s^{a_s}} : m \in \Z, a_1,\dots,a_s \in \N_0 \} \]
+\end{ex}
+
+We say $x \in \Q$ is an $S$-unit if $x \neq 0$ and $x, x^{-1}$ are both in $O_S$.
+So if $S = \{ \infty \}$, then $\pm 1$ are the only $S$-units. If $S = \{ \infty,p_1,\dots,p_s \}$ then $x$ is an $S$-unit $\iff x = \pm \prod_{p \in S \setminus \infty} p^{a_p}$ (and $a_p \in \Z$).
+
+\begin{theorem}[1.5.4 $S$-unit equation]
+  Let $S \subset M_\Q$ be finite, and $\infty \in S$. Let $\alpha_0,\dots,\alpha_n$ be non-zero and in $\Q$.
+  Then 
+  \[ \alpha_0 x_0 + \dots + \alpha_n x_n = 0 \]
+  has only finitely many solutions $\underline{x} = (x_0,\dots,x_n)$ if:
+  \begin{itemize}
+    \item $x_0,\dots x_n$ are $S$-units
+    \item we identify proportional solutions (i.e., $\underline{x} = \lambda \underline{x}$ for $ \lambda \in \Q \setminus 0$).
+    \item no proper sub-sum vanishes, i.e., $\sum_{I} \alpha_i x_i \neq 0$ for all $\emptyset \subsetneqq I \subsetneqq \{0,1,\dots,n\}$.
+  \end{itemize}
+\end{theorem}
+
+\begin{rem}
+  $S = \{\infty, p \}$ $x_0+x_1+x_2+x_3 = 0$ then $x_0 = - x_1 =  1$, $x_2 = - x_3 = p^a$ ($a \in \Z$)
+  are solutions in $S$-units. So non-vanishing condition is needed!
+\end{rem}
+
+\begin{ex}
+  The exponential Diophantine equation 
+  \[ 3^x + 5^y - 7^z = 1 \]
+  has solutions, e.g., $(x,y,z) = (0,0,0)$ or $(x,y,z) = (1,1,1)$.
+  However, with $S = \{ \infty,3,5,7 \}$ each solution $(x,y,z)$ yields a solution $u_0 = 3^x$, $u_1 = 5^y$, $u_2 = - 7^z$, $u_3 = - 1$ of the $S$-unit equation $u_0 + u_1 + u_2 + u_3 = 0$.
+  These solutions are all non-proportional.
+  Moreover, no sub-sum vanishes unless $x y z = 0$ but then we easily see that $x=y=z=0$.
+  Hence, Theorem 1.5.4 yields finiteness.
+\end{ex}
+
+\begin{proof}[Proof (assuming Theorem 1.5.3)]
+  Induction on $n$. If $n=1$ then $\alpha_0 x_0 + \alpha_1 x_1 = 0$, so all solutions are proportional to $(1, -\frac{\alpha_0}{\alpha_1})$.
+  Now suppose the claim holds for all $S$-unit equations in $\leq n$ variables.
+  As $x_i$ are $S$-units we have
+  \[ \abs{x_i}_v = 1 \forall v \nin S \text{.} \]
+  By the product formula (PF)
+  \[ 1 = \prod_{v \in M_\Q} \abs{x_i}_v = \prod_{v \in S} \abs{x_i}_v \text{,}\]
+  and thus
+  \[ \prod_{v \in S} \prod_{i=0}^n \abs{x_i}_v = 1 \text{.} \]
+  Let $\tilde{\underline{x}} = (x_0,\dots,x_{n-1})$.
+  For each $v \in S$ pick $i(v)$ with $0 \leq i(v) \leq n-1$.
+  So we get $n^{\#S}$ such tuples $(i(v))_{v \in S}$.
+  Choose one of those tuples and consider all solutions of $\alpha_0 x_0 + \dots + \alpha_n x_n = 0$ with
+  \[ \abs{\tilde{\underline{x}}}_v = \abs{x_{i(v)}}_v \]
+  Choose the set of linear forms
+  \[ \{ L_{v_j} : 1 \leq j \leq n \} = \{ X_0,X_1,\dots,X_{n-1},\frac{\alpha_0}{\alpha_n}X_0+\dots + \frac{\alpha_{n-1}}{\alpha_n}X_{n+1} \} \setminus \{X_{i(v)}\} \]
+  Then
+  \[ \prod_{ v \in S} \prod_{j=1}^n \frac{\abs{L_{v_j}(\tilde{\underline{x}})}_v}{\abs{\tilde{\underline{x}}}_v} 
+  = \frac{1}{H_{\p^{n+1}}(\tilde{\underline{x}})^{n+1}} \]
+  By Theorem 1.5.3 the solutions $\tilde{\underline{x}}$ lie in finitely many proper subspaces.
+  Take one of these  then all elements in this subspace satisfy an equation
+  \[ c_0 x_0 + \dots + c_{n-1} x_{n-1} = 0  (c_i \in \Q \text{, not all } = 0 \text{!})\]
+  Let $J_0$ be the set of $i$ with $c_i \neq 0$.
+  Then 
+  \begin{align}
+    \sum_{i \in J_0} c_i x_i = 0 \text{ marker(S)}
+  \end{align}
+  is an $S$-unit equation in $\leq n$ unknowns.
+  For every solution of "marker(S)" there is a set $J \subset J_0$, $J \neq \emptyset$, such that
+  \[ \sum_{i \in J} c_i x_i = 0 \]
+  and \underline{no} sub-sum vanishes.
+  By the induction hypotheses, up to proportionality, we get only finitely many solutions.
+  Moreover, the number of possible choices $J$ is finite.
+  Therefore it suffices to consider solutions $\{x_i\}_{i \in J}$ that are proportional to a fixed $\{u_i\}_{i \in J}$,
+  i.e., $x_i = \xi u_i (i \in J)$.
+  Returning to our initial equation $\sum_{i=0}^n \alpha_i x_i = 0$ we get
+  \[ \xi ( \sum_{i \in J} \alpha_i u_i) + (\sum_{i \nin J} \alpha_i x_i) = 0 \]
+  If $\sum_{i \in J} \alpha_i x_i \neq 0$ then the above is an $S$-unit equation in $1 + (n+1) - \#J \leq n$ unknowns,
+  namely $\xi, x_i \: (i \nin J)$. By the induction hypothesis we get only finitely many non-proportional solutions
+  $\{ x_i\}_{i=0}^n$ for which no sub-sum vanishes. Finally, if $\sum_{i \in J} \alpha_i x_i = 0$ then $\sum_{i \nin J} \alpha_i x_i = 0$ and we ignore these solutions by assumption of the Theorem.
+\end{proof}
+
+\subsection{Further generalizations and open problems}
+
+Let $\alpha, \beta \in \R \setminus \Q$ and consider the linearly independent  linear forms $L_1{\underbar{x}} = x_0 \alpha -x_1$, $L_2(\underbar{x}) = x_0 \beta - x_2$, $L_3(\underbar{x}) = x_0$
+If $\alpha, \beta$ are algebraic then Theorem 1.5.1 implies that the solutions $\underbar{x} \in \Z^3 \setminus \underbar{0}$ of
+\[ \abs{L_1(\underbar{x}) \cdot L_2(\underbar{x}) \cdot L_3(\underbar{x})} < \norm{\underbar{x}}^{-\delta} \; (\delta > 0) \]
+lie in finitely many proper subspaces of $\Q^3$.
+
+However, in the following is a long-standing conjecture.
+
+\begin{conj}[Littlewood-conjecture, around 1920]
+  Let $\alpha,\beta \in \R \setminus \Q$ and $\varepsilon > 0$. Then $\exists \underbar{x} \in \Z^3$ such that
+  \[ 0 < \abs{L_1(\underbar{x}) L_2(\underbar{x}) L_3(\underbar{x})} < \varepsilon \]
+\end{conj}
+
+\begin{rem}
+  Note that the conjecture is obviously true if $\alpha = \beta$ (by Corollary 1.1.2) or if $\alpha$ or $\beta$ are \underline{not} badly approximable.
+\end{rem}
+
+Let's consider again approximations to \underline{one} real $\alpha$.
+So far our approximations were $\frac{p}{q} \in \Q$.
+If we replace $\Q$ by a smaller or larger set then we get now interesting problems.
+
+\begin{op}[1.6.2]
+  Let $\alpha \in \R \setminus \Q$ and $\lambda < 2$. Does $\abs{\alpha - \frac{p}{q}} < q^{-\lambda}$ have $\infty$-many solutions $(p,q) \in \Z \times \N$ with:
+  \begin{itemize}
+    \item $p$ and $q$ are both square-free.\\
+    Best-result (Hoath-Brown 1984): Yes, if $\lambda < \frac{5}{3}$.
+    \item $q$ is prime?\\
+    Best-result (Matomaki, 2009): Yes, if $\lambda < \frac{4}{3}$.
+  \end{itemize}
+\end{op}
+
+Let's now consider problems in which $\Q$ is replaced by a certain subset $A$ of
+\[ \overbar{\Q} = \{\alpha \in \C : \alpha \text{ algebraic} \} \text{.} \]
+
+If we assume that $A \subset \R$  then we still can use the (usual) absolute value on $\R$ to measure
+\[ \abs{\alpha -x} \; (x \in A) \text{.}\]
+But usually we have no "natural denominators" for $x \in A$.
+But there is a natural way to interpret the original setting that easily generalizes from $A = \Q$ to $A=\overbar{\Q} \cap \R$.
+To this end we introduce the so-called \underline{multiplicative absolute Weil height}:
+\[ H: \overbar{\Q} \to \left[1,\infty\right) \]
+defined by
+\[ H(\alpha) = M(D_\alpha(x))^{\frac{1}{\deg \alpha}} \]
+where $D_\alpha(x) = a_0 (x - \alpha_1)\dots (x - \alpha_d) \in \Z[x]$ is the minimal polynomial of $\alpha$ and
+\[ M(D_\alpha(x)) = \abs{a_0} \cdot \prod_{i=1}^d \max \{ 1, \abs{\alpha_i} \} \]
+$M$ is called the \underline{Mahler-measure}.
+
+\begin{ex}
+  \begin{itemize}
+    \item $\alpha = \frac{p}{q} \in \Q$ ($q > 0$, $\gcd(p,q)=1$).\\
+    $\deg(\alpha) = 1$, $D_\alpha = q x - p$. So $H(\alpha) = M(D_\alpha) = q \max \{ 1, \abs{\frac{p}{q}} \}
+    = \max \{ q, \abs{p} \} = H_{\p^1} ((1,\alpha))$.
+    \item $\alpha = 2^{\frac{1}{d}}$, $D_\alpha = x^d -2$ ($2$-Eisenstein), $\deg \alpha = d$,
+    $H(\alpha) = M(D_\alpha)^{\frac{1}{d}} = \prod_{i=1}^d \max \{1, \abs{\xi_d^{i-1} 2^{\frac{1}{d}}} \} = 2^{\frac{1}{d}}$
+  \end{itemize}
+\end{ex}
+
+One can easily show (c.f. sheet 4) that 
+\begin{align}
+  \# \{ \alpha \in \overbar{\Q} : \deg \alpha \leq d, H(\alpha) \leq X \} < \infty \; \forall d \in \N \; X \geq 1\text{.} 
+  \label{6_1}
+\end{align}
+
+Back to Diophantine approximation with $A = \Q$.
+As 
+\[ \alpha + m - \frac{p}{q} = \alpha - \left( \frac{p - mq}{q} \right) \]
+we can assume $\alpha \in (0,1)$
+So all good enough approximations $\frac{p}{q}$ lie also in $(0,1)$. Now if $\frac{p}{q} \in (0,1)$ then 
+\[ H \left( \frac{p}{q} \right) = q \text{.} \]
+So
+\[ \abs{\alpha - \frac{p}{q}} < \phi(q) \iff \abs{\alpha - \frac{p}{q}} < \phi\left( H \left( \frac{p}{q} \right) \right) \text{.} \]
+So now the denominator plays \underline{no} role any more and we can write more easily:
+\begin{align}
+  \abs{\alpha - x} < \phi(H(x))
+  \label{6_2}
+\end{align} 
+(\ref{6_2}) makes sense as long as $x - \alpha \in \R$, so $x \in \R$, and $x \in \overbar{\Q}$.
+So let's assume $A \subset \overbar{\Q} \cap \R$.
+However, if $x_1,x_2,x_3,\dots$ is a sequence of pairwise distinct solutions of (\ref{6_2}) then we want to conclude that
+$x_i \to \alpha$ (with respect to $\abs{\bullet}$).
+Now as $\phi(t) \to 0$ as $t \to \infty$ but we don't know a priori that $H(x_i) \to \infty$.
+So cannot conclude from (\ref{6_2}) that $x_i \to \alpha$.
+But if $A \subset \Q_{(d)} = \{ \alpha \in \overbar{\Q} : \deg \alpha \leq d \}$
+then (\ref{6_1}) tells us that $H(x_i) \to \infty$ and so $x_i \to \alpha$.
+
+More generally this is true if 
+\[ \# \{ \alpha \in A : H(\alpha) \leq X \} < \infty \; \forall X \geq 1\text{.}\]
+In this case we say $A$ has \underline{property $N$}.
+
+\begin{theorem}[Wirsing 1961 \label{th_1_6_3}]
+  Let $d \in \N$, $d > 1$ and $\alpha \in \R \setminus \Q_{(d)}$.
+  Then $\exists \infty$-many $x \in \Q_{(d)}$ with
+  \[ \abs{\alpha - x} < H(x)^{-(\frac{d+3}{2})} \]
+\end{theorem}
+
+\begin{conj}[Wirsing's Conjecture, around 1961 \label{conj_1_6_4}]
+  Suppose $\alpha \in \R \setminus \Q_{(d)}$, ($d\in \N$) and $\lambda < d+1$ then 
+  $\exists \infty$-many $x \in \Q_{(d)}$ with
+  \[ \abs{\alpha - x} < H(x)^{-\lambda} \text{.} \]
+\end{conj}
+
+\begin{theorem}[1.6.5 Davenport and Schmidt \label{th_1_6_5}]
+  Wirsing's conjecture (\ref{conj_1_6_4}) holds for $d \leq 2$.
+\end{theorem}
+
+Instead of taking $A = \Q_{(d)} \cap \R$ let's replace $\Q_{(d)}$ with the smallest field that contains $\Q_{(d)}$;
+let's call this field $\Q^{(d)}$.
+Unfortunately, nobody knows whether $\Q^{(d)}$ has property ($N$), except when $d \leq 2$.
+
+\begin{theorem}[1.6.6 Bombien-Zannier, 2001 \label{th_1_6_6}]
+  $\Q^{(2)}$ has Property ($N$).
+\end{theorem}
+
+\begin{op}[1.6.7]
+  Find an analogue of Corollary 1.1.2 for $A = \Q^{(2)} \cap \R$.
+  How quickly can $\phi : \left[1,\infty\right) \to \left(0,\infty\right)$ decay if for every $\alpha \in \R \setminus A$
+  \[ \abs{ \alpha - x } < \phi(H(x)) \]
+  has $\infty$-many solutions $x \in A$? 
+  It is not difficult to show an inequality in the other direction provided $\alpha$ is algebraic, 
+  e.g., if $\alpha \in \overbar{\Q}\setminus \Q^{(2)}$ then
+  \[ \abs{\alpha -x } > (2 \cdot H(\alpha) H(x))^{-\deg \alpha \cdot 2^{(2 H(x))^8}} \]
+  How much can this be improved?
+\end{op}
+
+\end{document}

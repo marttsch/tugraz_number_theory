@@ -1,0 +1,721 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section{Algebraic Number Theory}
+
+\begin{rem}[References]
+  \begin{itemize}
+    \item Daniel Marcus "Number fields" Springer
+    \item Course Notes "Algebraic Number Theory" Math 2803(?) by Matt Baker (available online on his webpage)
+    \item Serge Lang: Algebraic Number Theory Addison \& Wesley
+  \end{itemize}
+\end{rem}
+
+\subsection{Introduction}
+
+Algebraic number theory is concerned with finite field extensions of $\Q$ and their "ring of integers",
+e.g., $\Q(\sqrt{2}) = \{a + b\sqrt{2}: a,b\in \Q \}$ and $\Z[\sqrt{2}] = \{ a + b \sqrt{2} : a,b \in \Z \}$.
+These extensions of $\Q$ and $\Z$ are often needed; even when studying questions that initially involve only integers.
+
+Let's consider some examples.
+We start with the very simple Diophantine equation
+\[ x^2 -x = y^3 \]
+to be solved with $x,y \in \Z$.
+We can factor the left hand side, and note that the factors $x, x-1$ are coprime.
+The unique prime factorization in $\Z$ tells us that 
+\begin{align*}
+  x &= \pm {u^\prime}^3 = u^3 \text{ with } u = \pm u^\prime\\
+  x -1 &= \pm {v^\prime}^3 = v^3 \text{ with } v = \pm v^\prime
+\end{align*}
+So $u^3 - v^3 = 1$.
+So $(u,v) = (1,0), (0,-1)$ and thus $(x,y) = (1,0), (0,0)$.\\
+
+So here $\Z$ itself was sufficient. Next let's consider
+\[ x^2 + 2 = y^3 \]
+
+Now the polynomial $x^2 + 2$  does not factor over $\Z$, but it does over $\Z[\sqrt{-2}] = \{a + b \sqrt{-2}: a,b \in \Z\}$
+\[ x^2 + 2 = (x + \sqrt{-2}) (x - \sqrt{-2}) \]
+If $x^2+2 = y^3$ then $x + \sqrt{-2}$ and $x - \sqrt{-2}$ are coprime in $\Z[\sqrt{-2}]$.\\
+Why?
+Suppose $r \in \Z[\sqrt{-2}]$ and
+\begin{align*}
+  r &\divides x + \sqrt{-2} \text{ and } \\
+  r &\divides x - \sqrt{-2} \text{.}
+\end{align*}
+Thus $r \divides 2 \sqrt{-2}$.\\
+Let $\bar{r}$ be the complex conjugate of $r$.
+Then 
+\[ \bar{r} \divides \overbar{x+ \sqrt{-2}} = x - \sqrt{-2} \text{.} \]
+Thus
+\begin{align*}
+  r \bar{r} &\divides (x + \sqrt{-2})(x-\sqrt{-2}) = x^2 + 2 \text{ and } \\
+  r \bar{r} &\divides (2 \sqrt{-2})(-2 \sqrt{-2}) = 8 \text{.}
+\end{align*}
+As $r \bar{r} \in \Z$ we conclude that $s r \bar{r} = 8$ with $s \in \Z[\sqrt{-2}]$ implies $s \in \Z$.
+So either 
+\[ r = \pm 1 \text{ or } 2 \divides r \bar{r} \text{.} \]
+If 
+\[ 2 \divides r \bar{r} \divides x^2 + 2 = y^3 \] 
+then 
+\begin{align*}
+  2 &\divides y^1 \\
+  \implies 8 &\divides y^3 \\ 
+  \implies 8 &\divides x^2 + 2
+\end{align*}
+which is impossible since $x^2 \in \{ \overbar{0},\overbar{1} \} \bmod 4$.\\
+So we have $r = \pm 1$ and so 
+\[ x + \sqrt{-2} \text{ and } x - \sqrt{-2} \] 
+are coprime in $\Z[\sqrt{-2}]$. \\
+We conclude also that  $\pm 1$ are the only units in $\Z[\sqrt{-2}]$.
+Suppose we have a unique prime factorization in $\Z[\sqrt{-2}]$.
+Then we could conclude as before that there exist $u,v \in \Z[\sqrt{-2}]$ such that
+\begin{align*}
+  u^3 &= x + \sqrt{-2}\\
+  v^3 &= x - \sqrt{-2}
+\end{align*}
+With $u = a +b \sqrt{-2}$ ($a,b\in \Z$) we get
+\[ u^3 = (a^3 - 6ab^2) + (3a^2b - 2b^3) \sqrt{-2} = x + \sqrt{-2} \]
+Hence,
+\begin{align*}
+  a(a^2 - 6b^2) &= x\\
+  b(3a^2 - 2b^2) &= 1
+\end{align*}
+So $b = \pm 1$. If $b = -1$ then $3a^2 -2 = -1$ which is impossible.
+So $b = 1$ and $a^2 = 1$.
+Hence $(x,y) \in \{(5,3), (-5,3)\}$.
+\\
+As we shall see later $\Z[\sqrt{-2}]$ really has a unique prime factorization.\\
+\\
+Now let's consider the Fermat equation
+\[ x^n + y^n = z^n \; (n\geq 3) \]
+We could try to apply the same strategy to show that at least one of the coordinates equals $0$.
+It suffices to consider prime exponents. Let's assume $p > 2$.
+We can also assume $\gcd(x,y,z) = 1$.
+Now take $\Z[\zeta]$ where $\zeta = e^{-\frac{2\pi \i}{p}}$.
+Then
+\[ t^p - 1 = (t-1)(t-\zeta)\dots (t-\zeta^{p-1}) \text{.} \]
+Replacing $t$ by $- \frac{x}{y}$ we conclude
+\[ x^p + y^p = (x+y)(x + \zeta y) \cdots (x + \zeta^{p-1}y) \]
+We split the solutions in two classes:
+\begin{enumerate}
+  \item $(x,y,z)$ with $p \nmid xyz$
+  \item $(x,y,z)$ with $p$ divides exactly one of the coordinates.
+\end{enumerate}
+We consider only solutions as in 1).
+For $p = 3$ we note that $x^3 + y^3 = z^3$ is impossible as each of these cubes is $\pm 1 \bmod 9$.
+So assume $p>3$.
+Suppose that there exists a unique prime factorization in $\Z[\zeta]$. 
+Then one can show that 
+\[ x + \zeta y = \varepsilon \alpha^p \] 
+where $\varepsilon$ is a unit and $\alpha \in \Z[\zeta]$.
+Then one can show that if
+\begin{align*}
+  x+ \zeta y &= \varepsilon \alpha^p \text{ and } \\ 
+  p &\nmid xy
+\end{align*}
+then
+\begin{align*}
+  x \equiv y \bmod p \text{.}
+\end{align*}
+As 
+\[ x^p + (-z)^p = (-y)^p\]
+we also conclude $x  \equiv -z \bmod p$.
+So 
+\[ 2x^p \equiv x^p + y^p = z^p \equiv (-x)^p \pmod p \text{.} \]
+So 
+\[ p \divides 3 x^p \text{.} \]
+As $p > 3$ and $p \nmid x$ we get a contradiction; so no solutions of class 1), provided $\Z[\zeta]$ has a unique prime factorization.
+
+The latter holds for $p < 23$ but it "usually" fails.
+To solve Fermat completely Wiles and Wiles-Taylor used the theory of elliptic curves.
+On the other hand the Catalan equation
+\[ x^n - y^m = 1 \; (n,m > 1,\:x,y >0) \]
+was solved completely by Mih\v{a}ilescu using algebraic number theory.
+
+\subsection{Basic notions}
+
+Let $R$ be a commutative ring with $1$,
+and denote by $R^\ast$ the subset of its units.
+An element $x \in R$ is called \emph{irreducible} if
+\begin{itemize}
+  \item $x \neq 0$, $x \nin R^\ast$ and
+  \item $x = a \cdot b$ with $a,b \in R \implies a \in R^\ast$ or $b \in R^\ast$
+\end{itemize}
+An element $\pi \in R$ is called \emph{prime} if
+\begin{itemize}
+  \item $\pi \nin R^\ast$, $\pi \neq 0$ and
+  \item $\pi \divides x \cdot y$ with $x,y \in R \implies \pi \divides x$ or $\pi \divides y$
+\end{itemize}
+Two elements $x,y \in R$ are called \emph{associate} if $\exists u \in R^\ast$ such that $y = ux$.
+\\
+
+A ring $R$ is called a unique factorisation domain (UFD) if
+\begin{enumerate}
+  \item $R$ is an integral domain
+  \item Every non-zero non-unit $x \in R$ can be written as a product $x = q_1 \cdots q_r$ with finitely many irreducible elements $q_1,\dots,q_r \in R$.
+  \item This decomposition is unique up to unites and the order of the factors.
+\end{enumerate}
+
+\begin{ex}
+  \begin{itemize}
+    \item $R = \Z$, $R^\ast = \{\pm 1\}$. \\
+    $\pi$ is prime if and only if $\pi$ is irreducible. \\
+    And $R$ is a UFD.
+    \item $R = \Z[\sqrt{-5}]$. \\
+    If $x = a + b \sqrt{-5} \neq 0$ in $R$ then $x^{-1} = \frac{a -b \sqrt{-5}}{a^2 + 5 b^2}$.
+    So 
+    \[ x^{-1} \in R \implies a^2 + 5b^2 \divides a \text{.} \]
+    Thus $R^\times = \{ \pm 1\}$.\\
+    Consider the norm map $N: R \to \Z$ defined by
+    \[ N(a+b\sqrt{-5}) = a^2 + 5 b^2 \text{.} \]
+    Then $N(x \cdot y) = N(x) \cdot N(y)$ for all $x,y \in \Z[\sqrt{-5}]$ and $N(x) = 1 \iff x \in R^\ast$.
+    Consider the decompositions
+    \begin{align}
+      6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5}) \label{star}
+    \end{align}
+    All factors are irreducible. \\
+    Why?
+    If $xy = 2 \implies 4 = N(2) = N(x) N(y)$.
+    Now $N(x) = 2$ is impossible. Hence, $N(x) = 1$ or $N(y) = 1$.
+    So either $x \in R^\ast$ or $y \in R^\ast$. \\
+    The same argument applies for the other factors.\\
+    Clearly none of these are associate so (\ref{star}) are two essentially different decompositions in irreducable factors.
+    So $R$ is not a UFD. None of the factors in (\ref{star}) is prime.\\
+    Indeed, e.g., $2 \divides (1 + \sqrt{-5})(1- \sqrt{-5})$.
+    But $2 \nmid 1 + \sqrt{-5}$ and $2 \nmid 1- \sqrt{-5}$ otherwise
+    \[ 4 = N(2) \divides N(1 \pm \sqrt{-5}) = 6 \lightning\]
+  \end{itemize}
+\end{ex}
+
+Recall that an ideal $I$ of $R$ is an additive subgroup of $R$ that satisfies
+\[ r \in R \text{ and } x \in I \implies r \cdot x \in I \]
+An ideal $\mathfrak{p}$ of $R$ is called a \emph{prime ideal} if $a,b \in R$ and $a \cdot b \in \mathfrak{p} \implies a \in \mathfrak{p}$ or $b \in \mathfrak{p}$.
+An ideal $I$ of $R$ is called \emph{maximal} if the only ideals of $R$ containing $I$ are $R$ and $I$ itself.
+If $I,J$ are ideals of $R$ then we define
+\begin{itemize}
+  \item $I + J = \{ x+y : x \in I, y \in J \}$
+  \item $I \cdot J = \{ \sum_{i=1}^n x_i y_i : n \in \N, x_i \in I, y_i \in J (1 \leq i \leq n) \}$
+\end{itemize}
+These are both ideals of $R$.
+
+An ideal $I$ of $R$ is called \emph{principal} if there exists an $x \in R$ such that
+\[ I = \{ r \cdot x : r \in R \} = \left\langle x \right\rangle \text{.} \]
+A ring in which every ideal is principle is called a \emph{principal ideal domain} (PID).
+
+A ring is called \emph{Euclidean} if there exists a map $\phi: R \to \Z$ such that
+\begin{itemize}
+  \item $\phi(x) \geq 0$
+  \item $\phi(0) = 0$
+  \item $\forall x,y \in R$, $y \neq 0$ there exist $r,q \in R$ such that $ x = q\cdot y + r$ and either $r = 0$ or $\phi(r) < \phi(y)$.
+\end{itemize}
+
+\begin{ex}
+  \begin{itemize}
+    \item $R = \Z$, $\phi(x) = \abs{x}$
+    \item $R = K[t]$, where $K$ is a field. \\
+    $\phi(x) = \deg_t(x)$ if $x \neq 0$ and $\phi(0) = 0$.
+  \end{itemize}
+\end{ex}
+
+\begin{theorem}\label{th_3_2_1}
+  Every Euclidean ring is a PID.
+\end{theorem}
+
+\begin{proof}
+  Let $I$ be an ideal of $R$.
+  If $I = (0)$ then we are done.\\
+  Suppose $I \neq \left\langle 0 \right\rangle$.
+  Then let $y \in I$ be non-zero with $\phi(y)$ minimal.
+  Then $I = \left\langle y \right\rangle$. \\
+  Why?
+  Suppose $x \in I$.
+  Then there exist $q,r\in R$ such that $x = q \cdot y + r$.
+  As $I$ is an ideal we have $q \cdot y \in I$ and thus $r = x-qy \in I$.
+  By the minimality of $y$ we have $r = 0$.
+  This shows that $x \in \left\langle y \right\rangle$.
+\end{proof}
+
+So in particular, $\Z$ and $K[t]$ are PIDs.
+
+\begin{cor}\label{cor_3_2_2}
+  The rings $\Z[\sqrt{-1}]$ and $\Z[\sqrt{-2}]$ are Euclidean and thus PIDs.
+\end{cor}
+
+\begin{proof}
+  Identify $\C$ with $\R^2$ then $\Z[\sqrt{-2}]$ can be seen as a lattice in $\R^2$ with fundamental cells $[0,1)
+  \begin{pmatrix}
+    1 \\
+    0
+  \end{pmatrix}
+  + [0,1)
+  \begin{pmatrix}
+    0 \\
+    \sqrt{2}
+  \end{pmatrix}
+  + v$ ($v \in \Lambda = \Z[\sqrt{-2}]$)\\
+  %picture
+  \todo{add pic}
+  We take $\phi(\cdot) = N(\cdot)$ the norm map, so $\phi(a+b\sqrt{-2}) = a^2 + 2 b^2$.
+  So $\phi(z) \in \Z$, $\phi(z) \geq 0$, $\phi(0) = 0$.\\
+  Now let $x,y \in \Z[\sqrt{-2}]$ and $y \neq 0$.
+  Let $q \in \Z[\sqrt{-2}]$ be a closest lattice point to the complex number $\frac{x}{y}$.
+  Then
+  \[ \abs{ \frac{x}{y} - q} \leq \frac{\sqrt{3}}{2} \text{.} \]
+  Put $r = x - qy$.
+  Hence, 
+  \begin{align*}
+    \phi(r) &= \phi(x - qy) = \abs{x - qy}^2 \\
+    &= \abs{y}^2 \abs{\frac{x}{y} - q}^2 \\
+    &\leq \frac{3}{4} \abs{y}^2 = \frac{3}{4} \phi(y) \\
+    &< \phi(y) \text{.}
+  \end{align*}
+  This shows that $\Z[\sqrt{-2}]$ is Euclidean.
+  The same argument applies for $\Z[\sqrt{-1}]$.
+\end{proof}
+
+The argument fails already for $\Z[\sqrt{-3}]$ as $\frac{\sqrt{1 + 3}}{2} \nless 1$.
+And indeed $\Z[\sqrt{-3}]$ is not Euclidean.
+
+\subsection{Integrality}
+
+Let $A$ be a subring of $B$.
+We say $b \in B$ is \emph{integral} over $A$ if $b$ is the root of a \emph{monic} polynomial with coefficients in $A$.
+Clearly every $a \in A$ is integral over $A$.
+We say $B$ is integral over $A$ if every $b \in B$ is integral over $A$.\\
+Note that $x = \frac{r}{s} \in \Q$ with $\gcd(r,s) = 1$ is integral over $\Z$ if and only if $x \in \Z$. \\
+Why?
+Indeed, 
+\[ \left( \frac{r}{s} \right)^n + a_1 \left( \frac{r}{s} \right)^{n-1} + \dots + a_{n-1} \left( \frac{r}{s} \right) + a_n = 0 \; (a_i \in \Z)\]
+then 
+\[ r^n + s a_1 r^{n-1} + \dots + s^{n-1} a_{n-1} r + s^n a_n = 0\]
+Hence, $s \divides r^n$ and thus $s = \pm 1$.
+So $x \in \Z$.
+\\
+
+Let $A_B = \{ b \in B : b \text{ is integral over } A\}$.
+We call this the \emph{integral closure} of A in B.
+
+We will show that $A_B$ is a ring.
+In particular, if $x,y \in B$ are integral over $A$ then so are $x \cdot y$ and $x + y$.
+\\
+
+Recall that an $A$-module $M$ is a generalisation of the concept of a vector space over a field, where the field is replaced by a ring $A$.
+We say that $M$ is finitely generated as an $A$-module if there exist $m_1,\dots,m_r \in M$ such that every $m \in M$ can be written as 
+\[ m = a_1 m_1 + \dots + a_r m_r \]
+where $a_1,\dots,a_r \in A$.
+We say that $m_1,\dots,m_r$ generate $M$ as an $A$-module.
+
+
+\begin{lemma}\label{l_3_3_1}
+  Let $A \subset B$ be rings and let $M$ be a $B$-module.
+  Suppose that $M$ is finitely generated as a $B$-module and that $B$ is finitely generated as an $A$-module.
+  Then $M$ is finitely generated as an $A$-module.
+\end{lemma}
+
+\begin{proof}
+  Let $x_1,\dots,x_m$, and $y_1,\dots,y_n$ be generators for $M$ as a $B$-module and $B$ as an $A$-module respectively.
+  Then $x_i y_j$ ($1 \leq i \leq m$, $1 \leq j \leq n$) are generators for $M$ as an $A$-module. \\
+  Why?
+  Let $x \in M$ and write 
+  \[ x = \sum_{i=1}^m b_i x_i \] 
+  with $b_i \in B$.
+  Moreover, for each $i$ we can find $a_{ij} \in A$ such that
+  \[ b_i = \sum_{j=1}^n a_{ij} y_j \text{.} \]
+  Thus
+  \[ x = \sum_i \left( \sum_j a_{ij} y_j \right) \cdot x_i = \sum_{i,j} a_{ij}x_i y_j\]
+\end{proof}
+
+Recall that all rings in this Chapter 3 are integral domains with $1$ (unless specified otherwise).
+For rings $A \subset B$ and $x \in B$ we write $A[x]$ for the smallest ring contains $A$ and $x$.
+
+\begin{theorem}\label{th_3_3_2}
+  Let $A \subset B$ be rings and $x \in B$.
+  The following statements are equivalent:
+  \begin{enumerate}
+    \item[i)] $x$ is integral over $A$
+    \item[ii)] $A[x]$ is finitely generated as an $A$-module.
+    \item[iii)] $A[x]$ is contained in a subring of $B$ which is finitely generated as an $A$-module.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  $i) \Rightarrow ii)$  If $x$ is integral over $A$ then
+  \[ x^n + a_1 x^{n-1} + \dots + a_n = 0 \; (a_i \in A) \]
+  Thus $x^n = - (a_1x^{n-1} + \dots + a_n)$ and so $A[x]$ is generated by $1,x,\dots,x^{n-1}$ as an $A$-module. \\
+  $ii) \Rightarrow iii)$ Trivial \\
+  $iii) \Rightarrow i)$ Suppose $A[x] \subset C$ for a subring $C$ of $B$ that is finitely generated as an $A$-module.
+  As $C$ is a ring and $x \in C$ we have
+  \[ x \cdot C \subset C \text{,} \] 
+  i.e., $y \in C \implies x \cdot y \in C$.
+  Let $y_1,\dots,y_n$ be generators for $C$ and express 
+  \[ x \cdot y_i = \sum_{j} a_{ij}y_j \]
+  with $a_{ij} \in A$ ($1 \leq i \leq n$).
+  We get a matrix equation 
+  \begin{align*}
+    \begin{pmatrix}
+      xy_1 \\
+      \vdots \\
+      xy_n
+    \end{pmatrix}
+    = T
+    \begin{pmatrix}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{pmatrix}
+  \end{align*}
+  with $T = [a_{ij}]$.
+  As $1 \in A \subset C$ the vector $
+  \begin{pmatrix}
+    y_1 \\
+    \vdots \\
+    y_n
+  \end{pmatrix}
+  \neq 0$.
+  Now
+  \begin{align*}
+    (xI - T) 
+    \begin{pmatrix}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{pmatrix}
+    = 0 \text{.}
+  \end{align*}
+  Hence $\det(xI -T) = 0$.\\
+  Now 
+  \[ \det(xI - T) = x^n + Q(x) \]
+  where $Q(x) \in A[x]$ and $\deg Q \leq n-1$.\\
+  
+  This proves that $x$ is integral over $A$.
+\end{proof}
+
+\begin{cor}\label{cor_3_3_3}
+  Let $A \subset B \subset C$ be rings and suppose $C$ is integral over $B$ and $B$ is integral over $A$.
+  Then $C$ is  integral over $A$.
+\end{cor}
+
+\begin{proof}
+  Let $x \in C$.
+  We want to show that $x$ is integral over $A$.
+  Now 
+  \[ x^n + b_1 x^{n-1} + \dots + b_n = 0 \; (b_i \in B) \]
+  Let 
+  \[ \tilde{B}_i = A[b_1,\dots,b_i] \; (0 \leq i \leq n) \text{.} \]
+  Then $b_i$ is integral over $\tilde{B}_{i-1}$ and so by Theorem \ref{th_3_3_2} $\tilde{B}_i$ is finitely generated over $\tilde{B}_{i-1}$.
+  By Lemma \ref{l_3_3_1} we conclude that $\tilde{B}_n$ is finitely generated over $A$.
+  As $b_1,\dots,b_n \in \tilde{B}_n$ $x$ is integral over $\tilde{B}_n$.
+  Thus by Theorem \ref{th_3_3_2} $\tilde{B}_n[x]$ is finitely generated over $\tilde{B}_n$.
+  Again by Lemma \ref{l_3_3_1} we get that $\tilde{B}_n[x]$ is finitely generated over $A$ and thus by Theorem \ref{th_3_3_2} also integral over $A$.
+\end{proof}
+
+\begin{cor}\label{cor_3_3_4}
+  Let $A \subset B$ be rings. Then 
+  \[ A_B = \{ b \in B : b \text{ integral over } A \} \]
+  is a ring.
+\end{cor}
+
+\begin{proof}
+  It suffices to show that 
+  \[ x,y\in A_B \implies x \cdot y , x+y \in  A_B \text{.} \]
+  So let $x,y \in A_B$.
+  By Theorem \ref{th_3_3_2} $A[x]$ is finitely generated as an $A$-module.
+  As $y$ is integral over $A$ it is also integral over $A[x]$ and thus 
+  \[ (A[x])[y] = A[x,y] \] 
+  is finitely generated as an $A[x]$-module.
+  By Lemma \ref{l_3_3_1} $A[x,y]$ is finitely generated over $A$.
+  Thus by Theorem \ref{th_3_3_2} every element in $A[x,y]$ is integral over $A$; in particular $x \cdot y$ and $x+y$
+\end{proof}
+
+\begin{rem}
+  \begin{itemize}
+    \item Note that $\overbar{\Q} = \Q_\C$, so $\overbar{\Q}$ is a ring by Corollary \ref{cor_3_3_4}.\\
+    But $\overbar{\Q}$ is even a field; indeed if $x \in \bar{\Q}$, $x \neq 0$ then 
+    \begin{align*}
+      x^n + a_1 x^{n-1} + &\dots + a_n = 0 \; (a_i \in \Q) \\
+      &\implies (x^{-1})^n + \frac{a_{n-1}}{a_n}(x^{-1})^{n-1} + \dots + \frac{1}{a_n} = 0 
+    \end{align*}
+    \item The ring $\Z_\C = \{ \alpha \in \C: \alpha \text{ integral over } \Z \}$ is called the ring of algebraic integers.
+    \item Let $A$ be a field and $\alpha$ a root of a non-zero polynomial with coefficients in $A$,
+    i.e., $\alpha$ is algebraic over $A$.\\
+    We write $f_\alpha(x)$ for the monic minimal polynomial of $\alpha$ over $A$,
+    i.e., the monic polynomial in $A[x]$ of minimal degree that vanishes at $\alpha$.\\
+    If $h(x) \in A[x]$, $h \neq 0$ and $h(\alpha) = 0$ then $f_\alpha \divides h$ in $A[x]$ as follows from the Euclidean division algorithm.
+    \end{itemize}
+\end{rem}
+
+\begin{lemma}\label{l_3_3_5}
+  Let $\alpha \in \bar{\Q}$ be an algebraic number and $f_\alpha(x)$ the monic minimal polynomial over $\Q$.
+  Then:
+  \begin{align*}
+    \alpha \in \Z_\C \iff f_\alpha(x) \in \Z[x] \text{.}
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  "$\Leftarrow$" trivial\\
+  "$\Rightarrow$" $\exists h \in \Z[x]$ monic with $h(\alpha) = 0$.
+  Then $f_\alpha \divides h$ in $\Q[x]$.
+  Hence all roots of $f_\alpha$ vanish at $h$.
+  Hence, all roots of $f_\alpha$ are algebraic integers.
+  But the coefficients of $f_\alpha$ are symmetric functions in the roots ($f_\alpha$ is monic!) thus the coefficients are also algebraic integers,
+  and they are also in $\Q$.
+  We already know that $\Z_\C \cap \Q = \Z$ thus $f_\alpha \in \Z[x]$.
+\end{proof}
+
+A \emph{number field} $K$ is a subfield of $\bar{\Q}$ which as a $\Q$-vector space has finite dimension.
+The latter is called the degree of $K$ over $\Q$ and denoted by $[K:\Q]$.
+By the "primitive element theorem" there exist $\alpha \in K$ such that 
+\[ K = \Q(\alpha) = \{ \frac{P(\alpha)}{Q(\alpha)} : P,Q \in \Q[x], Q(\alpha) \neq 0 \} \text{.} \]
+In fact $\Q(\alpha) = \Q[\alpha]$ and $1,\alpha,\dots,\alpha^{\deg(f_\alpha) - 1}$ is a $\Q$-basis for $K$,
+thus 
+\[ [K:\Q] = \deg(f_\alpha) \text{ (see exercise sheet 6).} \]
+The integral closure $\Z_K$ of $\Z$ in $K$ is usually dnoted by $O_K$.\\
+
+The following result is central in algebraic number theory.
+
+\begin{theorem}\label{th_3_3_6}
+  If $K$ is a number field then $O_K$ has a unique prime factorization of ideals,
+  i.e., if $\mathfrak{a} \neq (1),(0)$ is an ideal in $O_K$ then there exist prime ideals $\mathfrak{p}_1,\dots,\mathfrak{p}_s$ such that
+  \[ \mathfrak{a} = \mathfrak{p}_1 \dots \mathfrak{p}_s \]
+  and this decomposition is, up to the order of the factors, unique.
+\end{theorem}
+
+%renewcommand \hom form hom to Hom
+
+Additional references: J. Neukirch, "Algebraic number Theory", Springer \\
+\\
+We will not prove Theorem \ref{th_3_3_6}.\\
+\\
+
+\begin{ex}
+  Consider $K = \Q[\sqrt{-5}]$ then $O_K = \Z[\sqrt{-5}]$ (see sheet 6).\\
+  Consider the following ideals
+  \begin{align*}
+    \mathfrak{p}_1 &= (2, 1 + \sqrt{-5}) \text{,} \\
+    \mathfrak{p}_2 &= (2, 1 - \sqrt{-5})
+  \end{align*}
+  generated as $O_K$-modules by $2, 1 \pm \sqrt{-5}$. Then 
+  \begin{align*}
+    \mathfrak{p}_1 \mathfrak{p}_2 &= (4, 2 (1 - \sqrt{-5}), 2 (1+ \sqrt{-5}), 6) \\
+    &= (2) \underbrace{(2, 1 + \sqrt{-5}, 1 - \sqrt{-5}, 3)}_{ = (1)} = (2)
+  \end{align*}
+  With 
+  \begin{align*}
+  \mathfrak{p}_3 &= (3, 1 + \sqrt{-5}) \text{,} \\
+  \mathfrak{p}_4 &= (3, 1 - \sqrt{-5})
+  \end{align*}
+  we find 
+  \[ p_3 p_4 = (3) \text{.} \]
+  Then the non-unique factorization into irreducable elements
+  \[ 6 = 2 \cdot 3 = (1 + \sqrt{-5}) (1 - \sqrt{-5}) \]
+  in $O_K$ becomes the unique prime factorization into ideals in $O_K$
+  \begin{align*}
+    (6) = (2) \cdot (3) &= (\mathfrak{p}_1 \mathfrak{p}_2) (\mathfrak{p}_3 \mathfrak{p}_4) \\
+    &= (\mathfrak{p}_1 \mathfrak{p}_3) (\mathfrak{p}_2 \mathfrak{p}_4) \\
+    &= (1 + \sqrt{-5}) (1 - \sqrt{-5}) \text{.}
+  \end{align*}
+\end{ex}
+
+\begin{cor}\label{cor_3_3_7}
+  If $O_K$ is a principal ideal domain (PID) then $O_K$ is a unique factorization domain (UFD).
+\end{cor}
+
+\begin{proof}
+  Exercise (on your own)
+\end{proof}
+
+\begin{ex}
+  With $K = \Q(\sqrt{-1})$ or $\Q(\sqrt{-2})$ then $O_K = \Z[\sqrt{-1}]$ or $\Z[\sqrt{-2}]$ respectively (see sheet 6).
+  We know that the above rings are Euclidean and hence PIDs, thus UFD.
+\end{ex}
+
+
+\subsection{The ideal class group}
+
+Throughout this subsection $K$ denotes a number field.\\
+\\
+A \emph{fractional ideal} $I$ is an additive subgroup of $K$ such that there exists $a \in O_K$, $a \neq 0$ with
+\[ aI = \{ a \cdot r : r \in I \} \]
+is an ideal in $O_K$.\\
+Note that the product of two fractional ideals $I$, $J$
+\[ I \cdot J = \{ x \cdot y : x \in I, y \in J \} \]
+is again a fractional ideal.
+For an ideal $J \neq 0$ in $O_K$ we denote
+\[ J^{-1} = \{ x \in K : x \cdot J \subset O_K \} \text{.} \]
+As $a \cdot J^{-1} \subset O_K$ for any $a \in J$ we easily see that $J^{-1}$ is a fractional ideal of $O_K$.
+
+\begin{lemma}["to divide is to contain"\label{l_3_4_1}]
+  Let $\mathfrak{a}$, $\mathfrak{b}$ be ideals in $O_K$.
+  Then 
+  \[ \mathfrak{a} \divides \mathfrak{b} \iff \mathfrak{b} \subset \mathfrak{a} \text{.} \]
+\end{lemma}
+
+\begin{proof}
+  If $\mathfrak{b} \subset \mathfrak{a}$ then $\mathfrak{c} \coloneq \mathfrak{b} \cdot \mathfrak{a}^{-1} \subset \mathfrak{a} \mathfrak{a}^{-1} = O_K$.
+  Thus $\mathfrak{c}$ is an ideal in $O_K$ and $\mathfrak{b} = \mathfrak{c} \mathfrak{a}$.
+  Conversely if $\mathfrak{b} = \mathfrak{a} \cdot \mathfrak{c}$ with $\mathfrak{c}$ in $O_K$ then $\mathfrak{b} = \mathfrak{a} \cdot \mathfrak{c} \subset \mathfrak{a}$.
+\end{proof}
+
+\begin{lemma}\label{l_3_4_2}
+  The set $I_K$ of non-zero fractional ideal of $O_K$ forms a group under multiplication.
+\end{lemma}
+
+\begin{proof}
+  It suffices to check that we have inverses.\\
+  Let $J \in I_K$.
+  Then there exists an $a \in O_K$, $a \neq 0$ such that 
+  \[ I \coloneq a J \subset O_K \text{.} \]
+  Then also
+  \[ a \cdot I^{-1} \in I_K \text{.} \]
+  Moreover,
+  \[ J \cdot a I^{-1} = I \cdot I^{-1} = O_K \text{.} \]
+\end{proof}
+
+A fractional ideal $I$ is called \emph{principal} if there exists an $x \in K$ such that 
+\[ I = (x) = \{ x \cdot r: r \in O_K \} \text{.} \]
+Write $P_K$ for the subset of $I_K$ of non-zero principal fractional ideals.
+$P_K$ is a subgroup of $I_K$.
+
+The \emph{ideal class group} $CL_K$ is defined as the quotient group
+\[ CL_K = I_K/P_K \text{.} \]
+We have the following exact sequence
+\[ 1 \to O_K^\ast \to K^\ast \to I_K \to CL_K \to 1 \]
+(all maps are homomorphisms).\\
+The map $I_K \to CL_K$ is clearly surjective.
+The expansion when passing from numbers (in $K^\ast$) to ideals (in $I_K$) is measured by the class group ($CL_K$)
+and $O_K^\ast$ measures the contraction in the same process.
+
+\begin{theorem}\label{th_3_4_3}
+  $CL_K$ is finite.
+\end{theorem}
+
+Let $\hom_\Q(K)$ be the set of $\Q$-homomorphisms from $K$ into $\C$.
+If $K = \Q[\alpha]$ and $\sigma \in \hom_\Q(K)$ then
+\[ 0 = \sigma(f_\alpha(\alpha)) = f_\alpha(\sigma ( \alpha)) \]
+so $\sigma(\alpha)$ is a root of $f_\alpha$.
+Denote these roots by $\alpha_1,\dots,\alpha_d$ so $d = [K:\Q]$.\\
+Indeed each $\sigma(\alpha) = \alpha_i$ extends to a $\Q$-homomorphism of $K$.
+After relabelling let 
+\[ \alpha_1,\dots,\alpha_r \] 
+be the real and
+\[ \alpha_{r+1},\alpha_{r+1+s},\dots,\alpha_{r+s},\alpha_{r + 2s} \] 
+be the $s$ pairs of complex conjugate roots of $f_\alpha$.\\
+Then
+\[ \sigma_1,\dots,\sigma_r \]
+are the real embeddings and
+\[ \sigma_{r+1},\sigma_{r+1+s},\dots,\sigma_{r+s},\sigma_{r+2s} \]
+are the $s$ pairs of complex conjugate embeddings.\\
+We consider the \emph{Minkowski-embedding}:
+\begin{align*}
+  \sigma: K &\to \R^r \times \C^s \\
+  \alpha &\mapsto (\sigma_1(\alpha),\dots,\sigma_r(\alpha),\sigma_{r+1}(\alpha),\dots,\sigma_{r+s}(\alpha))
+\end{align*}
+\\
+
+Let $\mathfrak{a} \neq (0)$ be an ideal in $O_K$ and let $N(\mathfrak{a}) = [O_K:\mathfrak{a}]$ be the group index.
+We call $N(\mathfrak{a})$ the \emph{norm} of $\mathfrak{a}$.
+\\
+
+We make use of the following lemma which we won't prove.
+
+\begin{lemma}[3.4.4\label{l_3_3_4}]
+  \begin{itemize}
+    \item $N(\mathfrak{a})$ is finite for all $\mathfrak{a} \neq (0)$ ideals in $O_K$
+    \item $N(\mathfrak{a} \cdot \mathfrak{b}) = N(\mathfrak{a}) \cdot N(\mathfrak{b})$ for $\mathfrak{a}, \mathfrak{b} \neq (0)$ ideals in $O_K$
+    \item If $\alpha \in O_K$, $\alpha \neq 0$ $N((\alpha)) = \prod_{\sigma \in \hom_\Q(K)} \abs{\sigma(\alpha)}$
+  \end{itemize}
+  Moreover, if $(0) \neq \mathfrak{a}$ is an ideal in $O_K$ then $\sigma \mathfrak{a}$ is a lattice in 
+  \[ \R^r \times \C^s \simeq \R^{r + 2s} = R^d \] 
+  $(d = [K:\Q])$ with 
+  \todo{$\frac{1}{2}$ or $-\frac{1}{2}$?} \[ \det(\sigma \mathfrak{a}) = 2^{-s} N(\mathfrak{a}) \cdot \abs{\Delta_K}^{-\frac{1}{2}} \] 
+  where $\Delta_K \in \Z \setminus 0$ is a certain invariant of $K$ called the discriminant of $K$.\\
+  Any $I \in I_K$ has the form $I = \mathfrak{a} \mathfrak{b}^{-1}$ with $\mathfrak{a}$ and $\mathfrak{b}$ ideals in $O_K$.
+  By the multiplicity of the norm we can extend $N(\cdot)$ to $I_K$; 
+  \[ N(I) = N(\mathfrak{a})/N(\mathfrak{b}) \text{.} \] 
+\end{lemma}
+
+\begin{lemma}\label{l_3_4_5}
+  Let $\mathfrak{a} \neq (0)$ be an ideal in $O_K$. 
+  Then there exists $0 \neq \alpha \in \mathfrak{a}$ such that
+  \[ N((\alpha)) \leq \left( \frac{2}{\pi} \right)^s \cdot \sqrt{\abs{\Delta_K}} \cdot N(\mathfrak{a}) \text{.} \]
+\end{lemma}
+
+\begin{proof}
+  Choose $c_i > 0$ ($1 \leq i \leq r+s$) with 
+  \[ \prod_{i=1}^{r+s} c_i^{d_i} > \left( \frac{2}{\pi} \right)^s N(\mathfrak{a}) \sqrt{\abs{\Delta_K}} \text{,} \]
+  where $d_i = 
+  \begin{cases}
+    1 &: 1 \leq i \leq r \\
+    2 &: r+1 \leq i \leq r+s
+  \end{cases} \text{.}$\\
+  Consider
+  \[ S = \{ x \in \R^r \times \C^s: \abs{x_i} < c_i (1 \leq i \leq r+s) \} \text{.} \]
+  Now $S$ is convex, symmetric in $\R^r \times \C^s \simeq \R^d$ with 
+  \begin{align*}
+    \vol S &= (2 \cdot c_1) \dots (2 c_r) (\pi c_{r+1}^2) \dots (\pi c_{r+s}^2) \\
+    &> 2^d \cdot \det \sigma(\mathfrak{a}) \text{.}
+  \end{align*}
+  By Minkowski's First Theorem there exists an $\alpha \in \mathfrak{a}$, $\alpha \neq 0$ such that $\sigma \alpha \in S$.
+  Thus $\abs{\sigma_i \alpha} < c_i \; (1 \leq i \leq r+s)$,
+  and hence 
+  \begin{align*}
+    N((\alpha)) &= \prod_{i=1}^{r+s} \abs{\sigma_i(\alpha)}^{d_i} \\
+    &< \prod_{i=1}^{r+s} c_i^{d_i}.
+  \end{align*}
+  As $\prod_{i=1}^{r+s} c_i^{d_i}$ can be chosen arbitrarily close to $\left( \frac{2}{\pi} \right)^s N(\mathfrak{a}) \sqrt{\abs{\Delta_K}}$ the claim follows.
+\end{proof}
+
+\begin{lemma}\label{l_3_4_6}
+  There are finitely many ideals in $O_K$ with bounded norm, i.e., 
+  \[ \abs{\{ \mathfrak{a} \subset O_K : a \neq 0, N(\mathfrak{a}) < M \}} < \infty \; \forall M > 0 \text{.} \]
+\end{lemma}
+
+\begin{proof}
+  Let $\mathfrak{p}$ be a prime ideal in $O_K$.
+  Then 
+  \[ \mathfrak{p} \cap \Z = p \Z \]
+  with a prime number $p \in \Z$.\\
+  By Lemma \ref{l_3_4_1} $\mathfrak{p} \divides (p)$, hence
+  \[ N(\mathfrak{p}) \divides N((p)) = p^d \; (d = [K:\Q]) \text{.} \]
+  As there are only finitely many prime ideals $\mathfrak{p}$ that divide $(p)$ we conclude that there are only finitely many prime ideals of bounded norm.
+  This implies that there are only finitely many ideals in $O_K$ of bounded norm.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{th_3_4_3}]
+  Let $c \in CL_K$ and let $I \subset O_K$ be an ideal in $c^{-1}$. 
+  We write $[I] = c^{-1}$.
+  By Lemma \ref{l_3_4_5} we can choose $\alpha \in I$, $\alpha \neq 0$ such that
+  \[ N((\alpha)) \leq \left( \frac{2}{\pi} \right)^s \cdot \abs{\Delta_K}^{\frac{1}{2}} N(I) \text{.} \]
+  By Lemma \ref{l_3_4_1} we have
+  \[ (\alpha) \subset I \implies I \divides (\alpha) \] 
+  so
+  \[ (\alpha) = I \cdot J \] 
+  with $J \subset O_K$.
+  Now $( \alpha) \in P_K$.
+  So 
+  \[  [J] = [I]^{-1} = c \text{.} \]
+  Now 
+  \[ N(J) = \frac{N((\alpha))}{N(I)} \leq \left( \frac{2}{\pi} \right)^s \abs{\Delta_K}^{\frac{1}{2}} \text{.} \]
+  Hence, any ideal class $c$ has an integral representative $J$ of bounded norm.
+  But by Lemma \ref{l_3_4_6} there are only finitely many of these.
+\end{proof}
+
+
+\subsection{Dirichlet's Unit Theorem}
+
+Using geometry of numbers for a "multiplicative version" of the Minkowski-embedding one can prove the following fundamental result.
+
+\begin{theorem}[Dirichlet's Unit Theorem\label{th_3_5_1}]
+  Let $K$ be a number field with $r$ real and $s$ pairs of complex conjugate embeddings.
+  The group $O_K^\ast$ is the direct product of a finite cyclic group and of an abelian free group of rank $r+s-1$.\\
+  So there exist 
+  \todo{Professor: r+s-1 or r+s+1 ??}
+  \[ \varepsilon_1,\dots,\varepsilon_{r+s-1} \text{ in } O_K^\ast \]
+  such that 
+  \[ \forall \varepsilon \in O_K^\ast \text{exists a unique root of unity } \xi \text{ and a vector } (a_1,\dots,a_{r+s-1}) \in \Z^{r+s-1} \]
+  such that
+  \[ \varepsilon = \xi \varepsilon_1^{a_1} \cdots \varepsilon_{r+s-1}^{a_{r+s-1}} \text{.} \]
+\end{theorem}
+
+\end{document}

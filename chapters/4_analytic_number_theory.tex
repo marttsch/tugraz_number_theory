@@ -1,0 +1,1016 @@
+\documentclass[NumTh.tex]{subfiles}
+\begin{document}
+
+\section{4 Analytic number theory}
+
+Study number-theoretic Questions using (complex) analysis.
+
+\begin{rem}[Notation]
+  \begin{itemize}
+    \item $f,g : [0,\infty) \to \C$. Then $f \sim g : \Leftrightarrow \lim_{x\to \infty} \frac{f(x)}{g(x)} = 1$ "asymptotically equal"
+    \item $f = \mathcal{O}(g) : \Leftrightarrow \exists c > 0$ such that $\abs{f(x)} \leq c \cdot g(x) \forall x \geq 1$.
+  \end{itemize}
+\end{rem}
+
+\begin{rem}[Motivation: Prime number theorem (PNT)]
+  Let $\pi(x) \coloneq \# \{ p \leq x : p \text{ prime} \}$.
+  Then $\pi(x) \sim \frac{x}{\log x}$, 
+  i.e., "Tere are roughly $\frac{x}{\log x}$ primes up to $x$."
+\end{rem}
+
+\subsection{Dirichlet series}
+
+\begin{defi}\label{4_1}
+  A \emph{Dirichlet} series is  a \underline{formal series} of the form
+  \[ D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s} \]
+  $a_n \in \C$, $n \in \N$, $s \in \C$.
+\end{defi}
+
+\begin{ex}
+  $a_n = 1$, $n \in \N$: $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ ... \emph{Riemann} $\zeta$-function.\\
+\end{ex}
+
+For any arithmetic function $f: \N \to \C$, we define the dirichlet series
+\[ D_f(s) = \sum_{n=1}^\infty \frac{f(n)}{n^s} \]
+\underline{Goal:} study $D_f(s)$ via  complex analysis to obtain \# -theoretic results about $f$.
+
+Write $s = \sigma + i t$, where $\sigma = \mathcal{R}e(s)$, $t = \mathcal{I}m(s)$. $s_0 = \sigma_0 + i t_0, \dots$
+
+\begin{lemma}\label{4_2}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ be a Dirchlet series, $s_0 \in \C$.
+  If $D_(s_0)$ converges absolutely, then $D(s)$ converges absolutely and uniformly in the half-plane $\sigma \geq \sigma_0$.
+\end{lemma}
+
+\begin{proof}
+  $n^s = e^{s \log n} = e^{(\sigma + i t) \log n} \implies \abs{n^s} = e^{\sigma \log n} \geq e^{\sigma_0 \log n}$
+  \[ \abs{\frac{a_n}{n^s}} \leq \abs{\frac{a_n}{n^{\sigma_0}}} \]
+  formal majorant, independent of $s$ $\implies$ uniform convergence.
+  \todo{add picture of (right) half-plane |--}
+\end{proof}
+
+\begin{defi}\label{4_3}
+  A right half-plane 
+  \[ H = \{ s \in \C : \sigma > \sigma_0 \} \]
+  $\sigma_0 \in \R$, is called \underline{half-plane of absolute convergence for $D(s)$},
+  if $D(s)$ converges absolutely for all $s \in H$.\\
+  We also allow $\sigma_0 = - \infty$.
+  Then $D(s)$ converges everywhere.
+\end{defi}
+
+\begin{rem}
+  \begin{enumerate}
+    \item If $D(s)$ converges absolutely somewhere, then it has a half-plane of absolute convergence. (by lemma \ref{4_2})
+    \item The union of all half-planes of absolute convergence of $D(s)$ is a half-plane of absolute convergence of $D(s)$. We call it \underline{the} half-plane of absolute convergence of $D(s)$.
+    \item Lemma \ref{4_2} $\implies D(s)$ is a holomorphic function in its half-plane of absolute convergence\\
+    ( $\frac{a_n}{n^s}$ is an entire function and the series converges uniformly in compact disks)
+  \end{enumerate}
+\end{rem}
+
+\begin{ex}
+  $\sigma > 1$. $\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ converges absolutely (for $\sigma > 1$).
+  By \emph{integral test}:
+  \[ \int_1^\infty \frac{1}{x^s} dx = \frac{1}{s - 1} < \infty \]
+  but $\zeta(1) = \sum_{n=1}^\infty \frac{1}{n}$ diverges $\implies \zeta(s)$ has $\sigma > 1$ as its h-p oac.
+\end{ex}
+
+\begin{lemma}\label{4_4}
+  Let $\abs{a_n} \leq C \cdot n^\alpha$, for $C > 0$, $\alpha \in \R$, and all $n \in \N$.
+  Then $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ converges absolutely for $\sigma > 1 + \alpha$.
+\end{lemma}
+
+\begin{proof}
+  $\abs{\frac{a_n}{n^s}} \leq \frac{C}{n^{\sigma- \alpha}}$; converges to $\zeta(s - \alpha)$.
+\end{proof}
+
+\begin{theorem}\label{4_5}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$, $a_n \in \C$, such that $D(s) = 0$ for all $s$ in a h-p oac $H$.
+  Then $a_n = 0$ for all $n$.
+\end{theorem}
+
+\begin{proof}
+  Let $\sigma_0 \in \R$ such that $D(s)$ converges absolutely for $\sigma \geq \sigma_0$.
+  Proof by contradiction.\\
+  Let $n_0$ be the samllest index with $a_n \neq 0$.
+  Then 
+  \begin{align*}
+    0 = D(s) = \frac{a_{n_0}}{n_0^s} + \underbrace{\sum_{n = n_0 + 1}^\infty \frac{a_n}{n^s}}_{=: D_1(s)} \\
+    \implies a_{n_0} = - n_0^s D_1(s) \text{.} \\
+    \forall \sigma \geq \sigma_0: \abs{a_{n_0}} \leq n_0^\sigma \sum_{n= n_0 + 1}^\infty \frac{\abs{a_n}}{n^\sigma}
+    = \sum_{n = n_0 +1}^\infty \abs{a_n} \left( \frac{n_0}{n} \right)^\sigma
+  \end{align*}
+  let $\sigma \coloneq \sigma_0 + \lambda$ for $\lambda > 0$.
+  \begin{align*}
+    \left( \frac{n_0}{n} \right)^\sigma &=  \left( \frac{n_0}{n} \right)^{\sigma_0} \left( \frac{n_0}{n} \right)^\lambda \\
+    &\leq \left( \frac{n_0}{n} \right)^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda
+  \end{align*}
+  \begin{align*}
+    \abs{a_{n_0}} \leq n_0^{\sigma_0} \left( \frac{n_0}{n_0 + 1} \right)^\lambda \underbrace{\sum_{n = n_0 +1}^\infty \frac{\abs{a_n}}{n^{\sigma_0}}}_{=: C_0 < \infty} = n_0^{\sigma_0} C_0 \left( \frac{n_0}{n_0 + 1} \right)^\lambda
+  \end{align*}
+  \[ \implies \abs{a_{n_0}} \overset{\lambda \to \infty}{\to} 0 \implies a_{n_0} = 0 \lightning \]
+\end{proof}
+
+\begin{rem}
+  The theorem shows that $(a_n)_{n \in \N}$ is determined by $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$
+  since $D(\sigma_0)$ converges absolutely.\\
+  e.g. to prove that two arithmetic functions $f,g$ are identically equal, it is enough to show that $D_f(s) = D_g(s)$ for  $s$ in some h-p oac
+\end{rem}
+
+Why do \# - theorist use $D$- series (and not ,say, power series)?\\
+Because $D$-series are compatible with multiplicative structure.
+Consider a (abs conv) D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$.
+For $A \subseteq \N$, with $D_A(s) = \sum_{n \in A} \frac{a_n}{n^s}$.
+
+\begin{lemma}\label{4_6}
+  Let $A,B \subseteq \N$. $A,B \neq \emptyset$, such that
+  \begin{enumerate}
+    \item the multiplication map $A \times B \to \N$, $(a,b) \mapsto ab$ is injective
+    \item $a_{n \cdot m} = a_n \cdot a_m$ for $n \in A$ and $m \in B$.
+  \end{enumerate}
+  Let $C = AB = \{ ab : a \in A, b \in B \}$. Then $D_C(s) = D_A(s) D_B(s)$ in the half-plane oac of $D(s)$.
+\end{lemma}
+
+\begin{proof}
+  Cauchy-product: 
+  \[ \left( \sum_{n \in A} \frac{a_n}{n^s} \right) \cdot \left( \sum_{m \in B} \frac{a_m}{m^s} \right) = \sum_{(n,m) \in A \times B} \frac{a_n a_m}{(nm)^s} \overset{1,2}{=} \sum_{n \in C} \frac{a_n}{n^s} \]
+\end{proof}
+
+\begin{rem}
+  by induction: if $\emptyset \neq A_1,\dots , A_N \subseteq \N$ such that
+  \begin{enumerate}
+    \item $A_1 \times \dots \times A_n \to \N$, $(n_1,\dots,n_N) \mapsto n_1 \cdots n_N$ injective.
+    \item $a_{n_1 \cdots n_N} = a_{n_1} \cdots a_{n_N}$
+  \end{enumerate}
+  Let $C = A_1 \cdots A_N$, Then $D_C(s) = D_{A_1}(s) \cdots D_{A_N}(s)$.
+\end{rem}
+
+\begin{theorem}\label{4_7}
+  Let $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ be a convergent D-series, such that $a_1 = 1$ and $a_{n \cdot m} = a_n \cdot a_m$ whenever $\gcd(n,m) = 1$ (i.e., $a_n$ is multiplicative).
+  Then 
+  \[ D(s) = \prod_{p \text{ prime}} \left( \sum_{\nu = 0}^\infty \frac{a_{p^\nu}}{p^{\nu s}} \right) \text{,} \]
+  where the infinite product over all primes converges absolute in the half-plane $H$ of absolute convergence of $D(s)$.
+  The infinite product is called the \emph{Euler} product of $D(s)$.
+\end{theorem}
+
+\begin{proof}
+  Let $s \in H$, $p_1 = 2, p_2 = 3, p_3 = 5, \dots, p_n = n \text{-th prime}$.
+  $A_n = \{ p_n^\nu : \nu = 0,1,2,\dots \}$, $B_N = \{ n \in \N : \gcd(n,p_1,\dots,p_N) = 1 \}$\\
+  By the fundamental theorem of arithmetic,
+  \begin{align*}
+    A_1 \times \dots \times A_N \times B_N &\to \N \\
+    (n_1,\dots,n_N,m) &\mapsto n_1 \cdots n_N m
+  \end{align*}
+  is bijective. And
+  \[ a_{n_1 \cdots n_N m} = a_{n_1} \cdots a_{n_N} \cdot a_m \]
+  Lemma $\implies$
+  \[ D(s) = D_\N(s) = \left( \prod_{i=1}^N D_{A_i}(s) \right) D_{B_N}(s) = \prod_{i=1}^N \left( \sum_{\nu=0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)\cdot D_{B_N}(s) \]
+  \begin{align*}
+    \gcd(m, p_1 \cdots p_N) = 1 \implies m = 1 \text{ or } m \geq N \\
+    &\implies \abs{D_{B_N} - \underbrace{1}_{= \frac{a_1}{1^s}}} \leq \sum_{m \geq N} \frac{\abs{a_m}}{m^s} \overset{N \to \infty}{\to} 0
+  \end{align*}
+  since $D(s)$ converges absolutely.
+  \begin{align*}
+    D(s) = \lim_{N \to \infty} \prod_{i=1}^N \left( \sum_{\nu = 0}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}} \right)
+  \end{align*}
+  we need to show: this is a convergent infinite product
+  \begin{rem}[Recall]
+    \[ \prod_{i=1}^\infty (1 + b_i) \text{ converges absoutely } \iff \sum_{i=1}^\infty b_i \text{ converges absolutely} \]
+  \end{rem}
+  here:
+  \[ \sum_{i=1}^\infty \abs{b_i} = \sum_{i=1}^\infty \abs{ \sum_{\nu = 1}^\infty \frac{a_{p_i^\nu}}{p_i^{\nu s}}} \]
+  arises from $D(s)$ by re-ordering a sub-series (all prime powers) $\implies$ still converges absolutely
+\end{proof}
+
+\begin{ex}
+  For $\sigma > 1$, we have
+  \begin{align*}
+    \zeta(s) = \prod_{p} \left( \sum_{\nu = 0}^\infty \frac{1}{p^{\nu s}} \right) = \prod_p \left( \frac{1}{1 - \frac{1}{p^s}} \right)\\
+    \implies \zeta(s) \neq 0 \text{ for } \sigma > 1 \text{.}
+  \end{align*}
+\end{ex}
+
+
+\subsection{A Tauberian Theorem}
+
+Tauberian theorem are one way to extract arithmetic information about $(a_n)_{n \in \N}$ from $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$.
+The translate analytic properties of $D(s)$ to asymptotics of $A(x) = \sum_{n \leq x} a_n$.
+
+\begin{theorem}[T\label{4_8_T}]
+  Let $(a_n)_{n\in \N}$ ba a sequence of non-negative real numbers, such that the D-series $D(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}$ converges for  $\sigma > 1$. Assume:
+  \begin{enumerate}
+    \item[(I)] $D(s)$ has a \underline{meromorphic continuation} to an open set $U \subseteq \C$ containing the closed half-space $\sigma \geq 1$.
+    \todo{add pic}
+    \item[(II)] The \underline{only pole} of $D(s)$ in $U$ is at $s = 1$, has order $1$, and residue
+    \[ Res_{s=1} D(s) =: \rho \]
+    \item[(III)] There are constants $C,k$ such that $\abs{D(s)} \leq C \cdot \abs{t}^k$ and $\abs{D^\prime(s)} \leq C \cdot \abs{t}^k$ for $\sigma > 1$ and $\abs{t} \geq 1$.
+    Then
+    \[ \sum_{n \leq x} a_n = \rho x + \mathcal{O} \left( \frac{x}{\sqrt[N]{\log x}} \right) \text{,} \]
+    for some $N = N(k)$.
+  \end{enumerate}
+\end{theorem}
+
+In the next lecture, we apply Theorem \ref{4_8_T} and proberties of $\zeta(s)$ to deduce PNT.
+Next week we probe Theorem \ref{4_8_T}.
+
+\subsection{$\zeta$-function and primes}
+
+\[ \zeta(s) = \prod_p \frac{1}{1 - \frac{1}{p^s}} \text{, } \zeta(s) \text{holomorph, } \zeta(s) \neq 0 \text{, } \sigma > 1 \]
+
+\begin{defi} \label{4_9}
+  The  \emph{von Mangoldt}-function $\Lambda: \N \to \R$ is defined as
+  \[ \Lambda(n) = 
+  \begin{cases}
+    \log p & \text{if } n = p^\nu, \nu \geq 1 \\
+    0 & \text{otherwise}
+  \end{cases} \]
+\end{defi}
+
+\begin{lemma}\label{4_10}
+  $D_\Lambda(s) = - \frac{\zeta^\prime(s)}{\zeta(s)}$, in $\sigma > 1$.
+\end{lemma}
+
+\begin{proof}
+  \[\log (1 - p^{-s})^\prime =  \frac{(\log p) p^{-s}}{1 - p^{-s}} = (\log p) \sum_{\nu = 1}^\infty p^{- \nu s} \]
+  \[ - \frac{\zeta^\prime (s)}{\zeta(s)} = - \log (\zeta(s))^\prime = \sum_p \log(1 - p^{-s})^\prime
+  = \sum_p (\log p) \sum_{\nu = 1}^\infty p^{- \nu s} = \sum_{p^\nu \in \N\\ \nu \geq 1} \frac{\log p}{p^{\nu s}}
+  = \sum_{n \in \N} \frac{\Lambda(n)}{n^s} = D_\Lambda(s) \text{.} \]
+\end{proof}
+
+Strategy for proof of PNT:\\
+1) study $\zeta(s)$, 2) study $D_\Lambda(s)$, 3) prove that $D_\Lambda(s)$ satisfies (I),(II),(III) of Theorem \ref{4_8_T}
+$\implies \sum_{n \leq x} \Lambda(n) = x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}})$, 5) $\implies$ PNT.
+
+\begin{lemma}\label{4_11}
+  $\zeta(s)$ has a meromorphic continuation of $\sigma >0$, with a simple pole at $s = 1$, with $Res_{s=1} \zeta(s) = 1$.
+\end{lemma}
+
+\begin{proof}
+  Prove existence of a function $h(s)$ holomorph on $\sigma > 0$, such that $\zeta(s) = \frac{1}{s - 1} + h(s)$ on $\sigma > 1$.
+  $\sigma > 1$: $\zeta(s) - \frac{1}{s-1} = \sum_{n=1}^\infty \frac{1}{n^s} - \int_1^\infty \frac{1}{x^s} dx 
+  = \sum_{n=1}^\infty \underbrace{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx}_{\coloneq h(s)}$
+  \[ \abs{\int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx} = \abs{ \int_n^{n+1} (\int_n^x (\frac{s \cdot du}{u^{s+1}})dx}
+  \leq \max_{n \leq u \leq n+1} \abs{\frac{s}{u^{s+1}}} = \frac{\abs{s}}{n^{\sigma + 1}} \]
+  If $s \in D \subset \C$, then $\abs{s} \leq C = C(D)$.\\
+  $\implies$ the sum defining $h(s)$ has a majorant converges absloutely and uniformly in compact subsets of $\{\sigma > 0 \}$.
+  $\implies$ $h(s)$ holomporph on $\sigma > 0$.
+\end{proof}
+
+\begin{lemma} \label{4_12}
+  $D_\Lambda(s) =  - \frac{\zeta^\prime(s)}{\zeta(s)}$ has a meromoorphic continuation to $\sigma > 0$.
+  In this domain, $D_\Lambda(s)$ has
+  \begin{itemize}
+    \item a simple pole at $s = 1$, with $Res_{s=1} D_\Lambda(s) = 1$
+    \item for each zero $\alpha$ of $\zeta(s)$ of order $\mu$, a simple pole at $s = \alpha$ with $Res_{s=\alpha} D_\Lambda(s) = - \mu$
+    \item no other pole
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  $\zeta(s)$ mropmorphic on $\sigma > 0 \implies \zeta^\prime(s)$ meromorphic on $\sigma > 0 \implies D_\Lambda(s) = - \frac{\zeta^\prime(s)}{\zeta(s)}$ meromorphic on $\sigma > 0$.
+  $D_\Lambda(s)$ has its poles at
+  \begin{enumerate}
+    \item poles of $\zeta^\prime(s)$
+    \item zeros of $\zeta(s)$
+  \end{enumerate}
+  since $\zeta(s)$ holomorphic $\implies \zeta^\prime(s)$ holomorphic $\implies$ the only pole of $\zeta^\prime(s)$ can be at $s = 1$.\\
+  \underline{Laurent-series at $s=1$:}
+  \begin{align*}
+    \left.
+    \begin{array}{ll}
+    \zeta(s) &= \frac{1}{s-1} + \dots \text{ higher order terms} \\
+    \implies \zeta^\prime(s) &= \frac{-1}{(s-1)^2} + \dots \\
+    \frac{1}{\zeta(s)} &= (s-1) + \dots
+    \end{array}
+    \right\rbrace -\frac{\zeta^\prime(s)}{\zeta(s)} = \frac{1}{s-1} + \dots \checkmark
+  \end{align*}
+  Let $\alpha \in \{ \sigma >0\}$ be a zero of $\zeta(s)$ of order $\mu \geq 1$.
+  Lauraunt-series at $s = \alpha$:\\
+  \begin{align*}
+    \zeta(s) &= c \cdot (s- \alpha)^\mu + \dots \\
+    \implies \zeta^\prime(s) &= \mu c (s-\alpha)^{\mu - 1} + \dots \\
+    \frac{1}{\zeta(s)} &= \frac{1}{c} \cdot \frac{1}{(s-\alpha)^\mu} + \dots
+  \end{align*}
+  $\implies - \frac{\zeta^\prime(s)}{\zeta(s)} = - \frac{\mu}{(s - \alpha)} + \dots \checkmark$
+\end{proof}
+
+\begin{defi}\label{4_13}
+  $\Phi(s) \coloneq \sum_p \frac{\log p}{p^s}$.
+\end{defi}
+
+\begin{lemma}\label{4_14}
+  There is a holomorphic function $g(s)$ on $\sigma > \frac{1}{2}$, such that $\Phi(s) = D_\Lambda(s) - g(s)$, on $\sigma > 1$.
+  In particular, $\Phi(s)$ has meromorphic continuation to $\sigma > \frac{1}{2}$ with the same poles as $D_\Lambda(s)$.
+\end{lemma}
+
+\begin{proof}
+  $\sigma > 1$.
+  \[ \Phi(s) + \underbrace{\sum_p \frac{\log p}{p^s (p^s -1)}}_{=: g(s)} = \sum_p \frac{(\log p)}{p^s -1} = \sum_p \frac{(\log p)}{p^s} \cdot \frac{1}{1- p^{-s}} = \sum_p (\log p) \sum_{\nu \geq 1} \frac{1}{p^{\nu s}} = D_\Lambda(s) \text{.} \]
+  Let $\sigma \geq \sigma_0 > \frac{1}{2}$.
+  Then
+  \[ \frac{p^\sigma - 1}{p^\sigma} = 1 - \frac{1}{p^\sigma} \geq 1 - \frac{1}{\sqrt{2}} \geq \frac{1}{4} \]
+  \begin{align*}
+    \abs{\frac{(\log p)}{p^s (p^s -1)}} \leq \abs{4 \frac{\log p}{p^{2s}}} \leq \abs{ 4 \frac{\log p}{p^{2\sigma_0}}} \\
+  \end{align*}
+  $\implies$ found majorant for $g(s)$, independent of $s$ in any closed half-plane $\sigma \geq \sigma_0 > \frac{1}{2}$.\\
+  $\implies$ $g(s)$ holomorph on $\sigma > \frac{1}{2}$.
+\end{proof}
+
+\begin{theorem}[Zero-freeness of $\zeta$]\label{4_15}
+  $\zeta(s) \neq 0$ for $\sigma \geq 1$.
+  In particular, $D_\Lambda(s)$ has no poles in $\sigma \geq 1$, except $s = 1$.
+\end{theorem}
+
+\begin{proof}[Proof (Mertens)]
+  \begin{align*}
+    D_\Lambda(s) = \Phi(s) + g(s) \text{,}
+  \end{align*}
+  $g(s)$ holomorphic on $\sigma > \frac{1}{2}$.
+  We know that $\zeta(s)$ has no zeros on $\sigma > 1$.
+  Assume that $\zeta(s)$ has a zero of order $\mu$ at $s=1 + \alpha \cdot i$, and a zero of order $\nu$ at $1 + 2 \cdot \alpha \cdot i$, where $\mu,\nu \geq 0$.
+  Show that $\mu = 0$.\\
+  Then: 
+  \[ \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + \varepsilon)
+  = \underbrace{\lim_{\varepsilon \searrow 0} \varepsilon D_\Lambda(1 + \varepsilon)}_{Res_{s=1} D_\Lambda(s)} - \underbrace{\lim_{\varepsilon \searrow 0} \varepsilon g(1 + \varepsilon)}_{= 0, \text{since g holom at 1}} = 1 \]
+  Similarly,
+  \begin{align*}
+    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + \alpha i \pm \varepsilon) &= Res_{s=1+\alpha i} D_\Lambda(s) = - \mu \\
+    \lim_{\varepsilon \searrow 0} \varepsilon \Phi(1 + 2 \alpha i \pm \varepsilon) &= Res_{s=1+2\alpha i} D_\Lambda(s) = - \nu
+  \end{align*}
+  \begin{align*}
+    0 &\leq \sum_p \frac{\log p}{p^{1+\varepsilon}} ( \underbrace{p^{i \frac{\alpha}{2}} + p^{-i \frac{\alpha}{2}}}_{\in\R})^4 \\
+    &= \sum_p \frac{\log p}{p^{1+\varepsilon}} \sum_{j = 0}^4 \left( 4 \choose j \right) p^{i \frac{\alpha}{2}(j -(4-j))} \\
+    &= \sum_p \frac{\log p}{p^{1+\varepsilon}} \sum_{j=0}^4 \left( 4 \choose j \right) p^{i \alpha (j-2)} \\
+    &= \Phi(1 + \varepsilon + 2 \alpha i) + 4 \Phi(1+ \varepsilon + i \alpha) + 6 \Phi(1 +\varepsilon) + 4 \Phi(1 +\varepsilon - i \alpha) + \Phi(1 + \varepsilon - 2 i \alpha) =: E(\varepsilon)
+  \end{align*}
+  \[ 0 \leq \lim_{\varepsilon \searrow 0} \varepsilon E(\varepsilon) = 6 - 8 \mu - 2 \nu \implies \mu = 0 \]
+\end{proof}
+
+In particular, we can find a open subset $U \subseteq \C$, containing $\{\sigma \geq 1\}$, such that $D_\Lambda(s)$ has no poles in $U$, except $s = 1$.
+$\implies D_\Lambda(s)$ satisfies (I),(II) of Theorem \ref{4_8_T}. What about (III)?
+
+\begin{theorem}\label{4_16}
+  \begin{enumerate}
+    \item Let $m \in \N_0$.
+    Then there exists a $C_m > 0$, such that $\abs{\zeta^{(m)}(s)} \leq C_m \cdot \abs{t}$ for all $s$ with $\sigma > 1$, $\abs{t} \geq 1$.
+    \item There exists a constant $c_0 > 0$ such that $\abs{\zeta(s)} \geq c_0 \abs{t}^{-4}$ for all $s$ with $\sigma >1$, $\abs{t} \geq 1$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Later (technical).
+\end{proof}
+
+\begin{theorem}[version of PNT]\label{4_17}
+  \[ \sum_{n \leq x} \Lambda(n) = x + \mathcal{O} \left( \frac{x}{\sqrt[N]{\log x}} \right) \text{.} \]
+\end{theorem}
+
+\begin{proof}
+  Use Theorem T.\\
+  $D_\Lambda(s)$ satisfies (I),(II); moreover, on $\sigma >1$, $\abs{t} \geq 1$ 
+  \[ \abs{D_\Lambda(s)} = \frac{\abs{\zeta^\prime(s)}}{\abs{\zeta(s)}} \leq C_1 \frac{1}{c_0} \abs{t}^5\]
+  \[ \abs{D_\Lambda^\prime(s)} = \abs{ \frac{- \zeta^{\prime \prime}(s) \zeta(s) + \zeta^\prime(s)^2}{\zeta(s)^2}}
+  \leq \frac{\abs{\zeta^{\prime \prime(s)}}}{\abs{\zeta(s)}} + \frac{\abs{\zeta^\prime(s)}^2}{\abs{\zeta(s)}^2}
+  \leq C_2 \frac{1}{c_0} \abs{t}^5 + C_1^2 \frac{1}{c_0^2} \abs{t}^{10} \]
+  $\implies$ $D_\Lambda(s)$ satisfies (III) with $k = 10$.
+  Theorem \ref{4_8_T} $\implies \sum_{n \leq x} \Lambda(n) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N]{\log x}})$,
+  $ \rho = Res_{s = 1} D_\Lambda(s) = 1$. This quite easily implies the PNT.
+\end{proof}
+
+\begin{theorem}[PNT] \label{4_18}
+  $\exists N \in \N$ such that $\pi(x) = \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}})$.
+\end{theorem}
+
+\begin{proof}
+  First, 
+  \begin{align*}
+    \sum_{p \leq x} (\log p) &= \sum_{n \leq x} \Lambda(n) - \sum_{p^\nu \leq x, \nu \geq 2} (\log p) \\
+    &= x + \mathcal{O} ( \frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O}( \sum_{\nu = 2}^{\lceil \log_2 x \rceil} \sum_{n^\nu \leq x} (\log n)) \\
+    &= x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) + \mathcal{O} ( (\log x)^2 \sqrt{x}) \\
+    &= x + \mathcal{O}( \frac{x}{(\log x)^{\frac{1}{N}}} )
+  \end{align*}
+  Then use Abel sum formula:
+  \[ \sum_{y < n \leq x} a_n f(n) = A(x) f(x) - A(y) f(y) - \int_y^x A(t) f^\prime(t) dt \text{,} \]
+  where $a_n \in \C$, $A(x) \coloneq \sum_{n \leq x} a_n$, $f: [y,\infty) \to \C$ contiuantially differntiable.
+  \[ a_n =
+  \begin{cases}
+    \log p & \text{if} n = p \\
+    0 & \text{otherwise}
+  \end{cases}
+  \implies A(x) = \sum_{p \leq x} \log p = x + \mathcal{O}(\frac{x}{(\log x)^{\frac{1}{N}}}) \]
+  $f(t) = \frac{1}{\log t}$;
+  $x = x$, $y = 2$
+  \begin{align*}
+    \sum_{2 < p \leq x} 1 &= \frac{A(x)}{\log x} - \frac{A(2)}{\log 2} - \int_2^x \frac{A(t)}{t (\log t)^2} dt \\
+    &= \frac{x}{\log x} + \mathcal{O}(\frac{x}{(\log x)^{1+\frac{1}{N}}}) - 1 - \int_2^x \frac{1}{(\log t)^2} dt
+  + \mathcal{O} ( \int_2^x \frac{1}{(\log t)^{2+\frac{1}{N}}}dt) \\
+    &= \frac{x}{\log x} + \mathcal{O}( \frac{x}{(\log x)^{1 + \frac{1}{N}}}) + \mathcal{O}( \int_2^x \frac{1}{(\log t)^2}dt )
+  \end{align*}
+  \begin{align*}
+    \int_2^x \frac{1}{(\log t)^2} dt &= \int_{\log 2}^{\log x} \frac{e^u}{u^2} du \\
+  &\underset{u = \log t, du = \frac{dt}{t}}{=} [ \frac{e^u}{u^2}]_{\log 2}^{\log x} + 2 \int_{\log 2}^{\log x} \frac{e^u}{u^3} du \\
+  &\underset{ \frac{e^u}{u^3} \leq c \frac{e^{\log x}}{(\log x)^3}, c > 0}{=} \\
+  &\leq \frac{x}{(\log x)^2} + \frac{2}{(\log 2)^2} + (\log x)c \frac{x}{(\log x)^3} \\
+  &= \mathcal{O}(\frac{x}{(\log x)^2}) 
+  \end{align*}
+\end{proof}
+
+\subsection{Proof of the Tauberian Theorem}
+
+\begin{proof}[Proof of Theorem \ref{4_8_T}:]
+  For the proof we consider so called "higher summatory functions"
+  \[ A_l(x) \coloneq \frac{1}{l!} \sum_{n \leq x} a_n (x-n)^l \text{.} \]
+  \[ A_0(x) = \sum_{n \leq x} a_n \]
+  is what we want.
+  Let's look at
+  \begin{align*}
+    \int_1^x A_l(t) dt &= \int_1^x \frac{1}{l!} \sum_{n \leq t} a_n ( t-n)^l dt \\
+    &= \sum_{n \leq x} a_n \int_n^x \frac{1}{l!} (t-n)^l dt \\
+    &= \frac{1}{(l+1)!} \sum_{n \leq x} a_n [(t-n)^{l+1}]_n^x \\
+    &= A_{l+1}(x)
+  \end{align*}
+  Define $r_l(x)$ by 
+  \[ A_l(x) = \rho \frac{x^{l+1}}{(l+1)!} (1 + r_l(x)) \text{.} \]
+  \begin{lemma}\label{l1}
+    Let $l \geq 0$. If $r_{l+1}(x) = \mathcal{O}(\frac{1}{\sqrt[N]{\log x}}$ then $r_l(x) = \mathcal{O}( \frac{1}{\sqrt[2N]{\log x}})$.
+  \end{lemma}
+  \begin{lemma}\label{l2}
+    If $l > k+1$ then $r_l(x) = \mathcal{O}( \frac{1}{\log x}$.
+  \end{lemma}
+  By Lemma \ref{l1} and Lemma \ref{l2} follows that
+  \[ r_l(x) = \mathcal{O}(\frac{1}{\sqrt[N_l]{\log x}})\]
+  with 
+  \[ N_l = \begin{cases}
+    1, & l > k + 1 \\
+    2^{\lfloor k \rfloor + 2 - l}, & l \leq k+1
+  \end{cases} \]
+  In particular, 
+  \[ r_0(x) = \mathcal{O}(\frac{1}{\sqrt[N_0]{\log x}}) \]
+  \[ N_0 = 2^{\lfloor k \rfloor + 2} \]
+  so 
+  \[ A_0(x) = \rho x + \mathcal{O}(\frac{x}{\sqrt[N_0]{\log x}}) \implies \text{ Theorem \ref{4_8_T}} \]
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{l1}]
+  $0 < h = h(x) < 1$, $A_l(x)$ increasing.
+  We conclude the estimation
+  \begin{align*}
+    \int_x^{x+hx} A_l(t) dt \geq h x A_l(x)
+  \end{align*}
+  This implies
+  \begin{align*}
+    h \frac{\rho}{(l+1)!} x^{l+2}(1+r_l(x)) &\leq A_{l+1}(x+hx) - A_{l+1}(x) \\
+    &= \frac{\rho}{(l+2)!} ((x+hx)^{l+2} (1 + r_{l+1}(x+hx)) - x^{l+2} (1 + r_{l+1}(x)) \\
+    (1 + r_l(x)) &\leq \frac{(1+h)^{l+2} (1 + r_{l+1}(x+hx)) - (1 + r_{l+1}(x)}{h(l+2)}
+  \end{align*}
+  Let $\varepsilon(x) \coloneq \sup_{0 \leq y \leq 1} \abs{r_{l+1}(x+yx)}$.
+  Then this implies
+  \begin{align*}
+    r_l(x) &\leq \frac{(1+h)^{l+2} (1 + \varepsilon(x)) - (1 + \varepsilon(x))}{h (l+2)} - 1 \\
+    &= \frac{((1+h)^{l+2} - 1) \varepsilon(x)}{h (l+2)} + \frac{(1+h)^{l+2} - 1 - h(l+2)}{h (l+2)}
+  \end{align*}
+  Choose now $h(x) \coloneq \sqrt{\varepsilon(x)} < 1$ for large enough $x$.
+  \begin{align*}
+    &\implies ((1+h)^{l+2} - 1) \leq c_0 < \infty \\
+    &\implies r_l(x) \leq c_1 \frac{\varepsilon(x)}{h(x)} + \frac{\sum_{j=2}^{l+2} \left( l+2 \choose j \right) h^j}{h (l+2)} \\
+    &\leq c_1 \frac{\varepsilon(x)}{h(x)} + c_2 h = \mathcal{O}(\sqrt{\varepsilon(x)})
+  \end{align*}
+  To conclude that $r_l(x) = \mathcal{O} (\sqrt{\varepsilon(x)})$, we also need a lower bound.
+  This is obtained analogously, considering
+  \begin{align*}
+    \int_{x-hx}^x A_l(t) dt \leq hx A_l(x) \implies \overbar{r}_l(x) = \mathcal{O}(\sqrt{\varepsilon(x)})
+    \text{in Assumption of Lemma \ref{l1} we have } \\ \varepsilon(x) = \mathcal{O}(\frac{1}{\sqrt[N]{\log x}})
+    \text{ and thus this equals } \mathcal{O}(\frac{1}{\sqrt[2N]{\log x}})
+  \end{align*}
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{l2}]
+  We want to show that $r_l(x) = \mathcal{O}(\frac{1}{\log x})$, for $l > k+1$.
+  Idea: Write $A_l(x)$ as an integral, evaluate this integral by residue theorem.
+  \begin{lemma}\label{l3}
+    Let $l \in \N$, $\sigma_0 > 1$, $x > 0$.
+    Then 
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \underbrace{\frac{x^s}{s (s+1) \cdots (s+l)}}_{= f(s)} ds =
+      \begin{cases}
+        0, & 0 < x < 1 \\
+        \frac{1}{l!} (1 - \frac{1}{x})^l, & x \geq 1
+      \end{cases}
+    \end{align*}
+    Moreover, the integral converges absolutely.
+    \todo{add pic}
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{\abs{x^s}}{\abs{s} \abs{s+1} \cdots \abs{s+l}} ds 
+      &\leq x^{\sigma_0} \int_{t = - \infty}^\infty \frac{1}{\abs{\sigma_0 + i t}^2} dt \\
+      &\leq x^{\sigma_0} \left( \int_{-\infty}^{-1} \frac{1}{\abs{t}^2} dt + \int_{-1}^1 \frac{1}{\sigma_0^2} dt 
+      + \int_1^\infty \frac{1}{t^2} dt \right) < \infty
+    \end{align*}
+    Therefore the integral converges absolutely.
+    Let $0 < x < 1$.
+    For $R > 0$, let $\gamma_R$ be the path \todo{add picture}.
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds 
+      &= \lim_{R \to \infty} \int_{\sigma_0 - i R}^{\sigma_0 + i R} f(s) ds \\
+      &= \lim_{R \to \infty} \oint_{\gamma_R} f(s) ds - \lim_{R \to \infty} \int_{R half} f(s) ds
+    \end{align*}
+    $f(s)$ is holomorphic inside $\gamma_R$.\\
+    Cauchy's Theorem implies $\oint_{\gamma_R} f(s) ds = 0$.\\
+    Since $0 < x < 1$, $\abs{x^s} \leq 1$, since $\sigma > \sigma_0 > 0$ on $R half$.
+    \begin{align*}
+      \int_{R half} \abs{f(s)} ds &\leq \int_{R half} \frac{1}{R^2} ds \leq \frac{\pi R}{R^2} = \frac{\pi}{R} \overset{R \to \infty}{\to} 0 \\
+      &\implies \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds = 0
+    \end{align*}
+    Now $x \geq 1$: 
+    Now choose this contour \todo{add picture}\\
+    $R > l \implies$ all poles of $f(s)$ are inside this contour.
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} f(s) ds 
+      &= \lim_{R \to \infty} \frac{1}{2 \pi i} \int_{\circ} f(s) ds - \lim_{R \to \infty} \frac{1}{2 \pi i} \int_{half R^c} f(s) ds
+    \end{align*}
+    We have $\abs{x^s} \leq x^{\sigma_0} < \infty$ on $half C$. This implies
+    \[ \int_{half C} \abs{f(s)} ds \overset{R \to \infty}{\to} 0 \]
+    Residue Theorem:
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\circ C} f(s) ds  &= \sum_{j=o}^l Res_{s= -j} f(s) \\
+      Res_{s=-j} f(s) &= \lim_{s \to -j} (s+j) f(s) \\
+      &= \frac{x^{-j}}{(-j)(-j+1) \cdots 1 \cdot 2 \cdots (l-j)} \\
+      &= \frac{(-1)^j x^{-j}}{j! (l-j)!}
+    \end{align*}
+    Now we need to sum up the residues.
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\circ C} f(s) ds &= \sum_{j=0}^l \frac{(-1)^j x^{-j}}{j! (l-j)!} 
+      = \frac{1}{l!} (1 - \frac{1}{x})^l
+    \end{align*}
+  \end{proof}
+  
+  \begin{lemma}\label{l4}
+    Let $l \geq 1$, $\sigma_0 > 1$. Then
+    \begin{align*}
+      A_l(x) = \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma + i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds
+    \end{align*}
+    The integral converges absolutely.
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma + i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds
+       = \frac{1}{2 \pi i} \int_{\sigma_0 -i \infty}^{\sigma_0 + i \infty} \sum_{n=1}^\infty \frac{a_n}{n^s} \frac{x^{s+l}}{s (s+1) \cdots (s+l)} ds
+    \end{align*}
+    Use Lebesgue's dominated convergence theorem to swap integral and sum.
+    The integral is bounded by
+    \[ ( \underbrace{\sum_{n=1}^\infty \frac{\abs{a_n}}{n^{\sigma_0}}}_{=: c < \infty}) x^{\sigma_0 + l} \cdot \frac{1}{(\sigma_0 + i t)^2} =: g(s) \]
+    Hence,
+    \begin{align*}
+      \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} g(s) ds 
+      &= c \cdot x^{\sigma_0 + l} \cdot \int_{-\infty}^\infty \frac{1}{(\sigma_0 + i t)^2} dt < \infty \checkmark
+    \end{align*}
+    Thus
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds
+      &= \sum_{n=1}^\infty a_n x^l \frac{1}{2 \pi i} \int_{\sigma_0 - i \infty}^{\sigma_0 + i \infty} \frac{(\frac{x}{n})^s}{s (s+1) \cdots (s+l)} ds \\
+      &\overset{\text{by Lemma \ref{l3}}}{=} \sum_{n \leq x} a_n x^l \frac{1}{l!} (1 -\frac{n}{x})^l \\
+      &= \frac{1}{l!} \sum_{n \leq x} a_n (x-n)^l \\
+      &= A_l(x)
+    \end{align*}
+  \end{proof}
+  Choose $\sigma_0 = 2$.
+  We want to shift integration to $\sigma = 1$, but we need to avoid the pole of $D(s)$ at $s = 1$.
+  Recall that $U \supseteq \{ \sigma \geq 1\}$ open implies that we can find $0 < \sigma_1 < 1$ such that the box with corners
+  $1 \pm i$, $\sigma_1 \pm i$ is in $U$.
+  Let $L$ be the following path: \todo{add picture}
+  \begin{lemma}\label{l5}
+    Let $l \geq k$. Then
+    \[ A_l(x) = \frac{\rho x^{l+1}}{(l+1)!} + \frac{1}{2 \pi i} \int_L \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds \]
+  \end{lemma}
+  \begin{proof}
+    Let $T > 1$. We define $L_T$ by \todo{add picture}, $C_T$ \todo{add picture} closed curve.
+    Let $\tilde{f}(s) = \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)}$.
+    Then 
+    \begin{align*}
+      \frac{1}{2 \pi i} \int_{2 - Ti}^{2+ Ti} \tilde{f}(s) ds - \frac{1}{2 \pi i} \int_{L_T} \tilde{f}(s) ds 
+      = \frac{1}{2 \pi i} \oint_{C_T} \tilde{f}(s) ds - \int_{1 - Ti}^{2- Ti} \tilde{f}(s) ds + \int_{1 + Ti}^{2 + Ti} \tilde{f}(s) ds
+    \end{align*}
+    Residue Theorem:
+    \begin{align*}
+      \frac{1}{2 \pi i} \oint_{C_T} \tilde{f}(s) ds &= Res_{s=1} \tilde{f}(s) \\
+      &= \lim_{s \to 1} \frac{(s-1) D(s) x^{s+l}}{s (s+1) \cdots (s+l)} \\
+      &= \frac{\rho x^{l+1}}{(l+1)!}
+    \end{align*}
+    For $s = \sigma \pm Ti$, $1 < \sigma < 2$ we have $\abs{D(s)} \leq C T^k$ (by (III)).
+    Thus
+    \begin{align*}
+      \abs{\tilde{f}(s)} \leq \frac{C T^k x^{\sigma+l}}{T^{l+1}} \leq \frac{C x^{\sigma + l}}{T} \overset{T \to \infty}{\to} 0
+    \end{align*}
+    \begin{align*}
+      A_l(x) = \frac{1}{2 \pi i} \int_{2 - i \infty}^{2 + i \infty} \tilde{f}(s) ds 
+      &= \lim_{T \to \infty} \frac{1}{2 \pi i}\int_{2 - iT}^{2+ iT} \tilde{f}(s) ds  \\
+      &=  \lim_{T \to \infty} \frac{1}{2 \pi i} \int_{L_T} \tilde{f}(s) ds + \frac{\rho x^{l+1}}{(l+1)!} \\
+      &= \frac{1}{2 \pi i} \int_L \tilde{f}(s) ds + \frac{\rho x^{l+1}}{(l+1)!} \\
+    \end{align*}
+  \end{proof}
+  
+  %---20.01.2016---
+  To prove Lemma \ref{l2}, we need
+  \[ \int_L \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds = \mathcal{O}( \frac{x^{l+1}}{\log x} \]
+  For integrals over vertical lines, use following lemma:
+  \begin{lemma}\label{l6}[Riemann-Lebesgue]
+    Let $- \infty \leq a < b \leq \infty$, $f: (a,b) \to \C$ bounded, continuously differentiable, such that
+    \[ \int_a^b \abs{f(t)} dt \text{ and } \int_a^b \abs{f^\prime(t)} dt \]
+    exist.\\
+    Let $x > 0$. Then $\int_a^b \abs{f(t) x^{it}} dt$ exists and 
+    \[ \int_a^b f(t) x^{it} dt = \mathcal{O}(\frac{1}{\log x}) \text{.} \]
+  \end{lemma}
+  \begin{proof}
+    \begin{align*}
+      \abs{f(t) x^{it}} = \abs{f(t)} \implies \int_a^b \abs{f(t) x^{it}} dt \text{ exists.}
+    \end{align*}
+    \begin{align*}
+      \int_a^b f(t) x^{it} dt 
+      &= [ f(t) \frac{x^{it}}{i \log x} ]_a^b - \int_a^b f^\prime(t) \frac{x^{it}}{i \log x} dt \\
+      &= \frac{1}{i \log x} ([f(t) x^{it}]_a^b - \int_a^b f^\prime(t) x^{it} dt)
+    \end{align*}
+    $f(t)$ is bounded implies that $f(t) x^{it}$ is bounded and thus
+    \[ \abs{[f(t) x^{it}]_a^b} = C_1 < \infty \]
+    \begin{align*}
+      \abs{ \int_a^b f^\prime(t) x^{it} dt} \leq \int_a^b \abs{f^\prime(t)} dt = C_2 < \infty
+    \end{align*}
+    $C_1, C_2$ are independent of $x$ and therefore
+    \[ \int_a^b f(t) x^{it} dt = \mathcal{O}(\frac{1}{\log x}) \]
+  \end{proof}
+  Apply Lemma \ref{l6} to $f(t) = \frac{D(1+it)}{(1+it) (1+it+1) \cdots (1+it +l)}$.
+  Recall that for $l > k+1$ (III): $\abs{D(s)} \leq C \abs{t}^k$, $\sigma >1$, $\abs{t} \geq 1$ by continuity also holds for $\sigma = 1$.
+  Thus
+  \begin{align*}
+    \abs{f(t)} \leq \frac{C \abs{t}^k}{\abs{t}^{l+1}} \leq \frac{C}{\abs{t}^2} \leq C \text{ if } \abs{t} \geq 1
+  \end{align*}
+  So $\int_{-\infty}^{-1} \abs{f(t)} dt$ and $\int_1^\infty \abs{f(t)} dt$ exist.
+  \begin{align*}
+    f^\prime(t) = \frac{iD^\prime(1+it)}{(1+it) (1+it+1) \cdots (1+it +l)} - \frac{i D(1+it) \sum_{j=0}^l \prod_{m \neq j} (1+ m + it)}{((1+it) \cdots (1+it + l))^2}
+  \end{align*}
+  From (III) follows
+  \begin{align*}
+    \abs{f^\prime(t)} &\leq \frac{C \abs{t}^k}{\abs{t}^{l+1}} + \frac{C \abs{t}^k (l+1)}{\abs{t}^{l+2}} \leq \frac{\tilde{C}}{\abs{t}^2} \\
+    &\implies \int_{-\infty}^{-1} \abs{f^\prime(t)} dt \text{ and } \int_1^\infty \abs{f^\prime(t)} dt \text{ exist.}
+  \end{align*}
+  Thus
+  \begin{align*}
+    \abs{\int_{1-i \infty}^{1-i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} &\overset{s = 1+it}{=} x^{1+l} \abs{ \int_{1-i \infty}^{1-i} \frac{D(s) x^{it}}{s (s+1) \cdots (s+l)} ds } \\
+    &\overset{ds = i dt}{=} x^{1+l} \abs{\int_{-\infty}^{-1} f(t) dt} \overset{\text{Lemma \ref{l6}}}{=} \mathcal{O}(\frac{x^{1+l}}{\log x}) \checkmark
+  \end{align*}
+  analogously:
+  \[ \int_{1+i}^{1+i \infty} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} = \mathcal{O}(\frac{x^{1+l}}{\log x}) \]
+  \todo{add pic}
+  $D(s)$ is holomorph on $[\sigma_1 -i, \sigma_1 +i]$ and thus continuous\\
+  Compactness: $D(s)$ is bounded on $[\sigma_1 - i, \sigma_1 + i]$, e.g. $\abs{D(s)} \leq c < \infty$
+  \begin{align*}
+    \abs{\int_{\sigma_1 - i}^{\sigma_1 + i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} \leq 2 c x^{\sigma_1 + l} 
+    = \mathcal{O}(x^{\sigma_1 +l}) = \mathcal{O}(\frac{x^{1+l}}{\log x})
+  \end{align*}
+  \todo{ $\sigma_1 > \frac{1}{2}$??}
+  $D(s)$ holomorph on $[\sigma_1 \pm i, 1 \pm i] \implies$ bounded ($\implies \abs{D(s)} \leq c < \infty$)
+  \begin{align*}
+    \abs{ \int_{\sigma_1 \pm i}^{1\pm i} \frac{D(s) x^{s+l}}{s (s+1) \cdots (s+l)} ds} &\leq c \int_{\sigma_1 \pm i}^{1 \pm i} x^{\sigma + l} d\sigma \\ 
+    &= c x^l \int_{\sigma_1}^1 x^\sigma d\sigma \\ 
+    &= c x^l [\frac{x^\sigma}{\log x}]_{\sigma_0}^1 \\
+    &= \mathcal{O}(\frac{x^{l+1}}{\log x}) 
+  \end{align*}
+  This implies that $A_l(x) \overset{\text{Lemma \ref{l5}}}{=} \mathcal{O}(\frac{x^{l+1}}{\log x}) + \frac{\rho x^{l+1}}{(l+1)!}$ and thus
+  \[ r_l(x) = \mathcal{O}(\frac{1}{\log x}) \]
+  by definition of $r_l(x)$.
+\end{proof}
+
+\subsection{Estimates for $\zeta(s)$:}
+\begin{theorem}
+  If $s = \sigma + it$.
+  \begin{enumerate}
+    \item Let $m \in \N_0$. Then there exists a $C_m > 0$ such that $\abs{\zeta^{(m)}(s)} \leq C_m \abs{t}$ for $\sigma > 1$ and $\abs{t} \geq 1$.
+    \item There exists $c_0 > 0$ such that $\abs{ \zeta(s)} \geq c_0 \abs{t}^{-4}$ for $\sigma > 1$ and $\abs{t} \geq 1$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $\sigma \geq 2$: 
+    \begin{align*}
+      \zeta^{(m)}(s) &= \sum_{n=1}^\infty ( \frac{\partial}{\partial s})^m \frac{1}{n^s} \\
+      &= \sum_{n=1}^\infty \frac{(-1)^m (\log n)^m}{n^s}
+    \end{align*}
+    so $\abs{\zeta^{(m)}(s)} \leq \sum_{n=1}^\infty \frac{(\log n)^m}{n^2} < \infty$.
+    choose $C_m$ large enough.\\
+    $1 < \sigma < 2$: we already know
+    \begin{align*}
+      \zeta(s) = \frac{1}{s-1} + \sum_{n=1}^\infty \int_n^{n+1} ( \frac{1}{n^s} - \frac{1}{x^s}) dx \\
+      \text{The sum converges uniformly in $s$.} \\
+      \implies \zeta^{(m)}(s) = \frac{(-1)^m m!}{(s-1)^{m+1}} + \sum_{n=1}^\infty (-1)^m \int_n^{n+1} (\frac{(\log n)^m}{n^s} - \frac{(\log x)^m}{x^s}) dx
+    \end{align*}
+    Now consider
+    \todo{check inequality; especially $x$ and $n$, which is right??}
+    \begin{align*}
+      \abs{ \frac{(\log n)^m}{n^s} - \frac{(\log x)^m}{x^s} } = \abs{ \int_{u=n}^x ( \frac{(\log u)^m}{u^s})^\prime du} 
+      \leq 1 \cdot (\abs{s} + m) \frac{(\log n)^m}{x^{\sigma +1}} \leq (\abs{s}+m) \frac{(\log n)^m}{x^2} \\
+    \end{align*}
+    Since
+    \begin{align*}
+      {(\frac{(\log x)^m}{x^s})^\prime = \frac{m (\log x)^{m-1}}{x^{s+1}} - s \frac{(\log x)^m}{x^{s+1}} 
+      = \frac{1}{x^{s+1}} (m (\log x)^{m-1} - s(\log x)^m)}
+    \end{align*}
+    \begin{align*}
+      \implies \abs{\zeta^{(m)}(s)} \leq \underbrace{\frac{m!}{\abs{s-1}^{m+1}}}_{\leq m! \text{, } \abs{s-1} \geq \abs{t} \geq 1} + C_m^\prime \abs{s} \underbrace{\sum_{n=1}^\infty \frac{(\log n)^m}{n^2}}_{< \infty} \leq C_m^{\prime \prime} \abs{s} \leq C_m \abs{t}
+    \end{align*}
+    since $\abs{s} \leq \underbrace{\sigma}_{\in (1,2)} + \underbrace{\abs{t}}_{\geq 1}$
+    \item Let $\sigma > 1$.
+    \begin{align*}
+      \log \zeta(s) = \sum_p - \log (1-p^{-s}) \overset{- \log (1-z) = \sum_{n=1}^\infty \frac{z^n}{n} \text{ for } \abs{z} < 1}{=}
+      \sum_p \sum_\nu \frac{1}{\nu p^{\nu s}}
+      = \sum_n \frac{b_n}{n^s}
+    \end{align*}
+    where $ b_n \coloneq \begin{cases}
+      \frac{1}{\nu}, & \text{if } n = p^\nu, p \text{ prime} \\
+      0, & \text{otherwise}
+    \end{cases} $
+  \end{enumerate}
+  Let 
+  \[ B(s) \coloneq \sum_{n=1}^\infty \frac{b_n}{n^s} \]
+  In other words,
+  \[ \zeta(s) = e^{B(s)} \]
+  for $\sigma > 1$.
+  \begin{lemma}\label{lt2}
+    Let $B(s) = \sum_{n=1}^\infty \frac{b_n}{n^s}$ be a D-series with $b_n \geq 0$, that is (abs) convergent for $\sigma > 1$.
+    Then $Re(B(\sigma + 2 it)) + 4 \cdot Re(B(\sigma+it)) + 3 \cdot Re(B(\sigma)) \geq 0$ for $\sigma > 1$.
+    In particular, for $Z(s) \coloneq e^{B(s)}$, we have
+    \[ \abs{Z(\sigma +it)}^4 \cdot \abs{Z(\sigma +2 it)} \cdot \abs{Z(\sigma)}^3 \geq 1 \]
+  \end{lemma}
+  \begin{proof}
+    Let $a \in \C$, $a \overbar{a} = \abs{a} =1$.
+    Then 
+    \begin{align*}
+      (a + \overbar{a})^4 &= \sum_{j=0}^4 \left( 4 \choose j \right) a^j \overbar{a}^{4-j} \\
+      &= \overbar{a}^4 + 4 \overbar{a}^2 + 6  + 4 a^2 + a^4 \\
+      &= (a^4 + \overbar{a}^4) + 4( a^2 + \overbar{a}^2) + 6
+    \end{align*}
+    $a + \overbar{a} = 2 Re(a)$
+    \begin{align*}
+      0 \leq 16 Re(a)^4 = 2 Re(a^4) + 8 Re(a^2) +6 \\
+      \implies Re(a^4) + 4 Re(a^2) +3  = 8 Re(a)^4 \geq 0
+    \end{align*}
+    Choose $a \coloneq n^{- \frac{it}{2}}$. Then we get
+    \begin{align*}
+      Re(n^{-2it}) + 4 Re(n^{-it}) + 3 \geq 0
+    \end{align*}
+    Multiply this by $\frac{b_n}{n^\sigma}$
+    \begin{align*}
+      Re(\frac{b_n}{n^{\sigma + 2it}} + 4 Re(\frac{b_n}{n^{\sigma + it}} + 3 Re(\frac{b_n}{n^\sigma}) \geq 0 \text{ take the sum over all n}\\
+      Re(B(\sigma + 2it)) + 4 Re(B(\sigma + it)) + 3 Re(B(\sigma)) \geq 0 \text{ use } e^\bullet \\
+      \abs{Z(\sigma + 2it)} \cdot \abs{Z(\sigma + it)}^4 \cdot \abs{Z(\sigma)}^3 \geq 1
+    \end{align*}
+  \end{proof}
+  Applying this to $Z(s) = \zeta(s) = e^{B(s)}$, we get
+  \begin{align} \label{star}
+    \abs{\frac{\zeta(\sigma + it)}{\sigma - 1}}^4 \cdot \abs{\zeta(\sigma + 2it)} \cdot \abs{\zeta(\sigma)(\sigma-1)}^3 \geq \frac{1}{\sigma - 1}
+  \end{align}
+  \begin{rem}
+    \ref{star} implies $\zeta(s) \neq 0$ or $\sigma = 1$.
+    Indeed, assume $\zeta(1+it) = 0, t\neq 0$. Then
+    \begin{align*}
+      \lim_{\sigma \searrow 1} LHS &=  \lim_{\sigma \searrow 1} \abs{\frac{\zeta(\sigma+it) - \zeta(1+it)}{\sigma - 1}}^4 \cdot \lim_{\sigma \searrow 1} \abs{\zeta(\sigma + 2it)} \lim_{\sigma \searrow 1} \abs{\zeta(\sigma)(\sigma -1)}^3 \\
+      &= \abs{\zeta^\prime(1+it)^4 \zeta(1+2it) \cdot 1} < \infty
+    \end{align*}
+    But $\lim_{\sigma \searrow 1} RHS = \infty$ and thus $\lightning$.
+  \end{rem}
+  Assume first that $\sigma \geq 2$.
+  Then 
+  \begin{align*}
+    \abs{\zeta(s)} \geq 1 - \abs{\zeta(s) - 1} = 1 - \abs{\sum_{n=2}^\infty \frac{1}{n^s}}
+    \geq 1 - \sum_{n=2}^\infty \frac{1}{n^2}
+    = 1 - (\zeta(2) - 1) = 2 -\zeta(2) > 0
+  \end{align*}
+  \begin{lemma}
+    $\zeta(2) = \frac{\pi^2}{6} \approx 1,64 < 2$
+  \end{lemma}
+  \begin{proof}[Proof by Euler]
+    Weierstaß product for $\sin(\pi x)$.
+    \begin{align*}
+      \sin(\pi x) = \pi x \prod_{n=1}^\infty (1 - \frac{x^2}{n^2})
+    \end{align*}
+    \begin{align*}
+      \sin(\pi x) = \pi x - \frac{(\pi x)^3}{3!} + \dots \\
+      \implies \pi  x \prod_{n=1}^\infty (1- \frac{x^2}{n^2}) = \pi x - (\pi x)^3 \sum_{n=1}^\infty \frac{1}{n^2} + \dots
+    \end{align*}
+    comparison with the coefficient of $[x^3]$ yields
+    \begin{align*}
+      \frac{(\pi x)^3}{6} = \pi x^3 \zeta(2) \\
+      \implies \zeta(2) = \frac{\pi^2}{6}
+    \end{align*}
+  \end{proof}
+  $1 < \sigma < 2$: Rewrite \ref{star} with $s = \sigma +it$.
+  \begin{align*}
+    \abs{\zeta(s)} \geq (\sigma - 1)^{\frac{3}{4}} \abs{\zeta(\sigma + 2it)}^{-\frac{1}{4}} \cdot \abs{\zeta(\sigma) (\sigma-1)}^{-\frac{3}{4}}
+  \end{align*}
+  The function $\sigma \mapsto (\sigma - 1) \zeta(\sigma)$ is continuous on $1 \leq \sigma \leq 2$, we see in $1 \leq \sigma \leq 2$ that $c_2 \geq \abs{\zeta(\sigma) (\sigma -1) } \geq c_1 > 0$ for some $c_1$ (compactness)\\
+  By 1) $\implies \abs{\zeta(\sigma + 2it)} \leq 2 C_0 \abs{t}$, $\abs{t} \geq 1$.
+  Therefore:
+  \begin{align} \label{starstar}
+    \abs{\zeta(s)} \geq A(\sigma - 1)^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} 
+  \end{align}
+  where $A > 0$, for $1 < \sigma < 2$ and $\abs{t} \geq 1$.
+  Let $\varepsilon \in (0,1)$ small enough (see later)
+  Define
+  \[ \sigma(t) \coloneq 1 + \varepsilon \abs{t}^{-5} \in (1,2) \text{ for } \abs{t} \geq 1 \]
+  Case a) $\sigma \geq \sigma(t)$.
+  Then \ref{starstar} implies that 
+  \[ \abs{\zeta(s)} \geq A (\varepsilon \abs{t}^{-5})^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} = A \varepsilon^{\frac{3}{4}} \abs{t}^{-4} \checkmark \]
+  Case b) $1 < \sigma < \sigma(t)$.
+  Then 
+  \begin{align*}
+    \zeta(s) = \zeta(\sigma + it) = \zeta(\sigma(t) + it) - \int_\sigma^{\sigma(t)} \zeta^\prime(x + it) dx \\
+    \implies \abs{\zeta(s)} \geq \abs{\zeta(\sigma(t) + it)} - \abs{\int_\sigma^{\sigma(t)} \zeta^\prime(x + it) dx} \\
+    1) \implies \abs{\zeta^\prime(x + it)} \leq C_1 \abs{t} \\
+    \implies \abs{\zeta(s)} \geq \abs{\zeta(\sigma(t) + it)} - C_1 \abs{t} (\sigma(t) -1) 
+    \overset{\ref{starstar}}{\geq} A (\sigma(t) - 1)^{\frac{3}{4}} \abs{t}^{-\frac{1}{4}} - C_1 \abs{t} (\sigma(t) -1) \\
+    \geq A \varepsilon^{\frac{3}{4}} \abs{t}^{-4} - C_1 \varepsilon \abs{t}^{-4}
+    = \underbrace{(A \varepsilon^{\frac{3}{4}}}_{\text{choose $\varepsilon$ small enough to ensure that this is $>0$}} - C_1 \varepsilon) \abs{t}^{-4}
+  \end{align*}
+\end{proof}
+
+\subsection{$e$ and $\pi$ are transcendental}
+
+\begin{theorem}
+  $e$ is transcendental. (Hermite 1873)
+\end{theorem}
+
+Exploit properties of $e^x$ ($(e^x)^\prime = e^x$)
+\begin{align*}
+  e^x \cdot \int_0^x e^{-t} f(t) dt &= \{ \text{using integration by points} \} \\
+  &= e^x (f(0) - f(x)) + e^x \cdot \int_0^x e^{-t} f^\prime(f) dt \text{.}
+\end{align*}
+Plug into this formula $f^\prime, f^{\prime \prime},\dots$ and take the sum of all equations, Cancellations occur!
+Choose $f$ polynomial if $n > \deg(f)$, $f^{(n)}(x) = 0$.
+Define
+\[ F(x) = \sum_{j=0}^\infty f^{(j)}(x) \text{ is a finite sum} \]
+Then the sum of all equations gives
+\begin{align} \label{doublestar}
+  e^x \cdot \int_0^x e^{-t} f(t) dt = e^x F(0) - F(x) \text{.}
+\end{align}
+
+\begin{proof}
+  Assume $e$ is algebraic.
+  There exist integers $a_0, a_1,\dots,a_n \in \Z$ such that
+  \[ a_0 + a_1 e + \dots + a_n e^n = 0 \text{.} \]
+  Apply (\ref{doublestar}) when $x$ ranges from $0$ to $n$, and multiply by $a_k$.
+  \begin{align*}
+    a_k e^k \cdot \int_0^k e^{-t} f(t) dt &= a_k e^k F(0) - a_k F(k) \text{, } k=0,1,\dots,n \\
+    \sum_{k=0}^n a_k e^k \int_0^k e^{-t} f(t) dt &= \underbrace{\left( \sum_{k=0}^n a_k e^k \right)}_{0} F(0) - \sum_{k=0}^n a_k F(k) \\
+    - \sum_{k=0}^n a_k e^k \int_0^k e^{-t} f(t) dt &= \sum_{k=0}^n a_k F(k) \text{.}
+  \end{align*}
+  Idea: We choose $f$ so that the RHS is a nonzero integer, and thus in absolute value $\geq 1$,
+  but also that the LHS can be made arbitrarily small.
+  \\
+  Hermite's choice of $f$:
+  \begin{align}
+    f(t) = \frac{1}{(p-1)!} t^{p-1} g(t)^p \text{,}
+  \end{align}
+  $p$ prime number we specify $p$ later!
+  \[ g(t) = (t-1) \cdots (t-n) \text{,} \]
+  $n = \deg$ of the minimal polynomial of $e$.
+  We choose $p > n$, $p > \abs{a_0}$, but if needed also that is arbitrarily large.
+  This will be explained later.
+  \begin{align*}
+    \abs{LHS} &= \abs{\sum_{k=0}^n a_k e^k \int_0^k e^{-t} f(t) dt} \\
+    &\overset{\text{triangle inequ.}}{\leq} \sum_{k=0}^n \abs{a_k} e^k \abs{\int_0^k e^{-t}f(t)dt} \\
+    &\leq \sum_{k=0}^n \abs{a_k} e^k \int_0^k e^{-t} \abs{f(t)}dt \\
+    \text{comment} \\
+    & e^{-t} \leq 1 \text{ for } 0 \leq t \leq n \\
+    \text{comment end} \\
+    &= \sum_{k=0}^n \abs{a_k} e^k \int_0^k \abs{f(t)} dt\\
+    \text{comment} \\
+    &\text{ Note that the maximum value of functions } t,t-1,\dots ,t-n \text{ on } [0,n] \text{ is } n \\
+    & \abs{f(x)} \text{ on } [0,n] \text{ is bounded above by } \frac{1}{(p-1)!} n^{p-1} n^{np} \\
+    \text{comment end} \\
+    &\leq \sum_{k=0}^n \abs{a_k} e^k \frac{1}{(p-1)!} n^{np+p-1} \int_0^k 1 dt \\
+    &= \sum_{k=0}^n \abs{a_k} e^k \frac{n^{np+p-1}}{(p-1)!} \cdot \underbrace{k}_{\leq n} \\
+    &\leq \sum_{k=0}^n \abs{a_k} e^k \frac{n^{np+p}}{(p-1)!} \\
+    &\leq \sum_{k=0}^n \abs{a_k} e^n \frac{(n^{n+1})^{p-1}}{(p-1)!} n^{n+1} \\
+    &\text{comment} \\
+    & \lim_{m \to \infty} \frac{c^m}{m!} = 0; \text{ In our case } \lim_{p\to \infty} \frac{(n^{n+1})^{p-1}}{(p-1)!} = 0 \\
+    & \text{So, the last expression for $p$ sufficently large will be } < 1 \text{.}
+    &\text{comment end} \\
+  \end{align*}
+  Therefore, for sufficiently large $p$, the LHS is in absolute value $<1$.\\
+  \\
+  We now turn attention to the RHS.
+  \begin{align*}
+    RHS &= \sum_{k=0}^n a_k F(k) \text{.}
+  \end{align*}
+  Recall $F(k) = \sum_{j=0}^{\deg f} f^{(j)}(k)$.
+  Show that RHS is a nonzero integer.
+  Idea: we will show that $f^{(j)}(k) \in \Z$ for all $j$, and that only $F(0)$ is not divisible by $p$.
+  
+  \begin{align*}
+    f(t) &= \frac{1}{(p-1)!} t^{p-1} \cdot g(t)^p \\
+    g(t) &= (t-1) \cdots (t - m)
+  \end{align*}
+  We analyse $F(0)$, that is the case $k = 0$.
+  \[ F(0) = \sum_{j=0}^\infty f^{(j)}(0) \text{.}\]
+  \[ \deg(f) = (p-1) + np = n (p+1) - 1 \]
+  Since $0$ is a root of $f$ of multiplicity $p-1$, it follows that
+  \[ f^{(j)}(0) = 0\]
+  for all $j < p-1$.\\
+  $f^{(p-1)}(0) = ?$, $f^{(j)}(0) = ?$ when $j \geq p$.\\
+  We look at the Taylor expansion of $f$ at $0$.
+  \begin{align*}
+    f(x) &= \frac{f^{(p-1)}(0)}{(p-1)!} \cdot t^{p-1} + \dots + \frac{f^{(j)}(0)}{j!} \cdot t^j
+  \end{align*}
+  The coefficients of $f$ next to $t^{p-1}$ is $\frac{f^{(p-1)}(0)}{(p-1)!}$,
+  but by definition of $f$, this coefficient is 
+  \[ \frac{((-1)(-2)\cdots(-n))^p}{(p-1)!} \implies f^{(p-1)}(0) = ((-1)^n \cdot n!)^p \]
+  For $p > n$, this is not divisible by $p$.\\
+  We now show that $f^{(j)}(0)$ is an integer divisible by $p$ when $j \geq p$.
+  Look at the Taylor expansion of $f$ and definition of $f$.\\
+  Next to the $t^j$:
+  \begin{align*}
+    \frac{f^{(j)}(0)}{j!} = \frac{1}{(p-1)!} x
+  \end{align*}
+  the coefficients next to $t^j$ in the polynomial are $t^{p-1}g(t)^p$:
+  So, $f^{(j)}(0) = \frac{j!}{(p-1)!} x$ is an integer.
+  This implies $f^{(0)} \in \Z$, divisible by $p$.
+  Thus,
+  \begin{align*}
+    f^{(j)}(0) &= 0 \text{ when } j < p-1 \\
+    f^{(p-1)} &\in \Z \text{ not divisible by } p \\
+    f^{(j)}(0) \in \Z \text{ divisible by } p \text{.}
+  \end{align*}
+  It follows that $F(0) \in \Z$, and not arbitrary.
+  Now , $p$ was chosen so that $p > \abs{a_0}$
+  \begin{align*}
+    &\implies \abs{a_0 F(0)} \geq 1 \text{ integer }
+    &\implies a_0 F(0) \text{ not divisible by } p \text{, integer.}
+  \end{align*}
+  \[ RHS = \sum_{k=0}^n a_k F(k) \]
+  $F(k) = ?$ when $k = 1,2,\dots,n$.
+  Follow the same method (look at the Taylor expansion of $f$ at $k$).
+  \[ f(t) = \frac{1}{(p-1)!} t^{p-1} \cdot g(t)^p \]
+  \[ g(t) = (t-1) \cdots (t-n) \]
+  In the case, $k \in \{1,2,\dots,n \}$ is a root of $f$ of multiplicity by $p$.
+  Because of this $f^{(p-1)}(k)$ is going to be $0$, and all $f^{(j)}(K)$, for $0 \leq j \leq \deg(f)$,
+  will be divisible by $p$.
+  Therefore,
+  \[ \sum_{k=0}^n a_k F(k) = a_0 F(0) + \text{ something divisible by $p$} \]
+  Thus,
+  \[ \sum_{k=0}^n a_k F(k) \neq 0 \]
+  So in absolute value $\geq 1$.
+\end{proof}
+
+\begin{theorem}
+  $\pi$ is transcendental. (Lindemann 1882)
+\end{theorem}
+
+\begin{proof}
+  Assume $\pi$ is algebraic.
+  Now $i$ is algebraic (a root of $x^2+1 = 0$).
+  It follows that $i \cdot \pi$ is algebraic.
+  Recall that
+  \[ e^{i \pi} +1 = 0 \text{.} \]
+  Let $\sigma1 \in \Q[x]$ such that $\sigma1(i \pi) = 0$,
+  let $n = \deg(\sigma1)$.
+  So, $\sigma1$ has $n$ roots.
+  \[ \alpha_1 = i \pi, \alpha_2,\dots,\alpha_n \]
+  be other root of $\sigma_1$.
+  \[ e^{\alpha_1} + 1 = 0 \text{.} \]
+  Thus,
+  \begin{align}\label{onestar}
+    (e^{\alpha_1} + 1)(e^{\alpha_2} + 1) \cdots (e^{\alpha_n} + 1) = 0
+  \end{align}
+  Expand the sum (\ref{onestar}), and note the summands are of type $e^\xi$
+  \[ \xi = \xi_1 \alpha_1 + \xi_2 \alpha_2 + \dots + \xi_n \alpha_n \]
+  for $\xi_i \in \{0,1\}$.
+  Exponent $\xi = 0$ occurs at least once (corresponds to the summands $1 \: 1 \: \dots \: 1$).
+  Let $k$ be the number of the summands with the exponent $0$.
+  There are $2^n-k$ nonzero sums of type (\ref{doublestar}).
+  Let $\beta_1,\dots,\beta_r$ be nonzero sums of type (\ref{doublestar}).
+  It follows that 
+  \[ k \cdot e^0 + e^{\beta_1} + \dots + e^{\beta_r} = 0 \]
+  and each $\beta_j \neq 0$.
+  Let $\sigma$ be a polynomial whose roots are $\beta_i$'s \todo{and integer coefficients??},
+  \[ \sigma(x) = c x^r + c_1 x^{r-1} + \dots + \underbrace{c_r}_{\neq 0} \]
+  We will again exploit the fact that 
+  \[ - \int_0^x e^{-y} f(y) dy = e^{-x} F(x) - F(0) \]
+  with
+  \[ F = \sum_{j=0}^x f^{(j)}(x) \]
+  \\
+  \\
+  \[ f(x) = \frac{c^s x^{p-1}}{(p-1)!} \sigma(x)^p \]
+  $s = rp -1$.
+  
+  Idea: Again use identity, use $\sigma$, and use similar strategy as with $e$.
+\end{proof}
+
+\subsection*{Oral exam:}
+
+\begin{itemize}
+  \item all parts of the lecture will be covered
+  \item roughly 20-30 min 
+  \item know at least the ideas behind the long proofs
+  \item to get a date write an e-mail
+  \item before the end of March take the exam by Frei, then Tichy
+\end{itemize}
+
+\end{document}
