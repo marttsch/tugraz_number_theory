@@ -15,15 +15,15 @@ Chapter 1:
 \subsection{Dirichlet's Theorem}
 
 Let $\alpha \in \R$. As $\Q$ is dense in $\R$ any $\alpha \in \R$ can be approximated arbitrarily well, by rational numbers $p/q$ ($p \in \Z, q \in \N = \{1,2,3,\dots\}$).\\
-The question is how well can we approximate $\alpha$ in terms of the denominator $q$, e.g., is it true that for every $\alpha \in \R$ there exists infinitely many $p/q \in \Q$ $q\in \N$) such that $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$?\\
+The question is how well can we approximate $\alpha$ in terms of the denominator $q$, e.g., is it true that for every $\alpha \in \R$ there exists infinitely many $p/q \in \Q$ $q\in \N$) such that $\abs{\alpha - \frac{p}{q}} < \frac{1}{q^2}$?\\
 \\
 The answer is no!\\
 Take $\alpha = r/s (s \in \N)$ a rational number. Then 
-\[ | \alpha - \frac{p}{q} | = |\frac{r}{s} - \frac{p}{q} | = | \frac{qr -ps}{sq} | \overset{\geq}{\text{provided } \alpha \neq \frac{p}{q}} \frac{1}{sq}  > \frac{1}{q^2} \text{ provided } q > s.\]
-This shows that we have only finitely many solutions $p/q \in \Q$ for $| \alpha -\frac{p}{q} | < \frac{1}{q^2}$.
+\[ \abs{\alpha - \frac{p}{q}} = \abs{\frac{r}{s} - \frac{p}{q}} = \abs{\frac{qr -ps}{sq}} \overset{\geq}{\text{provided } \alpha \neq \frac{p}{q}} \frac{1}{sq}  > \frac{1}{q^2} \text{ provided } q > s.\]
+This shows that we have only finitely many solutions $p/q \in \Q$ for $\abs{\alpha -\frac{p}{q}} < \frac{1}{q^2}$.
 
 \begin{theorem}[Dirichlet's Theorem]\label{1_1_1}
-  Suppose $\alpha,Q \in \R$ and $Q > 1$. Then $\exists p,q \in \Z \text{s.t.} 0< q<Q$ and $| q\alpha - p | \leq \frac{1}{Q}$.
+  Suppose $\alpha,Q \in \R$ and $Q > 1$. Then $\exists p,q \in \Z \text{s.t.} 0< q<Q$ and $\abs{q \alpha - p} \leq \frac{1}{Q}$.
 \end{theorem}
 
 \begin{proof}
@@ -31,22 +31,22 @@ This shows that we have only finitely many solutions $p/q \in \Q$ for $| \alpha 
   Consider the $Q + 1$ numbers $0,1,\{\alpha\},\{2\alpha\},\dots,\{(Q-1)\alpha\}$.\\
   They all lie in $[0,1]$. We split it up in $Q$ subintervals:
   \[ [0,1] =[0, \frac{1}{Q}] \cup \left[ \frac{1}{Q},\frac{2}{Q} \right] \cup \dots \cup \left[ \frac{Q-1}{Q},1 \right] \]
-  By the pigeon hole principle two of the previous numbers lie in the same subinterval. Thus $\exists r_1,r_2,s_1,s_2 \in \Z$ with $0 \leq r_1 < r_2 \leq Q-1$ such that $| (r_1\alpha - s_1) - (r_2 \alpha -s_2) | \leq \frac{1}{Q}$.
-  Then with $q = r_2 - r_1$ and $p = s_2 -s_1$ we get $|q\alpha - p| \leq \frac{1}{Q}$ and $0 < q < Q$.
+  By the pigeon hole principle two of the previous numbers lie in the same subinterval. Thus $\exists r_1,r_2,s_1,s_2 \in \Z$ with $0 \leq r_1 < r_2 \leq Q-1$ such that $\abs{(r_1\alpha - s_1) - (r_2 \alpha - s_2)} \leq \frac{1}{Q}$.
+  Then with $q = r_2 - r_1$ and $p = s_2 -s_1$ we get $\abs{q \alpha - p} \leq \frac{1}{Q}$ and $0 < q < Q$.
   This proves the Theorem when $Q \in \Z$. Now suppose $Q \nin \Z$. 
   We apply the previous with $Q^\prime = \lfloor Q \rfloor + 1 > 1$.
-  Hence, $\exists p,q \in \Z$ with $| q\alpha - p | \leq \frac{1}{Q^\prime}$ and $0 < q < Q^\prime$, and so $|q\alpha - p | \leq \frac{1}{Q}$ and $0 < q < Q$.
+  Hence, $\exists p,q \in \Z$ with $\abs{q \alpha - p} \leq \frac{1}{Q^\prime}$ and $0 < q < Q^\prime$, and so $\abs{q \alpha - p} \leq \frac{1}{Q}$ and $0 < q < Q$.
 \end{proof}
 
 \begin{cor}\label{1_1_2}
-  Suppose $\alpha \in \R/\Q$. Then there exist infinitely many solutions $p/q \in \Q$ ($q \in \N$) of $| \alpha - \frac{p}{q}| < \frac{1}{q^2}$.
+  Suppose $\alpha \in \R/\Q$. Then there exist infinitely many solutions $p/q \in \Q$ ($q \in \N$) of $\abs{\alpha - \frac{p}{q}} < \frac{1}{q^2}$.
 \end{cor}
 
 \begin{proof}
-  Take $Q_1 > 1$. By Theorem 1.1.1 we get $(p_1, q_1) \in \Z^2$ with $0<q_1 < Q$, and $|q_1 \alpha - p_1 | \leq \frac{1}{Q_1}$.
-  Thus $|\alpha - \frac{p_1}{q_1} | \leq \frac{1}{q_1 Q_1} < \frac{1}{q_1^2}$
+  Take $Q_1 > 1$. By Theorem 1.1.1 we get $(p_1, q_1) \in \Z^2$ with $0<q_1 < Q$, and $\abs{q_1 \alpha - p_1} \leq \frac{1}{Q_1}$.
+  Thus $\abs{\alpha - \frac{p_1}{q_1}} \leq \frac{1}{q_1 Q_1} < \frac{1}{q_1^2}$
   \\
-  Next take $Q_2 = |\alpha - \frac{p_1}{q_1}|^{-1} + 1$. Then Theorem 1.1.1 again yields $\frac{p_2}{q_2} \in \Q$ with $|\alpha - \frac{p_2}{q_2} | < \frac{1}{q^2}$ and $|\alpha - \frac{p_2}{q_2} | \leq \frac{1}{q_2 Q_2} \leq \frac{1}{Q_2} < |\alpha - \frac{p_1}{q_1}|$. So $\frac{p_2}{q_2}$ is a better approx then $\frac{p_1}{q_1}$.
+  Next take $Q_2 = \abs{\alpha - \frac{p_1}{q_1}}^{-1} + 1$. Then Theorem 1.1.1 again yields $\frac{p_2}{q_2} \in \Q$ with $\abs{\alpha - \frac{p_2}{q_2}} < \frac{1}{q^2}$ and $\abs{\alpha - \frac{p_2}{q_2}} \leq \frac{1}{q_2 Q_2} \leq \frac{1}{Q_2} < \abs{\alpha - \frac{p_1}{q_1}}$. So $\frac{p_2}{q_2}$ is a better approx then $\frac{p_1}{q_1}$.
   Repeating this process indefinitely proves the claim.
 \end{proof}
 
@@ -59,10 +59,10 @@ This shows that we have only finitely many solutions $p/q \in \Q$ for $| \alpha 
 
 \begin{proof}
   Apply Corollary 1.1.2 with $\alpha = \sqrt{m}$. So $\alpha \in \R/\Q$.
-  We get $| \alpha - \frac{p}{q} | < \frac{1}{q^2}$ and $|\alpha + \frac{p}{q} | \overset{\leq}{triangle inequality} 1 + 2 \alpha$.
+  We get $\abs{\alpha - \frac{p}{q}} < \frac{1}{q^2}$ and $\abs{\alpha + \frac{p}{q}} \overset{\leq}{triangle inequality} 1 + 2 \alpha$.
   Thus
-  \[ |p^2 - mq^2| = q^2 | \alpha - \frac{p}{q} | \cdot |\alpha + \frac{p}{q}| < 1 + 2 \sqrt{m}. \]
-  Hence, there exists $k \in \Z$ with $|k| < 1 + 2 \sqrt{m}$. such that $ p^2 - m q^2 = k$ for infinitely many $(p,q) \in \Z^2$ and $p/q$ all distinct.\\
+  \[ \abs{p^2 - mq^2} = q^2 \abs{\alpha - \frac{p}{q}} \cdot \abs{\alpha + \frac{p}{q}} < 1 + 2 \sqrt{m}. \]
+  Hence, there exists $k \in \Z$ with $\abs{k} < 1 + 2 \sqrt{m}$. such that $ p^2 - m q^2 = k$ for infinitely many $(p,q) \in \Z^2$ and $p/q$ all distinct.\\
   As $m$ is not a square we have $k \neq 0$.\\
   \\
   Let $S$ be the set of solutions $(p,q) \in \Z^2$ of $p^2 - m q^2 = k$.
@@ -195,7 +195,7 @@ Next we deduce some properties of continued fraction convergents.
   For (a) - (d) we assume that the continued fraction proves does not terminate
   \begin{enumerate} %a,b
     \item For all $n \in \N_0$, $\theta$ lies between $\frac{p_n}{q_n}$ and $\frac{p_{n+1}}{q_{n+1}}$.
-    \item For all $n \in \N_0: |\theta - \frac{p_n}{q_n} | \leq \frac{1}{q_n q_{n+1}}$
+    \item For all $n \in \N_0: \abs{\theta - \frac{p_n}{q_n}} \leq \frac{1}{q_n q_{n+1}}$
     \item For $n \geq 1$ we have $q_{n+2} \geq 2\cdot q_n$
     \item $\frac{p_n}{q_n} \to \theta$ as $n \to \infty$
     \item The continued fraction process terminates if and only if $\theta$ is rational.
@@ -207,12 +207,12 @@ Next we deduce some properties of continued fraction convergents.
     \item Note $\theta = [a_0,\dots,a_n,\theta_{n+1} ] = [a_0,\dots,a_n+\frac{1}{\theta_{n+1}}$
     where $0 < \frac{1}{\theta_{n+1}} < \frac{1}{a_{n+1}}$. So that $\theta$ lies between $[a_0,\dots,a_n]$ and $[a_0,\dots,a_n + \frac{1}{a_{n+1}} ]$.
     But $[a_0,\dots,a_n + \frac{1}{a_{n+1}} = [a_0,\dots,a_{n+1}]$. This shows (a).
-    \item By (a) we have $|\theta - \frac{p_n}{q_n} | \leq |\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}| = | \frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}} | \underset{=}{Lemma 1.2.1(a)} \frac{1}{q_n q_{n+1}}$
+    \item By (a) we have $\abs{\theta - \frac{p_n}{q_n}} \leq \abs{\frac{p_n}{q_n} - \frac{p_{n+1}}{q_{n+1}}} = \abs{\frac{p_n q_{n+1} - p_{n+1} q_n}{q_n q_{n+1}}} \overset{\text{Lemma~\ref{1_2_1}}(a)}{=} \frac{1}{q_n q_{n+1}}$
     \item Follows from the fact that $a_i >0 (i > 0 )$ using Lemma 1.2.1.
     \item Follows from (b) and (c)
     \item Only if part is obvious.\\
     Conversely suppose $\theta = \frac{a}{b} \in \Q$ but the process does \emph{not} terminate. Taking $n$ such that $q_n > b$ yields
-    \[ | \theta - \frac{p_n}{q_n} | \underset{\geq}{\frac{a}{b} \neq \frac{p_n}{q_n} as q_n > b and \gcd(p_n,q_n) = 1} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
+    \[ | \theta - \frac{p_n}{q_n} | \overset{\frac{a}{b} \neq \frac{p_n}{q_n} \text{ as } q_n > b \text{ and } \gcd(p_n,q_n) = 1}{\geq} \frac{1}{b q_n} > \frac{1}{q_n q_{n+1}} \]
     contradicting (b).
   \end{enumerate}
 \end{proof}
@@ -234,14 +234,14 @@ We now show that convergents give best-possible rational approximations.
   Let $\theta$ be an irrational real number, and let $\frac{p_n}{q_n}$ be the convergents ($n \geq 0$) with partial quotients $a_n (n \geq 0)$.\\
   Then
   \begin{enumerate} %a,b
-    \item $ | \theta - \frac{p_n}{q_n}|$ strictly decreases as $n$ increases.
+    \item $\abs{\theta - \frac{p_n}{q_n}}$ strictly decreases as $n$ increases.
     \item the convergents give successively closer approximations to $\theta$.
-    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < |\theta - \frac{p_n}{q_n}| < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
+    \item $\frac{1}{(a_{n+1} + 2) q_n^2} < \abs{\theta - \frac{p_n}{q_n}} < \frac{1}{a_{n+1} q_n^2} \leq \frac{1}{q_n^2}$
     \item If $p,q \in \Z$ with $0 < q < q_{n+1}$ then
-    \[ |q \theta - p| \geq |q_n \theta - p_n| \]
+    \[ \abs{q \theta - p} \geq \abs{q_n \theta - p_n} \]
     Moreover, "$=$" only if $(p,q) = (p_n,q_n)$.\\
     (In this sense convergents are best-possible approximations.)
-    \item If $(p,q) \in \Z \times \N$ and $|\theta - \frac{p}{q}| < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
+    \item If $(p,q) \in \Z \times \N$ and $\abs{\theta - \frac{p}{q}} < \frac{1}{2\cdot q^2}$ then $\frac{p}{q}$ is a convergent to $\theta$.
   \end{enumerate}
 \end{theorem}
 
@@ -250,17 +250,17 @@ We now show that convergents give best-possible rational approximations.
     \item From Lemma 1.2.1(d) we have $\theta = \frac{p_n \theta_{n+1} + p_{n-1}}{q_n \theta_{n+1} + q_{n-1}}$.
     Using Lemma 1.2.1(a) we get
     \begin{align}
-    |q_n \theta - p_n| &= |\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}| \\
+    \abs{q_n \theta - p_n} &= \abs{\frac{q_n p_n \theta_{n+1} + q_n p_{n-1} - p_n q_n \theta_{n+1} - p_n q_{n-1}}{q_n \theta_{n+1} + q_{n-1}}} \\
     &= \frac{1}{q_n \theta_{n+1} + q_{n-1}}\\
     &< \frac{1}{q_n + q_{n-1}}\\
     &= \frac{1}{(a_n +1) q_{n-1} + q_{n-2}}\\
     &< \frac{1}{\theta_n q_{n-1} + q_{n-2}}\\
-    &= | q_{n-1} \theta - p_{n-1}|
+    &= \abs{q_{n-1} \theta - p_{n-1}}
     \end{align}
     This shows (a) and (b) because the $q_n$ are increasing.
     \item[c] We use $a_{n+1} q_n^2 < \theta_{n+1} q_n^2 + q_n q_{n-1} < (a_{n+1} + 2) q_n^2$
     and combine it with the equation (proof part (a)),
-    \[ |\theta - \frac{p}{q}| = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
+    \[ \abs{\theta - \frac{p}{q}} = \frac{1}{q_n^2 \theta_{n+1} + q_n q_{n-1}} \]
     
     %---part from 27.10.2015
     
@@ -270,12 +270,12 @@ We now show that convergents give best-possible rational approximations.
     So let's assume $v \neq 0$. Then $u$ and $v$ cannot both be negative (as $q > 0$) nor both be positive (as $q < q_{n+1}$).
     So they have opposite signs.\\
     By Theorem 1.2.2(a) also $q_n\theta - p_n$ and $q_{n+1} \theta - p_{n+1}$ have opposite signs.
-    Hence, $|q \theta - p| = |u (q_n \theta - p_n) + v (q_{n+1} \theta - p_{n+1})| > |q_n \theta - p_n|$.
+    Hence, $\abs{q \theta - p} = \abs{u (q_n \theta - p_n) + v (q_{n+1} \theta - p_{n+1})} > \abs{q_n \theta - p_n}$.
     \item[e)] Take $n$ with $q_n \leq q < q_{n+1}$. Then 
     \begin{align*} 
-    |\frac{p}{q} - \frac{p_n}{q_n}| &\leq |\theta - \frac{p}{q}| + |\theta - \frac{p_n}{q_n}| \\
-    &= \frac{|q \theta - p|}{q} + \frac{|q_n \theta - p_n|}{q_n}\\
-    &\overset{\leq}{(d)} (\frac{1}{q} + \frac{1}{q_n}) |q \theta - p | \\
+    \abs{\frac{p}{q} - \frac{p_n}{q_n}} &\leq \abs{\theta - \frac{p}{q}} + \abs{\theta - \frac{p_n}{q_n}} \\
+    &= \frac{\abs{q \theta - p}}{q} + \frac{\abs{q_n \theta - p_n}}{q_n}\\
+    &\overset{\leq}{(d)} (\frac{1}{q} + \frac{1}{q_n}) \abs{q \theta - p} \\
     &\leq \frac{2}{q_n} \frac{1}{2q} \\
     &= \frac{1}{q q_n}
     \end{align*}
@@ -287,12 +287,12 @@ We now show that convergents give best-possible rational approximations.
   \begin{itemize}
     \item (d) implies that if $p,q \in \Z$, $0 < q \leq q_n$ then
     \begin{align*}
-      |\theta - \frac{p}{q}| &\geq |\theta - \frac{p_n}{q_n}| \cdot \frac{q_n}{q}\\
-      &\geq | \theta - \frac{p_n}{q_n}|
+      \abs{\theta - \frac{p}{q}} &\geq \abs{\theta - \frac{p_n}{q_n}} \cdot \frac{q_n}{q}\\
+      &\geq \abs{\theta - \frac{p_n}{q_n}}
     \end{align*}
     with "$=$" only if $\frac{p}{q} = \frac{p_n}{q_n}$.
     \item We say $\alpha \in \R \setminus \Q$ is \emph{badly approximable} if
-    \[ \exists c > 0 \text{ such that } |\alpha - \frac{p}{q}| > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
+    \[ \exists c > 0 \text{ such that } \abs{\alpha - \frac{p}{q}} > \frac{c}{q^2} \forall (p,q) \in \Z \times \N\]
     \item By (c) and (d) we see that $\theta = [a_0,a_1,a_2,\dots]$ is badly approximable if and only if
     the partial quotients $a_i$ are uniformly bounded, i.e., $\exists M > 0$ such that $a_i < M \forall i$.
     \item (c) suggests that the \grqq worst-approximable\grqq ~number is $\theta = [1,1,1,\dots]$. 
@@ -307,8 +307,8 @@ We now show that convergents give best-possible rational approximations.
 \todo{Professor: check}
 Let $\alpha \in \R \setminus \Q$ and let $\phi: [1,\infty) \to (0,\infty)$ be decreasing.
 Consider the number of "$\phi$-good" approximations:
-\[ N_\alpha(\phi,Q) = \#\{\frac{p}{q} \in \Q ; |\alpha - \frac{p}{q} | < \phi(q), 1 \leq q \leq Q\} \]
-We put $S_\alpha(\phi,Q) = \{(x,y)\in \R^2 : | \alpha - \frac{x}{y}| < \phi(y), 1 \leq y \leq Q\}$.
+\[ N_\alpha(\phi,Q) = \#\{\frac{p}{q} \in \Q ; \abs{\alpha - \frac{p}{q}} < \phi(q), 1 \leq q \leq Q\} \]
+We put $S_\alpha(\phi,Q) = \{(x,y)\in \R^2 : \abs{\alpha - \frac{x}{y}} < \phi(y), 1 \leq y \leq Q\}$.
 Then
 \[ N_\alpha(\phi,Q) = \#\{(p,q)\in \Z \times \N : \gcd(p,q) = 1\} \cap S_\alpha(\phi,Q) \]
 Note that by Corollary 1.1.2 we have $N_\alpha(\phi,Q) \to \infty$ as $Q \to \infty$ provided $\phi(y) \geq \frac{1}{y^2}$,
@@ -338,9 +338,9 @@ Here is an example.
 
 \begin{ex}
   Suppose $\phi(x) = \frac{1}{2x^2}$. Consider the continuous fraction expansion $\alpha = [a_0,a_1,a_2,\dots]$.
-  By Theorem 1.2.3 we know $| \alpha - \frac{p}{q}| < \phi(q) \Rightarrow \frac{p}{q}$ is a convergent.
-  Moreover, if $\frac{p}{q} = \frac{p_n}{q_n}$ is the $n$-th convergent then $|\alpha - \frac{p}{q}| < \frac{1}{a_{n+1} q^2}$.
-  So if all $a_i > 1$ then $|\alpha - \frac{p}{q}| < \phi(q) \forall$ convergent $\frac{p}{q}$.\\
+  By Theorem 1.2.3 we know $\abs{\alpha - \frac{p}{q}} < \phi(q) \Rightarrow \frac{p}{q}$ is a convergent.
+  Moreover, if $\frac{p}{q} = \frac{p_n}{q_n}$ is the $n$-th convergent then $\abs{\alpha - \frac{p}{q}} < \frac{1}{a_{n+1} q^2}$.
+  So if all $a_i > 1$ then $\abs{\alpha - \frac{p}{q}} < \phi(q) \forall$ convergent $\frac{p}{q}$.\\
   Hence, $N_\alpha(\phi,Q) = \#\{n: q_n \leq Q \}$.\\
   So, we need to compute the number of convergents $\frac{p_n}{q_n}$ with $q_n \leq Q$. 
   We shall soon see that this is rather simple if $\alpha = [b,a,b,a,b,a,\dots]$ with $a \divides b$.\\
@@ -407,7 +407,7 @@ By Theorem 1.2.5 we know
 where $ \epsilon = \begin{cases} \frac{1}{\theta - \bar{\theta}} & 2 \divides n\\ \frac{1}{\sqrt{c}(\theta -\bar{\theta})} & 2 \nmid n \end{cases}$
 \[ \iff n \log\left(\frac{\theta}{\sqrt{c}}\right) + \log\left( 1 - \left(\frac{\bar{\theta}}{\theta}\right)^n\right) + \log \epsilon \leq \log Q \]
 Using Taylor series expansion we see that 
-\[ | \log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right) | \leq | \frac{\bar{\theta}}{\theta - \bar{\theta}} |  \]
+\[ \abs{\log\left( 1 - \left(\frac{\bar{\theta}}{\theta} \right)^n\right)} \leq \abs{\frac{\bar{\theta}}{\theta - \bar{\theta}}} \]
 This proves the claim.
 
 \subsection{Liouville's Theorem}
@@ -433,34 +433,34 @@ If $\alpha$ is algebraic then we say $\deg D_\alpha$ is the \emph{degree of $\al
 \begin{theorem}[Liouville's Theorem]\label{1_3_1}
   Suppose $\alpha$ is a real, algebraic number of degree $d$.
   Then $\exists c(\alpha) > 0$ such that
-  \[ |\alpha - \frac{p}{q}| > \frac{c(\alpha)}{q^d} \]
+  \[ \abs{\alpha - \frac{p}{q}} > \frac{c(\alpha)}{q^d} \]
   for every $(p,q) \in \Z \times \N$ with $\alpha \neq \frac{p}{q}$.
 \end{theorem}
 
 \begin{proof}
-  Suppose $|\alpha - \frac{p}{q} | > 1$ then the claim holds for every $c(\alpha) > 1$.
-  Now suppose $|\alpha - \frac{p}{q}| \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
+  Suppose $\abs{\alpha - \frac{p}{q}} > 1$ then the claim holds for every $c(\alpha) > 1$.
+  Now suppose $\abs{\alpha - \frac{p}{q}} \leq 1$. Taylor series expansion at $D_\alpha$ about $\alpha$ gives:
   \[ D_\alpha(x) = \sum_{i=1}^d (x - \alpha)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha) \]
   Hence, 
-  \[ |D_\alpha\left(\frac{p}{q}\right) | = | \sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)| \overset{(D)label}{\leq} |\frac{p}{q} - \alpha | \frac{1}{c(\alpha)} \]
+  \[ \abs{D_\alpha\left(\frac{p}{q}\right)} = \abs{\sum_{i=1}^d \left(\frac{p}{q} - \alpha \right)^i \frac{1}{i!} D_\alpha^{(i)}(\alpha)} \overset{(D)label}{\leq} \abs{\frac{p}{q} - \alpha} \frac{1}{c(\alpha)} \]
   where
-  \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} |D_\alpha^{(i)}(\alpha) |\right)^{-1} \]
+  \[ c(\alpha) = \left( 1 + \sum_{i=1}^d \frac{1}{i!} \abs{D_\alpha^{(i)}(\alpha)} \right)^{-1} \]
   Now if $D_\alpha$ has a rational root then it must have degree one, so have only \emph{one} root.
   Thus $D_\alpha \left(\frac{p}{q}\right) \neq 0$ unless $\alpha = \frac{p}{q}$.
   Hence, if $\alpha \neq \frac{p}{q}$ we get
-  \[ | D_\alpha \left(\frac{p}{q}\right) | = | \frac{\text{non-zero integer}}{q^d} \geq \frac{1}{q^d}. \]
+  \[ \abs{D_\alpha \left(\frac{p}{q}\right)} = \abs{\frac{\text{non-zero integer}}{q^d}} \geq \frac{1}{q^d}. \]
   Combing this with (D)label yields 
-  \[ |\alpha - \frac{p}{q} | > \frac{c(\alpha)}{q^d}.\]
+  \[ \abs{\alpha - \frac{p}{q}} > \frac{c(\alpha)}{q^d}.\]
 \end{proof}
 
 We say a real number $\alpha$ is a \emph{Liouville number} if for every $n \in \N$
-\[ 0 < |\alpha - \frac{p}{q}| < \frac{1}{q^n} \]
+\[ 0 < \abs{\alpha - \frac{p}{q}} < \frac{1}{q^n} \]
 has a solution. $p,q \in \Z$ with $q > 1$.
 
 \begin{ex}
   $\alpha = \sum_{k = 1}^\infty 10^{-k^k}$ is a Liouville number.
   Let $n \in\N$ and put $p = \sum_{k=1}^n 10^{n^n - k^k}$ and $q = 10^{n^n}$.
-  Then $ 0 < |\alpha - \frac{p}{q}| = \sum_{k>n} 10^{-k^k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
+  Then $ 0 < \abs{\alpha - \frac{p}{q}} = \sum_{k>n} 10^{-k^k} \leq 2\cdot 10^{-(n+1)^{(n+1)}} < 10^{-n^{(n+1)}} = q^{-n}$
 \end{ex}
 
 \begin{cor}\label{1_3_2}
@@ -480,7 +480,7 @@ has a solution. $p,q \in \Z$ with $q > 1$.
 \begin{theorem}[Khintchine]\label{1_3_3}
   Suppose $\psi: \N \to (0,\infty)$ is monotone decreasing (not necessarily strictly).
   The set 
-  \[A_\psi = \{\alpha \in \R: |\alpha - \frac{p}{q}| < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
+  \[A_\psi = \{\alpha \in \R: \abs{\alpha - \frac{p}{q}} < \frac{\psi(q)}{q} \text{ has $\infty$-many solutions } (p,q) \in \Z \times \N \} \]
   has a Lebesgue measure zero if $\sum_{q=1}^\infty \psi(q)$ converges and has full Lebesgue measure (i.e. the complement has measure zero) 
   if $\sum_{q=1}^\infty \psi(q)$ diverges.
 \end{theorem}
@@ -497,84 +497,84 @@ We will not prove this Theorem. (For a proof see e.g. Glyn Harman "Metric number
   \end{itemize}
 \end{ex}
 
-\subsection{Theorems of Thue- Siegel and Roth}
+\subsection{Theorems of Thue, Siegel, and Roth}
 In Section 1 we have seen that $\infty$-many solutions $\frac{p}{q}$ to $\abs{\sqrt2-\frac{p}{q}}<\frac{1}{q^2}$  leads to $\infty$-many solutions $\left(x,y\right)\in\Z^2$ of $x^2-2y^2=1$. What about $x^3-2y^3=1$? Starting as for $x^2-2y^2$ we get
-$$y^3 \abs{\frac{x}{y}-2^{1⁄3}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega}}_{\ge\operatorname{Im}{\omega}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega^2}}_{{\ge{\operatorname{Im}{\omega}}}}$$
+\[ y^3 \abs{\frac{x}{y}-2^{1⁄3}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega}}_{\ge\operatorname{Im}{\omega}} \underbrace{\abs{\frac{x}{y}-2^{1/3} \omega^2}}_{{\ge{\operatorname{Im}{\omega}}}} \]
 where $\omega=e^{\frac{2\pi i}{3}}$.
 
 So to get boundedness of $x^3-2y^3$ for $\infty$-many $\left(x,y\right)$ we need $\exists c>0$ such that
-$$\abs{\frac{x}{y}-2^{1/3}}<\frac{c}{y^3}$$
+\[ \abs{\frac{x}{y}-2^{1/3}}<\frac{c}{y^3} \]
 has $\infty$-many solutions $\left(x,y\right)\in\Z\times\N$. 
 
 Theorem 1.3.3 tells us that we would be extremely lucky if that were the case. And erven if so, we still would lack the group structure for $\Z+\sqrt 2 \Z$ (closed under multiplication but $\Z+2^{1/3} \Z$ is not). On the other hand, suppose we could show that
-$$\abs{\frac{x}{y}-2^{1/3}}<1/y^\lambda$$
+\[ \abs{\frac{x}{y}-2^{1/3}}<1/y^\lambda \]
 has only finitely many solutions $\left(x,y\right)\in\Z\times\N$ for some fixed $\lambda<3$. As $x^3-2y^3=1$, and $y\ne0$ yields: 
-$$\abs{\frac{x}{y}-2^{1/3}}<\frac{1}{2^{1/3} {\left(\operatorname{Im}\omega\right)}^2 y^3}$$
+\[ \abs{\frac{x}{y}-2^{1/3}}<\frac{1}{2^{1/3} {\left(\operatorname{Im}\omega\right)}^2 y^3} \]
 We would conclude that $x^3-2y^3=1$ has only finitely many solutions $\left(x,y\right)\in\Z^2$. Note that $"deg" 2^{1/3}=3 (D(x)=x^3-2)$ and so Liouville’s Theorem yields only $\lambda=3$ not $\lambda<3$. So the big challenge is to improve Liouville’s Theorem. After Liouville it has taken 65 years until the first breakthrough was obtained by Axel Thue in 1909. 
 
 \begin{theorem}[Thue]\label{1_4_1}
 Let $\alpha$ be a real algebraic number of degree $d\ge 2$, and let $\lambda>\frac{d}{2}+1$. Then $\exists c=c(\alpha,\lambda)>0$ such that
-$$\abs{\alpha-\frac{p}{q}}>\frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N.$$
+\[ \abs{\alpha-\frac{p}{q}}>\frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N \text{.} \]
 \end{theorem}
 
 \begin{itemize}
-\item Note that for $d=2$ Liouville is stronger
-\item Given $\alpha$ and $\lambda$ there is no method to determine a feasible value for $c$. This is in stark contrast to Liouville’s Theorem. 
+\item Note that for $d=2$ Liouville is stronger.
+\item Given $\alpha$ and $\lambda$ there is no method to determine a feasible value for $c$. This is in strong contrast to Liouville’s Theorem. 
 \end{itemize}
 
 Just as for $x^3-2y^3=1$ one can now very easily show that if $f(X,Y)=a_0 (X-\alpha_1 Y)\cdots(X-\alpha_d Y)\in\Q[X,Y]$ with $a_0\ne0, d\ge 3$, and $\alpha_1,\dots,\alpha_d$ pairwise distinct, and $b\in\Q\setminus\set{0}$, then
-$$f(x,y)=b$$
+\[ f(x,y)=b \]
 has only finitely many solutions $\left(x,y\right)\in\Z^2$. \\
 Wrong if $d=2$:
-$$X^2-2Y^2=1$$
+\[ X^2-2Y^2=1 \]
 or $b=0$:
-$$X^3-Y^3=0$$
+\[ X^3-Y^3=0 \]
 or $\alpha_1,\dots,\alpha_d$ not pairwise distinct: 
-$$(X-Y)^5=1$$
-We will show that Theorem 1.4.1 implies even the following stronger result. 
+\[ (X-Y)^5=1 \]
+We will show that Theorem~\ref{1_4_1} implies even the following stronger result.
 
 \begin{theorem}[Generalized Thue equations]\label{1_4_2}
 Let $f(X,Y)=a_0 \left(X-\alpha_1 Y\right)\cdots\allowbreak\left(X-\alpha_d Y\right)\in\Q\left[X,Y\right]$ with $a_0\ne 0, d\ge 3$ and $\alpha_1,\cdots,\alpha_d$ pairwise distinct. Let $g(X,Y)\in\Q\left[X,Y\right]$ of total degree $<\frac{d}{2}-1$. 
 \\
 Then there are only finitely many $(X,Y)\in\Z^2$ with
-$$f(x,y)=g(x,y)$$
+\[ f(x,y)=g(x,y) \]
 and
 $g(x,y)\ne 0$.
 \end{theorem}
 
 \begin{ex}
-$$x^5-2y^5=x-y$$
+\[ x^5-2y^5=x-y \]
 has only finitely many solutions $\left(x,y\right)\in\Z^2$. Indeed if $x-y=0$ then $x^5-2y^5=0$ thus $x=y=0$. 
 Note Theorem can go wrong if $\alpha_1=\alpha_2$: 
-$$(X^2-2Y^2 )^2=1.$$
+\[ (X^2-2Y^2 )^2=1 \text{.} \]
 \end{ex}
 
-\begin{proof}[Proof (assuming Theorem 1.4.1)]
+\begin{proof}[Proof (assuming Theorem~\ref{1_4_1})]
 If $y=0$ then we have at most d possibilities for x. So we can assume $y\ne 0$. We claim that
-$$\abs{x}\le c_1 \abs{y}$$
+\[ \abs{x}\le c_1 \abs{y} \]
 for some $c_1=c_1 (f,g)$. Clearly true when $\abs{x}\le\abs{y}$, so let's assume $\abs{x}>\abs{y}$. Then we write
-$$f(x,y)=\sum_{i=0}^d {a_i x^{d-i} y^i}=\sum_{j+k\le d-1} {b_{jk} x^j y^k}=g(x,y)$$
+\[ f(x,y)=\sum_{i=0}^d {a_i x^{d-i} y^i}=\sum_{j+k\le d-1} {b_{jk} x^j y^k}=g(x,y) \]
 \todo{sum $j+k \leq d-1$ or $d+1$ or $\frac{d}{2}-1$}
 Dividing by $x^{d-1}$ yields
-$$a_0 x=-\sum_{i=1}^d {a_i  \frac{y^i}{x^{i-1}}}+\sum_{j+k \leq d-1} {b_{jk} x^{j-d+1} y^k}$$
+\[ a_0 x=-\sum_{i=1}^d {a_i  \frac{y^i}{x^{i-1}}}+\sum_{j+k \leq d-1} {b_{jk} x^{j-d+1} y^k} \]
 We have
-$$\abs{\frac{y^i}{x^{i-1}}}\le\abs{y}$$
+\[ \abs{\frac{y^i}{x^{i-1}}}\le\abs{y} \]
 and
-$$\abs{\frac{y^k}{x^{d-1-j}}}\le\abs{y}^{j+k-(d-1)}\le 1$$
+\[ \abs{\frac{y^k}{x^{d-1-j}}}\le\abs{y}^{j+k-(d-1)}\le 1 \]
 Therefore $\abs{x}\le c_1 \abs{y}$, e.g. with $c_1=\frac{1}{\abs{a_0}} \left(\sum \abs{a_i} +\sum \abs{b_{jk}} \right)+1$.
 From
-$$f(x,y)=g(x,y),(\star)$$
+\[ f(x,y)=g(x,y),(\star) \]
 we get
-$$\abs{\alpha_0}\prod_{i=1}^d {\abs{\frac{x}{y}-\alpha_i}} \le c_2 \abs{y}^{e-d}$$
+\[ \abs{\alpha_0}\prod_{i=1}^d {\abs{\frac{x}{y}-\alpha_i}} \le c_2 \abs{y}^{e-d} \]
 where $c_2=c_2\left(c_1,g\right)$ and $e<\frac{d}{2}-1$. So assume $(\star)$ has $\infty$-many solutions $\left(x,y\right)\in\Z^2$. Then $\exists i$, say $i=1$, such that $\abs{\frac{x}{y}-\alpha_1}\le\mu:=\frac{1}{2}\displaystyle{\min_{j\ne 1}{\left\{\abs{\alpha_j-\alpha_1}\right\}}}>0$ for $\infty$-many $(x,y)$ of these solutions of $(\star)$. 
 Now
-$$\abs{\frac{x}{y}-\alpha_j}\ge\abs{\abs{\alpha_j-\alpha_1}-\abs{\frac{x}{y}-\alpha_1}}\ge 2\mu-\mu=\mu>0$$
+\[ \abs{\frac{x}{y}-\alpha_j}\ge\abs{\abs{\alpha_j-\alpha_1}-\abs{\frac{x}{y}-\alpha_1}}\ge 2\mu-\mu=\mu>0 \]
 Hence, we conclude
-$$\abs{\frac{x}{y}-\alpha_1}\le \frac{c_2}{\abs{a_0}}\mu^{1-d} \abs{y}^{e-d},(\star\star)$$
+\[ \abs{\frac{x}{y}-\alpha_1}\le \frac{c_2}{\abs{a_0}}\mu^{1-d} \abs{y}^{e-d},(\star\star) \]
 for these solutions $\left(x,y\right)$. Here we can assume $y>0$ (just replace $x$ by $-x$). Now let $d_1$ be the degree of $\alpha_1$. As $f(x,1)\in\Q[x]$, $f(x,1)\ne 0$ and $f(\alpha_1,1)=0$. Thus $d_1\le d$. Moreover, $d-e>\frac{d}{2}+1$ and this $\exists\lambda$ such that
-$$d-e>\lambda>\frac{d_1}{2}+1.$$
-If $d_1\ge 2$ then Theorem 1.4.1 implies that $(\star)$ has only finitely many solutions $\left(x,y\right)\in\Z^2$. Finally suppose $d_1=1$. Then $\alpha_1=\frac{p}{q}$, and $(\star\star)$ yields: 
-$$\abs{x-\frac{p}{q} y} \le c_3 y^{e-d+1}\le c_3 y^{-\frac{d}{2}}.$$
+\[ d-e>\lambda>\frac{d_1}{2}+1. \]
+If $d_1 \geq 2$ then Theorem~\ref{1_4_1} implies that $(\star)$ has only finitely many solutions $\left(x,y\right)\in\Z^2$. Finally suppose $d_1=1$. Then $\alpha_1=\frac{p}{q}$, and $(\star\star)$ yields:
+\[ \abs{x-\frac{p}{q} y} \le c_3 y^{e-d+1}\le c_3 y^{-\frac{d}{2}}. \]
 Thus $x=\frac{p}{q} y=\alpha_1 y$ for $y$ large enough. But then $0=f(x,y)=g(x,y)$ a contradiction. 
 \end{proof}
 
@@ -582,7 +582,7 @@ After Thue came Siegel (1921) who improved the exponent $\frac{d}{2}+1$ to $2\sq
 
 \begin{theorem}[(Roth)]\label{1_4_3}
 Let $\alpha$ be a real, algebraic irrational number, and $\lambda>2$. Then $\exists c=c(\alpha,\lambda)>0$ such that
-$$\abs{\alpha-\frac{p}{q}}\ge \frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N.$$
+\[ \abs{\alpha-\frac{p}{q}}\ge \frac{c}{q^\lambda} ,\quad\forall(p,q)\in\Z\times\N. \]
 \end{theorem}
 
 By Corollary 1.1.2 $\lambda>2$ is best-possible. 
@@ -591,7 +591,7 @@ But if we allow more general functions $\phi(q)$, not only powers of $q$, then a
 However, back to the case where $\phi(q)$ is a power of $q$. 
 \\
 From Theorem 1.3.3. we know that for a generic real $\alpha$
-$$\abs{\frac{p}{q}-\alpha}<q^{-\lambda}$$
+\[ \abs{\frac{p}{q}-\alpha}<q^{-\lambda} \]
 has only finitely many solutions $p,q\in\Z\times\N$ provided $\lambda>2$. Any by Corollary 1.1.2 every irrational real number has $\infty$-many solutions when $\lambda=2$. And so from Roth's Theorem we see an algebraic irrational behaves \grqq essentially\grqq~like a generic number.
 
 Roth's Theorem has various new applications to, e.g., Diophantine equations and transcendence.
@@ -710,7 +710,7 @@ so called $p$-adic absolute values.
     \[ \abs{x}_p = \begin{cases} 0 &: x = 0\\ p^{-ord_p(x)} &: x \neq 0 \end{cases} \]
     The multiplicativity is clear.
     Note that $ord_p(x_1+x_2) \geq \min\{ord_p(x_1),ord_p(x_2)\}$.
-    Hence, $\abs{x_1 + x_2}_p = p^{-ord_p(x_1+x_2)} \leq p^{-\min\{ord_p(x_1),ord_p(x_2)\}} \underbrace{=}{strong triangle inequality} \max{\abs{x_1}_p, \abs{x_2}_p\}} \leq \abs{x_1}_p + \abs{x_2}_p$
+    Hence, $\abs{x_1 + x_2}_p = p^{-ord_p(x_1+x_2)} \leq p^{-\min\{ord_p(x_1),ord_p(x_2)\}} \underbrace{=}_{\text{strong triangle inequality}} \max{\abs{x_1}_p, \abs{x_2}_p\}} \leq \abs{x_1}_p + \abs{x_2}_p$
     An absolute value that satisfies the strong triangle inequality is called non-Archimedean.
   \end{itemize}
 \end{ex*}
