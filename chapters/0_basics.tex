@@ -1,25 +1,6 @@
 \documentclass[NumTh.tex]{subfiles}
 \begin{document}
 
-\section*{Organizatorial stuff}
-
-Dates (in TUGrazOnline):
-\begin{table}[!h]
-  \begin{tabular}{cccl}
-    Mon & 14:15--15:45 & C208 & Exercises (starting 19.10. first exercise class) \\
-    Tue & 14:15--15:45 & C307 & Lecture (starting 20.10. first (real) lecture) \\
-    Wed & 08:15--09:45 & C208 & Lecture
-  \end{tabular}
-\end{table}
-
-From now until 15.12. lectures by Martin Widmer.
-Then C. Frei.
-
-End: oral exams
-
-Exercises: Find details on website of the instructor Dijana Kreso.
-\url{math.tugraz.at/~kreso}
-
 \section{Basics}
 
 \begin{align}
@@ -29,7 +10,7 @@ Exercises: Find details on website of the instructor Dijana Kreso.
 \end{align}
 
 \subsection{Divisibility}
-\begin{defi}
+\begin{defi}\label{def_0_1_1}
 Let $a,b \in \Z$. $a$ divides $b$ (written $a\divides b$) if $\exists q \in \Z : b = qa$.
 \newline
 Some properties: Let $a,b,c \in \Z$. Then the following statements hold:
@@ -41,10 +22,10 @@ Some properties: Let $a,b,c \in \Z$. Then the following statements hold:
 \end{align}
 \end{defi}
 
-\begin{defi}[Remainder]
+\begin{theorem}[Euclidean division]\label{th_0_1_2}
 Let $a \in \Z$, $b \in \N$. Then there are unique $q,r \in \Z$ such that
 \[a = qb + r \text{ and } 0 \leq r < b.\]
-\end{defi}
+\end{theorem}
 
 \begin{rem}
 \begin{enumerate}
@@ -54,25 +35,23 @@ Let $a \in \Z$, $b \in \N$. Then there are unique $q,r \in \Z$ such that
 \end{enumerate}
 \end{rem}
 
-\begin{defi}
+\begin{defi}\label{def_0_1_3}
 Let $a_1,a_2,\dots,a_n,d \in \mathbb{Z}$. $d$ is a greatest common divisor (gcd) of $a_1,\dots,a_n$ if
 $d\divides a_i$ $\forall 1\leq i \leq n$,
 and for every $e \in \Z$ with $e\divides a_i$ $\forall 1\leq i \leq n$, $e\divides d$.
 \end{defi}
 
 \begin{rem}
-
-\begin{enumerate}
-  \item a $\gcd$ of $a_1,\dots,a_n$ is unique up to sign
-  \item we write $d = \gcd(a_1,\dots,a_n)$ if $d$ is a $\gcd$ of $a_1,\dots,a_n$
-  \item for $a_1,\dots,a_n \in \Z$, a $\gcd$ exists and can be written as a linear combination of $a_1,\dots,a_n$,
-  i.e., $\exists x_1,\dots,x_n \in \Z$ such that $$\gcd(a_1,\dots,a_n) = x_1 a_1+ \dots + x_n a_n$$
-  \item $\gcd(a_1,\dots,a_n) = \gcd(\gcd(a_1,\dots,a_{n-1}),a_n)$
-  \item if $a\divides bc$ and $\gcd(a,b) = 1$ then $a\divides c$.
-  \item let $a^\prime \coloneq \frac{a}{\gcd(a,b)}$, $b^\prime = \frac{b}{\gcd(a,b)}$. Then $\gcd(a^\prime,b^\prime) = 1$
-\end{enumerate}
+  \begin{enumerate}
+    \item a $\gcd$ of $a_1,\dots,a_n$ is unique up to sign
+    \item we write $d = \gcd(a_1,\dots,a_n)$ if $d$ is a $\gcd$ of $a_1,\dots,a_n$
+    \item for $a_1,\dots,a_n \in \Z$, a $\gcd$ exists and can be written as a linear combination of $a_1,\dots,a_n$,
+    i.e., $\exists x_1,\dots,x_n \in \Z$ such that $$\gcd(a_1,\dots,a_n) = x_1 a_1+ \dots + x_n a_n$$
+    \item $\gcd(a_1,\dots,a_n) = \gcd(\gcd(a_1,\dots,a_{n-1}),a_n)$
+    \item if $a\divides bc$ and $\gcd(a,b) = 1$ then $a\divides c$.
+    \item let $a^\prime = \frac{a}{\gcd(a,b)}$, $b^\prime = \frac{b}{\gcd(a,b)}$. Then $\gcd(a^\prime,b^\prime) = 1$
+  \end{enumerate}
 \end{rem}
-\todo{Hier verwendest du $\coloneq $, sonst aber nur $=$, evtl. einheitlich machen für alle Definitionen?}
 
 \begin{algorithm}
   \caption{Compute the $\gcd$ of two integers: Euclidean algorithm}
@@ -168,20 +147,19 @@ Let $a,b,c \in \Z$, $a,b,c \neq 0$. Find all $(x,y) \in \Z^2$ which satisfy
 
 \subsection{Primes}
 
-\todo{1. Beistriche für bessere Lesbarkeit 2. faustregel, vor und nach ``i.e.'' gehört eigentlich beistrich}
-\begin{defi}
+\begin{defi}\label{def_0_2_1}
 $p \in \N$, $p > 1$ is a \emph{prime number} if the only positive divisors of $p$ are $1$ and $p$, i.e., $a \in \N$, $a\divides p \Rightarrow a \in \{1,p\}$.
 $\PP \coloneq \{ primes\} \subset \N, \PP = \{2,3,5,7,11,13,\dots\}$.
 $p$ prime and $p\divides ab \Rightarrow p\divides a$ or $p\divides b$
 \end{defi}
 
-\begin{theorem}[Fundamental theorem of arithmetic]
+\begin{theorem}[Fundamental theorem of arithmetic]\label{th_0_2_2}
 Every $n \in \N$ can be written uniquely (up to reordering) as a product of primes.
 i.e. there are distinct primes $p_1,\dots,p_l$, and $\alpha_1,\dots,\alpha_l \in \N$ such that
 $n = p_1^{\alpha_1} \dots p_l^{\alpha_l}$
 \end{theorem}
 
-\begin{proof}[Sketch]\hfill{}
+\begin{proof}[Sketch of proof]\hfill{}
   \begin{description}
     \item[Existence]
       let $p_0 > 1$ be the smallest divisor $> 1$ of $n$. Then $p_0$ is prime.
@@ -194,7 +172,7 @@ $n = p_1^{\alpha_1} \dots p_l^{\alpha_l}$
   \end{description}
 \end{proof}
 
-\begin{theorem}[Euclid]
+\begin{theorem}[Euclid]\label{th_0_2_3}
 There are $\infty$-many primes.
 \end{theorem}
 
@@ -212,10 +190,9 @@ then \[\gcd(a_1,\dots,a_n) = \prod_{p \in \PP} p^{\min_{1\leq i\leq n} \{\alpha_
 
 \subsection{Congruences}
 
-All rings are commutative with $1$.
-\todo{zu Begriffserklärung oder zum ersten Vorkommen von Ringen}
+All rings in this section are commutative with $1$.
 
-\begin{defi}
+\begin{defi}\label{def_0_3_1}
 Let $a,b \in \Z$, $n \in \N$. Then \emph{$a$ is congruent to $b \pmod{n}$}, $a \equiv b \pmod{n}$,
 if $n\divides  a-b$.
 We write $\overbar{a} = [a]_n \coloneq \{b \in \Z : b \equiv a (\mod n)\}$
@@ -228,13 +205,12 @@ We write $\overbar{a} = [a]_n \coloneq \{b \in \Z : b \equiv a (\mod n)\}$
   \item $\overbar{0},\overbar{1},\dots,\overline{n-1}$ is a partition of $\Z$.
   \item if $a \equiv b \pmod{n}$, $c \equiv d \pmod{n}$, then 
   $-a \equiv -b \pmod{n}$,
-  $a \overset{+}{\underset{-}{\cdot}} d \equiv \overset{\pm}{\cdot} \pmod{n}$.
+  $a \overset{+}{\underset{-}{\cdot}} c \equiv b \overset{\pm}{\cdot} d \pmod{n}$.
   \todo{fix + - *}
 \end{enumerate}
 \end{rem}
 
-\todo{a ring }
-\begin{defi}
+\begin{defi}\label{def_0_3_2}
 $\Z / n\Z = \Z_n \coloneq \{[a]_n : a\in \Z\} = \{\overbar{0},\overbar{1},\dots,\overline{n-1}\}$ residue class ring modulo $n$
 \end{defi}
 
@@ -243,7 +219,7 @@ $\Z_n$ is a ring with operation $\overbar{a} \overset{+}{\underset{-}{\cdot}} \o
 $\Z_n^\times = \{ \overbar{a} \in \Z_n : \exists \overbar{b} \in \Z_n : \overbar{a}\overbar{b} = \overbar{1} \}$ ... group of units $\mod n$
 \end{rem}
 
-\begin{lemma}
+\begin{lemma}\label{l_0_3_3}
 Let $a \in \Z$. Then $\overbar{a} \in \Z_n^\times \Leftrightarrow \gcd(a,n) = 1$.
 \end{lemma}
 
@@ -271,12 +247,13 @@ x &\equiv 0 \pmod{7}
 \end{align}
 \end{ex}
 
-\begin{theorem}[Chinese remainder theorem (CRT)] Let
-\[ n_1,\dots,n_l \in \N \text{ subject to } \gcd (n_i,n_j) = 1 \;\forall i\neq j \]
-\[ x_1, \dots, x_l \in \Z \text{.} \]
-Then
-\[ \exists x \in \Z \text{ such that } x \equiv x_i \pmod{n_i} \; \forall 1\leq i \leq l \]
-where $x$ is unique modulo $n_1 \cdot \dots \cdot n_l$.
+\begin{theorem}[Chinese remainder theorem (CRT)]\label{th_0_3_4}
+  Let
+  \[ n_1,\dots,n_l \in \N \text{ subject to } \gcd (n_i,n_j) = 1 \;\forall i\neq j \]
+  \[ x_1, \dots, x_l \in \Z \text{.} \]
+  Then
+  \[ \exists x \in \Z \text{ such that } x \equiv x_i \pmod{n_i} \; \forall 1\leq i \leq l \]
+  where $x$ is unique modulo $n_1 \cdot \dots \cdot n_l$.
 \end{theorem}
 
 \begin{proof}
@@ -297,7 +274,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \] \[
     x_1 = 2, \hspace{20pt} x_2 = 1, \hspace{20pt} x_3 = 0
   \] \[
-    N_1 = 35, \hspace{20pt} N_2 = 21, \hspace{20pt} N_3 = ?
+    N_1 = 35, \hspace{20pt} N_2 = 21, \hspace{20pt} N_3 = 15
   \]
   \[ \overbar{m}_1 = \inv{\overbar{35}} \pmod{3} = \inv{\overbar{2}} \pmod{3} = \overbar{2} \pmod{3} \Rightarrow m_1 = 2 \]
   \[ \overbar{m}_2 = \inv{\overbar{21}} \pmod{5} = \inv{\overbar{1}} \pmod{5} = \overbar{1} \pmod{5} \Rightarrow m_2 = 1 \]
@@ -319,13 +296,17 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
 
 \subsection{Arithmetic functions}
 
-\begin{defi}
-  $f: \N \to \C$ is an \emph{arithmetic function}.
-  $f$ is \emph{multiplicative} if $\forall m,n $ it holds that $\gcd(m,n) = 1$. We have $f(mn) = f(m) f(n)$.
+\begin{defi}\label{def_0_4_1}
+  Let $f: \N \to \C$ be an \emph{arithmetic function}.
+  Then $f$ is \emph{multiplicative}, i.e. $f(mn) = f(m) f(n)$, if $\forall m,n $ $\gcd(m,n) = 1$ holds.
   $f$ is \emph{completely multiplicative} if $\forall m,n: f(mn) = f(m) f(n)$.
   Let $f: \N \to \C$. Its \emph{summatory function} is $S_{f}(n) \coloneq \sum_{d\divides n} f(d)$.
 \end{defi}
-\todo{add lemma}
+
+\begin{lemma}\label{l_0_4_2}
+  If $f$ is multiplicative, then so is its summatory function.
+\end{lemma}
+
 \begin{proof}
   If $\gcd(m,n) = 1$ and $d\divides mn$, then $\exists$ unique $d_1,d_2$ such that $d = d_1 \cdot d_2$ with $d_1 \divides  m$, $d_2\divides n$.
   \[S_f (mn) = \sum_{d\divides mn} f(d) = \sum_{d_1\divides m} \sum_{d_2\divides n} f(d_1 d_2) = \sum_{d_1\divides m} f(d_1) \sum_{d_2\divides n} f(d_2) = S_f(m) S_f(n)\]
@@ -338,7 +319,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \end{align*}
 \end{ex}
 
-\begin{defi}
+\begin{defi}\label{def_0_4_3}
   The function $\phi(n) \coloneq \card{\Z_n^\times}$ is called \emph{Euler's $\phi$-function}.
 \end{defi}
 
@@ -350,8 +331,8 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \end{enumerate}
 \end{rem}
 
-\begin{lemma}
-  $\phi(p^n) = p^n - p^{n-1}$
+\begin{lemma}\label{l_0_4_4}
+  $\phi(p^n) = p^n - p^{n-1} = p^n \left(1 - \frac{1}{p} \right)$
 \end{lemma}
 
 \begin{proof}
@@ -362,14 +343,14 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \end{align*}
 \end{proof}
 
-\begin{prop}
+\begin{cor}\label{cor_0_4_5}
   If $n = p_1^{\alpha_1} \dots p_l^{\alpha_l}$ with $p_i \neq p_j$ primes, $\alpha_i \in \N$.
   Then
-  \[ \phi(n) = \prod_{i=1}^l p_i^{\alpha_i} (1 - \frac{1}{p_i}) = n \prod_{p\divides n} (1 - \frac{1}{p}) \]
-\end{prop}
+  \[ \phi(n) = \prod_{i=1}^l p_i^{\alpha_i} \left(1 - \frac{1}{p_i} \right) = n \prod_{p\divides n} \left(1 - \frac{1}{p} \right) \]
+\end{cor}
 
-\begin{theorem}[Euler-Fermat]
-  Then $a^{\phi(n)} \equiv 1 \mod n$.
+\begin{theorem}[Euler-Fermat]\label{th_0_4_6}
+  Let $a^{\phi(n)} \equiv 1 \mod n$.
   In particular: $a^{p-1} \equiv 1 \mod p$ $\forall p \nmid a$ (little Fermat).
 \end{theorem}
 
@@ -381,7 +362,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   $\prod_{x \in \Z_n^\times} x = \prod_{x \in \Z_n^\times} (\overbar{a}x) = \overbar{a}^{\phi(n)} \prod_{x \in \Z_n^\times} x \Rightarrow a^{\phi(n)} \equiv 1 \mod n$ 
 \end{proof}
 
-\begin{defi}
+\begin{defi}\label{def_0_4_7}
   The Möbius function $\mu: \N \to \{-1,0,+1\}$ is defined as
   \[
 	\mu(n) = \begin{cases}
@@ -398,7 +379,7 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \end{enumerate}
 \end{rem}
 
-\begin{lemma}
+\begin{lemma}\label{l_0_4_7}
   \[
     S_\mu(n) = \begin{cases}
       1 & \text{if } n=1 \\
@@ -418,9 +399,9 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
   \end{align*}
 \end{proof}
 
-\begin{theorem}[Möbius inversion formula]
+\begin{theorem}[Möbius inversion formula]\label{th_0_4_9}
   Let $f: \N \to \C$. Then
-  \[ f(n) = \sum_{d\divides n} \mu(d) S_f(\frac{n}{d}) \text{.}\]
+  \[ f(n) = \sum_{d\divides n} \mu(d) S_f\left(\frac{n}{d}\right) \text{.}\]
 \end{theorem}
 
 \begin{proof}
@@ -429,10 +410,10 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
       &= \sum_{d\divides n} \mu(d) \sum_{e\divides \frac{n}{d}} f(e) \\
       &= \sum_{e\divides n} f(e) \sum_{\substack{d\divides n \\ s.t. e\divides \frac{n}{d}}} \mu(d) \\
       \text{For the next step we use }
-		    &d\divides n \land e\divides \frac{n}{d}
+		    &d \divides n \land e \mid \frac{n}{d}
 		    \Leftrightarrow e d \divides n
-		    \Leftrightarrow e\divides n \land d\divides \frac{n}{e}\\
-      &= \sum_{e\divides n} f(e) \sum_{d\divides  \frac{n}{e}} \mu(d)\\
+		    \Leftrightarrow e\divides n \land d \mid \frac{n}{e}\\
+      &= \sum_{e\divides n} f(e) \underbrace{\sum_{d \mid \frac{n}{e}} \mu(d)}_{= S_\mu \left(\frac{n}{e} \right)}\\
       &= f(n)\\
       \text{since }
         \sum_{d\divides  \frac{n}{e}} \mu(d) =
@@ -445,41 +426,14 @@ We have $N_i m_i x_i \equiv 0 \pmod{n_j, j\neq i}$%\\ x_i \mod m_i$
 
 
 \subsection{Structure of $\Z_n^\times$}
+Let
+\[ n = p_1^{\alpha_1} \dots p_l^{\alpha_l} \]
+with $p_i \neq p_j$, $i \neq j$, $\alpha_i \in \N$ where $p_i$ are primes.
+From the CRT it follows that
+\[ \Z_n^\times \cong \Z_{p_1^{\alpha_1}}^\times \times \dots \times \Z_{p_l^{\alpha_l}}^\times \text{.} \]
+So we only need to consider $\Z_{p^\alpha}^\times$ for prime powers $p^\alpha$, $p \in \PP$, $\alpha \in \N$.
 
-\[ n = p_1^{\alpha_1} \dots p_l^{\alpha_l} \text{ with } p_i \neq p_j, i \neq j, \alpha_i \in \N \text{ where } p_i \text{ are primes} \]
-From the CRT it follows that $\Z_n^\times \cong \Z_{p_1^{\alpha_1}}^\times \times \dots \times \Z_{p_l^{\alpha_l}}^\times$.
-So we only consider prime powers $p^\alpha$, $p \in \PP$, $\alpha \in \N$
-
-\subsubsection{Case 1: $\alpha = 1$}
-
-\begin{theorem}
-  $\Z_p^\times$ is cyclic, i.e. $\Z_p^\times \cong \Z_{(p-1)}$
-\end{theorem}
-
-\begin{proof}
-  Use structure theorem for finite abelian groups. If $G$ is a finite abelian group then $\exists d_1,\dots d_l \in \N$ such that
-  $1 < d_1\divides d_2\divides d_3\divides \dots\divides d_l$, and $G \cong \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$
-  thus, $\Z_p^\times \cong \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$ 
-  (every element $x \in \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$ satisfies $d_l x = 0$
-  $\Rightarrow$ every $x \in \Z_p^\times$ satisfies $x^{d_l} = 1$).
-  $x^{d_l} -1$ is a polynomial of degree $d_l$ over the field $\Z_p \Rightarrow x^{d_l} -1$ has $\leq d_l$ roots $\Rightarrow p-1 \leq d_l$,
-  but $p-1 = d_1 \dots d_l \Rightarrow l = 1, p-1 = d_l$
-\end{proof}
-
-\begin{rem}
-  The same proof shows: Let $F$ be a field, $G \leq F^\times$, $|G| < \infty$. Then $G$ is cyclic.
-\end{rem}
-
-\subsubsection{Case 2: $\alpha \geq 2$; $p \geq 3$}
-
-Denote $\abs{x}$ as the order of $x$ in $\Z_{p^\alpha}^\times$;
-i.e. $\abs{x} = \min\set{l\in \N : x^l\equiv 1 \mod p^\alpha}$
-
-$\card{\Z_{p^\alpha}^\times} = \phi(p^\alpha) = p^{\alpha -1}(p-1)$,
-find $x,y \in \Z_{p^\alpha}^\times$ such that $\abs{x} = p^{\alpha-1}$, $\abs{y} = p-1$
-then $\abs{xy} = \abs{x}\abs{y} = p^{\alpha-1}(p-1)$, since $\gcd(\abs{x},\abs{y}) = 1$
-
-\begin{lemma}
+\begin{lemma}\label{l_0_5_1}
   \[ (1+p)^{p^{n-1}}
     \begin{cases}
       \equiv 1 \mod p^n \\
@@ -497,36 +451,81 @@ then $\abs{xy} = \abs{x}\abs{y} = p^{\alpha-1}(p-1)$, since $\gcd(\abs{x},\abs{y
         (1+p)^{p^n} &= (1 + a p^n)^p \\
                     &= 1 + pap^{n} + \sum_{i=2}^{p-1} {p \choose i} (ap^n)^i + (ap^n)^p
       \end{align*}
-      \[
-          p^{np} \divides \bullet, \hspace{10pt}
+      \begin{align*}
+          p^{n+2} &\divides (ap^n)^p, \hspace{10pt}
           np \geq n+2, \hspace{10pt}
-          (\text{or } p \geq 3), \hspace{10pt}
-          p^{2n+1} \divides \bullet, \hspace{10pt}
+          (\text{since } p \geq 3) \\
+          p^{n+2} &\divides ap^{2n+1} \mid {p \choose i} \left( ap^n \right)^i, \hspace{10pt}
           2n+1 \geq n+2
-      \]
+      \end{align*}
       \[
-        p\divides{p \choose i} = \frac{p!}{i!(p-i)!}, 1 \leq i < p
+        p \mid {p \choose i} = \frac{p!}{i!(p-i)!}, 1 \leq i < p
         \Rightarrow (1+p)^{p^n} \equiv 1 + ap^{n+1} \pmod{p^{n+2}}, p \nmid a
       \]
   \end{itemize}
 \end{proof}
 
-$2 \times$ Lemma: $x = 1+p$ satisfies $\abs{x} = p^{\alpha -1}$, now find $y$.
 
-\begin{enumerate}
-  \item $\exists z \in \Z: \abs{\overbar{z}} = p-1 \text{ is } \Z_p^\times$
-  \item let $l \coloneq \card{\overbar{z}} \text{ is } \Z_{p^\alpha}^\times$
-  \item Then $p^\alpha \divides  z^l -1 \Rightarrow z^l \equiv 1 \mod p$
-  \item $\Rightarrow$ $p-1 \divides  l$.
-  \item Let $y \coloneq z^{\frac{l}{p-1}}$, then $\abs{\overbar{y}} = p-1$.
-\end{enumerate}
+\begin{theorem}\label{th_0_5_2}
+  $\Z_{p^\alpha}^\times$ is cyclic, i.e. $\Z_{p^\alpha}^\times \cong \Z_{p^{\alpha-1}(p-1)}$
+\end{theorem}
 
-We have proven: Theorem: $\Z_{p^\alpha}^\times$ is cyclic, i.e. $\Z_{p^\alpha}^\times \cong \Z_{p^{\alpha-1}(p-1)}$, if $p \geq 3, \alpha \geq 1$.
+\begin{proof}
+  We distinguish two cases:
+  \begin{enumerate}
+    \item $\alpha = 1$
+    
+    We need to show that $\Z_p^\times$ is cyclic, i.e. $\Z_p^\times \cong \Z_{(p-1)}$.
+    
+    Use structure theorem for finite abelian groups. If $G$ is a finite abelian group then $\exists d_1,\dots d_l \in \N$ such that
+    $1 < d_1\divides d_2\divides d_3\divides \dots\divides d_l$, and $G \cong \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$
+    thus, $\Z_p^\times \cong \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$ 
+    (every element $x \in \Z_{d_1}^\times \times \dots \times \Z_{d_l}^\times$ satisfies $d_l x = 0$
+    $\Rightarrow$ every $x \in \Z_p^\times$ satisfies $x^{d_l} = 1$).
+    $x^{d_l} -1$ is a polynomial of degree $d_l$ over the field $\Z_p \Rightarrow x^{d_l} -1$ has $\leq d_l$ roots $\Rightarrow p-1 \leq d_l$,
+    but $p-1 = d_1 \cdots d_l \Rightarrow l = 1, p-1 = d_l$
+    \begin{rem}
+      The same proof shows: Let $F$ be a field, $G \leq F^\times$, $|G| < \infty$. Then $G$ is cyclic.
+    \end{rem}
+    \item $\alpha \geq 2$; $p \geq 3$
+    
+    Denote $\ord\left(x\right)$ as the order of $x$ in $\Z_{p^\alpha}^\times$;
+    i.e. $\ord\left(x\right) = \min\set{l\in \N : x^l\equiv 1 \mod p^\alpha}$.
+    Then $\ord\left(\Z_{p^\alpha}^\times \right) = \phi(p^\alpha) = p^{\alpha -1}(p-1)$.
+    
+    Idea: Find $x,y \in \Z_{p^\alpha}^\times$ such that $\ord\left(x\right) = p^{\alpha-1}$, $\ord\left(y\right) = p-1$.
+    Since $\gcd\left(\ord\left(x\right),\ord\left(y\right)\right) = 1$,
+    \[ \ord\left(xy\right) = \ord\left(x\right) \cdot \ord\left(y\right) = p^{\alpha-1}(p-1) \text{.} \]
+    
+    
+    Proof: Apply two times Lemma \ref{l_0_5_1}. Then $x \coloneqq 1+p$ satisfies $\ord\left(x\right) = p^{\alpha -1}$. 
+    Now find $y$.
+    
+    There exists a $z \in \Z$ such that $\ord\left(z\right) = p-1$ in $\Z_p^\times$.
+    Let $l \coloneqq \ord\left(z\right)$ in $\Z_{p^\alpha}^\times$.
+    Thus,
+    \[ z^l \equiv 1 \bmod p^\alpha \iff p^\alpha \divides z^l-1 \]
+    and this implies that
+    \[ p \divides z^l - 1 \iff z^l \equiv 1 \bmod p \text{.} \]
+    By definition, $p-1 \divides  l$.
+    Now let $y \coloneq z^{\frac{l}{p-1}}$.
+    Then $\ord\left(y\right) = p-1$.
+  \end{enumerate}
+  
+  Now we have proven Theorem \ref{th_0_5_2}: for $p \geq 3$ and $\alpha \geq 1$.
+  If $p = 2$, then
+  \[ \Z_{2^\alpha}^\times \equiv
+  \begin{cases}
+    0 & \alpha = 1 \\
+    \Z_2 & \alpha = 2 \\
+    \Z_2 \times \Z_{p^{\alpha - 2}} & \alpha \geq 3
+  \end{cases} \]
+\end{proof}
 
-$p = 2$: $\Z_{2^\alpha}^\times \cong \set{0, \alpha = 1 \hspace{10pt} \Z_2, \alpha = 2 \hspace{10pt} \Z_2 \times \Z_{p^{\alpha -2}}, \alpha \geq 3}$
+\todo{check last statement $Z_2 \times ??$}
 
-\begin{cor}
-  Let $m \in \N$. Then $\Z_m^\times$ is cyclic iff $m$ has one of the following forms:
+\begin{cor}\label{cor_0_5_3}
+  Let $m \in \N$. Then $\Z_m^\times$ is cyclic if and only if $m$ has one of the following forms:
   \begin{itemize}
     \item $m = 2$
     \item $m = 4$

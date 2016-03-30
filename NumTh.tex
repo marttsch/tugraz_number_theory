@@ -17,9 +17,11 @@
 \usepackage{subfiles}
 \usepackage{accents}
 \usepackage{color}
+\usepackage{titlesec}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=footnotesize]{todonotes}
 
+\newcommand{\sectionbreak}{\clearpage}
 
 \hypersetup{
   pdfborder={0 0 0},
@@ -30,7 +32,7 @@
 
 \newcommand{\lecture}{\vspace{5mm}\textcolor{blue}}
 
-\setcounter{section}{-1}
+\setcounter{section}{-2}
 
 \newcounter{cnt} \numberwithin{cnt}{subsection}
 
@@ -63,6 +65,7 @@
 \DeclareMathOperator{\oth}{O}
 \DeclareMathOperator{\lip}{Lip}
 \DeclareMathOperator{\inner}{Int}
+\DeclareMathOperator{\ord}{ord}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -104,11 +107,64 @@
 Please send feedback to \url{martina@tscheckl.eu}.
 \tableofcontents
 
+\section{Organizatorial information}
+
+Dates (in TUGrazOnline):
+\begin{table}[!h]
+  \begin{tabular}{cccl}
+    Mon & 14:15--15:45 & C208 & Exercises (starting 19.10. first exercise class) \\
+    Tue & 14:15--15:45 & C307 & Lecture (starting 20.10. first (real) lecture) \\
+    Wed & 08:15--09:45 & C208 & Lecture
+  \end{tabular}
+\end{table}
+
+From now until 15.12. lectures by Martin Widmer.
+Then C. Frei.
+
+End: oral exams
+
+Exercises: Find details on website of the instructor Dijana Kreso.
+\url{math.tugraz.at/~kreso}
+
+\subsection{Oral exam information}
+\begin{itemize}
+  \item all parts of the lecture will be covered
+  \item roughly 20-30 min 
+  \item know at least the ideas behind the long proofs
+  \item to get a date write an e-mail
+  \item before the end of March take the exam by Frei, then Tichy
+\end{itemize}
+
 \subfile{chapters/0_basics.tex}
 \subfile{chapters/1_diophantine_approximation.tex}
 \subfile{chapters/2_geometry_of_numbers.tex}
 \subfile{chapters/3_algebraic_number_theory.tex}
 \subfile{chapters/4_analytic_number_theory.tex}
+
+\section{Literature}
+
+\subsection{Chapter1: Diophantine Approximation}
+\begin{enumerate}
+  \item Approximation to algebraic numbers; Wolfgang M. Schmidt, 1972 L'Ehseignement Mathématique
+  \item Lectures Notes in Mathematics 785; W.M.Schmidt, Springer
+  \item LNM 1467, W.M.S., Springer
+  \item For section 2 (continued fractions) he will strictly follow the lecture notes of MT421 of Professor James McKee
+\end{enumerate}
+
+\subsection{Chapter2: Geometry of Numbers}
+\begin{enumerate}
+  \item J.W.S. Cassels "An Introduction to the Geometry of Numbers"
+  \item W.M. Schmidt Lecture Notes M. 785 and 1467
+\end{enumerate}
+
+\subsection{Chapter3: Algebraic Number Theory}
+\begin{enumerate}
+  \item Daniel Marcus "Number fields" Springer
+  \item Course Notes "Algebraic Number Theory" Math 2803(?) by Matt Baker (available online on his webpage)
+  \item Serge Lang: Algebraic Number Theory Addison \& Wesley
+\end{enumerate}
+
+
 
 %\subfile{lectures/NT_2015-10-05.tex}
 %\subfile{lectures/NT_2015-10-06.tex}
